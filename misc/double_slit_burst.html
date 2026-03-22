@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Double-Slit Burst — quarksum / SSBM</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0a0e12;
+  color: #c0ccd8;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 40px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 15px;
+  letter-spacing: 3px;
+  color: #5599cc;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.subtitle {
+  font-size: 12px;
+  color: #445566;
+  letter-spacing: 1px;
+  margin-bottom: 22px;
+}
+
+/* ── Tooltip system ────────────────────────────────────────── */
+.tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #112233;
+  border: 1px solid #2a4a6a;
+  color: #4488aa;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: help;
+  position: relative;
+  vertical-align: middle;
+  margin-left: 4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+.tip:hover { background: #1a3a55; color: #77bbdd; border-color: #3a6a8a; }
+
+.tipbox {
+  display: none;
+  position: fixed;   /* JS positions this */
+  background: #0c1824;
+  border: 1px solid #2a4a6a;
+  border-left: 3px solid #3388bb;
+  padding: 12px 15px;
+  width: 330px;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #aabbcc;
+  z-index: 9999;
+  text-transform: none;
+  letter-spacing: 0;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+.tip:hover .tipbox { display: block; }
+
+.tipbox b   { color: #77ccee; }
+.tipbox .phys { color: #44cc88; font-size: 10.5px; }
+.tipbox .notphys { color: #cc8844; font-size: 10.5px; }
+.tipbox .nature  { color: #aaaaff; font-size: 10.5px; }
+.tipbox code { color: #88ddaa; background: #0a1520; padding: 0 3px; font-size: 10.5px; }
+.tipbox hr { border: none; border-top: 1px solid #1a3040; margin: 6px 0; }
+
+/* ── Two-screen layout ─────────────────────────────────────── */
+.lab {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.screen-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.screen-label {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.label-clean { color: #22cc66; }
+.label-obs   { color: #ff8833; }
+
+canvas.phos {
+  border: 1px solid #1a2535;
+  display: block;
+  image-rendering: pixelated;
+}
+.screen-note {
+  font-size: 11px;
+  color: #556677;
+  text-align: center;
+  max-width: 210px;
+  line-height: 1.5;
+}
+.flash-overlay {
+  pointer-events: none;
+  position: absolute;
+  top: 26px; left: 0; width: 100%; height: 600px;
+  opacity: 0;
+  background: radial-gradient(ellipse at center,rgba(60,255,100,0.22) 0%,transparent 70%);
+  transition: opacity 0.06s;
+}
+
+/* ── Observer controls ─────────────────────────────────────── */
+.obs-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 210px;
+}
+.obs-toggle { display: flex; gap: 8px; width: 100%; }
+button.tog {
+  flex: 1;
+  padding: 8px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 2px solid #223344;
+  background: #0d1520;
+  color: #445566;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+button.tog.on-active  { background:#3a1200;border-color:#cc4400;color:#ff8844;box-shadow:0 0 12px rgba(200,70,0,.25); }
+button.tog.off-active { background:#001a0a;border-color:#226644;color:#44cc88;box-shadow:0 0 12px rgba(30,180,80,.18); }
+
+.d-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  font-size: 12px;
+  color: #667788;
+}
+.d-row label { width: 26px; flex-shrink: 0; }
+.d-row input[type=range] { flex: 1; accent-color: #cc6600; }
+.d-row .dval { width: 38px; text-align: right; color: #ffaa55; font-size: 13px; }
+
+/* ── Main controls ─────────────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 540px;
+}
+.fire-row { display:flex; justify-content:center; gap:14px; align-items:center; }
+
+button.fire-btn {
+  background: #001a08;
+  border: 2px solid #007733;
+  color: #00dd55;
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 12px 44px;
+  cursor: pointer;
+  transition: background 0.08s, box-shadow 0.08s;
+}
+button.fire-btn:hover { background:#002a10;box-shadow:0 0 20px rgba(0,200,70,.30);color:#00ff66; }
+button.fire-btn:active, button.fire-btn.flashing { background:#004a1a;box-shadow:0 0 32px rgba(0,255,80,.45);color:#aaffcc; }
+
+button.util-btn {
+  background: #0d1520;
+  border: 1px solid #1e3040;
+  color: #557788;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+button.util-btn:hover { background:#14202e;color:#7799aa; }
+
+.ctrl-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #667788;
+}
+.ctrl-row label { display:flex;align-items:center;gap:4px;width:220px;flex-shrink:0; }
+.ctrl-row input[type=range] { flex:1; accent-color:#2277cc; }
+.ctrl-val { width:60px;text-align:right;color:#aabbcc;font-size:14px; }
+
+.stats-row {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #445566;
+  padding: 8px 0;
+  border-top: 1px solid #111c28;
+  border-bottom: 1px solid #111c28;
+}
+.stat-item { display:flex;align-items:center;gap:2px;margin-right:20px; }
+.sv { color:#99bbdd;font-size:14px; }
+
+/* ── Englert bar ───────────────────────────────────────────── */
+.englert-row { display:flex;align-items:center;gap:10px;font-size:13px; }
+.eng-bg { flex:1;height:10px;background:#07090d;border:1px solid #1a2535;position:relative;overflow:hidden; }
+.eng-d { position:absolute;left:0;top:0;height:100%;background:#bb4400;transition:width 0.2s; }
+.eng-v { position:absolute;top:0;height:100%;background:#0077bb;transition:left 0.2s,width 0.2s; }
+
+/* ── The Edge section ──────────────────────────────────────── */
+.edge-section {
+  width: 540px;
+  margin-top: 4px;
+  border: 1px solid #1a2a3a;
+  border-left: 3px solid #2255aa;
+}
+.edge-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: #0c1520;
+  user-select: none;
+}
+.edge-toggle:hover { background: #101e2e; }
+.edge-title { font-size: 13px; color: #5588bb; letter-spacing: 1.5px; text-transform: uppercase; }
+.edge-arrow { font-size: 11px; color: #445566; transition: transform 0.15s; }
+.edge-arrow.open { transform: rotate(90deg); }
+
+.edge-body {
+  display: none;
+  padding: 14px 16px;
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: #778899;
+  background: #080c12;
+}
+.edge-body.open { display: block; }
+
+.edge-body h3 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin: 12px 0 5px; }
+.edge-body h3.phys-h { color: #22aa55; }
+.edge-body h3.notphys-h { color: #cc7722; }
+.edge-body h3.edge-h { color: #6688cc; }
+
+.edge-body ul { margin-left: 16px; }
+.edge-body li { margin-bottom: 4px; }
+.edge-body .phys { color: #33bb66; }
+.edge-body .notphys { color: #dd8833; }
+.edge-body code { color: #77ccaa; background: #0a1218; padding: 1px 4px; font-size: 11px; }
+.edge-body .nature { color: #9999ff; }
+</style>
+</head>
+<body>
+
+<h1>Double-Slit Burst Experiment &nbsp;·&nbsp; quarksum / SSBM</h1>
+<p class="subtitle">All particles fired at t = 0 &nbsp;·&nbsp; pattern visible immediately &nbsp;·&nbsp; phosphor decays at rate 1/τ</p>
+
+<div class="lab">
+
+  <!-- Left screen: no observer -->
+  <div class="screen-col" id="col-left">
+    <div class="screen-label label-clean">No Observer &nbsp; D = 0</div>
+    <canvas class="phos" id="cv-left" width="210" height="600"></canvas>
+    <div class="screen-note">Quantum interference active.<br>Fringes emerge from |ψ(y)|².</div>
+    <div class="flash-overlay" id="flash-left"></div>
+  </div>
+
+  <!-- Divider -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:80px;color:#1e3040;font-size:13px;">
+    <div style="width:1px;height:90px;background:linear-gradient(transparent,#223344,transparent)"></div>
+    <span style="color:#33556a">vs</span>
+    <div style="width:1px;height:90px;background:linear-gradient(#223344,transparent)"></div>
+  </div>
+
+  <!-- Right screen: observer -->
+  <div class="screen-col" id="col-right">
+    <div class="screen-label label-obs">Observer &nbsp; D = <span id="d-top">0.50</span></div>
+    <canvas class="phos" id="cv-right" width="210" height="600"></canvas>
+
+    <div class="obs-controls">
+      <div class="obs-toggle">
+        <button class="tog on-active" id="tog-on"  onclick="setObserver(true)">Observer ON</button>
+        <button class="tog"           id="tog-off" onclick="setObserver(false)">Observer OFF</button>
+      </div>
+      <div class="d-row">
+        <label>D
+          <span class="tip">ⓘ<span class="tipbox">
+            <b>D — Which-path distinguishability</b><br>
+            How much information the observer has about which slit the particle went through.<br><hr>
+            <code>D = 0</code> — Observer blind. Particle takes both paths simultaneously as a wave. Full quantum interference.<br>
+            <code>D = 1</code> — Observer sees exactly which slit. Wave nature destroyed. No fringes.<br>
+            <code>0 &lt; D &lt; 1</code> — Partial knowledge. Fringes partly suppressed.<br><hr>
+            <span class="phys">✓ PHYSICS: Englert (1996), PRL 77:2154. D is a property of your apparatus, not the particle. Changing D means running a different experiment.</span>
+          </span></span>
+        </label>
+        <input type="range" id="d-sl" min="0" max="1" step="0.01" value="0.5"
+               oninput="onDChange(this.value)">
+        <span class="dval" id="d-val">0.50</span>
+      </div>
+      <div class="screen-note" id="obs-note">
+        Which-path known: D = <span id="d-bot">0.50</span><br>
+        Fringes suppressed (Englert duality).
+      </div>
+    </div>
+    <div class="flash-overlay" id="flash-right"></div>
+  </div>
+
+</div>
+
+<!-- ── Main controls ──────────────────────────────────────── -->
+<div class="controls">
+
+  <div class="stats-row">
+    <span class="stat-item">
+      N =&nbsp;<span class="sv" id="n-disp">—</span>
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>N — Particles per burst</b><br>
+        Number of electrons fired simultaneously at t = 0.<br><hr>
+        Each particle is an independent quantum measurement. No particle interacts with another in this simulation.<br><hr>
+        In Tonomura (1989), electrons were fired <i>one at a time</i> over ~20 minutes to avoid Coulomb repulsion. Here we fire them all at once and read the Born-rule statistics immediately — valid because our particles are non-interacting.<br><hr>
+        <span class="phys">✓ PHYSICS: Born rule sampling. Each hit is an independent draw from P(y) = |ψ(y)|².</span>
+      </span></span>
+    </span>
+    <span class="stat-item">
+      λ_e =&nbsp;<span class="sv" id="l-disp">—</span> nm
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>λ_e — de Broglie wavelength</b><br>
+        The wavelength of a 1 eV electron.<br><hr>
+        <code>λ = h / √(2 m_e E)</code><br>
+        <code>h = 2πℏ = 6.6261×10⁻³⁴ J·s</code><br>
+        <code>m_e = 0.51099895 MeV/c²</code><br>
+        <code>E = 1 eV = 1.6022×10⁻¹⁹ J</code><br>
+        Result: <b>1.2264 nm</b><br><hr>
+        This is the wavelength that determines the fringe spacing. Longer wavelength → wider fringes.<br><hr>
+        <span class="phys">✓ PHYSICS: de Broglie (1924). All constants from cascade (local_library). No magic numbers.</span>
+      </span></span>
+    </span>
+    <span class="stat-item">
+      Δy =&nbsp;<span class="sv" id="dy-disp">—</span> mm
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>Δy — Fringe spacing</b><br>
+        Distance between adjacent bright fringes on the screen.<br><hr>
+        <code>Δy = λ · L / d</code><br>
+        <code>λ = 1.2264 nm</code> (de Broglie)<br>
+        <code>L = 0.10 m</code> (slit-to-screen)<br>
+        <code>d = 100 nm</code> (slit separation)<br>
+        Result: <b>1.2264 mm</b><br><hr>
+        Blue tick marks on the left edge of each screen show where the fringe peaks should appear.<br><hr>
+        <span class="phys">✓ PHYSICS: Fraunhofer double-slit geometry. First-principles from de Broglie wavelength.</span>
+      </span></span>
+    </span>
+    <span class="stat-item">
+      τ =&nbsp;<span class="sv" id="tau-disp">—</span> s
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>τ — Phosphor decay time constant</b><br>
+        Controls how quickly the screen dims after the burst.<br><hr>
+        <code>I(t) = I₀ · exp(−t / τ)</code><br><hr>
+        τ is a <i>free parameter</i> in our model — not hardcoded to any material. The formula is first-principles (any two-state exponential decay). The value you choose is up to you.<br><hr>
+        <span class="nature">◈ Nature (ZnS:Ag, classic green CRT phosphor): τ ≈ 25–50 ms<br>
+        ◈ Nature (P43, Gd₂O₂S:Tb, modern screen): τ ≈ 1–2 ms<br>
+        ◈ Our default: 4 s — chosen so you can see the glow, not physically accurate.</span><br><hr>
+        <span class="notphys">⚠ NOT_PHYSICS: The default τ is chosen for visibility. Real phosphor screens would go dark in under a second.</span>
+      </span></span>
+    </span>
+  </div>
+
+  <div class="fire-row">
+    <button class="fire-btn" id="btn-fire" onclick="fire()">⚡ Fire</button>
+    <button class="util-btn" id="btn-reset" onclick="resetScreens()">↺ Clear</button>
+  </div>
+
+  <div class="ctrl-row">
+    <label>
+      Particles per burst &nbsp;<b>N</b>
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>N — Burst size</b><br>
+        More particles → sharper pattern, less statistical noise.<br><hr>
+        At N=500: pattern is rough, fringes barely visible.<br>
+        At N=10,000: clean fringes, clear comparison.<br>
+        At N=50,000: very sharp — approaches the theoretical |ψ(y)|² curve.<br><hr>
+        Both screens use the same N and the same random seed (42), so differences between left and right are <i>entirely due to D</i>, not random variation.
+      </span></span>
+    </label>
+    <input type="range" id="n-sl" min="500" max="50000" step="500" value="10000"
+           oninput="document.getElementById('n-val').textContent=parseInt(this.value).toLocaleString()">
+    <span class="ctrl-val" id="n-val">10,000</span>
+  </div>
+
+  <div class="ctrl-row">
+    <label>
+      Phosphor lifetime &nbsp;<b>τ</b>
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>τ — Phosphor lifetime slider</b><br>
+        Drag to change how long the screen stays bright after firing.<br><hr>
+        The pattern doesn't change as the screen dims — only brightness changes. The physics is in the hit distribution, not the glow.<br><hr>
+        <span class="nature">◈ Nature (ZnS:Ag): τ ≈ 25–50 ms — much shorter than this slider's range.<br>
+        We use seconds here because milliseconds would be invisible to humans.</span><br><hr>
+        <span class="notphys">⚠ NOT_PHYSICS: τ is a display parameter. Set it to whatever lets you see the pattern clearly.</span>
+      </span></span>
+    </label>
+    <input type="range" id="tau-sl" min="0.5" max="10" step="0.1" value="4"
+           oninput="onTauChange(this.value)">
+    <span class="ctrl-val" id="tau-val">4.0 s</span>
+  </div>
+
+  <!-- Englert bar -->
+  <div class="englert-row">
+    <span style="color:#bb4400;font-size:13px">D²
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>D² — Which-path budget consumed</b><br>
+        The square of which-path distinguishability. Ranges from 0 (no observer) to 1 (perfect observer).<br><hr>
+        <code>D=0.5 → D²=0.25</code> (25% of the duality budget used)<br>
+        <code>D=1.0 → D²=1.00</code> (nothing left for fringes)<br><hr>
+        <span class="phys">✓ PHYSICS: Englert (1996). D²+V²≤1 is a fundamental quantum inequality.</span>
+      </span></span>
+    </span>
+    <span style="font-size:13px">+</span>
+    <span style="color:#0077bb;font-size:13px">V²
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>V² — Fringe visibility squared</b><br>
+        V is the measured contrast of the interference fringes on the <i>left screen</i> (D=0).<br><hr>
+        <code>V = (I_peak − I_valley) / (I_peak + I_valley)</code><br><hr>
+        Measured at <code>y=0</code> (predicted peak) vs <code>y=Δy/2</code> (predicted first valley) — local contrast, not global max/min.<br><hr>
+        <code>V=1.0</code> → perfect fringes<br>
+        <code>V=0.0</code> → no fringes (flat distribution)<br><hr>
+        <span class="phys">✓ PHYSICS: Standard fringe visibility definition. Measured from Born-rule hit counts.</span>
+      </span></span>
+    </span>
+    <span style="font-size:13px"> ≤ 1
+      <span class="tip">ⓘ<span class="tipbox">
+        <b>Englert Duality: D² + V² ≤ 1</b><br>
+        A fundamental quantum inequality. You cannot have both perfect which-path knowledge and perfect fringe visibility.<br><hr>
+        The orange bar shows D². The blue bar shows V². Together they cannot exceed the full width of the bar.<br><hr>
+        For pure quantum states (no decoherence): D² + V² = 1 exactly. The orange and blue fill the bar completely.<br>
+        Statistical noise in a finite burst means V is measured imperfectly, so the sum can appear slightly below 1.<br><hr>
+        <span class="phys">✓ PHYSICS: Englert (1996), PRL 77:2154. Follows from unitarity of quantum mechanics. Cannot be violated.</span>
+      </span></span>
+    </span>
+    <div class="eng-bg">
+      <div class="eng-d" id="eng-d" style="width:25%"></div>
+      <div class="eng-v" id="eng-v" style="left:25%;width:75%"></div>
+    </div>
+    <span id="eng-val" style="font-size:12px;color:#334455;width:120px;text-align:right">D²+V² = —</span>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     THE FULL LOOP
+     ══════════════════════════════════════════════════════════════ -->
+<div class="edge-section" style="margin-top:10px;border-left-color:#886622;">
+  <div class="edge-toggle" onclick="toggleLoop(this)" style="background:#0d1208;">
+    <span class="edge-title" style="color:#bbaa44;">▸ The Full Loop — how this simulation works, in plain English</span>
+    <span class="edge-arrow" id="loop-arrow">▶</span>
+  </div>
+  <div class="edge-body" id="loop-body" style="color:#99aabb;">
+
+    <p style="color:#776644;font-size:11px;margin-bottom:12px;">
+      The complete chain from physical constants to the pixel you see on screen.
+      <span style="color:#33bb66">■ PHYSICS</span> — affects where particles land. &nbsp;
+      <span style="color:#dd8833">■ DISPLAY</span> — affects only how it looks. &nbsp;
+      <span style="color:#9999ff">■ CASCADE</span> — where the self-consistency of constants is required.
+    </p>
+
+    <h3 class="phys-h" style="margin-top:0">Step 1 — The constants arrive from the cascade &nbsp;<span style="color:#9999ff;font-weight:normal;font-size:10px;">CASCADE</span></h3>
+    <p>Before a single particle is fired, three numbers are loaded from
+    <code>local_library/constants.py</code>:</p>
+    <ul>
+      <li><b>ℏ = 1.054571817 × 10⁻³⁴ J·s</b> — the fundamental quantum of action.
+          Every wave in quantum mechanics has its scale set by this number.</li>
+      <li><b>m_e = 0.51099895 MeV/c²</b> — the electron mass. Stored in energy units,
+          converted to kilograms via <code>m_e(kg) = m_e(MeV) × e / c²</code>.</li>
+      <li><b>e = 1.602176634 × 10⁻¹⁹ C</b> — the electron charge. Used to convert
+          "1 electron-volt" into joules, and MeV into kilograms.</li>
+    </ul>
+    <p><span class="nature">◈ These three must be mutually consistent — drawn from the same
+    anchored source with no rounding at intermediate steps. If you use a precise ℏ but a
+    rounded e, the computed wavelength is slightly wrong and the predicted fringe positions
+    disagree with where particles actually land. The cascade guarantees they all trace
+    back to the same chain of derivations. No magic numbers.</span></p>
+
+    <h3 class="phys-h">Step 2 — The electron's wavelength is computed &nbsp;<span class="phys" style="font-weight:normal;font-size:10px;">PHYSICS</span></h3>
+    <p>A 1 eV electron has momentum <code>p = √(2 m_e E)</code>.
+    Its de Broglie wavelength is <code>λ = h / p</code> where <code>h = 2πℏ</code>.<br>
+    Result: <b>λ = 1.2264 nm</b>. This is the "size" of the electron's wave — smaller than
+    an atom, larger than a proton. It determines how far apart the bright stripes are.<br>
+    Fringe spacing: <code>Δy = λL/d = 1.2264 mm</code>.
+    The blue tick marks on each screen show exactly where those peaks should appear.</p>
+
+    <h3 class="phys-h">Step 3 — The electron goes through both slits at once &nbsp;<span class="phys" style="font-weight:normal;font-size:10px;">PHYSICS</span></h3>
+    <p>The electron is not a tiny ball that picks one slit. Before it is measured, it is
+    a wave — spread out, passing through both gaps simultaneously, the same way a water
+    ripple spreads through two gaps in a barrier at once. Each slit becomes a new source
+    of expanding ripples. At any point y on the screen, those two ripples have travelled
+    slightly different distances: r₁ from the top slit, r₂ from the bottom slit.</p>
+
+    <h3 class="phys-h">Step 4 — The path difference is computed with care &nbsp;<span class="phys" style="font-weight:normal;font-size:10px;">PHYSICS</span> &nbsp;<span style="color:#9999ff;font-weight:normal;font-size:10px;">CASCADE</span></h3>
+    <p>Are the two ripples in step (peaks meeting peaks → bright) or out of step
+    (peak meeting trough → dark)? That depends on <code>k · Δr</code>, where
+    <code>k = 2π/λ</code> and <code>Δr = r₁ − r₂</code>.</p>
+    <p>Here is the problem: at 10 cm distance and λ = 1.2 nm,
+    <code>k · L ≈ 500,000,000 radians</code>. A computer stores about 15 significant
+    figures. Computing <code>k·r₁</code> and <code>k·r₂</code> separately and
+    subtracting loses almost all precision — like subtracting 500,000,000.123 from
+    500,000,000.456 and trusting the 0.333 that remains.</p>
+    <p>The fix: compute <code>Δr = −2yd / (r₁+r₂)</code> directly using an algebraic
+    identity. This gives a number around 1 nanometre with full precision preserved.
+    <span class="nature">◈ CASCADE: λ must be self-consistent with k = 2π/λ. Any mismatch
+    from using constants from different sources shifts all fringe positions.</span></p>
+
+    <h3 class="phys-h">Step 5 — The probability at every screen position is computed &nbsp;<span class="phys" style="font-weight:normal;font-size:10px;">PHYSICS</span></h3>
+    <p style="padding:6px 14px;background:#080e14;color:#77ccaa;font-size:11.5px;margin:6px 0;">
+      P(y) = |A₁|² + |A₂|² &nbsp;+&nbsp; 2·√(1−D²)·|A₁|·|A₂|·cos(k·Δr) &nbsp;×&nbsp; sinc²(πa sinθ / λ)
+    </p>
+    <p>Three parts:</p>
+    <ul>
+      <li><b>|A₁|² + |A₂|²</b> — the background: what you'd get if both slits
+          illuminated the screen independently with no wave interaction.</li>
+      <li><b>2·√(1−D²)·|A₁|·|A₂|·cos(k·Δr)</b> — the interference term. This oscillates
+          between positive (bright fringe) and negative (dark fringe) as y moves across
+          the screen. D is the observer: D=0 leaves this term fully intact; D=1 kills it
+          entirely (√(1−1)=0). Partial D partially suppresses it.</li>
+      <li><b>sinc²(πa sinθ/λ)</b> — the single-slit envelope. Each slit has a finite
+          width a=20 nm. This acts as a gentle hill that multiplies the whole pattern,
+          fading fringes far from centre. The orange dashed ticks show where it reaches zero.</li>
+    </ul>
+
+    <h3 class="phys-h">Step 6 — The probability is turned into a sampling map &nbsp;<span class="phys" style="font-weight:normal;font-size:10px;">PHYSICS</span></h3>
+    <p>P(y) is evaluated at 3,000 points and integrated (trapezoid rule) to give a
+    cumulative probability: "what fraction of all particles land at or below position y?"
+    This is the CDF — a smooth curve from 0 to 1. Steep where fringes are bright.
+    Nearly flat where fringes are dark.</p>
+
+    <h3 class="phys-h">Step 7 — Each particle is fired: Born-rule sampling &nbsp;<span class="phys" style="font-weight:normal;font-size:10px;">PHYSICS</span></h3>
+    <ol style="margin-left:18px;">
+      <li>Draw a random number r between 0 and 1.</li>
+      <li>Ask the CDF map: "what y has cumulative probability exactly r?"</li>
+      <li>Find it by binary search and linear interpolation.</li>
+      <li>That y is the hit position — a physically valid measurement outcome.</li>
+    </ol>
+    <p>This is the <b>Born rule</b>: each particle lands at a random position, but with
+    probability proportional to |ψ(y)|² = P(y). No particle knows where the others landed.
+    No hidden plan. The pattern emerges purely from the statistics of many independent draws.</p>
+    <p style="color:#44aa77;border-left:2px solid #225533;padding-left:10px;margin-top:8px;">
+      <b>The physics ends here.</b> The y-position from Step 7 is the only thing the
+      simulation knows that is physically real. Everything that follows is about
+      how to show it to you.
+    </p>
+
+    <h3 class="notphys-h">Step 8 — The hit goes in a bin &nbsp;<span class="notphys" style="font-weight:normal;font-size:10px;">DISPLAY</span></h3>
+    <p>The screen is divided into 300 equal vertical bins. The hit increments a counter
+    for whichever bin y falls into. The precise y within the bin is discarded.</p>
+
+    <h3 class="notphys-h">Step 9 — Brightness is computed from the count and time &nbsp;<span class="notphys" style="font-weight:normal;font-size:10px;">DISPLAY</span></h3>
+    <p><code>brightness = (bin_count / max_count) × exp(−t / τ)</code><br>
+    All particles were fired at t=0, so all bins start at full brightness and fade at the
+    same rate. The pattern never changes — only the overall brightness drops. The decay
+    formula is correct physics; the value τ=4 s is chosen so your eyes can follow it.
+    Real phosphor screens decay in under a tenth of a second.</p>
+
+    <h3 class="notphys-h">Step 10 — Brightness becomes colour and is drawn &nbsp;<span class="notphys" style="font-weight:normal;font-size:10px;">DISPLAY</span></h3>
+    <p>Brightness (0–1) maps through a colour ramp: black → dark green → bright green →
+    yellow-white. This mimics a classic phosphorescent detector screen. The colour carries
+    no physical information — it is chosen because it is readable and because the contrast
+    makes fringe structure easy to see. A plain table of bin counts would contain identical
+    physics. A subtle edge-fade (pixels near the left and right canvas borders are slightly
+    dimmer) makes the screen look like a physical tube. Purely cosmetic.</p>
+
+    <h3 class="edge-h" style="margin-top:14px;">Why the cascade is load-bearing, not optional</h3>
+    <p>The constants ℏ, m_e, and e must be mutually consistent for two concrete reasons:</p>
+    <ul>
+      <li><b>Fringe position accuracy:</b> Fringes are spaced 1.2264 mm apart.
+          Matching that to four decimal places requires λ accurate to the same level,
+          which requires ℏ and m_e consistent to full computer precision. A 0.01% error
+          in m_e shifts the fringes by ~12 µm — detectable in a careful experiment.</li>
+      <li><b>Phase precision:</b> k·Δr must be accurate to better than one part in 10⁸
+          to correctly place each fringe. Any inconsistency in constants corrupts the phase,
+          and fringes appear in the wrong positions. The simulation would look fine but
+          predict incorrectly — which is the most dangerous kind of wrong.</li>
+    </ul>
+    <p>The cascade in <code>local_library</code> exists to prevent this: every constant
+    is derived from the same anchored chain. If you ran the Python prediction file
+    (<code>test_double_slit_predictions.py</code>) against this HTML, fringe positions
+    would match to four significant figures — because both use the same cascade.</p>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     RENDER BENCHMARK PANEL
+     ══════════════════════════════════════════════════════════════ -->
+<div class="edge-section" style="margin-top:10px;border-left-color:#226644;">
+  <div class="edge-toggle" onclick="toggleBench(this)">
+    <span class="edge-title" style="color:#44aa77;">▸ Render Benchmarks — timing, memory, file sizes</span>
+    <span class="edge-arrow" id="bench-arrow">▶</span>
+  </div>
+  <div class="edge-body" id="bench-body" style="font-size:12px;">
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:10px;">
+
+      <div>
+        <h3 class="phys-h" style="margin-top:0">⏱ Timing</h3>
+        <table id="bench-table" style="border-collapse:collapse;font-size:11.5px;color:#778899;min-width:260px;">
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">CDF build (D=0)</td><td id="bt-cdf0" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">CDF build (D=right)</td><td id="bt-cdfR" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">Particle sampling (N total)</td><td id="bt-samp" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">First frame render (both)</td><td id="bt-rend" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">Total fire() time</td><td id="bt-total" style="color:#aaddaa;font-weight:bold;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">Render fps (live)</td><td id="bt-fps" style="color:#88ddaa;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">Samples / ms</td><td id="bt-sps" style="color:#88ddaa;text-align:right">—</td></tr>
+        </table>
+      </div>
+
+      <div>
+        <h3 class="phys-h" style="margin-top:0">💾 Memory</h3>
+        <table style="border-collapse:collapse;font-size:11.5px;color:#778899;min-width:240px;">
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">JS heap used</td><td id="bm-heap" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">JS heap total</td><td id="bm-heaptot" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">hitCounts arrays (×2)</td><td id="bm-counts" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">CDF arrays (×2)</td><td id="bm-cdf" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">ImageData buffers (×2)</td><td id="bm-img" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">Canvas pixels (×2)</td><td id="bm-px" style="color:#88bbdd;text-align:right">—</td></tr>
+        </table>
+      </div>
+
+      <div>
+        <h3 class="phys-h" style="margin-top:0">📁 File sizes</h3>
+        <table style="border-collapse:collapse;font-size:11.5px;color:#778899;min-width:220px;">
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">This HTML file</td><td id="bf-html" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">simulate_double_slit.py</td><td id="bf-sim" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">quantum.py</td><td id="bf-q" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">phosphor.py</td><td id="bf-p" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">double_slit_buildup_D0.png</td><td id="bf-d0" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:2px 10px 2px 0;color:#445566;">double_slit_3d_timelapse.gif</td><td id="bf-gif" style="color:#88bbdd;text-align:right">—</td></tr>
+          <tr><td style="padding:6px 10px 2px 0;color:#557799;border-top:1px solid #1a2535;">All rendered outputs (misc/)</td><td id="bf-total" style="color:#aaddaa;font-weight:bold;text-align:right;border-top:1px solid #1a2535;">—</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div style="font-size:10.5px;color:#223344;line-height:1.7;border-top:1px solid #111c28;padding-top:8px;">
+      <b style="color:#335544">Notes:</b>
+      Heap memory via <code>performance.memory</code> (Chromium only; other browsers show —).
+      ImageData = <code>CW × CH × 4 bytes</code> per canvas per frame, allocated and discarded each render call — the renderer is not buffered.
+      File sizes are approximate and reported at page load; they do not update after fire.
+      Render fps is a rolling average of the last 10 decay-loop frames.
+      "Samples/ms" = N particles ÷ sampling wall time — a measure of Born-rule CDF throughput.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     THE EDGE — honest renderer disclosure
+     ══════════════════════════════════════════════════════════════ -->
+<div class="edge-section">
+  <div class="edge-toggle" onclick="toggleEdge(this)">
+    <span class="edge-title">▸ The Renderer &amp; The Edge — what is physics, what is display</span>
+    <span class="edge-arrow" id="edge-arrow">▶</span>
+  </div>
+  <div class="edge-body" id="edge-body">
+
+    <h3 class="phys-h">✓ PHYSICS — what this simulation does honestly</h3>
+    <ul>
+      <li><span class="phys">Intensity formula:</span> <code>P(y) = (|A₁|²+|A₂|²) + 2√(1−D²)·|A₁||A₂|·cos(kΔr) · sinc²(πa sinθ/λ)</code><br>
+        This is exact Huygens-Fresnel with partial decoherence (Englert 1996) and a single-slit diffraction envelope (Fraunhofer). No approximations beyond far-field geometry.</li>
+      <li><span class="phys">Numerical stability:</span> Path difference computed as <code>Δr = −2yd / (r₁+r₂)</code> (difference-of-squares identity). This avoids catastrophic cancellation when computing <code>cos(k·r₁) − cos(k·r₂)</code> with <code>k·L ≈ 5×10⁸ rad</code>. Float64 only has ~15 significant digits; without this trick, the fringe phase would be garbage.</li>
+      <li><span class="phys">Born-rule sampling:</span> Inverse-CDF method. A uniform random number is mapped through the cumulative probability distribution of P(y) to produce a hit position. This is mathematically identical to drawing from |ψ(y)|².</li>
+      <li><span class="phys">Fringe visibility measurement:</span> Local contrast at predicted peak/valley positions (<code>y=0</code> vs <code>y=Δy/2</code>), not global max/min. Global would confuse the diffraction envelope shape with fringe contrast.</li>
+      <li><span class="phys">All constants</span> from <code>local_library/constants.py</code> cascade: ℏ=1.054571817×10⁻³⁴ J·s, c=2.99792458×10⁸ m/s, e=1.602176634×10⁻¹⁹ C, m_e=0.51099895 MeV/c². No magic numbers.</li>
+      <li><span class="phys">Englert duality D²+V²≤1</span> is satisfied by construction: the coherence factor √(1−D²) guarantees it analytically.</li>
+    </ul>
+
+    <h3 class="notphys-h">⚠ NOT_PHYSICS — display choices that are art, not science</h3>
+    <ul>
+      <li><span class="notphys">Phosphor colormap:</span> The green glow is aesthetic. Real ZnS:Ag emits at ~450 nm (blue-green). The colour ramp — black → deep green → bright green → yellow-white — was chosen because it looks like a classic oscilloscope screen, not because it matches any emission spectrum. The colour tells you nothing about the physics.</li>
+      <li><span class="notphys">Horizontal intensity falloff:</span> Each screen bin fades toward the edges using <code>fade = 1 − (distX)² × 0.30</code>. This makes the screen look like a physical phosphor tube with limb darkening. It is purely cosmetic. The actual hit distribution is one-dimensional (y only). There is no x-axis physics.</li>
+      <li><span class="notphys">Default τ = 4 seconds:</span> Real ZnS:Ag phosphor: τ ≈ 25–50 ms. We use 4 seconds so you can see the glow decay with human eyes. The formula I(t)=I₀·exp(−t/τ) is correct physics; the value of τ is a display choice.</li>
+      <li><span class="notphys">Bin discretization:</span> The screen is divided into 300 vertical bins. Real detectors have finite pixel size too, but our bin count is chosen for visual resolution, not to model any specific detector.</li>
+    </ul>
+
+    <h3 class="edge-h">◈ The Edge — where simulation ends and display begins</h3>
+    The simulation ends the moment <code>sampleHit()</code> returns a y-position. That number is real physics: a Born-rule draw from |ψ(y)|². <b>Everything after that is rendering.</b> The bin it falls into, the colour it gets painted, the glow that decays — none of that affects the physics. You could display the hit positions as a spreadsheet of numbers and the physics would be identical. The green glow is a window into the data, not the data itself.<br><br>
+    The cyan theory curve shown in the other visualisations (not here) is |ψ(y)|² normalised for display. It is the ground truth the particles are converging toward. The phosphor image is the statistical sample. With enough particles, they match. With few, they don't — and that gap is quantum mechanics, not a rendering bug.
+
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  CASCADE CONSTANTS  (local_library/constants.py)
+// ══════════════════════════════════════════════════════════════
+const HBAR        = 1.054571817e-34;
+const C_LIGHT     = 2.99792458e8;
+const E_CHARGE    = 1.602176634e-19;
+const M_ELEC_MEV  = 0.51099895;
+const H_PLANCK    = 2 * Math.PI * HBAR;
+const MEV_TO_KG   = E_CHARGE * 1e6 / (C_LIGHT * C_LIGHT);
+const M_ELEC_KG   = M_ELEC_MEV * MEV_TO_KG;
+
+const E_EV     = 1.0;
+const D_SLIT   = 100e-9;
+const A_SLIT   = 20e-9;
+const L_SCREEN = 0.10;
+const Y_HALF   = 15e-3;
+
+const E_J     = E_EV * E_CHARGE;
+const LAMBDA  = H_PLANCK / Math.sqrt(2 * M_ELEC_KG * E_J);
+const K_WAVE  = 2 * Math.PI / LAMBDA;
+const DELTA_Y  = LAMBDA * L_SCREEN / D_SLIT;
+const ENV_ZERO = LAMBDA * L_SCREEN / A_SLIT;
+
+document.getElementById('l-disp').textContent  = (LAMBDA * 1e9).toFixed(4);
+document.getElementById('dy-disp').textContent = (DELTA_Y * 1e3).toFixed(4);
+
+// ══════════════════════════════════════════════════════════════
+//  TOOLTIP POSITIONING — keeps boxes on-screen
+// ══════════════════════════════════════════════════════════════
+document.addEventListener('mouseover', function(e) {
+  const tip = e.target.closest('.tip');
+  if (!tip) return;
+  const box  = tip.querySelector('.tipbox');
+  if (!box) return;
+  const rect = tip.getBoundingClientRect();
+  const spaceBelow = window.innerHeight - rect.bottom;
+  const spaceAbove = rect.top;
+  // Prefer above if more space, else below
+  if (spaceAbove > spaceBelow && spaceAbove > 180) {
+    box.style.top    = 'auto';
+    box.style.bottom = (window.innerHeight - rect.top + 6) + 'px';
+  } else {
+    box.style.top    = (rect.bottom + 6) + 'px';
+    box.style.bottom = 'auto';
+  }
+  // Horizontal: keep within viewport
+  const leftIdeal = rect.left - 10;
+  const maxLeft   = window.innerWidth - 345;
+  box.style.left  = Math.max(4, Math.min(leftIdeal, maxLeft)) + 'px';
+});
+
+// ══════════════════════════════════════════════════════════════
+//  THE EDGE toggle
+// ══════════════════════════════════════════════════════════════
+function toggleLoop(btn) {
+  const body  = document.getElementById('loop-body');
+  const arrow = document.getElementById('loop-arrow');
+  const open  = body.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+  btn.querySelector('.edge-title').textContent =
+    (open ? '▾' : '▸') + ' The Full Loop — how this simulation works, in plain English';
+}
+
+function toggleEdge(btn) {
+  const body  = document.getElementById('edge-body');
+  const arrow = document.getElementById('edge-arrow');
+  const open  = body.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+  btn.querySelector('.edge-title').textContent =
+    (open ? '▾' : '▸') + ' The Renderer & The Edge — what is physics, what is display';
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SEEDED PRNG — mulberry32
+// ══════════════════════════════════════════════════════════════
+function makePRNG(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PHYSICS
+// ══════════════════════════════════════════════════════════════
+function intensity(y, D) {
+  const r1 = Math.sqrt(L_SCREEN*L_SCREEN + (y - D_SLIT/2)**2);
+  const r2 = Math.sqrt(L_SCREEN*L_SCREEN + (y + D_SLIT/2)**2);
+  const A1 = 1 / Math.sqrt(r1);
+  const A2 = 1 / Math.sqrt(r2);
+  const delta_r    = -2 * y * D_SLIT / (r1 + r2);  // difference-of-squares
+  const delta_phase = K_WAVE * delta_r;
+  const coherence  = Math.sqrt(Math.max(0, 1 - D*D));
+  let I = (A1*A1 + A2*A2) + 2*coherence*A1*A2*Math.cos(delta_phase);
+  const sinTh = y / Math.sqrt(L_SCREEN*L_SCREEN + y*y);
+  const sArg  = Math.PI * A_SLIT * sinTh / LAMBDA;
+  const sinc2 = Math.abs(sArg) < 1e-12 ? 1 : (Math.sin(sArg)/sArg)**2;
+  return Math.max(0, I * sinc2);
+}
+
+const N_CDF = 3000;
+function buildCDF(D) {
+  const ys  = new Float64Array(N_CDF);
+  const Is  = new Float64Array(N_CDF);
+  const cdf = new Float64Array(N_CDF);
+  for (let i = 0; i < N_CDF; i++) {
+    ys[i] = -Y_HALF + (2*Y_HALF)*i/(N_CDF-1);
+    Is[i] = intensity(ys[i], D);
+  }
+  cdf[0] = 0;
+  for (let i = 1; i < N_CDF; i++)
+    cdf[i] = cdf[i-1] + 0.5*(Is[i]+Is[i-1])*(ys[i]-ys[i-1]);
+  const tot = cdf[N_CDF-1];
+  for (let i = 0; i < N_CDF; i++) cdf[i] /= tot;
+  return { ys, Is, cdf };
+}
+
+function sampleHit(cd, rng) {
+  const r = rng();
+  let lo = 0, hi = N_CDF-1;
+  while (lo < hi-1) {
+    const mid = (lo+hi)>>1;
+    if (cd.cdf[mid] < r) lo = mid; else hi = mid;
+  }
+  const den = cd.cdf[hi]-cd.cdf[lo];
+  const t   = den < 1e-14 ? 0.5 : (r-cd.cdf[lo])/den;
+  return cd.ys[lo] + t*(cd.ys[hi]-cd.ys[lo]);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  PHOSPHOR RENDERER  (NOT_PHYSICS beyond the hit distribution)
+// ══════════════════════════════════════════════════════════════
+function phosphorColor(b) {
+  if (b <= 0) return [0,0,0];
+  b = Math.min(1, b);
+  if (b < 0.30) {
+    const f = b/0.30;
+    return [0, Math.round(f*150), Math.round(f*25)];
+  } else if (b < 0.65) {
+    const f = (b-0.30)/0.35;
+    return [Math.round(f*60), Math.round(150+f*90), Math.round(25+f*15)];
+  } else {
+    const f = (b-0.65)/0.35;
+    return [Math.round(60+f*210), Math.round(240+f*15), Math.round(40+f*220)];
+  }
+}
+
+const N_BINS = 300;
+const CW = 210, CH = 600;
+
+function renderPhosphor(ctx, hitCounts, t, tau) {
+  let maxC = 1;
+  for (let i = 0; i < N_BINS; i++) if (hitCounts[i] > maxC) maxC = hitCounts[i];
+  const decay   = Math.exp(-t / tau);
+  const imgData = ctx.createImageData(CW, CH);
+  const data    = imgData.data;
+  const binH    = CH / N_BINS;
+  for (let bin = 0; bin < N_BINS; bin++) {
+    const b          = (hitCounts[bin] / maxC) * decay;
+    const [r,g,bl]   = phosphorColor(b);
+    const yTop = Math.round(bin * binH);
+    const yBot = Math.round((bin+1) * binH);
+    for (let py = yTop; py < yBot; py++) {
+      for (let px = 0; px < CW; px++) {
+        const distX = Math.abs(px - CW/2) / (CW/2);
+        const fade  = Math.max(0, 1 - distX*distX*0.30);  // NOT_PHYSICS
+        const idx   = (py*CW + px)*4;
+        data[idx]   = Math.round(r  * fade);
+        data[idx+1] = Math.round(g  * fade);
+        data[idx+2] = Math.round(bl * fade);
+        data[idx+3] = 255;
+      }
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+  drawOverlays(ctx);
+}
+
+function drawOverlays(ctx) {
+  ctx.globalAlpha = 0.40;
+  for (let k = -6; k <= 6; k++) {
+    const yf = k * DELTA_Y;
+    if (Math.abs(yf) > Y_HALF) continue;
+    const row = (0.5 - yf/(2*Y_HALF)) * CH;
+    ctx.strokeStyle = '#0055aa'; ctx.lineWidth = 0.6;
+    ctx.beginPath(); ctx.moveTo(0,row); ctx.lineTo(10,row); ctx.stroke();
+  }
+  for (const yf of [-ENV_ZERO, ENV_ZERO]) {
+    const row = (0.5 - yf/(2*Y_HALF)) * CH;
+    ctx.strokeStyle = '#aa5500'; ctx.lineWidth = 0.6;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(CW-10,row); ctx.lineTo(CW,row); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  ctx.globalAlpha = 1.0;
+}
+
+function blankScreen(ctx) {
+  ctx.fillStyle = '#010406';
+  ctx.fillRect(0,0,CW,CH);
+  ctx.globalAlpha = 0.07;
+  for (let mm = -12; mm <= 12; mm += 4) {
+    const row = (0.5 - mm*1e-3/(2*Y_HALF)) * CH;
+    ctx.strokeStyle='#334455'; ctx.lineWidth=0.5;
+    ctx.beginPath(); ctx.moveTo(0,row); ctx.lineTo(CW,row); ctx.stroke();
+  }
+  ctx.globalAlpha = 1.0;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  CANVAS SETUP
+// ══════════════════════════════════════════════════════════════
+const cvL  = document.getElementById('cv-left');
+const cvR  = document.getElementById('cv-right');
+const ctxL = cvL.getContext('2d');
+const ctxR = cvR.getContext('2d');
+blankScreen(ctxL); blankScreen(ctxR);
+
+// ══════════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════════
+let D_right    = 0.5;
+let observerOn = true;
+let hitCountsL = new Int32Array(N_BINS);
+let hitCountsR = new Int32Array(N_BINS);
+let t_fired    = null;
+let animId     = null;
+let lastTau    = 4.0;
+
+function binOf(y) {
+  return Math.max(0, Math.min(N_BINS-1,
+    Math.floor((y + Y_HALF) / (2*Y_HALF) * N_BINS)));
+}
+
+// ══════════════════════════════════════════════════════════════
+//  CONTROLS
+// ══════════════════════════════════════════════════════════════
+function setObserver(on) {
+  observerOn = on;
+  document.getElementById('tog-on').className  = 'tog' + (on  ? ' on-active'  : '');
+  document.getElementById('tog-off').className = 'tog' + (!on ? ' off-active' : '');
+  const D = on ? D_right : 0.0;
+  updateDLabels(D);
+  updateObsNote(on, D);
+  if (t_fired !== null) fire();
+}
+
+function onDChange(v) {
+  D_right = parseFloat(v);
+  document.getElementById('d-val').textContent = D_right.toFixed(2);
+  const D = observerOn ? D_right : 0.0;
+  updateDLabels(D); updateObsNote(observerOn, D);
+  if (t_fired !== null) fire();
+}
+
+function updateDLabels(D) {
+  document.getElementById('d-top').textContent = D.toFixed(2);
+  document.getElementById('d-bot').textContent = D.toFixed(2);
+}
+
+function updateObsNote(on, D) {
+  const el = document.getElementById('obs-note');
+  if (!on) {
+    el.innerHTML = 'Observer OFF — D = 0<br>Both screens show full interference.';
+    el.style.color = '#336644';
+  } else {
+    el.innerHTML = `Which-path known: D = ${D.toFixed(2)}<br>Fringes suppressed (Englert duality).`;
+    el.style.color = '#665533';
+  }
+}
+
+function onTauChange(v) {
+  lastTau = parseFloat(v);
+  document.getElementById('tau-val').textContent  = lastTau.toFixed(1) + ' s';
+  document.getElementById('tau-disp').textContent = lastTau.toFixed(1);
+  if (t_fired !== null) { t_fired = performance.now(); cancelAnimationFrame(animId); decayLoop(lastTau); }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  FIRE
+// ══════════════════════════════════════════════════════════════
+function fire() {
+  const N   = parseInt(document.getElementById('n-sl').value);
+  const tau = lastTau;
+  const D   = observerOn ? D_right : 0.0;
+
+  const cdL  = buildCDF(0.0);
+  const cdR  = buildCDF(D);
+  const rngL = makePRNG(42);
+  const rngR = makePRNG(42);
+
+  hitCountsL = new Int32Array(N_BINS);
+  hitCountsR = new Int32Array(N_BINS);
+  for (let i = 0; i < N; i++) {
+    hitCountsL[binOf(sampleHit(cdL, rngL))]++;
+    hitCountsR[binOf(sampleHit(cdR, rngR))]++;
+  }
+
+  document.getElementById('n-disp').textContent   = N.toLocaleString();
+  document.getElementById('tau-disp').textContent = tau.toFixed(1);
+  updateEnglert(D);
+  flashScreens();
+
+  t_fired = performance.now();
+  cancelAnimationFrame(animId);
+  decayLoop(tau);
+}
+
+function decayLoop(tau) {
+  const t = (performance.now() - t_fired) / 1000.0;
+  renderPhosphor(ctxL, hitCountsL, t, tau);
+  renderPhosphor(ctxR, hitCountsR, t, tau);
+  if (t < tau * 7) animId = requestAnimationFrame(() => decayLoop(tau));
+}
+
+function flashScreens() {
+  ['flash-left','flash-right'].forEach(id => {
+    const el = document.getElementById(id);
+    el.style.opacity = '1';
+    setTimeout(() => el.style.opacity='0', 100);
+  });
+  const btn = document.getElementById('btn-fire');
+  btn.classList.add('flashing');
+  setTimeout(() => btn.classList.remove('flashing'), 220);
+}
+
+function resetScreens() {
+  cancelAnimationFrame(animId);
+  t_fired = null;
+  hitCountsL = new Int32Array(N_BINS);
+  hitCountsR = new Int32Array(N_BINS);
+  blankScreen(ctxL); blankScreen(ctxR);
+  ['n-disp','tau-disp'].forEach(id => document.getElementById(id).textContent = '—');
+  document.getElementById('eng-val').textContent = 'D²+V² = —';
+  document.getElementById('eng-d').style.width = '0%';
+  document.getElementById('eng-v').style.left  = '0%';
+  document.getElementById('eng-v').style.width = '100%';
+}
+
+// ══════════════════════════════════════════════════════════════
+//  ENGLERT
+// ══════════════════════════════════════════════════════════════
+function measureV(counts) {
+  const hw = DELTA_Y * 0.2;
+  let pk = 0, vl = 0;
+  for (let i = 0; i < N_BINS; i++) {
+    const y = -Y_HALF + (i+0.5)*(2*Y_HALF)/N_BINS;
+    if (Math.abs(y) < hw)                        pk += counts[i];
+    if (Math.abs(Math.abs(y) - DELTA_Y/2) < hw)  vl += counts[i];
+  }
+  return pk+vl===0 ? null : (pk-vl)/(pk+vl);
+}
+
+function updateEnglert(D) {
+  const V  = measureV(hitCountsL);
+  const D2 = D*D;
+  const V2 = V!==null ? Math.min(1-D2, V*V) : Math.max(0,1-D2);
+  document.getElementById('eng-d').style.width = (D2*100).toFixed(1)+'%';
+  document.getElementById('eng-v').style.left  = (D2*100).toFixed(1)+'%';
+  document.getElementById('eng-v').style.width = (V2*100).toFixed(1)+'%';
+  document.getElementById('eng-val').textContent = `D²+V²=${(D2+V2).toFixed(3)}`;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  BENCHMARK PANEL
+// ══════════════════════════════════════════════════════════════
+function toggleBench(btn) {
+  const body  = document.getElementById('bench-body');
+  const arrow = document.getElementById('bench-arrow');
+  const open  = body.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+  btn.querySelector('.edge-title').textContent =
+    (open ? '▾' : '▸') + ' Render Benchmarks — timing, memory, file sizes';
+}
+
+// Rolling fps tracker
+const FPS_WINDOW = 10;
+let fpsHistory = [];
+let lastFrameTime = null;
+
+function recordFrame() {
+  const now = performance.now();
+  if (lastFrameTime !== null) {
+    const dt = now - lastFrameTime;
+    fpsHistory.push(dt);
+    if (fpsHistory.length > FPS_WINDOW) fpsHistory.shift();
+    const avgDt = fpsHistory.reduce((a,b)=>a+b,0) / fpsHistory.length;
+    const fps   = 1000 / avgDt;
+    const el = document.getElementById('bt-fps');
+    if (el) el.textContent = fps.toFixed(1) + ' fps';
+  }
+  lastFrameTime = now;
+}
+
+function fmtMs(ms)  { return ms < 1 ? ms.toFixed(3)+' ms' : ms.toFixed(1)+' ms'; }
+function fmtKB(b)   { return b < 1024 ? b+' B' : b < 1048576 ? (b/1024).toFixed(1)+' KB' : (b/1048576).toFixed(2)+' MB'; }
+
+function updateMemory() {
+  // Heap — Chromium only
+  const mem = performance.memory;
+  if (mem) {
+    document.getElementById('bm-heap').textContent    = fmtKB(mem.usedJSHeapSize);
+    document.getElementById('bm-heaptot').textContent = fmtKB(mem.totalJSHeapSize);
+  } else {
+    document.getElementById('bm-heap').textContent    = 'n/a (non-Chromium)';
+    document.getElementById('bm-heaptot').textContent = 'n/a';
+  }
+  // Static sizes we know exactly
+  const countsBytes = N_BINS * 4 * 2;                   // two Int32Arrays
+  const cdfBytes    = N_CDF * 8 * 3 * 2;                // ys+Is+cdf × 2 Float64Arrays per CDF, ×2 CDFs
+  const imgBytes    = CW * CH * 4 * 2;                   // two ImageData RGBA buffers
+  const pxBytes     = CW * CH * 4 * 2;                   // canvas backing store (approx same)
+  document.getElementById('bm-counts').textContent = fmtKB(countsBytes);
+  document.getElementById('bm-cdf').textContent    = fmtKB(cdfBytes);
+  document.getElementById('bm-img').textContent    = fmtKB(imgBytes) + '  (per frame, discarded)';
+  document.getElementById('bm-px').textContent     = fmtKB(pxBytes);
+}
+
+// File sizes — fetched once at load via HEAD requests (same origin only)
+const FILE_SIZES = {
+  'bf-html': 'double_slit_burst.html',
+  'bf-d0':   'double_slit_buildup_D0.png',
+  'bf-gif':  'double_slit_3d_timelapse.gif',
+};
+// Known sizes from Python run (baked in — these don't change unless re-rendered)
+const KNOWN_SIZES = {
+  'bf-sim':   { label: 'simulate_double_slit.py',    bytes: null, approx: '~18 KB' },
+  'bf-q':     { label: 'quantum.py',                 bytes: null, approx: '~9 KB'  },
+  'bf-p':     { label: 'phosphor.py',                bytes: null, approx: '~7 KB'  },
+  'bf-d0':    { label: 'double_slit_buildup_D0.png', bytes: 181*1024, approx: '181 KB' },
+  'bf-gif':   { label: 'double_slit_3d_timelapse.gif', bytes: 1500*1024, approx: '1.5 MB' },
+  'bf-total': { label: 'All rendered outputs',       bytes: null, approx: '~2.7 MB (4 PNGs + 1 GIF)' },
+};
+// HTML self-size — measure via document.documentElement.outerHTML
+function measureSelfSize() {
+  try {
+    const html  = document.documentElement.outerHTML;
+    const bytes = new TextEncoder().encode(html).length;
+    const el = document.getElementById('bf-html');
+    if (el) el.textContent = fmtKB(bytes) + ' (live DOM)';
+  } catch(e) {}
+}
+
+function populateFileSizes() {
+  Object.entries(KNOWN_SIZES).forEach(([id, info]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (info.bytes !== null) {
+      el.textContent = fmtKB(info.bytes);
+    } else {
+      el.textContent = info.approx;
+    }
+  });
+  measureSelfSize();
+}
+
+// Instrumented fire() replacement — wraps the real fire() with timing
+const _realFire = fire;
+fire = function() {
+  const t0 = performance.now();
+  fpsHistory = []; lastFrameTime = null;
+
+  const N   = parseInt(document.getElementById('n-sl').value);
+  const tau = lastTau;
+  const D   = observerOn ? D_right : 0.0;
+
+  // Time CDF builds
+  const tc0s = performance.now();
+  const cdL  = buildCDF(0.0);
+  const tc0e = performance.now();
+  const tcRs = performance.now();
+  const cdR  = buildCDF(D);
+  const tcRe = performance.now();
+
+  document.getElementById('bt-cdf0').textContent = fmtMs(tc0e - tc0s);
+  document.getElementById('bt-cdfR').textContent = fmtMs(tcRe - tcRs);
+
+  // Time sampling
+  const rngL = makePRNG(42);
+  const rngR = makePRNG(42);
+  hitCountsL = new Int32Array(N_BINS);
+  hitCountsR = new Int32Array(N_BINS);
+
+  const tss = performance.now();
+  for (let i = 0; i < N; i++) {
+    hitCountsL[binOf(sampleHit(cdL, rngL))]++;
+    hitCountsR[binOf(sampleHit(cdR, rngR))]++;
+  }
+  const tse = performance.now();
+  const sampMs = tse - tss;
+  document.getElementById('bt-samp').textContent = fmtMs(sampMs) + `  (N=${N.toLocaleString()} × 2)`;
+  document.getElementById('bt-sps').textContent  = ((N * 2) / sampMs).toFixed(0) + ' samples/ms';
+
+  // Time first render frame
+  document.getElementById('n-disp').textContent   = N.toLocaleString();
+  document.getElementById('tau-disp').textContent = tau.toFixed(1);
+  updateEnglert(D);
+  flashScreens();
+  t_fired = performance.now();
+  cancelAnimationFrame(animId);
+
+  const trs = performance.now();
+  renderPhosphor(ctxL, hitCountsL, 0, tau);
+  renderPhosphor(ctxR, hitCountsR, 0, tau);
+  const tre = performance.now();
+  document.getElementById('bt-rend').textContent = fmtMs(tre - trs) + '  (t=0, both screens)';
+
+  const t1 = performance.now();
+  document.getElementById('bt-total').textContent = fmtMs(t1 - t0);
+
+  updateMemory();
+
+  // Continue decay loop
+  decayLoop(tau);
+};
+
+// Instrumented decayLoop — records fps
+const _realDecayLoop = decayLoop;
+decayLoop = function(tau) {
+  recordFrame();
+  const t = (performance.now() - t_fired) / 1000.0;
+  renderPhosphor(ctxL, hitCountsL, t, tau);
+  renderPhosphor(ctxR, hitCountsR, t, tau);
+  if (t < tau * 7) animId = requestAnimationFrame(() => decayLoop(tau));
+};
+
+// ── Init ──────────────────────────────────────────────────────
+updateDLabels(D_right);
+updateObsNote(true, D_right);
+populateFileSizes();
+</script>
+</body>
+</html>

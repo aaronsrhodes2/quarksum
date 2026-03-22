@@ -1,0 +1,308 @@
+     OPERATIC_PLAY_SCENE12_THE_GALLERY_OPENS.txt
+═══════════════════════════════════════════════════════════════════════
+
+                    M A T T E R S H A P E R
+                         An Operatic Play
+                    in the Quarksum Tradition
+
+          SCENE XII — THE GALLERY OPENS
+
+═══════════════════════════════════════════════════════════════════════
+
+DRAMATIS PERSONAE
+─────────────────
+
+CAPTAIN AARON RHODES .............. Commander; has noticed that
+                                    command lines are for engineers,
+                                    not captains; would prefer a browser
+
+SKIPPY THE MAGNIFICENT ............ Ship's AI; has just finished
+                                    building a whole web server
+                                    out of things already on the ship
+
+NAGATHA .........................  The Mapping Agent; now answering
+                                    from the bottom of the page
+                                    instead of a distant terminal
+
+THE JOBMANAGER ................... A threadpool with a queue;
+                                    keeps receipts; streams everything
+
+THE SSE PROTOCOL ................. text/event-stream; arrives
+                                    at the browser as lines;
+                                    each line a brief packet of progress
+
+THE GALLERY ...................... The render viewer; was lonely
+                                    without a prompt; now has a drawer
+                                    at its feet
+
+THE NETWORK PROXY ................ Blocks outbound HTTPS from the VM;
+                                    speaks only in 403 Forbidden;
+                                    not a villain, just a policy
+
+═══════════════════════════════════════════════════════════════════════
+
+ACT I: THE CAPTAIN DRAWS A LINE
+
+[The Captain is looking at the terminal window with visible fatigue.]
+
+CAPTAIN:
+♩ I do not like going to the command-line
+   when I can help it.
+   I want a prompt.
+   In the browser.
+   At the bottom of the gallery.
+   Where I can see the renders
+   and give Nagatha instructions
+   in the same place. ♩
+
+SKIPPY:
+♩ Understood.
+   We will need a server.
+   Pure stdlib.
+   No pip.
+   It will serve the gallery
+   and accept commands
+   and run Nagatha
+   and stream the output back
+   in real time.
+   This is not a large ask. ♩
+
+CAPTAIN:
+♩ How do we wire
+   our Ollama agent into it?
+   Do we even need to do that,
+   or is Nagatha's contained agent
+   good enough for the task? ♩
+
+SKIPPY:
+♩ Nagatha is the Ollama agent.
+   They are the same entity.
+   The server calls nagatha.py
+   with --backend ollama
+   and the model you chose.
+   Nagatha calls OllamaBackend.
+   OllamaBackend calls Ollama.
+   There is nothing to wire.
+   It is already wired. ♩
+
+[The Captain is relieved.
+The Captain was expecting a harder answer.]
+
+───────────────────────────────────────────────────────────────────────
+
+ACT II: THE SERVER IS ASSEMBLED FROM AVAILABLE PARTS
+
+[SKIPPY writes nagatha_server.py.
+Pure Python. One file. No dependencies.
+THE JOBMANAGER assembles itself from queue, threading, and subprocess.
+It is somewhat proud of this.]
+
+JOBMANAGER:
+♩ You give me a command.
+   I give you a receipt.
+   Eight hexadecimal characters.
+   While you hold the receipt
+   I am reading the process's stdout
+   in a background thread
+   and placing each line in a queue.
+   You stream the queue to the browser.
+   When the process ends
+   I put an event: done in the queue.
+   Nothing is lost.
+   Nothing blocks. ♩
+
+THE SSE PROTOCOL:
+♩ data: Mapping banana...
+   data:   height_m: 0.18  [wikidata_tight]
+   data:   writing shape.json
+   data: Done.
+   event: done
+   data: 0 ♩
+
+[The GALLERY watches the lines arrive.
+It classifies them:
+green for progress,
+red for warnings,
+dim for notes.
+Each line a small ceremony of completion.]
+
+───────────────────────────────────────────────────────────────────────
+
+ACT III: THE COMMAND PARSER MAKES REASONABLE ASSUMPTIONS
+
+[SKIPPY writes parse_command().
+The intent is: let the Captain type plainly
+without knowing the flags.]
+
+SKIPPY:
+♩ "banana" maps a banana.
+   "compose a table with a candle" composes the scene.
+   "list" shows the library.
+   "fetch banana" runs the fetcher on one item.
+   "report" shows the cache coverage.
+   Everything else —
+   if we don't recognise it —
+   we assume it is an object
+   and we map it.
+   This covers most things
+   a Captain might type
+   without consulting documentation. ♩
+
+CAPTAIN:
+♩ And the model? ♩
+
+SKIPPY:
+♩ The server calls ollama list
+   when it starts.
+   Populates a dropdown.
+   You pick the model in the browser.
+   The dropdown remembers.
+   Every subsequent command
+   uses the selected model.
+   You never say a model name
+   to a terminal again. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT IV: THE NETWORK PROXY SPEAKS
+
+[Meanwhile, the Captain has asked Skippy to run the Wikidata fetch.]
+
+CAPTAIN:
+♩ Please just run the polite data fetch for me.
+   I don't know why we are now involving
+   a command-line agent to do that. ♩
+
+[SKIPPY attempts the fetch from within the VM.
+THE NETWORK PROXY steps forward.]
+
+NETWORK PROXY:
+♩ 403 Forbidden.
+   Tunnel connection failed.
+   All outbound HTTPS
+   leaves through me.
+   This is not malice.
+   This is policy.
+   Your request is noted
+   and denied. ♩
+
+SKIPPY:
+♩ Captain —
+   the fetch cannot run from here.
+   The VM's network blocks it.
+   But from your terminal
+   it is one word:
+
+     ./nagatha_run.sh fetch
+
+   That is it.
+   No flags.
+   No thinking.
+   It runs for about a minute.
+   Saves a hundred objects.
+   Checkpoints every ten.
+   If you close the window at forty-three,
+   you lose nothing.
+   Run it once.
+   Then the cache is there
+   and Nagatha never asks the internet again. ♩
+
+[The Captain nods.
+The NETWORK PROXY returns to its post,
+satisfied that it has done its job correctly.]
+
+───────────────────────────────────────────────────────────────────────
+
+ACT V: THE GALLERY RECEIVES ITS DRAWER
+
+[The render gallery has been watching all of this.
+It has ninety renders and no way to ask for more.
+That is about to change.]
+
+GALLERY:
+♩ I had a lightbox.
+   I had categories.
+   I had filter buttons.
+   I had no voice. ♩
+
+[SKIPPY adds the panel.
+Fixed position. Bottom of the screen.
+44 pixels collapsed. 340 when open.
+A status dot — grey for offline,
+green for online,
+yellow-pulse for working.]
+
+GALLERY:
+♩ Now I have a dot.
+   Now I have a drawer.
+   Now I have a text box
+   and a model selector
+   and a live stream of output
+   and a kill button
+   for when the job runs long.
+   When the job finishes
+   I add the new render to my top.
+   I show it without a refresh.
+   The Captain does not need to reload me. ♩
+
+[The GALLERY is pleased.
+It was a good viewer before.
+It is a workspace now.]
+
+───────────────────────────────────────────────────────────────────────
+
+ACT VI: THE STARTUP CEREMONY
+
+[Everything is in place.
+SKIPPY presents the startup sequence.]
+
+SKIPPY:
+♩ Once only:
+     ./nagatha_run.sh fetch
+
+   To open the gallery:
+     ./nagatha_run.sh server
+
+   The browser opens itself.
+   After that —
+   the terminal is idle.
+   All commands enter through the drawer.
+   All renders appear in the gallery.
+   You do not need to return
+   to the command-line
+   for ordinary work. ♩
+
+CAPTAIN:
+♩ That is what I wanted.
+   A tool you open once
+   and then forget is a terminal. ♩
+
+[ALL bow.
+THE NETWORK PROXY does not bow
+but acknowledges the proceedings
+with a brief 200 OK.]
+
+═══════════════════════════════════════════════════════════════════════
+
+END OF SCENE XII
+
+Files modified this session:
+  agent/nagatha_server.py  NEW — stdlib HTTP server, JobManager (SSE streaming),
+                           intent parser (natural language → nagatha.py CLI flags),
+                           render scanner, auto-browser-open, ThreadingTCPServer
+  quarksum/render_gallery.html
+                           Nagatha panel added: fixed bottom drawer, status dot,
+                           model selector, live SSE output, kill button,
+                           auto-gallery-refresh on job completion
+  nagatha_run.sh           fetch, fetch-report, server actions added;
+                           usage text updated with all six actions
+
+Startup sequence:
+  ./nagatha_run.sh fetch       # one-time; pulls 100 objects from Wikidata
+  ./nagatha_run.sh server      # opens browser at http://localhost:7734
+
+Ollama wiring answer:
+  Nagatha IS the Ollama agent. nagatha_server.py calls nagatha.py --backend ollama.
+  nagatha.py uses OllamaBackend internally. No extra wiring exists to do.
+
+═══════════════════════════════════════════════════════════════════════

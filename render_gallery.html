@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nagatha — Quarksum Studio</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0a0a0e;
+  --surface:  #12121a;
+  --raised:   #1a1a26;
+  --border:   #26263a;
+  --accent:   #6c8eff;
+  --accent2:  #a78bfa;
+  --green:    #4ade80;
+  --yellow:   #facc15;
+  --red:      #f87171;
+  --orange:   #fb923c;
+  --blue:     #60a5fa;
+  --purple:   #c084fc;
+  --text:     #d4d4e8;
+  --muted:    #5a5a78;
+  --dim:      #2a2a3e;
+  --radius:   8px;
+  --mono:     "SF Mono","Fira Code","Cascadia Code",monospace;
+}
+
+html, body { height: 100%; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 13px; overflow: hidden; }
+
+/* ─── APP SHELL ─────────────────────────────────────────────────── */
+#app { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+/* ─── COMMAND CENTER ────────────────────────────────────────────── */
+#command-center {
+  flex-shrink: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px 10px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+
+/* Header row */
+#cc-header { display: flex; align-items: center; gap: 12px; }
+
+.wordmark {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; flex-shrink: 0;
+}
+
+#model-select {
+  background: var(--raised); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text);
+  font-size: 11px; padding: 3px 8px; cursor: pointer; outline: none;
+}
+#model-select:focus { border-color: var(--accent); }
+
+#ng-server-status { font-size: 11px; color: var(--muted); flex: 1; }
+
+/* Status circles */
+#status-circles { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+.sc-wrap { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.sc-circle {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--dim); transition: background 0.3s, box-shadow 0.3s;
+}
+.sc-label { font-size: 8px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.06em; }
+
+.sc-circle.lit-data  { background: var(--blue);   box-shadow: 0 0 8px var(--blue); }
+.sc-circle.lit-img   { background: var(--purple);  box-shadow: 0 0 8px var(--purple); }
+.sc-circle.lit-cpu   { background: var(--red);     box-shadow: 0 0 8px var(--red); }
+.sc-circle.lit-mem   { background: var(--yellow);  box-shadow: 0 0 8px var(--yellow); }
+.sc-circle.lit-disk  { background: var(--orange);  box-shadow: 0 0 8px var(--orange); }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+.sc-circle.pulsing { animation: blink 0.9s infinite; }
+
+/* Prompt row */
+#prompt-row { display: flex; gap: 10px; align-items: flex-end; }
+
+#prompt-input {
+  flex: 1; background: var(--raised); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text);
+  font-size: 14px; font-family: inherit; padding: 10px 14px;
+  resize: none; height: 44px; max-height: 120px; outline: none;
+  transition: border-color 0.15s; line-height: 1.5; overflow-y: hidden;
+}
+#prompt-input:focus { border-color: var(--accent); }
+#prompt-input::placeholder { color: var(--muted); }
+
+#ask-btn {
+  flex-shrink: 0; height: 44px; padding: 0 22px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; border: none; border-radius: var(--radius);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s; white-space: nowrap;
+}
+#ask-btn:hover { opacity: 0.88; }
+#ask-btn:active { transform: scale(0.97); }
+#ask-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Response / plan */
+#response-area {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--raised); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 14px;
+  font-size: 12px; line-height: 1.6;
+}
+#response-area[hidden] { display: none; }
+#ng-response { flex: 1; }
+.plan-have    { color: var(--green); }
+.plan-missing { color: var(--yellow); }
+
+#generate-btn {
+  flex-shrink: 0; align-self: flex-end;
+  padding: 6px 18px; background: var(--green);
+  color: #080810; border: none; border-radius: var(--radius);
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  transition: opacity 0.15s; white-space: nowrap;
+}
+#generate-btn:hover { opacity: 0.85; }
+#generate-btn[hidden] { display: none; }
+
+/* Progress */
+#progress-area { display: flex; align-items: center; gap: 12px; }
+#progress-area[hidden] { display: none; }
+#progress-track {
+  flex: 1; height: 4px; background: var(--dim);
+  border-radius: 2px; overflow: hidden;
+}
+#progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px; width: 0%; transition: width 0.5s ease;
+}
+@keyframes scan { from{background-position:-200% center} to{background-position:200% center} }
+#progress-fill.indet {
+  width: 38%; background-size: 200% 100%;
+  animation: scan 1.5s linear infinite;
+}
+#progress-label { font-size: 11px; color: var(--muted); min-width: 200px; font-family: var(--mono); }
+
+#kill-btn {
+  flex-shrink: 0; padding: 3px 10px;
+  background: transparent; border: 1px solid var(--red);
+  border-radius: var(--radius); color: var(--red);
+  font-size: 11px; cursor: pointer;
+}
+#kill-btn:hover { background: rgba(248,113,113,0.1); }
+
+/* SSE log */
+#output-log {
+  max-height: 72px; overflow-y: auto; font-family: var(--mono);
+  font-size: 10px; line-height: 1.5; color: var(--muted); display: none;
+}
+#output-log.vis { display: block; }
+#output-log .ok  { color: #86efac; }
+#output-log .err { color: var(--red); }
+#output-log .dim { color: var(--dim); }
+
+/* ─── WORKSPACE ─────────────────────────────────────────────────── */
+#workspace { flex: 1; display: flex; min-height: 0; overflow: hidden; }
+
+/* Viewer pane */
+#viewer-pane {
+  flex: 1; display: flex; flex-direction: column;
+  min-width: 0; overflow: hidden; position: relative;
+  background: #06060c;
+}
+
+#viewer-toolbar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 12px; background: rgba(6,6,12,0.9);
+  border-bottom: 1px solid var(--border); flex-shrink: 0; z-index: 5;
+}
+
+.mode-btn {
+  padding: 3px 10px; background: transparent;
+  border: 1px solid var(--dim); border-radius: 4px;
+  color: var(--muted); font-size: 11px; cursor: pointer; transition: all 0.15s;
+}
+.mode-btn.active {
+  background: rgba(108,142,255,0.1);
+  border-color: var(--accent); color: var(--accent);
+}
+.mode-btn:hover:not(.active) { border-color: var(--border); color: var(--text); }
+
+#viewer-title {
+  flex: 1; font-size: 11px; color: var(--muted);
+  text-align: center; letter-spacing: 0.05em;
+}
+
+#viewer-canvas {
+  position: absolute; top: 36px; left: 0; right: 0; bottom: 0;
+  width: 100%; height: calc(100% - 36px);
+  display: block; cursor: grab;
+}
+#viewer-canvas:active { cursor: grabbing; }
+#viewer-canvas[hidden] { display: none; }
+
+#render-img {
+  position: absolute; top: 36px; left: 0; right: 0; bottom: 0;
+  width: 100%; height: calc(100% - 36px);
+  object-fit: contain; display: block;
+}
+#render-img[hidden] { display: none; }
+
+#viewer-empty {
+  position: absolute; inset: 36px 0 0 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; pointer-events: none;
+}
+#viewer-empty[hidden] { display: none; }
+.ei { font-size: 56px; opacity: 0.06; line-height: 1; }
+.et { font-size: 16px; color: var(--muted); opacity: 0.4; font-weight: 300; letter-spacing: 0.06em; }
+.eh { font-size: 12px; color: var(--muted); opacity: 0.25; }
+
+/* Diagnostics pane */
+#diag-pane {
+  width: 210px; flex-shrink: 0; background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow-y: auto;
+}
+
+.ds { padding: 10px 14px 8px; border-bottom: 1px solid var(--border); }
+.dt { font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+.dv { font-size: 12px; color: var(--text); line-height: 1.6; font-family: var(--mono); }
+.dv.big { font-size: 22px; font-weight: 300; color: var(--accent); font-family: inherit; }
+.dsub { font-size: 10px; color: var(--muted); }
+.dtag {
+  display: inline-block; padding: 1px 6px; border-radius: 3px;
+  background: rgba(108,142,255,0.1); color: var(--accent);
+  font-size: 10px; margin: 1px 2px 1px 0;
+}
+.dtag.m { background: rgba(192,132,252,0.1); color: var(--purple); }
+
+.dbar-wrap { margin-top: 5px; display: flex; flex-direction: column; gap: 4px; }
+.dbar-row { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--muted); }
+.dbar { flex: 1; height: 3px; background: var(--dim); border-radius: 2px; }
+.dbar-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.4s; }
+
+/* ─── CONTROLS BAR ──────────────────────────────────────────────── */
+#controls-bar {
+  flex-shrink: 0; height: 56px;
+  background: var(--surface); border-top: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 16px; gap: 0;
+}
+
+#timeline-controls { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+
+.tl-btn {
+  background: transparent; border: none; color: var(--muted);
+  font-size: 14px; cursor: pointer; padding: 4px 6px;
+  border-radius: 4px; transition: color 0.15s, background 0.15s; line-height: 1;
+}
+.tl-btn:hover { color: var(--text); background: var(--raised); }
+.tl-btn.on { color: var(--accent); }
+
+#time-slider {
+  flex: 1; min-width: 60px; max-width: 280px;
+  -webkit-appearance: none; appearance: none;
+  height: 3px; background: var(--dim); border-radius: 2px; outline: none; cursor: pointer;
+}
+#time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--accent); cursor: pointer;
+}
+#time-slider::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent); border: none; cursor: pointer;
+}
+
+#time-display { font-size: 11px; color: var(--muted); font-family: var(--mono); min-width: 38px; }
+#fps-display  { font-size: 10px; color: var(--dim); font-family: var(--mono); }
+
+.vsep { width: 1px; height: 24px; background: var(--border); margin: 0 10px; flex-shrink: 0; }
+
+#camera-controls { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+
+.cam-mode {
+  padding: 4px 10px; background: transparent;
+  border: 1px solid var(--dim); border-radius: 4px;
+  color: var(--muted); font-size: 11px; cursor: pointer; transition: all 0.15s;
+}
+.cam-mode.active { background: rgba(108,142,255,0.1); border-color: var(--accent); color: var(--accent); }
+.cam-mode:hover:not(.active) { border-color: var(--border); color: var(--text); }
+
+.cam-preset {
+  padding: 4px 10px; background: transparent;
+  border: 1px solid var(--border); border-radius: 4px;
+  color: var(--muted); font-size: 11px; cursor: pointer; transition: all 0.15s;
+}
+.cam-preset:hover { border-color: var(--accent2); color: var(--accent2); }
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  COMMAND CENTER                                          ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<div id="command-center">
+
+  <!-- Header: wordmark · model · status · circles -->
+  <div id="cc-header">
+    <span class="wordmark">NAGATHA</span>
+    <select id="model-select"><option>connecting…</option></select>
+    <span id="ng-server-status">offline — run: ./nagatha_run.sh server</span>
+    <div id="status-circles">
+      <div class="sc-wrap">
+        <div class="sc-circle" id="sc-data"  title="Retrieving external data (Wikidata / web)"></div>
+        <div class="sc-label">Data</div>
+      </div>
+      <div class="sc-wrap">
+        <div class="sc-circle" id="sc-img"   title="Retrieving reference images"></div>
+        <div class="sc-label">Img</div>
+      </div>
+      <div class="sc-wrap">
+        <div class="sc-circle" id="sc-cpu"   title="CPU load"></div>
+        <div class="sc-label">CPU</div>
+      </div>
+      <div class="sc-wrap">
+        <div class="sc-circle" id="sc-mem"   title="Memory pressure"></div>
+        <div class="sc-label">Mem</div>
+      </div>
+      <div class="sc-wrap">
+        <div class="sc-circle" id="sc-disk"  title="Disk usage"></div>
+        <div class="sc-label">Disk</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prompt row -->
+  <div id="prompt-row">
+    <textarea id="prompt-input" rows="1"
+      placeholder="Describe a scene or object — 'an orange on a wooden table lit by a candle'"></textarea>
+    <button id="ask-btn">Ask Nagatha</button>
+  </div>
+
+  <!-- Plan response + Generate -->
+  <div id="response-area" hidden>
+    <div id="ng-response"></div>
+    <button id="generate-btn" hidden>Generate</button>
+  </div>
+
+  <!-- Progress bar -->
+  <div id="progress-area" hidden>
+    <div id="progress-track"><div id="progress-fill" class="indet"></div></div>
+    <div id="progress-label">Initialising…</div>
+    <button id="kill-btn">■ Stop</button>
+  </div>
+
+  <!-- SSE output log -->
+  <div id="output-log"></div>
+
+</div><!-- /command-center -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  WORKSPACE                                               ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<div id="workspace">
+
+  <!-- 3D viewer -->
+  <div id="viewer-pane">
+    <div id="viewer-toolbar">
+      <button class="mode-btn active" id="mode-preview">⬡ 3D Preview</button>
+      <button class="mode-btn"        id="mode-render" >▣ Render</button>
+      <span id="viewer-title">No scene loaded</span>
+    </div>
+    <canvas id="viewer-canvas" hidden></canvas>
+    <img    id="render-img"    hidden alt="render">
+    <div    id="viewer-empty">
+      <div class="ei">⬡</div>
+      <div class="et">No scene loaded</div>
+      <div class="eh">Ask Nagatha to build something ↑</div>
+    </div>
+  </div>
+
+  <!-- Diagnostics panel -->
+  <div id="diag-pane">
+
+    <div class="ds">
+      <div class="dt">Scene</div>
+      <div class="dv" id="diag-scene">—</div>
+    </div>
+
+    <div class="ds">
+      <div class="dt">Objects</div>
+      <div class="dv" id="diag-objects">—</div>
+    </div>
+
+    <div class="ds">
+      <div class="dt">Primitives</div>
+      <div class="dv big" id="diag-primitives">—</div>
+    </div>
+
+    <div class="ds">
+      <div class="dt">Render time</div>
+      <div class="dv" id="diag-render-time">—</div>
+    </div>
+
+    <div class="ds">
+      <div class="dt">θ Complexity threshold</div>
+      <div class="dv">0.38197 <span class="dsub">1/φ²</span></div>
+      <div style="font-size:9px;color:var(--muted);margin-top:3px">
+        BH Claying — geometry stops here
+      </div>
+    </div>
+
+    <div class="ds">
+      <div class="dt">Materials</div>
+      <div class="dv" id="diag-materials">—</div>
+    </div>
+
+    <div class="ds">
+      <div class="dt">Library</div>
+      <div class="dv" id="diag-library">—</div>
+      <div class="dbar-wrap" id="diag-sys-bars" style="display:none;margin-top:8px">
+        <div class="dbar-row">
+          <span style="min-width:26px">CPU</span>
+          <div class="dbar"><div class="dbar-fill" id="bar-cpu" style="width:0%"></div></div>
+          <span id="bar-cpu-pct" style="min-width:28px">0%</span>
+        </div>
+        <div class="dbar-row">
+          <span style="min-width:26px">Mem</span>
+          <div class="dbar"><div class="dbar-fill" id="bar-mem" style="width:0%;background:var(--yellow)"></div></div>
+          <span id="bar-mem-pct" style="min-width:28px">0%</span>
+        </div>
+        <div class="dbar-row">
+          <span style="min-width:26px">Disk</span>
+          <div class="dbar"><div class="dbar-fill" id="bar-disk" style="width:0%;background:var(--orange)"></div></div>
+          <span id="bar-disk-pct" style="min-width:28px">0%</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /diag-pane -->
+</div><!-- /workspace -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════╗
+     ║  CONTROLS BAR                                            ║
+     ╚══════════════════════════════════════════════════════════╝ -->
+<div id="controls-bar">
+  <div id="timeline-controls">
+    <button class="tl-btn" id="ctrl-rewind"  title="Rewind">⏮</button>
+    <button class="tl-btn" id="ctrl-play"    title="Play/Pause">▶</button>
+    <button class="tl-btn" id="ctrl-forward" title="Forward">⏭</button>
+    <input  type="range" id="time-slider" min="0" max="100" value="0" step="1">
+    <span id="time-display">0.00s</span>
+    <span id="fps-display">— fps</span>
+  </div>
+  <div class="vsep"></div>
+  <div id="camera-controls">
+    <button class="cam-mode active" data-mode="orbit">⟲ Orbit</button>
+    <button class="cam-mode"        data-mode="zoom" >⊕ Zoom</button>
+    <button class="cam-mode"        data-mode="pan"  >⇔ Pan</button>
+    <div class="vsep" style="height:18px"></div>
+    <button class="cam-preset" data-preset="front">Front</button>
+    <button class="cam-preset" data-preset="top">Top</button>
+    <button class="cam-preset" data-preset="iso">¾</button>
+    <button class="cam-preset" data-preset="reset">↺ Reset</button>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+'use strict';
+
+// ──────────────────────────────────────────────────────────────────
+// CONFIG
+// ──────────────────────────────────────────────────────────────────
+const SERVER    = 'http://localhost:7734';
+const THETA_N   = 0.38197;   // 1/φ² — BH Claying threshold from barnes_hut.py
+
+// ──────────────────────────────────────────────────────────────────
+// DOM refs
+// ──────────────────────────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+const el = {
+  modelSel:     $('model-select'),
+  srvStatus:    $('ng-server-status'),
+  prompt:       $('prompt-input'),
+  askBtn:       $('ask-btn'),
+  responseArea: $('response-area'),
+  ngResponse:   $('ng-response'),
+  genBtn:       $('generate-btn'),
+  progArea:     $('progress-area'),
+  progFill:     $('progress-fill'),
+  progLabel:    $('progress-label'),
+  killBtn:      $('kill-btn'),
+  log:          $('output-log'),
+  canvas:       $('viewer-canvas'),
+  renderImg:    $('render-img'),
+  empty:        $('viewer-empty'),
+  viewerTitle:  $('viewer-title'),
+  modePrev:     $('mode-preview'),
+  modeRend:     $('mode-render'),
+  diagScene:    $('diag-scene'),
+  diagObjects:  $('diag-objects'),
+  diagPrim:     $('diag-primitives'),
+  diagTime:     $('diag-render-time'),
+  diagMat:      $('diag-materials'),
+  diagLib:      $('diag-library'),
+  sysBars:      $('diag-sys-bars'),
+  barCpu:       $('bar-cpu'),     barCpuPct:  $('bar-cpu-pct'),
+  barMem:       $('bar-mem'),     barMemPct:  $('bar-mem-pct'),
+  barDisk:      $('bar-disk'),    barDiskPct: $('bar-disk-pct'),
+  scData:       $('sc-data'),     scImg:   $('sc-img'),
+  scCpu:        $('sc-cpu'),      scMem:   $('sc-mem'),   scDisk: $('sc-disk'),
+  timeSlider:   $('time-slider'),
+  timeDsp:      $('time-display'),
+  fpsDsp:       $('fps-display'),
+  ctrlPlay:     $('ctrl-play'),
+};
+
+// ──────────────────────────────────────────────────────────────────
+// SERVER CLIENT
+// ──────────────────────────────────────────────────────────────────
+let online = false;
+let jobId  = null;
+let jobES  = null;
+
+async function api(path, opts={}) {
+  const r = await fetch(SERVER + path, opts);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
+async function pingServer() {
+  try {
+    const d = await api('/api/ping');
+    if (!online) {
+      online = true;
+      el.srvStatus.textContent = `online  ·  ${d.model}`;
+      el.srvStatus.style.color = 'var(--green)';
+      populateModels(d.models, d.model);
+      pollSys();
+      updateLibrary();
+    }
+  } catch {
+    online = false;
+    el.srvStatus.textContent = 'offline — run: ./nagatha_run.sh server';
+    el.srvStatus.style.color = 'var(--muted)';
+  }
+}
+
+function populateModels(models, active) {
+  el.modelSel.innerHTML = '';
+  (models && models.length ? models : [active||'llama3.1:8b']).forEach(m => {
+    const o = document.createElement('option');
+    o.value = o.textContent = m;
+    if (m === active) o.selected = true;
+    el.modelSel.appendChild(o);
+  });
+}
+
+async function runCmd(text) {
+  const d = await api('/api/run', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ command: text, model: el.modelSel.value }),
+  });
+  return d.job_id;
+}
+
+function streamJob(id, onLine, onDone) {
+  const es = new EventSource(`${SERVER}/api/stream/${id}`);
+  jobES = es;
+  es.onmessage = e => onLine(e.data);
+  es.addEventListener('done', e => { es.close(); jobES = null; onDone(+e.data); });
+  es.onerror = () => { es.close(); onDone(-1); };
+}
+
+// ──────────────────────────────────────────────────────────────────
+// INVENTORY + PLAN
+// ──────────────────────────────────────────────────────────────────
+async function getInventory(desc) {
+  return api('/api/inventory?desc=' + encodeURIComponent(desc));
+}
+
+function showPlan(inv, desc) {
+  const { library_count, have, missing } = inv;
+  let html = '';
+  if (have.length)    html += `<span class="plan-have">✓ Have: ${have.join(', ')}</span>   `;
+  if (missing.length) html += `<span class="plan-missing">⊕ Will build: ${missing.join(', ')}</span>   `;
+  if (!have.length && !missing.length)
+    html = `<span style="color:var(--muted)">Library: ${library_count} objects. I'll compose this scene.</span>`;
+  html += `<br><span style="color:var(--muted);font-size:10px">
+    complexity bound θ = ${THETA_N} &nbsp;(1/φ² — BH Claying)</span>`;
+  el.ngResponse.innerHTML = html;
+  el.responseArea.removeAttribute('hidden');
+  el.genBtn.removeAttribute('hidden');
+}
+
+// ──────────────────────────────────────────────────────────────────
+// ASK FLOW
+// ──────────────────────────────────────────────────────────────────
+async function handleAsk() {
+  const txt = el.prompt.value.trim();
+  if (!txt) return;
+  el.askBtn.disabled = true;
+  el.genBtn.setAttribute('hidden','');
+  el.responseArea.setAttribute('hidden','');
+
+  if (online) {
+    try {
+      const inv = await getInventory(txt);
+      showPlan(inv, txt);
+    } catch {
+      el.ngResponse.innerHTML =
+        '<span style="color:var(--muted)">Could not reach server — click Generate to proceed anyway.</span>';
+      el.responseArea.removeAttribute('hidden');
+      el.genBtn.removeAttribute('hidden');
+    }
+  } else {
+    el.ngResponse.innerHTML =
+      '<span style="color:var(--muted)">Nagatha is offline. Start the server, then try again.</span>';
+    el.responseArea.removeAttribute('hidden');
+  }
+  el.askBtn.disabled = false;
+}
+
+// ──────────────────────────────────────────────────────────────────
+// GENERATE FLOW
+// ──────────────────────────────────────────────────────────────────
+async function handleGenerate() {
+  const txt = el.prompt.value.trim();
+  if (!txt || !online) return;
+
+  el.genBtn.setAttribute('hidden','');
+  el.responseArea.setAttribute('hidden','');
+  el.progArea.removeAttribute('hidden');
+  el.log.classList.add('vis');
+  el.log.innerHTML = '';
+  setProgress(0, 'Initialising…');
+  circleFlash(el.scData, 'lit-data', 3000);
+
+  // Decide: single object or scene composition
+  const lo = txt.toLowerCase();
+  const isScene = lo.includes(' on ') || lo.includes(' with ')
+               || lo.includes(' and ') || lo.includes(' beside ')
+               || lo.includes(' next to ') || lo.includes(' lit ')
+               || txt.split(' ').length > 3;
+  const cmd = isScene ? 'compose ' + txt : txt;
+
+  let stage = 0;
+  const t0  = Date.now();
+
+  try {
+    jobId = await runCmd(cmd);
+    streamJob(jobId, line => {
+      logLine(line);
+      stage = classifyLine(line, stage);
+    }, code => {
+      jobId = null;
+      finishGen(code, Date.now() - t0);
+    });
+  } catch(e) {
+    logLine('[error] ' + e.message, 'err');
+    finishGen(-1, 0);
+  }
+}
+
+function classifyLine(line, stage) {
+  const lo = line.toLowerCase();
+  if ((lo.includes('mapping ') || lo.includes('map_object')) && stage < 1) {
+    stage = 1; setProgress(15, 'Building objects…');
+  }
+  if ((lo.includes('compos') || lo.includes('scene')) && stage < 2) {
+    stage = 2; setProgress(55, 'Composing scene…');
+  }
+  if ((lo.includes('render') || lo.includes('writing')) && stage < 3) {
+    stage = 3; setProgress(80, 'Rendering frame…');
+  }
+  if (lo.includes('wikidata') || lo.includes('searching ') || lo.includes('cache'))
+    circleFlash(el.scData, 'lit-data', 2500);
+  if (lo.includes('reference') || lo.includes('duckduckgo') || lo.includes('ddg'))
+    circleFlash(el.scImg, 'lit-img', 2500);
+  return stage;
+}
+
+function finishGen(code, ms) {
+  setProgress(100, code === 0 ? `Done in ${(ms/1000).toFixed(1)}s` : 'Stopped.');
+  if (code === 0) {
+    el.diagTime.textContent = (ms / 1000).toFixed(2) + 's';
+    updateLibrary();
+    loadLatestObject();
+  }
+  setTimeout(() => {
+    el.progArea.setAttribute('hidden','');
+    el.log.classList.remove('vis');
+  }, 2000);
+}
+
+function setProgress(pct, label) {
+  el.progFill.style.width = pct + '%';
+  el.progFill.classList.toggle('indet', pct < 5);
+  el.progLabel.textContent = label;
+}
+
+function logLine(text, cls) {
+  const lo = text.toLowerCase();
+  const c  = cls || (lo.includes('error')||lo.includes('fail') ? 'err'
+    : (lo.startsWith('[nagatha]')||lo.startsWith('#') ? 'dim' : 'ok'));
+  const d  = document.createElement('div');
+  d.className = c;
+  d.textContent = text;
+  el.log.appendChild(d);
+  el.log.scrollTop = el.log.scrollHeight;
+}
+
+// ──────────────────────────────────────────────────────────────────
+// STATUS CIRCLES
+// ──────────────────────────────────────────────────────────────────
+const _timers = {};
+function circleFlash(circ, cls, ms) {
+  circ.classList.add(cls, 'pulsing');
+  clearTimeout(_timers[circ.id]);
+  _timers[circ.id] = setTimeout(() => circ.classList.remove(cls,'pulsing'), ms);
+}
+
+function updateSysCircles(cpu, mem, disk) {
+  el.scCpu.classList.toggle('lit-cpu',  cpu  > 70);
+  el.scMem.classList.toggle('lit-mem',  mem  > 80);
+  el.scDisk.classList.toggle('lit-disk', disk > 90);
+}
+
+async function pollSys() {
+  if (!online) return;
+  try {
+    const d = await api('/api/sysinfo');
+    updateSysCircles(d.cpu, d.mem, d.disk);
+    el.sysBars.style.display = 'flex';
+    el.barCpu.style.width   = d.cpu  + '%';  el.barCpuPct.textContent  = d.cpu  + '%';
+    el.barMem.style.width   = d.mem  + '%';  el.barMemPct.textContent  = d.mem  + '%';
+    el.barDisk.style.width  = d.disk + '%';  el.barDiskPct.textContent = d.disk + '%';
+  } catch {}
+  setTimeout(pollSys, 3000);
+}
+
+async function updateLibrary() {
+  if (!online) return;
+  try {
+    const inv = await getInventory('');
+    el.diagLib.textContent = inv.library_count + ' object' + (inv.library_count!==1?'s':'');
+  } catch {}
+}
+
+// ──────────────────────────────────────────────────────────────────
+// THREE.JS VIEWER
+// ──────────────────────────────────────────────────────────────────
+let viewer3d = null;
+let viewMode = 'preview';   // 'preview' | 'render'
+
+function setViewMode(mode) {
+  viewMode = mode;
+  el.modePrev.classList.toggle('active', mode === 'preview');
+  el.modeRend.classList.toggle('active',  mode === 'render');
+  el.canvas.toggleAttribute('hidden',    mode !== 'preview');
+  el.renderImg.toggleAttribute('hidden', mode !== 'render');
+}
+
+el.modePrev.onclick = () => setViewMode('preview');
+el.modeRend.onclick = () => setViewMode('render');
+
+class Viewer3D {
+  constructor(canvas) {
+    this.c      = canvas;
+    this.meshes = [];
+    this.cmode  = 'orbit';  // orbit | zoom | pan
+    this.o      = { theta: 0.6, phi: 1.15, r: 4.5 };
+    this.md     = { down: false, x: 0, y: 0 };
+
+    this.rdr = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+    this.rdr.setPixelRatio(Math.min(devicePixelRatio, 2));
+    this.rdr.shadowMap.enabled = true;
+    this.rdr.outputEncoding     = THREE.sRGBEncoding;
+
+    this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color(0x06060c);
+    this.scene.add(new THREE.GridHelper(8, 24, 0x18182a, 0x111120));
+
+    this.scene.add(
+      Object.assign(new THREE.AmbientLight(0xffffff, 0.35), {}),
+      Object.assign(new THREE.DirectionalLight(0xffffff, 0.9),
+        { position: new THREE.Vector3(3,5,4), castShadow: true }),
+      Object.assign(new THREE.DirectionalLight(0x8899dd, 0.25),
+        { position: new THREE.Vector3(-3,2,-3) }),
+      Object.assign(new THREE.DirectionalLight(0xffeedd, 0.12),
+        { position: new THREE.Vector3(0,-2,-4) }),
+    );
+
+    this.cam = new THREE.PerspectiveCamera(42, 1, 0.01, 200);
+    this._camUpdate();
+
+    this._events();
+    this._resize();
+    new ResizeObserver(() => this._resize()).observe(canvas.parentElement);
+    this._loop();
+
+    this._fpsT  = performance.now();
+    this._fpsN  = 0;
+  }
+
+  _resize() {
+    const p = this.c.parentElement;
+    const w = p.clientWidth;
+    const h = p.clientHeight - 36;  // minus toolbar
+    this.rdr.setSize(w, h, false);
+    this.cam.aspect = w / h;
+    this.cam.updateProjectionMatrix();
+  }
+
+  _camUpdate() {
+    const {theta, phi, r} = this.o;
+    this.cam.position.set(
+      r*Math.sin(phi)*Math.sin(theta),
+      r*Math.cos(phi),
+      r*Math.sin(phi)*Math.cos(theta)
+    );
+    this.cam.lookAt(0, 0, 0);
+  }
+
+  _events() {
+    const c = this.c;
+    const drag = (dx, dy) => {
+      if (this.cmode === 'orbit') {
+        this.o.theta -= dx * 1.8;
+        this.o.phi = Math.max(0.05, Math.min(Math.PI-0.05, this.o.phi + dy));
+      } else if (this.cmode === 'zoom') {
+        this.o.r = Math.max(0.5, Math.min(40, this.o.r + dy * 2));
+      } else {
+        this.o.theta -= dx;
+      }
+      this._camUpdate();
+    };
+    c.addEventListener('mousedown', e => { this.md={down:true,x:e.clientX,y:e.clientY}; });
+    window.addEventListener('mouseup', () => { this.md.down=false; });
+    window.addEventListener('mousemove', e => {
+      if (!this.md.down) return;
+      drag((e.clientX-this.md.x)*0.01, (e.clientY-this.md.y)*0.01);
+      this.md.x=e.clientX; this.md.y=e.clientY;
+    });
+    c.addEventListener('wheel', e => {
+      e.preventDefault();
+      this.o.r = Math.max(0.5, Math.min(40, this.o.r + e.deltaY*0.008));
+      this._camUpdate();
+    }, {passive:false});
+  }
+
+  async load(key) {
+    const base = `${SERVER}/MatterShaper/object_maps/${key}`;
+    const [sr, cr] = await Promise.all([
+      fetch(base+'.shape.json'),
+      fetch(base+'.color.json').catch(()=>null),
+    ]);
+    if (!sr.ok) throw new Error('no shape.json: '+key);
+    const shape = await sr.json();
+    const mats  = cr && cr.ok ? (await cr.json()).materials||{} : {};
+
+    this.meshes.forEach(m => this.scene.remove(m));
+    this.meshes = [];
+    const matNames = new Set();
+    let primN = 0;
+
+    for (const lyr of (shape.layers||[])) {
+      const geo = this._geo(lyr);
+      if (!geo) continue;
+      const md = mats[lyr.material]||{};
+      const [r,g,b] = md.color||[0.55,0.55,0.65];
+      const rough = md.roughness??0.5;
+      const m = new THREE.Mesh(geo,
+        new THREE.MeshStandardMaterial({
+          color: new THREE.Color(r,g,b),
+          roughness: rough,
+          metalness: md.reflectance>0.5&&rough<0.2 ? 0.8 : 0.0,
+        })
+      );
+      const [px,py,pz]=lyr.pos||[0,0,0];
+      const [rx,ry,rz]=lyr.rotate||[0,0,0];
+      m.position.set(px,py,pz);
+      m.rotation.set(rx,ry,rz);
+      if (geo.userData.s) { const s=geo.userData.s; m.scale.set(s[0],s[1],s[2]); }
+      m.castShadow=true; m.receiveShadow=true;
+      this.scene.add(m);
+      this.meshes.push(m);
+      if (lyr.material) matNames.add(lyr.material);
+      primN++;
+    }
+
+    // Auto-fit camera distance
+    this.o = { theta:0.6, phi:1.15, r: Math.max(2, primN*0.4+2.5) };
+    this._camUpdate();
+
+    // Update diagnostics
+    el.diagScene.textContent   = shape.name||key;
+    el.diagObjects.innerHTML   = `<span class="dtag">${key.replace(/_/g,' ')}</span>`;
+    el.diagPrim.textContent    = primN;
+    el.viewerTitle.textContent = shape.name||key;
+    el.empty.setAttribute('hidden','');
+    el.canvas.removeAttribute('hidden');
+    el.diagMat.innerHTML = [...matNames].map(
+      n => `<span class="dtag m">${n.replace(/_/g,' ')}</span>`
+    ).join('');
+
+    return {primN, matNames:[...matNames]};
+  }
+
+  _geo(lyr) {
+    switch(lyr.type) {
+      case 'ellipsoid': {
+        const [rx,ry,rz]=lyr.radii||[0.5,0.5,0.5];
+        const g=new THREE.SphereGeometry(1,32,20);
+        g.userData.s=[rx,ry,rz]; return g;
+      }
+      case 'sphere':
+        return new THREE.SphereGeometry(lyr.radius||(lyr.radii?lyr.radii[0]:0.5),32,20);
+      case 'cylinder': {
+        const r=lyr.radius||0.5, h=lyr.height||1;
+        return new THREE.CylinderGeometry(r,r,h,32);
+      }
+      case 'cone':
+        return new THREE.ConeGeometry(lyr.radius_base||lyr.radius||0.5,lyr.height||1,32);
+      case 'box': {
+        const [w,h,d]=lyr.size||lyr.radii||[1,1,1];
+        return new THREE.BoxGeometry(w,h,d);
+      }
+      case 'torus':
+        return new THREE.TorusGeometry(
+          lyr.radius_major||0.5, lyr.radius_minor||lyr.tube||0.15, 16, 64);
+      default: return null;
+    }
+  }
+
+  setMode(m) { this.cmode = m; }
+
+  preset(p) {
+    if (p==='front') { this.o.theta=0;   this.o.phi=Math.PI/2; }
+    if (p==='top')   { this.o.theta=0;   this.o.phi=0.08; }
+    if (p==='iso')   { this.o.theta=0.6; this.o.phi=1.0; }
+    if (p==='reset') { this.o={theta:0.6,phi:1.15,r:4.5}; }
+    this._camUpdate();
+  }
+
+  _loop() {
+    requestAnimationFrame(() => this._loop());
+    this.rdr.render(this.scene, this.cam);
+    this._fpsN++;
+    const now = performance.now();
+    if (now - this._fpsT >= 1000) {
+      el.fpsDsp.textContent = this._fpsN + ' fps';
+      this._fpsN = 0; this._fpsT = now;
+    }
+  }
+}
+
+viewer3d = new Viewer3D(el.canvas);
+
+// ──────────────────────────────────────────────────────────────────
+// CAMERA & TIMELINE WIRING
+// ──────────────────────────────────────────────────────────────────
+document.querySelectorAll('.cam-mode').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cam-mode').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    viewer3d.setMode(btn.dataset.mode);
+  });
+});
+
+document.querySelectorAll('.cam-preset').forEach(btn => {
+  btn.addEventListener('click', () => viewer3d.preset(btn.dataset.preset));
+});
+
+let playing = false, playTick = null, frameIdx = 0;
+el.ctrlPlay.addEventListener('click', () => {
+  playing = !playing;
+  el.ctrlPlay.textContent = playing ? '⏸' : '▶';
+  el.ctrlPlay.classList.toggle('on', playing);
+  if (playing) {
+    playTick = setInterval(() => {
+      frameIdx = (frameIdx + 1) % (+el.timeSlider.max + 1);
+      el.timeSlider.value = frameIdx;
+      el.timeDsp.textContent = (frameIdx*0.033).toFixed(2)+'s';
+    }, 33);
+  } else { clearInterval(playTick); }
+});
+el.timeSlider.addEventListener('input', () => {
+  el.timeDsp.textContent = (+el.timeSlider.value*0.033).toFixed(2)+'s';
+});
+
+// ──────────────────────────────────────────────────────────────────
+// PROMPT AUTO-RESIZE + HOTKEYS
+// ──────────────────────────────────────────────────────────────────
+el.prompt.addEventListener('input', () => {
+  el.prompt.style.height = 'auto';
+  el.prompt.style.height = Math.min(el.prompt.scrollHeight, 120) + 'px';
+});
+el.prompt.addEventListener('keydown', e => {
+  if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); handleAsk(); }
+});
+
+el.askBtn.addEventListener('click', handleAsk);
+el.genBtn.addEventListener('click', handleGenerate);
+el.killBtn.addEventListener('click', () => {
+  if (jobId) api('/api/kill',{method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({job_id:jobId})}).catch(()=>{});
+  if (jobES) jobES.close();
+  jobId=null;
+  el.progArea.setAttribute('hidden','');
+  el.log.classList.remove('vis');
+});
+
+// ──────────────────────────────────────────────────────────────────
+// LOAD LATEST OBJECT INTO VIEWER ON JOB COMPLETE
+// ──────────────────────────────────────────────────────────────────
+async function loadLatestObject() {
+  try {
+    const inv = await getInventory('');
+    if (inv.library && inv.library.length) {
+      await viewer3d.load(inv.library[inv.library.length-1]);
+      setViewMode('preview');
+    }
+  } catch(e) { console.warn('viewer load:', e); }
+}
+
+// ──────────────────────────────────────────────────────────────────
+// BOOT
+// ──────────────────────────────────────────────────────────────────
+pingServer();
+setInterval(pingServer, 5000);
+
+// Load object from URL hash: http://localhost:7734/#toaster
+(async()=>{
+  const key = location.hash.replace('#','').trim();
+  if (key && viewer3d) {
+    try { await viewer3d.load(key); setViewMode('preview'); } catch {}
+  }
+})();
+</script>
+</body>
+</html>

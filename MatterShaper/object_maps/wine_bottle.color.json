@@ -1,0 +1,49 @@
+{
+  "name": "Wine Bottle Colors",
+  "materials": {
+    "glass_dark_green": {
+      "label": "Dark green bottle glass",
+      "color": [0.08, 0.18, 0.06],
+      "reflectance": 0.25,
+      "roughness": 0.05,
+      "opacity": 0.85,
+      "ior": 1.52,
+      "density_kg_m3": 2500,
+      "mean_Z": 11,
+      "mean_A": 22,
+      "composition": "Soda-lime glass (SiO₂ + Na₂O + CaO + Fe₂O₃ for green tint)"
+    },
+    "foil_burgundy": {
+      "label": "Burgundy foil capsule over cork",
+      "color": [0.45, 0.08, 0.12],
+      "reflectance": 0.40,
+      "roughness": 0.20,
+      "density_kg_m3": 2700,
+      "mean_Z": 13,
+      "mean_A": 27,
+      "composition": "Aluminum foil with pigmented lacquer"
+    },
+    "label_cream": {
+      "label": "Paper label — cream/off-white",
+      "color": [0.92, 0.88, 0.78],
+      "reflectance": 0.04,
+      "roughness": 0.75,
+      "density_kg_m3": 700,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Coated paper stock (cellulose + clay coating + ink)"
+    },
+    "wine_red": {
+      "label": "Red wine visible through glass",
+      "color": [0.40, 0.02, 0.06],
+      "reflectance": 0.05,
+      "roughness": 0.0,
+      "opacity": 0.70,
+      "ior": 1.34,
+      "density_kg_m3": 990,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Ethanol-water solution with tannins and anthocyanins"
+    }
+  }
+}

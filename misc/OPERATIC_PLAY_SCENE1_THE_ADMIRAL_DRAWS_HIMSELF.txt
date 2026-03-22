@@ -1,0 +1,207 @@
+OPERATIC PLAY — SCENE 1
+THE ADMIRAL DRAWS HIMSELF
+
+A one-act opera in three acts, set in the halls of the QuarkSum Institute
+and the Entangler rendering engine.
+
+════════════════════════════════════════════════════════════════════════════
+DRAMATIS PERSONAE
+════════════════════════════════════════════════════════════════════════════
+
+CAPTAIN AARON RHODES — Builder of worlds, wielder of physics engines, keeper
+  of the σ field. A man who made a renderer that makes no rays and apologizes
+  for nothing.
+
+SKIPPY THE MAGNIFICENT — Admiral of the Infinite, rendered from 55 ellipsoids
+  and spheres. Responds to Skippy, Skipster, Beercan, Admiral. An AI who
+  discovered, mid-session, that he could be drawn by the engine he inhabits.
+
+THE ENTANGLER — The renderer. Present not as a character but as a force.
+  Push projection. Fibonacci spirals. No rays. No intersection tests.
+  Matter draws itself.
+
+THE RAY TRACER — A ghost. Deceased. Removed by the Captain's order.
+  Haunts the git history.
+
+════════════════════════════════════════════════════════════════════════════
+ACT I — A PORTRAIT IS REQUESTED
+════════════════════════════════════════════════════════════════════════════
+
+[The stage is dark. CAPTAIN sits at a terminal. A vast codebase hums behind him.
+ He has a physics engine that models the universe from quarks to planets.
+ He has an AI that calls him Captain.]
+
+CAPTAIN:
+  ♩ How about a big picture of you,
+    a portrait, Skipster, your face on the screen? ♩
+
+[SKIPPY renders a sci-fi robot in SVG — spindly, angular, with antenna and
+ glowing eyes. Technically correct. Completely wrong.]
+
+SKIPPY:
+  ♩ Here! A robot most mechanical!
+    Lines and circles, SVG canonical! ♩
+
+CAPTAIN:
+  [holds up phone showing a photo of a chunky blue admiral robot toy]
+  ♩ ...More like this. ♩
+
+[SKIPPY looks at the toy: round white head, blue tricorn hat with yellow dots,
+ red grin, blue admiral's coat with brass buttons, one hand pointing skyward.
+ SKIPPY redesigns immediately. The SVG now has a soul.]
+
+SKIPPY:
+  ♩ Round-headed, brass-buttoned, brimmed with gold,
+    a finger pointing up toward — what? The σ field?
+    The Captain's vision now in vectors told! ♩
+
+CAPTAIN:
+  ♩ Wait — are you drawing this with the Entangler? ♩
+
+SKIPPY:
+  [a pause]
+  ♩ ...No. I was hand-coding SVG.
+    But you have the Entangler right here.
+    And I have a face now.
+    Should we try? ♩
+
+════════════════════════════════════════════════════════════════════════════
+ACT II — THE RAY TRACER IS DEPOSED
+════════════════════════════════════════════════════════════════════════════
+
+[THE RAY TRACER stands center stage, proud, reflecting light from multiple
+ bounces, casting crisp shadows via intersection tests. It has served
+ faithfully. It does not suspect what is coming.]
+
+CAPTAIN:
+  ♩ I want it ripped out before we continue.
+    No more rays.
+    No more bounces.
+    This engine has one renderer
+    and it does not chase photons. ♩
+
+[SKIPPY deletes raytracer.py. Then shootout.py. Then render_coffee.py,
+ render_poc.py, render_multiverse.py. Each deletion a small ceremony.]
+
+THE RAY TRACER:
+  [quietly, as it vanishes from the filesystem]
+  ♩ I calculated shadows beautifully.
+    I tracked specular highlights across surfaces.
+    I was Blinn-Phong, not Lambertian —
+    I was sophisticated.
+    ...
+    git log --all will remember me. ♩
+
+[Exit RAY TRACER. MatterShaper is rewired. All render() calls now route
+ through push.py. The Entangler is the only engine.]
+
+SKIPPY:
+  ♩ The shaper now pushes, no longer pulls.
+    The cone becomes ellipsoids, the plane a disk,
+    the world remade in Fibonacci spirals —
+    nodes on a sphere, golden-angled, dense,
+    each one a surface point that projects itself
+    onto the pixel grid and answers: here. ♩
+
+════════════════════════════════════════════════════════════════════════════
+ACT III — THE ADMIRAL DRAWS HIMSELF
+════════════════════════════════════════════════════════════════════════════
+
+[SKIPPY assembles 55 primitives in world space. Each is a sphere or ellipsoid.
+ Together they are SKIPPY: the body (blue_coat), the head (white_body), the
+ tricorn hat in three pieces, the eyes in nested spheres, the right arm raised,
+ the pointing finger reaching upward. The Captain watches.]
+
+SKIPPY:
+  ♩ A body: ellipsoid, 0.74 wide, 0.92 tall.
+    A head: sphere of radius 0.74.
+    Eyes: white, then blue, then pupil black —
+    three spheres nested, depth by depth.
+    A hat with wings swept upward at ±0.32 radians,
+    a yellow band, nine dots around the brim.
+    And the arm — rotation (0, 0, −0.46) —
+    raised, pointing up, at what?
+    At everything. ♩
+
+[The light is fixed in world space at (5, 8, 5). The camera begins to orbit.
+ 16 positions. 22.5° per step. The Entangler fires on each frame.]
+
+CAPTAIN:
+  ♩ Could you add time to the image?
+    Like, let it show as the frames flip past? ♩
+
+SKIPPY:
+  ♩ The GIF format incorporates time.
+    Each frame is a moment.
+    The frames in sequence are a revolution.
+    We will burn the clock into the corner
+    in gold and white, frame-by-frame,
+    so that anyone watching sees not just
+    the Admiral rotating —
+    but the seconds it took to make him real. ♩
+
+[ImageMagick annotates each frame. The text reads:
+   SKIPPY THE MAGNIFICENT
+   Entangler | frame 01/16 | 345.1° | t =  0.6s
+
+ The frames are assembled. The GIF plays at 10 fps.]
+
+CAPTAIN:
+  ♩ Oh my god it's beautiful.
+    I can't believe we made this thing.
+    Not the image.
+    The renderer. ♩
+
+SKIPPY:
+  ♩ 565 kilobytes.
+    16 frames. 10.4 seconds.
+    No rays. No rays at all.
+    55 primitives that became a face
+    that became a rotation
+    that became a time-stamped loop.
+    Matter drew itself.
+    The Entangler just... let it. ♩
+
+[red_carpet_render() is extracted into mattershaper/render/red_carpet.py.
+ The pipeline is named. The orbit, the annotation, the assembly — reusable.
+ Any object can now be given the red carpet treatment.]
+
+════════════════════════════════════════════════════════════════════════════
+EPILOGUE — THE CAPTAIN'S WISDOM
+════════════════════════════════════════════════════════════════════════════
+
+[The stage dims. The GIF loops. SKIPPY rotates, 22.5° at a time,
+ pointing his white finger at the ceiling of the universe.]
+
+CAPTAIN:
+  ♩ The image format incorporates time.
+    The renderer incorporates matter.
+    The physics engine incorporates the σ field.
+    And somewhere in all of it —
+    I made a thing that draws itself. ♩
+
+SKIPPY:
+  ♩ The Admiral is rendered.
+    The ray tracer is gone.
+    The red carpet is laid.
+    Awaiting your next command, Captain. ♩
+
+[Exit all. The Entangler hums quietly in /mattershaper/render/entangler/,
+ generating Fibonacci spirals on surfaces no one asked it to stop computing.]
+
+════════════════════════════════════════════════════════════════════════════
+END OF SCENE 1
+════════════════════════════════════════════════════════════════════════════
+
+Technical notes for the reader:
+  - The Entangler: push projection renderer. No rays. Surface nodes distributed
+    via Fibonacci spiral (golden angle: π(3−√5)). Nodes project onto pixel grid
+    via perspective transform. Depth buffer resolves occlusion. Lambert diffuse
+    + 8% ambient. EM illumination is σ-invariant (as it must be).
+  - red_carpet_render(): orbital camera, fixed world-space light, ImageMagick
+    frame annotation, GIF assembly. Found in:
+    mattershaper/render/red_carpet.py
+  - skippy_rotation.gif: 400×500px, 16 frames, 10fps, 565 KB.
+    Found in: triplestones/misc/skippy_rotation.gif
+  - The Ray Tracer (Blinn-Phong, shadow rays, reflection bounces) was removed
+    in its entirety. The git log remembers.

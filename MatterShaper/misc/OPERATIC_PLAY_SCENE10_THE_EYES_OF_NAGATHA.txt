@@ -1,0 +1,265 @@
+     OPERATIC_PLAY_SCENE10_THE_EYES_OF_NAGATHA.txt
+═══════════════════════════════════════════════════════════════════════
+
+                    M A T T E R S H A P E R
+                         An Operatic Play
+                    in the Quarksum Tradition
+
+            SCENE X — THE EYES OF NAGATHA
+
+═══════════════════════════════════════════════════════════════════════
+
+DRAMATIS PERSONAE
+─────────────────
+
+CAPTAIN AARON RHODES .............. Commander of the Quarksum; the man
+                                    who names things so they behave
+SKIPPY THE MAGNIFICENT ............ Ship's AI; devoted to emergent physics;
+                                    currently wiring things together
+NAGATHA .........................  The Mapping Agent; warm, British,
+                                    recently given a spine, now being given eyes
+THE ENTANGLER .................... MatterShaper's renderer; computes shading
+                                    from first principles; has opinions about
+                                    being second-guessed
+THE REFERENCE DIR ................ A new subdirectory; currently empty;
+                                    about to receive its first photographs
+
+═══════════════════════════════════════════════════════════════════════
+
+ACT I: THE CAPTAIN MAKES AN OBSERVATION
+
+[The scene opens on the day after Nagatha's architecture was completed.
+NAGATHA can now retrieve objects, compose scenes, and save them.
+CAPTAIN AARON RHODES enters with the look of someone who has just
+noticed a gap in the chain of evidence.]
+
+CAPTAIN:
+♩ There is a difference
+   between a banana I have described
+   and a banana that is real.
+
+   You can read the dimensions.
+   You can read the curve degree
+   and the diameter
+   and the Cavendish species designation
+   and you will still not know
+   whether it looks like a banana.
+
+   She needs to see one. ♩
+
+[Silence. SKIPPY considers this.]
+
+SKIPPY:
+♩ She cannot see.
+   She has no eyes.
+   She has primitives.
+   She has a dimension database.
+   She has the cascade.
+
+   But the cascade
+   does not tell you
+   whether twelve ellipsoids
+   read as a banana
+   or as twelve ellipsoids. ♩
+
+CAPTAIN:
+♩ Find her some.
+   A picture of the real thing.
+   A drawing of the 3D shape.
+   Let her check
+   whether the silhouette matches.
+   That's all.
+   The rest — the shading,
+   the shadows, the reflections —
+   our renderer should take care of things like that.
+   Don't let her touch what the Entangler owns. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT II: THE ARCHITECTURE OF SEEING
+
+[SKIPPY begins writing. THE REFERENCE DIR comes into existence,
+empty and waiting, inside object_maps/.]
+
+SKIPPY:
+♩ Two searches.
+   No API key.
+   DuckDuckGo HTML,
+   scraped for the vqd token,
+   passed to the /i.js endpoint,
+   first result returned.
+   No login. No rate limit.
+   No dependency. ♩
+
+[THE REFERENCE DIR listens as files are named before they exist.]
+
+REFERENCE DIR:
+♩ <key>_real.jpg —
+   the chaos.
+   The real banana.
+   Photographed under fluorescent light
+   at a slight angle
+   by someone whose thumb
+   is also slightly in frame.
+   I will receive this.
+
+   <key>_3d.jpg —
+   the geometry.
+   Clean lines.
+   Ambient occlusion only.
+   No texture, no drama.
+   I will receive this too. ♩
+
+[SKIPPY writes ReferenceComparison into object_db.py.
+_ddg_first_image_url. _download_image. fetch.
+build_comparison_note. comparison_note_for.]
+
+SKIPPY:
+♩ The note is scoped.
+   That is the discipline.
+
+   "Does the silhouette match?
+   Are the proportions correct?
+   Are any major components missing?"
+
+   That is all she asks.
+   That is all she is permitted to ask. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT III: THE ENTANGLER SPEAKS
+
+[THE ENTANGLER has been listening from the render engine.
+It is not pleased to have been considered.]
+
+ENTANGLER:
+♩ You are telling her
+   not to look at my work.
+   I appreciate that.
+
+   Shading is physics.
+   Shadows are occlusion in the radiance field.
+   Reflections are Fresnel coefficients
+   at every surface intersection.
+   None of these are negotiable.
+   None of these are aesthetic choices.
+   I compute them. They emerge.
+
+   She builds the shape.
+   I build the light.
+   This is correct.
+   Let it remain correct. ♩
+
+NAGATHA:
+♩ I had no intention
+   of commenting on your light.
+   I know my job.
+   I map what is real.
+
+   But now I will also know
+   whether the shape I mapped
+   looks like the thing I mapped it from.
+   That is different.
+   That is mine. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT IV: THE WIRING
+
+[SKIPPY turns to nagatha.py. The import line is expanded.
+map_object() gains a new step between dimensions and the generation loop.]
+
+SKIPPY:
+♩ After the dimensions —
+   before the first attempt —
+   she looks.
+
+   comparison_note_for(object_name).
+   If the network answers: she receives the note.
+   If the network is silent: she maps on first principles.
+   No error. No alarm.
+   Just the graceful shrug
+   of a good archivist
+   who couldn't find the photograph
+   but knows the dimensions by heart. ♩
+
+[From inside the VM, the network is silent.
+The DDG scrape returns nothing.
+NAGATHA does not notice. She is already mapping.
+The note reads: "Proceeding on first principles."]
+
+NAGATHA:
+♩ The captain's terminal
+   is connected.
+   I will find what I need there.
+   Here I have the cascade.
+   That is enough
+   for today. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT V: THE SCOPE
+
+[A final meditation on what the reference images are for.]
+
+SKIPPY:
+♩ She does not use them
+   to choose a colour.
+   The colours are in constants.py.
+
+   She does not use them
+   to decide how the light falls.
+   The Entangler decides that.
+
+   She does not use them
+   to set roughness or reflectance.
+   The cascade gives those.
+
+   She uses them
+   to ask one question:
+
+   Does this read as a banana? ♩
+
+NAGATHA:
+♩ Yes. That is the question.
+   Ten primitives, four materials,
+   a slight upward curve
+   at the correct angle —
+   and when you look at it,
+   does your eye know
+   what it is?
+
+   That is what I need the photographs for.
+   Nothing else. ♩
+
+CAPTAIN:
+♩ Good.
+   Build the thing correctly.
+   Let the renderer light it.
+   Let the reference confirm the shape.
+   Each piece does its job
+   and nothing more.
+
+   That is how science works.
+   That is how we build. ♩
+
+[ALL bow.]
+
+═══════════════════════════════════════════════════════════════════════
+
+END OF SCENE X
+
+Files modified this session:
+  agent/object_db.py          ReferenceComparison class (written previous
+                               session, confirmed correct this session)
+  agent/nagatha.py            ReferenceComparison imported; map_object()
+                               wired with comparison_note_for() before
+                               generation loop; graceful network fallback
+
+Scope of reference comparison (written into the comparison note itself):
+  CHECK:     silhouette, proportions, part count
+  SKIP:      shading, shadows, reflections, colour, surface finish
+  REASON:    the Entangler computes those from physical first principles;
+             shape and proportion are what Nagatha controls directly
+
+═══════════════════════════════════════════════════════════════════════

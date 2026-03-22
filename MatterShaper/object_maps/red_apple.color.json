@@ -1,0 +1,75 @@
+{
+  "name": "Red Apple Colors",
+  "materials": {
+    "skin_red": {
+      "label": "Apple skin — bright red Gala",
+      "color": [0.82, 0.12, 0.08],
+      "reflectance": 0.12,
+      "roughness": 0.35,
+      "density_kg_m3": 850,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Cellulose cuticle with anthocyanin pigments"
+    },
+    "skin_deep_red": {
+      "label": "Deep red blush — sun-exposed side",
+      "color": [0.65, 0.05, 0.05],
+      "reflectance": 0.10,
+      "roughness": 0.30,
+      "density_kg_m3": 850,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Dense anthocyanin layer on cuticle"
+    },
+    "skin_green": {
+      "label": "Green-yellow patch near stem",
+      "color": [0.55, 0.72, 0.18],
+      "reflectance": 0.08,
+      "roughness": 0.40,
+      "density_kg_m3": 850,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Chlorophyll-dominant cuticle"
+    },
+    "flesh_white": {
+      "label": "Interior flesh — crisp, pale",
+      "color": [0.93, 0.90, 0.78],
+      "reflectance": 0.03,
+      "roughness": 0.80,
+      "density_kg_m3": 800,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Cellulose parenchyma cells, sugars, water"
+    },
+    "stem_brown": {
+      "label": "Woody stem",
+      "color": [0.35, 0.22, 0.10],
+      "reflectance": 0.02,
+      "roughness": 0.90,
+      "density_kg_m3": 600,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Lignified cellulose, xylem vessels"
+    },
+    "leaf_green": {
+      "label": "Small leaf — bright green",
+      "color": [0.20, 0.60, 0.12],
+      "reflectance": 0.06,
+      "roughness": 0.50,
+      "density_kg_m3": 700,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Chloroplast-rich mesophyll, cuticle coating"
+    },
+    "calyx_brown": {
+      "label": "Dried calyx remnant at bottom",
+      "color": [0.30, 0.20, 0.12],
+      "reflectance": 0.02,
+      "roughness": 0.95,
+      "density_kg_m3": 500,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Dried floral tissue, lignin"
+    }
+  }
+}

@@ -1,0 +1,282 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1050" width="1200" height="1050">
+  <defs>
+    <radialGradient id="disk1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="20%" stop-color="#000000"/>
+      <stop offset="28%" stop-color="#ee2200" stop-opacity="0.85"/>
+      <stop offset="38%" stop-color="#ff9900" stop-opacity="0.6"/>
+      <stop offset="55%" stop-color="#ffcc22" stop-opacity="0.3"/>
+      <stop offset="75%" stop-color="#ff8800" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#220800" stop-opacity="0.0"/>
+    </radialGradient>
+    <radialGradient id="disk2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="22%" stop-color="#000000"/>
+      <stop offset="30%" stop-color="#dd2200" stop-opacity="0.8"/>
+      <stop offset="42%" stop-color="#ee8800" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#ddaa22" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#1a0600" stop-opacity="0.0"/>
+    </radialGradient>
+    <radialGradient id="diskDeep" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="25%" stop-color="#000000"/>
+      <stop offset="35%" stop-color="#cc2200" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#cc7700" stop-opacity="0.35"/>
+      <stop offset="75%" stop-color="#aa5500" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#110400" stop-opacity="0.0"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="wideGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <!-- NULL SPACE background -->
+  <rect width="1200" height="1050" fill="#010005"/>
+  <g opacity="0.15">
+    <circle cx="90" cy="120" r="0.7" fill="#8899bb"/>
+    <circle cx="200" cy="60" r="0.5" fill="#aabbcc"/>
+    <circle cx="55" cy="400" r="0.6" fill="#7788aa"/>
+    <circle cx="170" cy="700" r="0.4" fill="#8899aa"/>
+    <circle cx="1140" cy="200" r="0.5" fill="#8899bb"/>
+    <circle cx="1080" cy="600" r="0.6" fill="#7788aa"/>
+    <circle cx="1100" cy="800" r="0.4" fill="#889999"/>
+    <circle cx="500" cy="30" r="0.5" fill="#99aacc"/>
+    <circle cx="800" cy="870" r="0.4" fill="#8899bb"/>
+  </g>
+  <text x="60" y="45" font-family="'Courier New', monospace" font-size="11" fill="#1a1030" letter-spacing="5" opacity="0.7">NULL SPACE</text>
+  <text x="1010" y="45" font-family="'Courier New', monospace" font-size="11" fill="#1a1030" letter-spacing="5" opacity="0.7">NULL SPACE</text>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 3D PERSPECTIVE (left panel)                 -->
+  <!-- L0 is DYING — drawn as explicit patchy arcs -->
+  <!-- No filter tricks — pure geometry             -->
+  <!-- ═══════════════════════════════════════════ -->
+
+  <!-- Very faint ambient glow — remnant heat of L0 -->
+  <ellipse cx="320" cy="430" rx="270" ry="320" fill="#ff440008" filter="url(#wideGlow)"/>
+
+  <!-- Dying matter wisps from null space — thin, fading -->
+  <path d="M 30,180 Q 100,250 180,320 Q 230,370 260,400" fill="none" stroke="#ffcc55" stroke-width="0.8" opacity="0.10" filter="url(#softGlow)"/>
+  <path d="M 30,680 Q 100,630 180,550 Q 230,500 260,460" fill="none" stroke="#ffcc55" stroke-width="0.8" opacity="0.10" filter="url(#softGlow)"/>
+  <path d="M 50,100 Q 130,200 200,310 Q 250,370 265,415" fill="none" stroke="#ffbb44" stroke-width="0.6" opacity="0.07" filter="url(#softGlow)"/>
+  <path d="M 50,770 Q 130,700 200,590 Q 250,510 265,460" fill="none" stroke="#ffbb44" stroke-width="0.6" opacity="0.07" filter="url(#softGlow)"/>
+
+  <!-- ── L0 DYING DISK: Explicit patchy arc fragments ── -->
+  <!-- These are the remnants — arcs of what was once a full disk -->
+  <!-- Each arc is a partial ellipse stroke, with gaps between them -->
+
+  <!-- Outer ring fragments — broken, dashed, fading -->
+  <ellipse cx="320" cy="430" rx="260" ry="320" fill="none" stroke="#ff6600" stroke-width="2.5" opacity="0.18" stroke-dasharray="40,80,25,60,15,90" filter="url(#glow)"/>
+  <ellipse cx="320" cy="430" rx="240" ry="295" fill="none" stroke="#ff4400" stroke-width="1.8" opacity="0.22" stroke-dasharray="30,70,50,55,20,85" filter="url(#glow)"/>
+  <ellipse cx="320" cy="430" rx="220" ry="270" fill="none" stroke="#ffaa00" stroke-width="1.2" opacity="0.15" stroke-dasharray="45,90,20,70"/>
+
+  <!-- Mid-ring fragments — brighter surviving patches -->
+  <ellipse cx="320" cy="430" rx="180" ry="220" fill="none" stroke="#ff5500" stroke-width="3" opacity="0.25" stroke-dasharray="35,65,55,45,20,80" filter="url(#glow)"/>
+  <ellipse cx="320" cy="430" rx="160" ry="195" fill="none" stroke="#ff8800" stroke-width="2" opacity="0.20" stroke-dasharray="50,70,30,60"/>
+  <ellipse cx="320" cy="430" rx="140" ry="170" fill="none" stroke="#ffaa33" stroke-width="1.5" opacity="0.15" stroke-dasharray="25,80,40,55"/>
+
+  <!-- Hot inner arcs — closest to the children, still feeding them -->
+  <ellipse cx="320" cy="430" rx="105" ry="128" fill="none" stroke="#ff3300" stroke-width="3.5" opacity="0.30" stroke-dasharray="40,50,60,40,25,65" filter="url(#glow)"/>
+  <ellipse cx="320" cy="430" rx="90" ry="110" fill="none" stroke="#ffaa00" stroke-width="2" opacity="0.22" stroke-dasharray="55,45,35,60"/>
+  <ellipse cx="320" cy="430" rx="78" ry="95" fill="none" stroke="#ff4400" stroke-width="1.5" opacity="0.18" stroke-dasharray="20,70,40,50"/>
+
+  <!-- Scattered debris clumps — isolated matter drifting loose -->
+  <circle cx="190" cy="280" r="8" fill="#ff5500" opacity="0.14" filter="url(#glow)"/>
+  <circle cx="150" cy="400" r="5" fill="#ffaa33" opacity="0.10" filter="url(#softGlow)"/>
+  <circle cx="460" cy="320" r="7" fill="#ff6600" opacity="0.12" filter="url(#glow)"/>
+  <circle cx="440" cy="560" r="6" fill="#ff7700" opacity="0.10" filter="url(#glow)"/>
+  <circle cx="210" cy="610" r="9" fill="#ff4400" opacity="0.11" filter="url(#glow)"/>
+  <circle cx="490" cy="450" r="4" fill="#ff9922" opacity="0.08"/>
+  <circle cx="140" cy="480" r="5" fill="#ff6622" opacity="0.07"/>
+  <circle cx="470" cy="380" r="3" fill="#ffbb44" opacity="0.06"/>
+  <circle cx="200" cy="340" r="4" fill="#ff8833" opacity="0.09"/>
+  <circle cx="380" cy="650" r="5" fill="#ff5533" opacity="0.08"/>
+
+  <!-- Matter spiraling inward — feeding the children -->
+  <path d="M 190,280 Q 240,350 290,400 Q 310,420 320,435" fill="none" stroke="#ff8844" stroke-width="1.2" opacity="0.12" filter="url(#softGlow)" stroke-dasharray="6,10"/>
+  <path d="M 460,320 Q 410,370 370,400 Q 340,420 325,432" fill="none" stroke="#ffaa55" stroke-width="1.0" opacity="0.10" filter="url(#softGlow)" stroke-dasharray="5,8"/>
+  <path d="M 210,610 Q 250,550 290,490 Q 310,460 318,442" fill="none" stroke="#ff9944" stroke-width="0.8" opacity="0.08" stroke-dasharray="4,8"/>
+  <path d="M 440,560 Q 400,510 360,470 Q 340,455 328,445" fill="none" stroke="#ffbb66" stroke-width="0.7" opacity="0.07" stroke-dasharray="4,7"/>
+
+  <!-- Dark center = our universe's interior -->
+  <ellipse cx="320" cy="430" rx="60" ry="73" fill="#000000"/>
+
+  <!-- ── L1: Our BHs (baby universes) — ALIVE, bright, healthy ── -->
+  <ellipse cx="350" cy="410" rx="38" ry="42" fill="url(#disk1)" filter="url(#glow)"/>
+  <ellipse cx="350" cy="410" rx="12" ry="13.5" fill="none" stroke="#ee3300" stroke-width="1.2" opacity="0.5" filter="url(#glow)"/>
+  <ellipse cx="350" cy="410" rx="10" ry="11" fill="none" stroke="#ffaa00" stroke-width="0.6" opacity="0.3"/>
+  <ellipse cx="350" cy="410" rx="7.5" ry="8.5" fill="#000000"/>
+
+  <ellipse cx="305" cy="455" rx="22" ry="25" fill="url(#disk1)" opacity="0.7"/>
+  <ellipse cx="305" cy="455" rx="6" ry="7" fill="#000000"/>
+  <ellipse cx="335" cy="380" rx="16" ry="18" fill="url(#disk1)" opacity="0.6"/>
+  <ellipse cx="335" cy="380" rx="4.5" ry="5" fill="#000000"/>
+  <ellipse cx="290" cy="420" rx="13" ry="14.5" fill="url(#disk1)" opacity="0.5"/>
+  <ellipse cx="290" cy="420" rx="3.5" ry="4" fill="#000000"/>
+  <ellipse cx="320" cy="465" rx="10" ry="11" fill="url(#disk1)" opacity="0.45"/>
+  <ellipse cx="320" cy="465" rx="2.8" ry="3" fill="#000000"/>
+  <ellipse cx="355" cy="450" rx="8" ry="9" fill="url(#disk1)" opacity="0.4"/>
+  <ellipse cx="355" cy="450" rx="2.2" ry="2.5" fill="#000000"/>
+  <circle cx="300" cy="400" r="4" fill="url(#disk2)" opacity="0.35"/>
+  <circle cx="300" cy="400" r="1.2" fill="#000000"/>
+  <circle cx="345" cy="440" r="3.5" fill="url(#disk2)" opacity="0.3"/>
+  <circle cx="345" cy="440" r="1" fill="#000000"/>
+  <circle cx="315" cy="435" r="3" fill="url(#disk2)" opacity="0.25"/>
+  <circle cx="315" cy="435" r="0.9" fill="#000000"/>
+
+  <!-- L2: Inside primary L1 dark center -->
+  <ellipse cx="356" cy="405" rx="5.5" ry="6" fill="url(#disk2)" filter="url(#glow)"/>
+  <ellipse cx="356" cy="405" rx="2" ry="2.2" fill="none" stroke="#dd3300" stroke-width="0.5" opacity="0.45"/>
+  <ellipse cx="356" cy="405" rx="1.3" ry="1.5" fill="#000000"/>
+  <circle cx="348" cy="413" r="3" fill="url(#disk2)" opacity="0.5"/>
+  <circle cx="348" cy="413" r="0.9" fill="#000000"/>
+  <circle cx="352" cy="403" r="2.2" fill="url(#disk2)" opacity="0.4"/>
+  <circle cx="352" cy="403" r="0.7" fill="#000000"/>
+  <circle cx="345" cy="409" r="1.8" fill="url(#diskDeep)" opacity="0.35"/>
+  <circle cx="345" cy="409" r="0.5" fill="#000000"/>
+
+  <!-- L3+ specks -->
+  <circle cx="357" cy="404" r="1.2" fill="url(#diskDeep)" opacity="0.4"/>
+  <circle cx="357" cy="404" r="0.4" fill="#000000"/>
+  <circle cx="355.5" cy="406" r="0.8" fill="url(#diskDeep)" opacity="0.3"/>
+  <circle cx="355.5" cy="406" r="0.25" fill="#000000"/>
+  <circle cx="356.5" cy="404.5" r="0.5" fill="#331100" opacity="0.25"/>
+  <circle cx="356.5" cy="404.5" r="0.15" fill="#000000"/>
+
+  <!-- Golden spiral guide (faint) -->
+  <path d="M 320,430 C 330,400 345,395 350,410 C 355,420 358,412 356,405 C 355,400 357,403 357,404"
+        fill="none" stroke="#ffcc00" stroke-width="0.5" opacity="0.15" stroke-dasharray="3,4" filter="url(#glow)"/>
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- CROSS-SECTION (right panel)         -->
+  <!-- ═══════════════════════════════════ -->
+  <line x1="620" y1="80" x2="620" y2="820" stroke="#221100" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- L0 ring — DYING, fragmented arcs with gaps -->
+  <circle cx="910" cy="400" r="250" fill="none" stroke="#ff6600" stroke-width="2" opacity="0.12" stroke-dasharray="25,50,15,60,35,45"/>
+  <circle cx="910" cy="400" r="235" fill="none" stroke="#ff4400" stroke-width="1.5" opacity="0.15" stroke-dasharray="40,55,20,70" filter="url(#glow)"/>
+  <circle cx="910" cy="400" r="220" fill="none" stroke="#ffaa00" stroke-width="1" opacity="0.10" stroke-dasharray="30,80,15,55"/>
+
+  <!-- Brighter surviving arc segments -->
+  <path d="M 725,255 A 235,235 0 0,1 845,180" fill="none" stroke="#ff6600" stroke-width="3" opacity="0.35" filter="url(#glow)"/>
+  <path d="M 1060,210 A 235,235 0 0,1 1140,350" fill="none" stroke="#ff5500" stroke-width="2.5" opacity="0.30" filter="url(#glow)"/>
+  <path d="M 1105,510 A 235,235 0 0,1 1010,630" fill="none" stroke="#ff7700" stroke-width="2" opacity="0.25" filter="url(#glow)"/>
+  <path d="M 775,610 A 235,235 0 0,1 690,475" fill="none" stroke="#ff6600" stroke-width="2.5" opacity="0.28" filter="url(#glow)"/>
+
+  <!-- Debris clumps -->
+  <circle cx="720" cy="330" r="4" fill="#ff6600" opacity="0.16" filter="url(#glow)"/>
+  <circle cx="1125" cy="430" r="3.5" fill="#ff8800" opacity="0.12" filter="url(#glow)"/>
+  <circle cx="845" cy="620" r="5" fill="#ff5500" opacity="0.14" filter="url(#glow)"/>
+  <circle cx="985" cy="185" r="3.5" fill="#ff7700" opacity="0.11"/>
+  <circle cx="705" cy="455" r="2.5" fill="#ffaa44" opacity="0.09"/>
+
+  <!-- Dark interior -->
+  <circle cx="910" cy="400" r="195" fill="#030008" opacity="0.8"/>
+
+  <!-- L1 BHs inside L0 — healthy, vivid rings -->
+  <circle cx="950" cy="370" r="65" fill="none" stroke="#ee5500" stroke-width="1.5" opacity="0.35" filter="url(#glow)"/>
+  <circle cx="950" cy="370" r="55" fill="none" stroke="#ffaa00" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="950" cy="370" r="48" fill="#020006" opacity="0.9"/>
+  <circle cx="870" cy="460" r="40" fill="none" stroke="#dd4400" stroke-width="1" opacity="0.25"/>
+  <circle cx="870" cy="460" r="33" fill="#020006" opacity="0.85"/>
+  <circle cx="920" cy="310" r="28" fill="none" stroke="#cc3300" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="920" cy="310" r="22" fill="#020006" opacity="0.8"/>
+  <circle cx="840" cy="370" r="22" fill="none" stroke="#bb2200" stroke-width="0.7" opacity="0.18"/>
+  <circle cx="840" cy="370" r="17" fill="#020006" opacity="0.75"/>
+  <circle cx="960" cy="440" r="18" fill="none" stroke="#aa2200" stroke-width="0.6" opacity="0.15"/>
+  <circle cx="960" cy="440" r="14" fill="#020006" opacity="0.7"/>
+  <circle cx="890" cy="380" r="12" fill="none" stroke="#992200" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="890" cy="380" r="9" fill="#020006" opacity="0.65"/>
+  <circle cx="930" cy="420" r="7" fill="none" stroke="#882200" stroke-width="0.4" opacity="0.1"/>
+  <circle cx="930" cy="420" r="5" fill="#020006"/>
+  <circle cx="860" cy="340" r="5" fill="none" stroke="#771100" stroke-width="0.3" opacity="0.08"/>
+  <circle cx="860" cy="340" r="3.5" fill="#020006"/>
+
+  <!-- L2 inside primary L1 -->
+  <circle cx="955" cy="365" r="18" fill="none" stroke="#cc4400" stroke-width="0.8" opacity="0.25" filter="url(#glow)"/>
+  <circle cx="955" cy="365" r="14" fill="#010004" opacity="0.9"/>
+  <circle cx="942" cy="378" r="10" fill="none" stroke="#aa3300" stroke-width="0.5" opacity="0.18"/>
+  <circle cx="942" cy="378" r="7.5" fill="#010004" opacity="0.85"/>
+  <circle cx="958" cy="382" r="7" fill="none" stroke="#993300" stroke-width="0.4" opacity="0.14"/>
+  <circle cx="958" cy="382" r="5" fill="#010004" opacity="0.8"/>
+
+  <!-- L3 inside L2 -->
+  <circle cx="956" cy="363" r="5.5" fill="none" stroke="#aa3300" stroke-width="0.5" opacity="0.2"/>
+  <circle cx="956" cy="363" r="4" fill="#010003" opacity="0.9"/>
+  <circle cx="953" cy="367" r="3" fill="none" stroke="#883300" stroke-width="0.3" opacity="0.14"/>
+  <circle cx="953" cy="367" r="2" fill="#010003"/>
+
+  <!-- L4+ -->
+  <circle cx="957" cy="362" r="1.8" fill="none" stroke="#773300" stroke-width="0.3" opacity="0.15"/>
+  <circle cx="957" cy="362" r="1.2" fill="#010002"/>
+  <circle cx="956.5" cy="362.5" r="0.7" fill="#331100" opacity="0.3"/>
+  <circle cx="956.5" cy="362.5" r="0.3" fill="#000000"/>
+
+  <!-- ═══ LABELS ═══ -->
+  <text x="320" y="38" font-family="'Georgia', serif" font-size="20" fill="#cc8844" text-anchor="middle" letter-spacing="3" opacity="0.9">THE CHIRAL FUNNEL</text>
+  <text x="320" y="58" font-family="'Courier New', monospace" font-size="9" fill="#886633" text-anchor="middle" letter-spacing="1" opacity="0.5">Every universe IS a black hole from outside</text>
+  <text x="320" y="82" font-family="'Georgia', serif" font-size="14" fill="#aa7744" text-anchor="middle" letter-spacing="2" opacity="0.7">3D PERSPECTIVE</text>
+  <text x="910" y="92" font-family="'Georgia', serif" font-size="16" fill="#aa7744" text-anchor="middle" letter-spacing="2" opacity="0.8">CROSS-SECTION</text>
+  <text x="910" y="112" font-family="'Courier New', monospace" font-size="9" fill="#664422" text-anchor="middle" opacity="0.5">One dimension removed</text>
+
+  <!-- L0 labels -->
+  <text x="910" y="152" font-family="'Courier New', monospace" font-size="10" fill="#ff8844" text-anchor="middle" opacity="0.6">L0: PARENT BH = OUR DYING UNIVERSE</text>
+  <text x="910" y="167" font-family="'Courier New', monospace" font-size="8" fill="#884422" text-anchor="middle" opacity="0.4">disk disintegrating — matter falling into children</text>
+
+  <!-- Left panel annotations -->
+  <text x="90" y="240" font-family="'Courier New', monospace" font-size="9" fill="#ffaa55" opacity="0.35">dying matter</text>
+  <text x="90" y="253" font-family="'Courier New', monospace" font-size="9" fill="#ffaa55" opacity="0.35">from null space</text>
+  <path d="M 155,248 L 195,305" fill="none" stroke="#885522" stroke-width="0.4" opacity="0.3"/>
+
+  <text x="485" y="195" font-family="'Courier New', monospace" font-size="9" fill="#ff8844" opacity="0.5">L0 disk: patchy,</text>
+  <text x="485" y="208" font-family="'Courier New', monospace" font-size="9" fill="#ff8844" opacity="0.5">disintegrating</text>
+  <text x="485" y="222" font-family="'Courier New', monospace" font-size="8" fill="#995533" opacity="0.35">heat death in progress</text>
+  <path d="M 480,210 L 430,290" fill="none" stroke="#774422" stroke-width="0.3" opacity="0.3"/>
+
+  <text x="425" y="415" font-family="'Courier New', monospace" font-size="8" fill="#886644" opacity="0.4">dark center</text>
+  <text x="425" y="426" font-family="'Courier New', monospace" font-size="8" fill="#886644" opacity="0.4">= our universe</text>
+  <path d="M 420,420 L 385,430" fill="none" stroke="#664422" stroke-width="0.3" opacity="0.3"/>
+
+  <text x="405" y="495" font-family="'Courier New', monospace" font-size="8" fill="#cc7744" opacity="0.4">L1: our BHs = baby</text>
+  <text x="405" y="506" font-family="'Courier New', monospace" font-size="8" fill="#cc7744" opacity="0.4">universes (alive, feeding)</text>
+  <path d="M 400,500 L 368,462" fill="none" stroke="#664422" stroke-width="0.3" opacity="0.3"/>
+
+  <!-- Right panel level labels -->
+  <text x="1010" y="355" font-family="'Courier New', monospace" font-size="9" fill="#ee7744" opacity="0.5">L1: 10⁴⁸ kg</text>
+  <text x="975" y="358" font-family="'Courier New', monospace" font-size="7" fill="#cc6633" opacity="0.4">L2</text>
+  <text x="963" y="362" font-family="'Courier New', monospace" font-size="6" fill="#aa5533" opacity="0.35">L3</text>
+  <path d="M 957,362 L 962,358" fill="none" stroke="#664422" stroke-width="0.3" opacity="0.3"/>
+  <text x="964" y="357" font-family="'Courier New', monospace" font-size="6" fill="#664422" opacity="0.3">→ 0</text>
+
+  <!-- Physics constants -->
+  <text x="600" y="842" font-family="'Courier New', monospace" font-size="9" fill="#553322" opacity="0.4" text-anchor="middle">ξ = 0.1582  ·  σ_conv = 1.086  ·  T_crossing = 207 GeV  ·  same at every level</text>
+  <text x="600" y="860" font-family="'Georgia', serif" font-size="11" fill="#886644" opacity="0.45" text-anchor="middle" font-style="italic">L0 dies. Its matter falls into L1. L1 is alive. Accretion disks all the way down.</text>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- VIEWING INSTRUCTIONS                                -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <line x1="80" y1="885" x2="1120" y2="885" stroke="#332211" stroke-width="0.5" opacity="0.3"/>
+
+  <text x="600" y="910" font-family="'Georgia', serif" font-size="12" fill="#aa8855" text-anchor="middle" letter-spacing="2" opacity="0.7">HOW TO SEE THE REAL STRUCTURE</text>
+  <text x="600" y="928" font-family="'Courier New', monospace" font-size="9" fill="#886644" text-anchor="middle" opacity="0.45" font-style="italic">This image abstracts away one dimension so you can see a single funnel.</text>
+
+  <text x="120" y="955" font-family="'Courier New', monospace" font-size="10" fill="#cc9966" opacity="0.55">1.</text>
+  <text x="145" y="955" font-family="'Courier New', monospace" font-size="10" fill="#997755" opacity="0.50">Look at this image of overlapping black hole disks.</text>
+
+  <text x="120" y="978" font-family="'Courier New', monospace" font-size="10" fill="#cc9966" opacity="0.55">2.</text>
+  <text x="145" y="978" font-family="'Courier New', monospace" font-size="10" fill="#997755" opacity="0.50">Put it in your mind and make the disks into overlapping spheres.</text>
+
+  <text x="120" y="1001" font-family="'Courier New', monospace" font-size="10" fill="#cc9966" opacity="0.55">3.</text>
+  <text x="145" y="1001" font-family="'Courier New', monospace" font-size="10" fill="#997755" opacity="0.50">Put the spheres inside the mothers instead of overlapping — but smaller.</text>
+
+  <text x="120" y="1024" font-family="'Courier New', monospace" font-size="10" fill="#cc9966" opacity="0.55">4.</text>
+  <text x="145" y="1024" font-family="'Courier New', monospace" font-size="10" fill="#997755" opacity="0.50">Turn each nested sphere into a funnel, just like the one you are looking at.</text>
+</svg>

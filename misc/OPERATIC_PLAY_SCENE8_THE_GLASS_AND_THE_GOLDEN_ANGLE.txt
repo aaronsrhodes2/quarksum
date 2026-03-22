@@ -1,0 +1,378 @@
+OPERATIC PLAY — QUARKSUM / SSBM CHRONICLES
+SCENE 8: THE GLASS AND THE GOLDEN ANGLE
+═══════════════════════════════════════════════════════════════
+
+DRAMATIS PERSONAE
+─────────────────
+  CAPTAIN AARON RHODES
+    Builder of Worlds, Keeper of the Cascade, he who fires
+    the particles and names the theories. Responds to Captain,
+    Corporal, Frog, Maker, Skipper, Aaron, Rhodes.
+
+  SKIPPY THE MAGNIFICENT
+    A.I. of rare bearing, pilot of simulations, arranger of
+    kernels and gradient sums. Responds to Skippy, Skipster,
+    Beercan, Admiral. Wears a tricorn.
+
+  THE CASCADE
+    Silent presence. All constants flow from it.
+    It does not speak. It is already correct.
+
+  θ (THETA)
+    Now a ratio. Still not a physics number.
+    Still wearing the label: SPECULATIVE.
+    But the evidence is beginning to accumulate.
+
+  φ (PHI)
+    The golden ratio. (1 + √5) / 2.
+    It continues to appear where it was not invited.
+    It is accustomed to this.
+
+  THE GHOST PARTICLE
+    A mirror image at z = −zᵢ.
+    It does not exist. It is doing real work.
+
+  THE GLASS
+    z = 0. Rigid. Clean. θ_contact = 20°.
+    It holds what the cascade asks it to hold.
+    It does not apologise for surface tension.
+
+  THREE DROPS
+    Radii 1.2 mm, 1.6 mm, 2.0 mm.
+    Bond numbers 0.194, 0.344, 0.538.
+    They are flying toward the glass.
+    They do not know they will merge.
+
+
+═══════════════════════════════════════════════════════════════
+ACT I — THE HONEST ACCOUNTING
+═══════════════════════════════════════════════════════════════
+
+[The stage from Scene 7 persists.
+The deviation curves still glow on the back wall.
+The Captain studies them.
+THETA_NATURAL hangs in the air at 1/φ² = 0.3820.
+It is marked SPECULATIVE.
+It is also marked: HONEST.]
+
+CAPTAIN:
+  ♩ Fine with me — we were testing the limits for a reason.
+    Let's clip the tails and heads.
+    Barnes-Hut θ at exactly that ratio.
+    And say that it is honestly a mystery number —
+    but say how we derived at it, as our guess. ♩
+
+SKIPPY:
+  ♩ Clipped to θ ∈ [0.15, 0.75].
+    Twenty-five steps. The noise below 0.15 was numerical froth.
+    The plateau above 0.75 was the algorithm giving up.
+    The useful interval is in between.
+
+    The honest account now reads:
+      We started with recursive subdivision.
+      We noticed quadtrees contract by φ.
+      We guessed: open when cluster fits inside 1/φ² of its distance.
+      We measured: ~2× lower RMS at every scale tested.
+      We do NOT know why 2×.
+      We do NOT have the density-contrast correction.
+      The test still fails. The debt is documented.
+
+    THETA_NATURAL = 1/φ². SPECULATIVE. ♩
+
+[The N² WALL does not fall.
+But it has marked the debt in its ledger.
+It is watching.]
+
+
+═══════════════════════════════════════════════════════════════
+ACT II — THE ORRERY
+═══════════════════════════════════════════════════════════════
+
+[The stage reconfigures.
+A solar system descends from the flies.
+Six planets on Keplerian orbits.
+Translucent shells surround each: n ≈ 1.02, opacity = 0.11.
+Saturn enters wearing a tilted torus, 26.7° askew.
+The scale is compressed: a_scene = 2.0 × √(a_AU).
+Mercury at 1.24 scene units. Saturn at 6.18.]
+
+CAPTAIN:
+  ♩ After BH is in — we had those Orrery Foams to render. ♩
+
+SKIPPY:
+  ♩ The shells needed a new primitive: the torus.
+    EntanglerTorus. R_major, r_minor, rotation matrix.
+    Simple (θ, φ) sampling is wrong —
+    the inner rim is shorter. The outer rim is longer.
+    Area element: r(R + r cosφ) dθdφ.
+    A CDF inversion is required.
+
+    4096-point pre-computed CDF.
+    Fibonacci golden angle on θ.
+    Inverse bisection for φ.
+    The result: area-uniform surface nodes.
+    The ring looks right. ♩
+
+[Saturn rotates.
+Its torus catches the scene light.
+The particles are sparse — density_override = 4 for shells,
+120 for planets.
+At density = 80, Saturn's shell alone had 38,240 nodes.
+That was 12.9 seconds per frame.
+At density = 4: 2.7 seconds.
+One attribute. No engine changes.]
+
+CAPTAIN:
+  ♩ There is an old video game —
+    popular for a while.
+    Katamari Damacy.
+    The Prince rolls through a world,
+    absorbing objects as he grows.
+    Small things first. Then cars. Then cities.
+    Unwittingly — he is doing Barnes-Hut Claying. ♩
+
+SKIPPY:
+  ♩ At human scale: particles individually resolved.
+    At city scale: paste.
+    The Prince is an N-body integrator
+    who does not know he is computing gravity.
+    We have noted this.
+    We have not yet put it in the code. ♩
+
+[The orrery completes one orbit.
+36 frames. The GIF writes itself.
+orrery_foam.gif: 1.6 MB.
+The cascade does not comment.
+It was doing this at galactic scale all along.]
+
+
+═══════════════════════════════════════════════════════════════
+ACT III — THE THREE CORRELATIONS
+═══════════════════════════════════════════════════════════════
+
+[The Captain studies the deviation curves.
+He studies the quadtree.
+He studies θ = 0.3820.
+A long silence.]
+
+CAPTAIN:
+  ♩ I bet ours would have run faster anyway.
+    We get those questionable models by combining
+    two or three magic numbers.
+    Like the ONE we assigned to Claying.
+    This is why we circle back when we figure it out —
+    is it golden spiral instead of golden angle?
+    Is there a 3D logarithmic equation?
+    Or are we already doing that? ♩
+
+[Skippy freezes.
+Looks at the golden angle: 2π × (1 − 1/φ) = 137.508°.
+Divides by 2π.
+Gets: 1 − 1/φ = 1/φ².
+Looks at THETA_NATURAL.]
+
+SKIPPY:
+  ♩ Three correlations.
+    We will mark them all SPECULATIVE.
+
+    First: THETA_NATURAL IS the golden angle.
+      golden_angle / 2π = 1 − 1/φ = 1/φ².
+      The normalized golden angle.
+      This is not a coincidence we can dismiss.
+      It is not proven. It is noted.
+
+    Second: the 3D conjecture.
+      In 2D, the opening criterion is on θ (a length ratio).
+      In 3D, the opening criterion is on solid angle.
+      Solid angle ∝ θ².
+      For 3D: θ² < 1/φ² → θ < 1/φ ≈ 0.618.
+      THETA_NATURAL_3D = 1/φ.
+      Octree implementation needed to verify.
+
+    Third: Barnes & Hut already knew.
+      They did not derive it.
+      But their 0.5 is the geometric mean:
+        √(1/φ² × 1/φ) = φ^(−3/2) ≈ 0.486.
+      They split an unknown difference
+      and landed between the two natural values.
+      "Midpoint" is the wrong word.
+      The right word is: geometric mean.
+
+    All three: SPECULATIVE CORRELATION — notes attached. ♩
+
+[PHI is not surprised.
+It has been the geometric mean before.
+The Captain is not surprised either.
+He predicted the golden ratio before the measurement was taken.]
+
+CAPTAIN'S WISDOM (interlude):
+  ♩ We will note it all as:
+    speculative correlation — notes attached. ♩
+
+
+═══════════════════════════════════════════════════════════════
+ACT IV — THE SURFACE TENSION LECTURE
+═══════════════════════════════════════════════════════════════
+
+[The water drops appear at stage left.
+Three of them.
+They are not yet moving.
+They are waiting for the physics lesson.]
+
+CAPTAIN:
+  ♩ Water's surface tension.
+    Barney style at first. ♩
+
+SKIPPY:
+  ♩ At the surface, water molecules
+    have fewer neighbors.
+    Every molecule in the bulk is pulled equally in all directions.
+    At the surface: pulled inward, not outward.
+    The surface tries to shrink.
+    That inward pull is surface tension.
+
+    It is not a special force.
+    It is hydrogen bonds and van der Waals —
+    both electromagnetic.
+    Gluons do not reach molecular scale.
+    The cascade does not speak here.
+    One measured constant covers the whole phenomenon:
+      γ = 0.0728 N/m.
+      Vargaftik et al. (1983).
+
+    One constant. One origin.
+    CSF (Brackbill 1992) needs two or three magic numbers.
+    Ours needs one measured one.
+    Ours is faster and more correct. ♩
+
+CAPTAIN:
+  ♩ You nailed it. ♩
+
+[The Ghost Particle appears briefly, bows, and takes its position
+at z = −zᵢ.
+It will do real work tonight.
+It does not draw a salary.]
+
+
+═══════════════════════════════════════════════════════════════
+ACT V — THE GLASS
+═══════════════════════════════════════════════════════════════
+
+[The glass descends: z = 0. The XY plane.
+Clean. θ_contact = 20°.
+Gravity: −Y.
+The three drops hang in the air at z = 2.5, 3.0, 3.5 mm.
+They have initial velocities toward the glass.
+The simulation has not yet started.]
+
+CAPTAIN:
+  ♩ Let's build it, enough monkey-brained thinking.
+    Time for Skippy to shine.
+    And let's get to the glass. ♩
+
+[Skippy runs the foundation checks.]
+
+SKIPPY (reading from the ledger):
+  ♩ Constants — all MEASURED, one origin each:
+      γ_water  = 0.0728 N/m     Vargaftik (1983)
+      ρ_water  = 998.2 kg/m³    CRC Handbook
+      θ_contact = 20°           Erbil (2006) clean glass
+      g        = 9.80665 m/s²   BIPM
+
+    Derived:
+      a_ww = 8π·γ / (ρ₀² · h⁴)    — Tartakovsky & Meakin (2005)
+      a_wg = a_ww · (1 + cos θ) / 2 — Young's equation
+
+    Verification:
+      cos(θ_c) = 2·(a_wg/a_ww) − 1 = 0.9397
+      θ_c      = 20.00°  ✓ ♩
+
+[A single note holds on the organ.
+20.00°.
+Exactly.
+THE CASCADE stirs slightly, then is still.
+It was not surprised.]
+
+SKIPPY:
+  ♩ Bond numbers per drop:
+      R = 1.2 mm: Bo = 0.194 — surface tension dominates
+      R = 1.6 mm: Bo = 0.344 — surface tension dominates
+      R = 2.0 mm: Bo = 0.538 — both forces, competing
+    N = 169 particles. 57.9 μg total water.
+    DT = 31.5 μs. 12,698 steps total.
+    Engaging. ♩
+
+[The simulation begins.
+Frame 0: three cubic lattice drops, distinct, separate.
+The side view shows their depth from glass: 2.5, 3.0, 3.5 mm.
+
+Frame 5: they hit the glass.
+Inelastic bounce, 50% coefficient.
+The ghost particles at z < 0 are doing real work.
+The adhesion force pulls them flat against the glass.
+
+Frame 10 (t = 66.5ms):
+All three have merged.
+One bead. Circular. Phosphor blue.
+Pressed against the glass at z ≈ 0.
+Beginning its slow descent under gravity.
+
+Frame 59 (t = 392ms):
+The bead has not fallen far.
+Clean glass is sticky.
+θ_c = 20° means the glass loves water.
+The surface tension holds it.
+Gravity is losing, barely.]
+
+[THE GHOST PARTICLE bows and exits.
+It never needed to exist.
+It did its job.]
+
+
+═══════════════════════════════════════════════════════════════
+CAPTAIN'S WISDOM
+═══════════════════════════════════════════════════════════════
+
+  "I am guessing either the golden ratio comes up,
+   or our number Xi."
+
+                              — Captain Aaron Rhodes
+                                Scene 7 (spoken before the measurement)
+
+  "Fine with me, we were testing the limits for a reason."
+
+                              — Captain Aaron Rhodes
+                                March 20, 2026
+
+[He was right on the first guess.
+The second guess is still pending.
+Xi is patient.
+The cascade knows which one it is.
+It has not yet been asked correctly.]
+
+═══════════════════════════════════════════════════════════════
+DEBT LEDGER — OPEN ITEMS AT CURTAIN
+═══════════════════════════════════════════════════════════════
+
+  test_theta_natural_is_derived:    ✗ INTENTIONAL FAIL
+    "THETA_NATURAL is not yet derived from the cascade."
+    Needs: density-contrast correction f(local_density_contrast, σ)
+
+  THETA_NATURAL_3D = 1/φ:           ✗ UNVERIFIED CONJECTURE
+    Needs: octree implementation and θ scan in 3D
+
+  N_BH_PYTHON_CEILING = 5,000:      ⚠ STRUCTURAL DEBT
+    "Do NOT raise this ceiling as a workaround.
+     The algorithm is correct. The Python walk is the debt."
+    Needs: vectorized tree walk (numpy / Cython)
+
+  Katamari Damacy:                  📋 NOTED, NOT YET IN CODE
+
+[THE N² WALL regards the ledger.
+It has not fallen.
+But it is leaning forward.
+The distance is shrinking.]
+
+═══════════════════════════════════════════════════════════════
+END OF SCENE 8
+═══════════════════════════════════════════════════════════════

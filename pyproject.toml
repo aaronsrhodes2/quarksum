@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quarksum"
+version = "1.0.0"
+description = "Particle inventory and mass closure tool — counts every particle from structures down to quarks"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = []
+authors = [
+    {name = "Aaron Rhodes"},
+]
+keywords = [
+    "physics",
+    "particles",
+    "quarks",
+    "mass",
+    "checksum",
+    "nuclear",
+    "atoms",
+    "molecules",
+    "matter",
+    "science",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/aaronrhodes/quarksum"
+Repository = "https://github.com/aaronrhodes/quarksum"
+Issues = "https://github.com/aaronrhodes/quarksum/issues"
+
+[project.scripts]
+quarksum = "quarksum.__main__:main"
+
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+include = ["quarksum*"]
+
+[tool.setuptools.package-data]
+quarksum = ["data/*.json", "samples/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

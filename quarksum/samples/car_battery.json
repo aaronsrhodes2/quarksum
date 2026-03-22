@@ -1,0 +1,38 @@
+{
+  "name": "Car Lead-Acid Battery",
+  "description": "Lead electrode plates immersed in dilute sulfuric acid electrolyte. The original rechargeable battery — study electrochemical half-reactions, sulfation, and ion transport.",
+  "stated_mass_kg": 15.0,
+  "children": [
+    {
+      "materials": [
+        {
+          "material": "Lead",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 100.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Sulfuric Acid",
+          "ratio": 0.35
+        },
+        {
+          "material": "Water",
+          "ratio": 0.65
+        }
+      ],
+      "thickness": 400.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Lead",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 100.0
+    }
+  ]
+}

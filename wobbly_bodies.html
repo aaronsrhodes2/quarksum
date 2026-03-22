@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wobbly Celestial Bodies — N-Body Simulation with Tidal Deformation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Courier New", monospace;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #1a1a1a;
+            border-bottom: 1px solid #333;
+            padding: 12px 20px;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin-bottom: 4px;
+            color: #00d4ff;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #canvas {
+            flex: 1;
+            background: #000;
+            border-right: 1px solid #333;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: #111;
+            border-left: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .section {
+            padding: 16px;
+            border-bottom: 1px solid #333;
+        }
+
+        .section h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .control-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            margin-bottom: 4px;
+            color: #aaa;
+        }
+
+        button {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 4px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #00ff99;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button.secondary {
+            background: #333;
+            color: #00d4ff;
+        }
+
+        button.secondary:hover {
+            background: #444;
+        }
+
+        select {
+            width: 100%;
+            padding: 6px;
+            background: #1a1a1a;
+            color: #00d4ff;
+            border: 1px solid #333;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .metric {
+            font-size: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: #0a0a0a;
+            border-left: 2px solid #00d4ff;
+        }
+
+        .metric-label {
+            color: #888;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .metric-value {
+            color: #00ff99;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .color-legend {
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+
+        .status {
+            padding: 12px;
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            font-size: 10px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wobbly Celestial Bodies</h1>
+            <div class="subtitle">N-Body Simulation with Real-Time Tidal Deformation</div>
+        </header>
+
+        <div class="main">
+            <canvas id="canvas"></canvas>
+
+            <div class="sidebar">
+                <!-- Scenario Selection -->
+                <div class="section">
+                    <h3>Scenario</h3>
+                    <div class="control-group">
+                        <label>Preset Configuration</label>
+                        <select id="scenarioSelect">
+                            <option value="binary_circular">Binary Stars (Circular)</option>
+                            <option value="binary_eccentric">Binary Stars (Eccentric)</option>
+                            <option value="triple">Triple System</option>
+                            <option value="inspiral">GW Inspiral (NS-NS)</option>
+                            <option value="roche">Roche Limit (Moon-analog)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="section">
+                    <h3>Controls</h3>
+                    <div class="control-group">
+                        <button id="playPauseBtn">Play</button>
+                        <button id="resetBtn" class="secondary">Reset</button>
+                    </div>
+                    <div class="control-group">
+                        <label>Speed: <span id="speedValue">1.0</span>x</label>
+                        <input type="range" id="speedSlider" min="0.1" max="5" step="0.1" value="1">
+                    </div>
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="showTrails" checked>
+                            Show Orbital Trails
+                        </label>
+                    </div>
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="showDeformation" checked>
+                            Show Tidal Deformation
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Physics Parameters -->
+                <div class="section">
+                    <h3>Physics</h3>
+                    <div class="control-group">
+                        <label>Softening: <span id="softeningValue">0.0</span> km</label>
+                        <input type="range" id="softeningSlider" min="0" max="1000" step="10" value="0">
+                    </div>
+                    <div class="control-group">
+                        <label>
+                            <input type="checkbox" id="includeGWLoss">
+                            Include GW Radiation Loss
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Metrics -->
+                <div class="section">
+                    <h3>System Metrics</h3>
+                    <div class="metric">
+                        <span class="metric-label">Time (years)</span>
+                        <span class="metric-value" id="timeMetric">0.00</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Total Energy (J)</span>
+                        <span class="metric-value" id="energyMetric">0.00e+00</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Energy Change (%)</span>
+                        <span class="metric-value" id="energyChangeMetric">0.00</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Ang. Momentum (kg·m²/s)</span>
+                        <span class="metric-value" id="angularMomentumMetric">0.00e+00</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Max Tidal Def.</span>
+                        <span class="metric-value" id="maxDeformMetric">0.00</span>
+                    </div>
+                </div>
+
+                <!-- Color Legend -->
+                <div class="section">
+                    <h3>Legend</h3>
+                    <div class="color-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff4444;"></div>
+                            <span>Body 1</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #4488ff;"></div>
+                            <span>Body 2</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #44ff44;"></div>
+                            <span>Body 3 (if present)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: rgba(255, 255, 0, 0.3);"></div>
+                            <span>Orbital trails</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status">
+                    Frame rate: <span id="fpsMetric">60</span> FPS<br>
+                    Steps: <span id="stepsMetric">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════════════
+        // Physics Constants (from materia.core.constants)
+        // ═══════════════════════════════════════════════════════════════════
+
+        const G = 6.67430e-11;  // m³/(kg·s²) — gravitational constant
+        const c = 299792458;    // m/s — speed of light
+        const M_sun = 1.989e30; // kg — solar mass
+        const AU = 1.496e11;    // m — astronomical unit
+
+        // Conversion factors
+        const YEAR_S = 365.25 * 24 * 3600;  // seconds per Julian year
+        const KM = 1000;
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Global State
+        // ═══════════════════════════════════════════════════════════════════
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+
+        // Resize canvas
+        function resizeCanvas() {
+            canvas.width = canvas.clientWidth * dpr;
+            canvas.height = canvas.clientHeight * dpr;
+            ctx.scale(dpr, dpr);
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Simulation state
+        let bodies = [];
+        let trails = [];
+        let isRunning = false;
+        let currentTime = 0;
+        let initialEnergy = 0;
+        let dt = 100;  // timestep in seconds
+        let speedMultiplier = 1.0;
+        let softening = 0.0;
+        let includeGWLoss = false;
+        let showTrails = true;
+        let showDeformation = true;
+        let stepCount = 0;
+
+        // Display state
+        let zoom = 1.0;
+        let panX = 0;
+        let panY = 0;
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Celestial Body Class
+        // ═══════════════════════════════════════════════════════════════════
+
+        class Body {
+            constructor(mass, x, y, vx, vy, radius, k2, sigma = 0, color = '#ff0000') {
+                this.mass = mass;      // kg
+                this.x = x;            // m
+                this.y = y;            // m
+                this.vx = vx;          // m/s
+                this.vy = vy;          // m/s
+                this.radius = radius;  // m
+                this.k2 = k2;          // Love number
+                this.sigma = sigma;    // σ-field
+                this.color = color;
+                this.trail = [];       // position history
+                this.ax = 0;
+                this.ay = 0;
+            }
+
+            // Effective mass with σ-field scaling: M_eff = M × e^σ
+            get effectiveGM() {
+                return G * this.mass * Math.exp(this.sigma);
+            }
+
+            get ke() {
+                return 0.5 * this.mass * (this.vx * this.vx + this.vy * this.vy);
+            }
+
+            recordPosition() {
+                this.trail.push([this.x, this.y]);
+                if (this.trail.length > 500) {
+                    this.trail.shift();
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Physics: Tidal Deformation
+        // ═══════════════════════════════════════════════════════════════════
+
+        function computeTidalDeformation(body, others) {
+            // ε₂ = (k₂/2) × (M_companion / M_body) × (R/d)³
+            let eps2 = 0;
+            let tidalAngle = 0;
+
+            for (let other of others) {
+                if (other === body) continue;
+                const dx = other.x - body.x;
+                const dy = other.y - body.y;
+                const d = Math.sqrt(dx*dx + dy*dy);
+                if (d > 0) {
+                    eps2 += (body.k2 / 2) * (other.mass / body.mass) * Math.pow(body.radius / d, 3);
+                    tidalAngle = Math.atan2(dy, dx);
+                }
+            }
+
+            return { eps2, tidalAngle };
+        }
+
+        // Evaluate tidal deformation: r(θ) = R₀[1 + ε₂ P₂(cos θ)]
+        // where P₂(cos θ) = ½(3cos²θ - 1)
+        function evaluateDeformation(eps2, theta) {
+            const cosTheta = Math.cos(theta);
+            const p2 = 0.5 * (3 * cosTheta * cosTheta - 1);
+            return eps2 * p2;
+        }
+
+        // Get surface points for a tidally deformed body
+        function getBodyContour(body, others, nPoints = 64) {
+            const { eps2, tidalAngle } = computeTidalDeformation(body, others);
+            const points = [];
+
+            for (let i = 0; i < nPoints; i++) {
+                const theta = (2 * Math.PI * i) / nPoints;
+                const deform = evaluateDeformation(eps2, theta - tidalAngle);
+                const r = body.radius * (1 + deform);
+
+                const x = body.x + r * Math.cos(theta + tidalAngle);
+                const y = body.y + r * Math.sin(theta + tidalAngle);
+                points.push([x, y]);
+            }
+
+            return points;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Physics: N-Body Integration
+        // ═══════════════════════════════════════════════════════════════════
+
+        function computeAccelerations() {
+            for (let b of bodies) {
+                b.ax = 0;
+                b.ay = 0;
+            }
+
+            for (let i = 0; i < bodies.length; i++) {
+                for (let j = i + 1; j < bodies.length; j++) {
+                    const b1 = bodies[i];
+                    const b2 = bodies[j];
+
+                    let dx = b2.x - b1.x;
+                    let dy = b2.y - b1.y;
+                    let r2 = dx*dx + dy*dy + softening*softening;
+                    let r = Math.sqrt(r2);
+
+                    if (r > 0) {
+                        const a = 1 / (r2 * r);
+                        const ax1 = b2.effectiveGM * dx * a;
+                        const ay1 = b2.effectiveGM * dy * a;
+
+                        b1.ax += ax1;
+                        b1.ay += ay1;
+                        b2.ax -= b1.effectiveGM * dx * a;
+                        b2.ay -= b1.effectiveGM * dy * a;
+                    }
+                }
+            }
+        }
+
+        function verletStep() {
+            // Velocity-Verlet integration
+            computeAccelerations();
+
+            for (let b of bodies) {
+                // Half-velocity step
+                const vx_half = b.vx + 0.5 * b.ax * dt;
+                const vy_half = b.vy + 0.5 * b.ay * dt;
+
+                // Position step
+                b.x += dt * vx_half;
+                b.y += dt * vy_half;
+
+                // Store old velocity for next half-step
+                b.vx = vx_half;
+                b.vy = vy_half;
+            }
+
+            // New accelerations
+            computeAccelerations();
+
+            for (let b of bodies) {
+                // Finish velocity step
+                b.vx += 0.5 * b.ax * dt;
+                b.vy += 0.5 * b.ay * dt;
+
+                // GW damping (if binary and enabled)
+                if (includeGWLoss && bodies.length === 2) {
+                    const ke = bodies[0].ke + bodies[1].ke;
+                    if (ke > 0) {
+                        const sep = Math.sqrt(
+                            Math.pow(bodies[1].x - bodies[0].x, 2) +
+                            Math.pow(bodies[1].y - bodies[0].y, 2)
+                        );
+                        // GW luminosity (Peters formula)
+                        const M1 = bodies[0].mass;
+                        const M2 = bodies[1].mass;
+                        const Mtot = M1 + M2;
+                        const Lgw = (32/5) * Math.pow(G, 4) / Math.pow(c, 5) *
+                                   Math.pow(M1*M2, 2) * Mtot / Math.pow(sep, 5);
+
+                        const dE_dE = Math.min(Lgw * dt / ke, 0.01);
+                        const scale = Math.sqrt(Math.max(1 - dE_dE, 0.99));
+                        b.vx *= scale;
+                        b.vy *= scale;
+                    }
+                }
+
+                // Record trail
+                b.recordPosition();
+            }
+
+            currentTime += dt;
+            stepCount++;
+        }
+
+        function computeSystemEnergy() {
+            let ke = 0;
+            for (let b of bodies) ke += b.ke;
+
+            let pe = 0;
+            for (let i = 0; i < bodies.length; i++) {
+                for (let j = i + 1; j < bodies.length; j++) {
+                    const dx = bodies[j].x - bodies[i].x;
+                    const dy = bodies[j].y - bodies[i].y;
+                    const r = Math.sqrt(dx*dx + dy*dy);
+                    if (r > 0) {
+                        pe -= G * bodies[i].mass * bodies[j].mass / r;
+                    }
+                }
+            }
+
+            return ke + pe;
+        }
+
+        function computeAngularMomentum() {
+            let L = 0;
+            for (let b of bodies) {
+                L += b.mass * (b.x * b.vy - b.y * b.vx);
+            }
+            return L;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Scenario Setup
+        // ═══════════════════════════════════════════════════════════════════
+
+        function setupScenario(name) {
+            bodies = [];
+            trails = [];
+            currentTime = 0;
+            stepCount = 0;
+
+            const scenarios = {
+                binary_circular: () => {
+                    // Two equal-mass stars in circular orbit
+                    const sep = 3 * AU;
+                    const v = Math.sqrt(G * 2 * M_sun / (2 * sep));
+                    bodies = [
+                        new Body(M_sun, -sep/2, 0, 0, v, 7e8, 0.5, 0, '#ff4444'),
+                        new Body(M_sun, sep/2, 0, 0, -v, 7e8, 0.5, 0, '#4488ff'),
+                    ];
+                },
+                binary_eccentric: () => {
+                    // Eccentric orbit (higher velocity for more elongated path)
+                    const sep = 2 * AU;
+                    const v = 1.5 * Math.sqrt(G * 2 * M_sun / (2 * sep));
+                    bodies = [
+                        new Body(M_sun, -sep/2, 0, 0, v, 7e8, 0.5, 0, '#ff4444'),
+                        new Body(M_sun, sep/2, 0, 0, -v, 7e8, 0.5, 0, '#4488ff'),
+                    ];
+                },
+                triple: () => {
+                    // Three stars
+                    const r1 = AU;
+                    const v1 = Math.sqrt(G * 2 * M_sun / (2 * r1));
+                    bodies = [
+                        new Body(M_sun, -r1/2, 0, 0, v1, 7e8, 0.5, 0, '#ff4444'),
+                        new Body(M_sun, r1/2, 0, 0, -v1, 7e8, 0.5, 0, '#4488ff'),
+                        new Body(0.5 * M_sun, 0, 3*r1, 0, 0, 5e8, 0.3, 0, '#44ff44'),
+                    ];
+                },
+                inspiral: () => {
+                    // Close binary (neutron stars) with GW-driven inspiral
+                    includeGWLoss = true;
+                    const sep = 500 * KM;
+                    const M_ns = 1.4 * M_sun;
+                    const v = Math.sqrt(G * 2 * M_ns / (2 * sep));
+                    bodies = [
+                        new Body(M_ns, -sep/2, 0, 0, v, 10*KM, 0.3, 0, '#ff4444'),
+                        new Body(M_ns, sep/2, 0, 0, -v, 10*KM, 0.3, 0, '#4488ff'),
+                    ];
+                    dt = 1;  // Smaller timestep for close encounter
+                },
+                roche: () => {
+                    // Moon-like body approaching primary (Roche limit demo)
+                    const M_primary = M_sun;
+                    const M_moon = 0.012 * M_sun;
+                    const sep = 6 * AU;
+                    const v_approach = 0.5 * Math.sqrt(G * M_primary / sep);
+                    bodies = [
+                        new Body(M_primary, 0, 0, 0, 0, 7e8, 0.5, 0, '#ff4444'),
+                        new Body(M_moon, sep, 0, 0, v_approach, 1.7e6, 0.3, 0, '#4488ff'),
+                    ];
+                    dt = 1000;
+                },
+            };
+
+            (scenarios[name] || scenarios.binary_circular)();
+            initialEnergy = computeSystemEnergy();
+
+            // Auto-zoom to fit all bodies in view
+            let maxDist = 0;
+            for (let b of bodies) {
+                const d = Math.sqrt(b.x * b.x + b.y * b.y);
+                if (d > maxDist) maxDist = d;
+            }
+            // Fit bodies within 30% of canvas half-width
+            const viewSize = Math.min(canvas.clientWidth, canvas.clientHeight) * 0.3;
+            zoom = maxDist > 0 ? viewSize / maxDist : 1.0;
+            panX = 0;
+            panY = 0;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Rendering
+        // ═══════════════════════════════════════════════════════════════════
+
+        function project(x, y) {
+            const cx = canvas.clientWidth / 2;
+            const cy = canvas.clientHeight / 2;
+            const px = cx + zoom * (x - panX);
+            const py = cy + zoom * (y - panY);
+            return [px, py];
+        }
+
+        function drawBody(body) {
+            const [px, py] = project(body.x, body.y);
+            // Ensure bodies are always visible: minimum 6px display radius
+            const displayRadius = Math.max(zoom * body.radius, 6);
+
+            if (showDeformation) {
+                // Draw deformed body surface
+                const { eps2, tidalAngle } = computeTidalDeformation(body, bodies);
+                const nPoints = 64;
+                ctx.beginPath();
+                for (let i = 0; i < nPoints; i++) {
+                    const theta = (2 * Math.PI * i) / nPoints;
+                    const deform = evaluateDeformation(eps2, theta - tidalAngle);
+                    // Scale deformation to display radius
+                    const r = displayRadius * (1 + deform);
+                    const cx = px + r * Math.cos(theta + tidalAngle);
+                    const cy = py + r * Math.sin(theta + tidalAngle);
+                    if (i === 0) ctx.moveTo(cx, cy);
+                    else ctx.lineTo(cx, cy);
+                }
+                ctx.closePath();
+                ctx.fillStyle = body.color + '66';
+                ctx.fill();
+                ctx.strokeStyle = body.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Glow effect
+                ctx.shadowColor = body.color;
+                ctx.shadowBlur = 15;
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+            } else {
+                // Draw simple circle
+                ctx.beginPath();
+                ctx.arc(px, py, displayRadius, 0, 2*Math.PI);
+                ctx.fillStyle = body.color + '88';
+                ctx.fill();
+                ctx.strokeStyle = body.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            // Draw label with mass
+            const massStr = (body.mass / M_sun).toFixed(2);
+            ctx.fillStyle = body.color;
+            ctx.font = '11px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(massStr + ' M☉', px, py - displayRadius - 10);
+        }
+
+        function drawTrails() {
+            for (let body of bodies) {
+                if (body.trail.length < 2) continue;
+                ctx.beginPath();
+                ctx.strokeStyle = body.color + '40';
+                ctx.lineWidth = 1.5;
+                for (let i = 0; i < body.trail.length; i++) {
+                    const [px, py] = project(body.trail[i][0], body.trail[i][1]);
+                    if (i === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function render() {
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+
+            // Clear background
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, w, h);
+
+            // Draw grid
+            ctx.strokeStyle = 'rgba(100, 100, 100, 0.1)';
+            ctx.lineWidth = 0.5;
+            const gridSpacing = 1e11 * zoom;  // 1 AU grid
+            const gridStart = Math.floor(-panX / (1e11 / zoom)) * (1e11 / zoom);
+
+            for (let x = gridStart; x < gridStart + w / zoom + 1e11; x += 1e11) {
+                const [px] = project(x, 0);
+                ctx.beginPath();
+                ctx.moveTo(px, 0);
+                ctx.lineTo(px, h);
+                ctx.stroke();
+            }
+
+            // Draw trails
+            if (showTrails) drawTrails();
+
+            // Draw bodies
+            for (let body of bodies) {
+                drawBody(body);
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // UI Event Handlers
+        // ═══════════════════════════════════════════════════════════════════
+
+        document.getElementById('playPauseBtn').addEventListener('click', () => {
+            isRunning = !isRunning;
+            document.getElementById('playPauseBtn').textContent = isRunning ? 'Pause' : 'Play';
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            const scenario = document.getElementById('scenarioSelect').value;
+            setupScenario(scenario);
+            isRunning = false;
+            document.getElementById('playPauseBtn').textContent = 'Play';
+        });
+
+        document.getElementById('scenarioSelect').addEventListener('change', (e) => {
+            setupScenario(e.target.value);
+            isRunning = false;
+            document.getElementById('playPauseBtn').textContent = 'Play';
+        });
+
+        document.getElementById('speedSlider').addEventListener('input', (e) => {
+            speedMultiplier = parseFloat(e.target.value);
+            document.getElementById('speedValue').textContent = speedMultiplier.toFixed(1);
+        });
+
+        document.getElementById('softeningSlider').addEventListener('input', (e) => {
+            softening = parseFloat(e.target.value) * KM;
+            document.getElementById('softeningValue').textContent = (softening / KM).toFixed(1);
+        });
+
+        document.getElementById('showTrails').addEventListener('change', (e) => {
+            showTrails = e.target.checked;
+        });
+
+        document.getElementById('showDeformation').addEventListener('change', (e) => {
+            showDeformation = e.target.checked;
+        });
+
+        document.getElementById('includeGWLoss').addEventListener('change', (e) => {
+            includeGWLoss = e.target.checked;
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Animation Loop
+        // ═══════════════════════════════════════════════════════════════════
+
+        let lastTime = performance.now();
+        let frameCount = 0;
+        let fpsTime = 0;
+
+        function animate(now) {
+            if (isRunning) {
+                for (let i = 0; i < speedMultiplier; i++) {
+                    verletStep();
+                }
+            }
+
+            render();
+
+            // Update metrics
+            const energy = computeSystemEnergy();
+            const energyChange = (energy - initialEnergy) / Math.abs(initialEnergy) * 100;
+            const L = Math.abs(computeAngularMomentum());
+            const maxDeform = Math.max(...bodies.map(b => {
+                const { eps2 } = computeTidalDeformation(b, bodies);
+                return eps2;
+            }), 0);
+
+            document.getElementById('timeMetric').textContent = (currentTime / YEAR_S).toFixed(2);
+            document.getElementById('energyMetric').textContent = energy.toExponential(2);
+            document.getElementById('energyChangeMetric').textContent = energyChange.toFixed(2);
+            document.getElementById('angularMomentumMetric').textContent = L.toExponential(2);
+            document.getElementById('maxDeformMetric').textContent = maxDeform.toFixed(4);
+            document.getElementById('stepsMetric').textContent = stepCount;
+
+            // FPS counter
+            frameCount++;
+            fpsTime += performance.now() - lastTime;
+            if (fpsTime >= 1000) {
+                document.getElementById('fpsMetric').textContent = frameCount;
+                frameCount = 0;
+                fpsTime = 0;
+            }
+            lastTime = performance.now();
+
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize
+        setupScenario('binary_circular');
+        animate(performance.now());
+    </script>
+</body>
+</html>

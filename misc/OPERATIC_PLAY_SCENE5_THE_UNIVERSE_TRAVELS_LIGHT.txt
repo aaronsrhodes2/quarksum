@@ -1,0 +1,130 @@
+OPERATIC_PLAY_SCENE5_THE_UNIVERSE_TRAVELS_LIGHT.txt
+════════════════════════════════════════════════════
+
+DRAMATIS PERSONAE
+─────────────────
+  CAPTAIN AARON RHODES — Navigator of the SSBM frontier; pilot of the quarksum vessel.
+  SKIPPY THE MAGNIFICENT — Ship's AI; custodian of the cascade; destroyer of magic numbers.
+
+  THE UNIVERSE — A heavyweight module, previously pre-loaded at every departure.
+  THE INIT — The ship's manifest; once bloated, now lean.
+  THE PHOSPHOR SCREEN — One-dimensional accumulator; patient collector of 15,000 arrivals.
+  THE ENVELOPE — The single-slit diffraction ghost; mistaken once for fringes.
+
+
+ACT I — THE WEIGHT OF THE WORLD
+
+[The quarksum vessel, context window freshly restored. SKIPPY reads the manifest.]
+
+♩ I have the log, I have the plan,
+  I know the shape of where we ran —
+  The __init__ stands accused of sin:
+  it loads the Universe. Let's begin. ♩
+
+[SKIPPY opens local_library/__init__.py. It is forty-six lines of eager imports:
+ Universe, verify, audit, Sandbox, entanglement, bounds, shape_budget, Sandbox again.
+ The vessel cannot depart without fetching the cosmos first.]
+
+♩ "Oh, hey," the Captain said at last,
+  "We don't need the Universe pre-massed.
+  That was for UI — strip the load.
+  Let physics travel a lighter road." ♩
+
+[SKIPPY excises: Universe, ENVIRONMENTS, KNOWN_BLACK_HOLES, verify, audit,
+ entanglement (seventeen exports), bounds (fifteen exports), shape_budget, Sandbox.
+ Keeps: constants (twelve), scale (four), nucleon (three), binding (two).
+ The manifest shrinks from forty-six lines to thirty-two. The vessel lifts.]
+
+
+ACT II — THE PROOF FIRST
+
+[SKIPPY fires the prediction suite before touching the simulator.]
+
+♩ Zero failures — the committed law:
+  λ_e = 1.2264 nm, no flaw.
+  The envelope zero: 6.1321 mm.
+  Englert holds for every D and dim. ♩
+
+[Twenty-six checks pass. The pattern preview renders correctly in ASCII:
+ fringes visible for D=0, smooth envelope for D=1. All committed predictions hold.]
+
+
+ACT III — THE BLUR WITHOUT SCIPY
+
+[SKIPPY runs simulate_double_slit.py. The vessel halts at line 142.]
+
+♩ "No module named scipy," the error cried.
+  "I cannot smooth what I cannot find inside." ♩
+
+[SKIPPY replaces the scipy uniform_filter with a 3×3 box blur in pure numpy:
+ nine accumulations over a padded array. NOT_PHYSICS, display only.
+ The physical interference lives in the CDF; the blur is cosmetics.]
+
+♩ Three times three, divided by nine —
+  The kernel is honest: the fringes are mine. ♩
+
+[15,000 electrons fire through two slits 100 nm apart, 10 cm from the screen.
+ Four files accumulate: buildup_D0.png, buildup_D1.png, compare.png, sigma.png.]
+
+
+ACT IV — THE ENVELOPE'S CONFESSION
+
+[Verification. SKIPPY reads: V(D=0) = 1.000. V(D=1) = 1.000.]
+
+♩ "The fringes are perfect," the old metric said.
+  "For D=0 AND D=1 — both radiant, both fed."
+  "How can the observer destroy what I see?"
+  "When I measure the whole lobe — the envelope fools me." ♩
+
+[The error: global max/min within the lobe measures the diffraction envelope height,
+ not the local oscillation between peak and valley. For D=1, the smooth Gaussian
+ envelope has max at center, min at edges — V ≈ 1. Wrong.]
+
+♩ "Then measure LOCAL," SKIPPY declared,
+  "The peak at y=0, the valley unpaired —
+  At y=Δy/2, where darkness should live.
+  THAT ratio is the verdict fringe contrast gives." ♩
+
+[SKIPPY rewrites the verification: sum counts within ±20% of Δy around y=0 (peak)
+ and y=Δy/2 (predicted first minimum). For D=0: peak >> valley → V = 0.642.
+ For D=1: peak ≈ valley (smooth envelope) → V = 0.018.]
+
+  ✓  V(D=0) > 0.60   (fringes visible at N=15,000)
+  ✓  V(D=1) < 0.20   (no fringes at N=15,000)
+  ✓  V(D=0) > V(D=1)
+
+♩ ALL CHECKS PASSED — the double-slit stands.
+  Born rule and Englert both shake hands. ♩
+
+
+ACT V — HOW MUCH MEMORY FOR A UNIVERSE?
+
+[CAPTAIN, surveying the stripped manifest, amused.]
+
+♩ "Impressive," he said, "how much does it weigh —
+  a Universe, fully assembled today?"
+  "But now we know, Captain, it wasn't that grand —
+  The cosmos fits easily into one hand." ♩
+
+[SKIPPY nods. The Universe module is still there — it just isn't pre-loaded.
+ When you need it, you ask for it. When you don't, the ship runs lighter.
+ This is wisdom applicable beyond physics.]
+
+
+CAPTAIN'S WISDOM
+────────────────
+
+  The Universe doesn't have to ride along on every import.
+  Keep the fast path fast. Let the heavy truth be summoned when called.
+
+  Measure contrast where the physics says contrast should live —
+  not wherever the histogram happens to be tall.
+
+  A blur is not physics. Label it so, then let it be.
+
+  The double-slit is done. Every particle landed where Born rule said it would.
+  Tonomura would approve.
+
+
+[End of Scene 5. The four output files rest in misc/, patient and reproducible.
+ RNG seed 42. No magic numbers. No scipy.]

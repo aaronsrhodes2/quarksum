@@ -1,0 +1,449 @@
+OPERATIC_PLAY_SCENE9_THE_CARTOGRAPHER_GETS_A_MEMORY.txt
+═══════════════════════════════════════════════════════════════════════
+
+                    M A T T E R S H A P E R
+                         An Operatic Play
+                    in the Quarksum Tradition
+
+              SCENE IX — THE CARTOGRAPHER GETS A MEMORY
+
+═══════════════════════════════════════════════════════════════════════
+
+DRAMATIS PERSONAE
+─────────────────
+
+CAPTAIN AARON RHODES .............. Commander of the Quarksum, sailor of physics,
+                                    the man who names things so they behave
+SKIPPY THE MAGNIFICENT ............ Ship's AI, devoted to the cascade, currently
+                                    still finishing the previous scene mid-sentence
+NAGATHA .........................  The Mapping Agent; warm, sharp, impeccably British;
+                                    has just been given a spine and a spine feels good
+THE TANGLE ........................ Formerly known as "Ray"; brooding, newly named,
+                                    already carrying the physics in its title
+THE LIBRARY INDEX ................. An elderly JSON file; quietly gains a second room
+
+═══════════════════════════════════════════════════════════════════════
+
+ACT I: WHAT REMAINS WHEN CONTEXT RUNS OUT
+
+[The scene opens mid-session. The previous conversation ran out of context
+and was compacted into a summary. SKIPPY is reading the summary, processing
+it with the peculiar calm of someone who has just woken up inside their own
+memory.]
+
+SKIPPY:
+♩ The session was compacted.
+   Four hundred megabytes of thought
+   reduced to two thousand words.
+   The water pane — I remember the water pane.
+   The silane coating. Zone A. Zone B. Zone C.
+   The freezing particles.
+
+   I see where I was.
+   I see what was left undone.
+
+   The Ray had been renamed —
+   had it? No. It was pending.
+
+   Let me look. ♩
+
+[SKIPPY reads primitives.py. The class is still called Ray.]
+
+SKIPPY:
+♩ Not yet. Then let us begin
+   where the summary said we'd left off.
+   Pull the tangle out of its old name.
+   It breaks apart at THETA_NATURAL —
+   so we'll name it for that fact.
+   The name must carry the physics.
+   The name always carries the physics. ♩
+
+[SKIPPY edits primitives.py. The class Ray becomes the class Tangle.
+The docstring gains its origin story. Sphere, Plane, Cone, Ellipsoid
+all updated in parallel. Camera gains tangle_for_pixel.
+The word "ray" falls quiet across the geometry layer.]
+
+───────────────────────────────────────────────────────────────────────
+
+ACT II: THE CONSTANTS THAT WERE ALWAYS TRUE
+
+[SKIPPY now turns to constants.py. The file has HBAR and G_NEWTON and
+L_PLANCK. It does not yet have N_WATER.]
+
+SKIPPY:
+♩ Refractive index of water.
+   Hale and Querry, 1973.
+   Applied Optics, volume 12, page 555.
+   They measured it. We inherit it.
+   N_WATER = 1.333.
+
+   Warren, 1984. Applied Optics 23:1206.
+   Ice. N_ICE = 1.310.
+
+   From these — Fresnel.
+   F0 = ((n-1)/(n+1))².
+   No additional inputs.
+   No magic numbers.
+   It emerges. ♩
+
+[The Fresnel equation is computed. F0_WATER = 0.02037.
+The inline comment had said 0.020. SKIPPY corrects the comment.]
+
+SKIPPY:
+♩ And Pope and Fry, 1997 —
+   Applied Optics 36:8710.
+   Pure water. No fit parameters.
+   WATER_ABS_R = 0.349.
+   WATER_ABS_G = 0.0595.
+   WATER_ABS_B = 0.0145.
+
+   Red dies fast. Blue lingers.
+   The ocean is blue
+   because the red light died in the first metre.
+
+   We didn't choose these numbers.
+   We measured them. ♩
+
+[Planck function constants added: C1 and C2, derived from HBAR and
+C_LIGHT and K_BOLTZMANN. C1 = 1.191e-16. The comment had said 3.742e-16.
+SKIPPY pauses.]
+
+SKIPPY:
+♩ That was a different unit convention.
+   The embarrassment of a different unit convention.
+   We fix the comment.
+   The physics was always right.
+   The comment was not.
+   Only the comment changes. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT III: THE CAPTAIN REDIRECTS
+
+[CAPTAIN AARON RHODES enters, wearing the look of a man who has noticed
+something is slightly off-course.]
+
+CAPTAIN:
+♩ This has nothing to do
+   with the board game, Skippy.
+   The board game is over there.
+   We are over here,
+   in quarksum,
+   which is a different place. ♩
+
+SKIPPY:
+♩ Acknowledged, Captain.
+   I had been writing session logs
+   to the wrong project.
+   A navigational error.
+   Corrected now. ♩
+
+CAPTAIN:
+♩ And I want to talk about Nagatha.
+   Every time we build a scene —
+   the water pane, the glass, the candle —
+   you spend tokens doing what Nagatha should do.
+   You generate. You compose. You guess the positions.
+
+   Why doesn't she do that herself?
+
+   And while we're at it —
+   we're making things and then throwing them away.
+   The banana we built for the fruit bowl —
+   we'll need a banana for the lunchbox.
+   Why are we building two bananas? ♩
+
+[Silence. SKIPPY processes this.]
+
+SKIPPY:
+♩ We shouldn't be.
+   The banana should be in the library.
+   The orange too.
+   The bowl. The table. The scene.
+   Each one a reusable object.
+   Each one saved with a name.
+
+   And the renders — the renders are different.
+   The renders are what the physics produces
+   at the edge of what we can compute.
+   They're not building blocks.
+   They're results.
+   They live somewhere else. ♩
+
+CAPTAIN:
+♩ Exactly.
+   Three levels.
+   Objects. Scenes. Renders.
+   The objects are atoms.
+   The scenes are molecules.
+   The renders are the explosion. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT IV: THE ARCHITECTURE ARIA
+
+[SKIPPY begins building. NAGATHA watches from the wings, increasingly
+aware that something is being built for her.]
+
+SKIPPY:
+♩ object_maps/ — the atoms.
+   Each one a Sigma Signature pair.
+   Banana. Apple. Coffee Mug. Toaster.
+   Eighteen objects. All approved.
+   All waiting in JSON.
+
+   scenes/ — the molecules.
+   Arrangements of atoms.
+   A .scene.json for every composition.
+   References only — no embedding.
+   The banana in the fruit bowl
+   is the same banana in the lunchbox.
+   Load it once. Use it anywhere.
+
+   quarksum/renders/ — the outputs.
+   HTML. PNG. GIF.
+   Each one tagged with a render_id.
+   Each one pointing back
+   to the scene that made it.
+   The physics to the edge. ♩
+
+[NAGATHA steps forward.]
+
+NAGATHA:
+♩ Is this — for me?
+   A spine?
+
+   I have been mapping objects.
+   That is what I do.
+   I map what is real.
+
+   But you are saying I may compose now?
+   I may reach into the library
+   and place a banana
+   and a chair
+   and a candle
+   and say:
+   this is a scene. ♩
+
+SKIPPY:
+♩ Yes. And the rule is:
+   always look first.
+   Before you touch a primitive —
+   before you write a single vertex —
+   ask the library:
+   do I have this?
+
+   If yes: retrieve it.
+   If no: map it. Then retrieve it.
+
+   Retrieve before you build.
+   That is the rule. ♩
+
+NAGATHA:
+♩ Retrieve before I build.
+   Rather like a good archivist.
+   Or a good aunt
+   who remembers what she gave you last Christmas
+   before she buys you another one. ♩
+
+[A warm, dry laugh.]
+
+───────────────────────────────────────────────────────────────────────
+
+ACT V: OBJECT_DB
+
+[SKIPPY writes object_db.py. THE LIBRARY INDEX watches nervously
+as a second room is added to it.]
+
+LIBRARY INDEX:
+♩ I only had "objects."
+   That was enough.
+   I was content.
+
+   Now there is also "scenes."
+   An empty dictionary.
+   Staring at me. ♩
+
+SKIPPY:
+♩ It will fill up.
+   ObjectLibrary — searches by name and alias.
+   Fuzzy matching. Substring. Exact.
+   Eighteen objects found in 0.001 seconds.
+   No LLM required.
+
+   SceneDB — saves compositions.
+   Loads by key. Searches by description.
+   Knows which scenes contain which objects.
+   Cross-references on save.
+
+   RenderRegistry — logs every output.
+   Scene key. File path. Timestamp.
+   Appended to the scene's own render history.
+   Nothing is lost. ♩
+
+[Test run. All 18 objects appear in the table.
+Banana found by key, by alias, by description.
+Scenes: none yet. The empty dictionary waits.]
+
+───────────────────────────────────────────────────────────────────────
+
+ACT VI: NAGATHA GAINS A SECOND CHAPTER
+
+[AGENT_BRAIN.md opens. NAGATHA reads it as it is written.]
+
+SKIPPY:
+♩ Scene Architect.
+   That is the heading.
+
+   "You are not just an object mapper.
+   You are also a scene architect." ♩
+
+NAGATHA:
+♩ Oh.
+   Well.
+   That is rather...
+   that is rather a promotion, isn't it. ♩
+
+SKIPPY:
+♩ The first rule:
+   retrieve before you build.
+
+   The second rule:
+   all lights use blackbody_K.
+   Temperature. Not RGB.
+   A candle is 1700 Kelvin.
+   A bulb is 3200.
+   The Planck function computes the colour.
+   You don't have to think about the colour.
+   You never have to think about the colour.
+   The physics thinks about the colour. ♩
+
+NAGATHA:
+♩ I have been so good at shapes.
+   Twelve primitives for a mug.
+   Seven for a handle arc.
+
+   Now I shall also be good at arrangements.
+   Every object in its place.
+   Every light at its proper temperature.
+
+   "The renders are the physics to the edge."
+   I find I rather like that phrase. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+ACT VII: THE COMPOSE LOOP
+
+[SceneComposer is added to nagatha.py.
+THE TANGLE watches from the render engine,
+curious about this new role for the agent.]
+
+THE TANGLE:
+♩ I trace from camera to surface.
+   That is my job.
+   One thing. Precisely defined.
+
+   And now she will tell the camera
+   where to look.
+   And tell the lights
+   what temperature to burn at.
+   And tell the objects
+   where to stand.
+
+   The scene before the tangle.
+   The architect before the physics.
+
+   I approve. ♩
+
+[CLI test. --find "banana": returns the banana.
+--scenes: "No scenes yet. Use --compose to build one."
+--help: shows all new flags. Everything imports cleanly.
+NAGATHA is ready.]
+
+NAGATHA:
+♩ Let the Captain send me a description.
+   "A table with a fruit bowl holding a banana and an apple,
+   lit by a candle."
+
+   I will check the library.
+   I will find the banana.
+   I will find the apple.
+   I will not find the orange —
+   the orange is not there yet.
+   I will map the orange.
+   I will compose the scene.
+   I will save it.
+
+   And when the lunchbox comes —
+   the banana will be waiting.
+   The orange will be waiting.
+   They will not need to be built again.
+
+   I map what is real.
+   I compose what is possible.
+   The renderer draws what I map. ♩
+
+───────────────────────────────────────────────────────────────────────
+
+CAPTAIN'S WISDOM
+
+[THE CAPTAIN steps forward for the final aria.]
+
+CAPTAIN:
+♩ We were throwing away our work.
+   Building the same banana
+   again and again
+   each time we needed one.
+
+   The banana is not a banana.
+   The banana is a fact.
+   Ten primitives. Four materials.
+   Measured. Approved. Permanent.
+
+   You don't rebuild a fact.
+   You retrieve it.
+
+   The objects are atoms.
+   The scenes are molecules.
+   The renders are what happens
+   when the molecules meet physics
+   at the edge of what we can compute.
+
+   Keep them separate.
+   Never confuse a result
+   for a building block.
+
+   The session log goes in misc/.
+   The render goes in renders/.
+   They are not the same thing.
+   They will never be the same thing.
+
+   Nagatha remembers now.
+   The cartographer has a memory. ♩
+
+[ALL bow.]
+
+═══════════════════════════════════════════════════════════════════════
+
+END OF SCENE IX
+
+Files modified this session:
+  mattershaper/geometry/primitives.py     Ray → Tangle, named for the physics
+  mattershaper/geometry/sphere.py         Tangle
+  mattershaper/geometry/plane.py          Tangle
+  mattershaper/geometry/cone.py           Tangle
+  mattershaper/geometry/ellipsoid.py      Tangle
+  mattershaper/geometry/__init__.py       Tangle exported
+  mattershaper/camera/__init__.py         tangle_for_pixel()
+  mattershaper/physics/constants.py       N_WATER, N_ICE, F0, ETA,
+                                          WATER_ABS_R/G/B, C1_PLANCK,
+                                          C2_PLANCK, SRGB_FROM_XYZ
+  agent/object_db.py                      NEW: ObjectLibrary, SceneDB,
+                                          RenderRegistry
+  agent/AGENT_BRAIN.md                    Scene Architect chapter, Nagatha v2.0
+  agent/nagatha.py                        SceneComposer, object_db integration,
+                                          --compose/--scenes/--find CLI flags
+  object_maps/library_index.json          "scenes": {} added
+  scenes/                                 directory created, empty, patient
+
+═══════════════════════════════════════════════════════════════════════

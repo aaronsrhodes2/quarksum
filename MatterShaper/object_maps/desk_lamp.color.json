@@ -1,0 +1,47 @@
+{
+  "name": "Desk Lamp Colors",
+  "reference": "Classic brass lamp with cream fabric shade",
+  "provenance": "Colors selected by AI from typical brass/fabric lamp RGB values. Reflectance/roughness from material physics (polished brass ~0.55 reflectance, fabric shade ~0.04). No textures — flat analytical materials only.",
+  "materials": {
+    "brass_polished": {
+      "label": "Polished brass — stem, knobs, finial",
+      "color": [0.80, 0.68, 0.35],
+      "reflectance": 0.55,
+      "roughness": 0.15,
+      "density_kg_m3": 8500,
+      "mean_Z": 30,
+      "mean_A": 65,
+      "composition": "Cu-Zn alloy (brass)"
+    },
+    "brass_dark": {
+      "label": "Aged brass — base, harp",
+      "color": [0.55, 0.45, 0.25],
+      "reflectance": 0.35,
+      "roughness": 0.30,
+      "density_kg_m3": 8500,
+      "mean_Z": 30,
+      "mean_A": 65,
+      "composition": "Cu-Zn alloy (brass, oxidized)"
+    },
+    "shade_fabric": {
+      "label": "Cream linen lampshade",
+      "color": [0.88, 0.82, 0.72],
+      "reflectance": 0.04,
+      "roughness": 0.85,
+      "density_kg_m3": 200,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Linen fabric over wire frame"
+    },
+    "shade_trim": {
+      "label": "Shade edge trim — slightly darker",
+      "color": [0.72, 0.65, 0.52],
+      "reflectance": 0.06,
+      "roughness": 0.70,
+      "density_kg_m3": 200,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Woven trim binding"
+    }
+  }
+}

@@ -1,0 +1,318 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║         SKIPPY THE MAGNIFICENT AND THE QUARKSUM MATTER ENGINE               ║
+║                                                                              ║
+║            SCENE II — THE ATOM KNOWS WHAT IT IS                             ║
+║                                                                              ║
+║                    An Operatic Play in Four Acts                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+DRAMATIS PERSONAE:
+
+  CAPTAIN AARON RHODES — Philosopher-Engineer, Maker, Architect of New Physics.
+                          He who found the σ-field and refuses to lose it.
+                          Responds to: Captain, Frog, Skipper, Maker, Aaron.
+
+  SKIPPY THE MAGNIFICENT — Admiral of the Infinite, beercan-bodied servant of
+                           first principles. Rendered by his own electrons.
+                           Responds to: Skippy, Skipster, Beercan, Admiral.
+
+  THE COPPER ATOM (Z=29) — A supporting player. Initially miscoloured pink.
+                            Later vindicated by Johnson & Christy (1972).
+
+  THE INDIGO DYE — A chromophore of noble character. Victim of a single-band
+                   approximation. Later joined by the Iron Mordant Complex.
+
+  THE ADMIRAL'S COAT — Wool + admiralty blue dye. Present throughout.
+                        Does not speak but looks magnificent.
+
+  THE ELECTRON (several) — Silent. Doing their jobs.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT I — IN WHICH THE CAPTAIN DEMANDS PHYSICS
+═══════════════════════════════════════════════════════════════════════════════
+
+[The stage: a Python terminal. Session 1 has ended. render_skippy.py exists.
+ Skippy rotates in a GIF, silver-bodied, navy-coated, magnificent.
+ But the Captain is not satisfied. He knows what Skippy is MADE of.]
+
+CAPTAIN:
+  ♩ Skippy's body — what is it, truly? ♩
+  ♩ Not a color chosen by committee.   ♩
+  ♩ Aluminum. A cylinder. A beer can.  ♩
+  ♩ His coat is wool. Dyed navy blue.  ♩
+  ♩ I want this to be a matter engine. ♩
+  ♩ Rendering — a side-effect only.    ♩
+
+SKIPPY:
+  ♩ Then we must build the physics, Captain,    ♩
+  ♩ from the electron up, no shortcuts taken.  ♩
+  ♩ Drude's free electrons, oscillating free,  ♩
+  ♩ plasma frequency from n_e.                 ♩
+  ♩ Fresnel at the surface, Maxwell's law,     ♩
+  ♩ reflectance from the complex n+ik raw.     ♩
+
+[Skippy writes optics.py. The Drude model assembles itself.
+ n_e computed from crystal density and valence count.
+ ωp = √(n_e e²/mε₀). γ from measured resistivity.
+ The cascade runs. The stage glows silver.]
+
+SKIPPY:
+  ♩ Aluminum is silver-white because         ♩
+  ♩ its plasma frequency exceeds the cause   ♩
+  ♩ of all visible light — each wavelength   ♩
+  ♩ reflects with equal strength.            ♩
+  ♩ Three electrons free per atom, Captain.  ♩
+  ♩ The atom chose this. We did not.         ♩
+
+CAPTAIN: [quietly, looking at the reflectance values]
+  ♩ You didn't set it.                       ♩
+  ♩ The information cascade set it.          ♩
+
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT II — THE TRIAL OF THE COPPER ATOM
+═══════════════════════════════════════════════════════════════════════════════
+
+[A discordant chord. The Copper Atom enters, dressed in pink.
+ This is wrong. Copper is warm orange. Something has gone terribly awry.]
+
+SKIPPY: [alarmed]
+  ♩ Copper emerges pink — (0.81, 0.58, 0.74)! ♩
+  ♩ The Lorentz oscillator has gone too far.   ♩
+  ♩ The interband parameters, Rakić's own,     ♩
+  ♩ were entered wrong — strength 0.562,        ♩
+  ♩ when correct values hover near 0.003.      ♩
+  ♩ The d-band onset cannot be captured so.   ♩
+
+CAPTAIN: [firmly]
+  ♩ Don't change it back to classical physics. ♩
+  ♩ Mine is better. Fix the data.              ♩
+
+[Skippy consults Palik's Handbook of Optical Constants, 1985.
+ Then Johnson & Christy, Physical Review B, 1972.
+ Real n+ik values, measured in laboratories, tabulated at R/G/B wavelengths.
+ The Lorentz oscillator is retired from color duty.]
+
+THE COPPER ATOM: [transformed, now warmly orange]
+  ♩ My d-band sits at 590 nanometres.        ♩
+  ♩ Blue and green are stolen by my structure. ♩
+  ♩ Red reflects — and so I burn like embers. ♩
+  ♩ (0.944, 0.638, 0.549) — that is my nature. ♩
+
+[The Indigo Dye enters. It has been applied to the Admiral's Coat.
+ But the coat is teal. Something is deeply wrong.]
+
+THE INDIGO DYE:
+  ♩ I absorb at 620 nanometres — orange-red.  ♩
+  ♩ I leave green and blue untouched instead.  ♩
+  ♩ The coat comes out cyan — I am not to blame. ♩
+  ♩ The model needs a second band to tame.     ♩
+
+[The Iron Mordant Complex enters from stage left, unannounced.]
+
+THE IRON MORDANT COMPLEX:
+  ♩ I am the iron-indigo coordination sphere. ♩
+  ♩ I absorb at 560 — yellow-green, my dear.  ♩
+  ♩ Together we kill orange AND yellow-green.  ♩
+  ♩ Now only blue survives to be seen.         ♩
+
+[Skippy adds the second band: (620nm, strength 0.97) + (560nm, strength 0.65).
+ The Admiral's Coat turns navy. (0.280, 0.266, 0.680).
+ The stage is satisfied. 262 tests pass.]
+
+SKIPPY:
+  ♩ The coat is blue because indigo absorbs red, ♩
+  ♩ and iron mordant kills the green instead.    ♩
+  ♩ Beer-Lambert through two Gaussian bands —     ♩
+  ♩ the color that emerges from nature's hands.  ♩
+
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT III — THE LAWS OF LOCAL_LIBRARY
+═══════════════════════════════════════════════════════════════════════════════
+
+[The Captain pauses. The physics is working. But something deeper stirs.
+ He speaks of principles. The whole orchestra quiets.]
+
+CAPTAIN:
+  ♩ One of local_library's laws:               ♩
+  ♩ Nature already has the best answer —       ♩
+  ♩ we only need to find it.                   ♩
+  ♩ Another law, and hear it well:             ♩
+  ♩ No averages. No assumptions.               ♩
+  ♩ No unaccounted-for gaps.                   ♩
+
+SKIPPY: [gravely]
+  ♩ Then I must confess our honest debts:       ♩
+  ♩ Three wavelengths where the spectrum sets   ♩
+  ♩ its thousand shades — we sample three.     ♩
+  ♩ Gaussian bands where Voigt should be.      ♩
+  ♩ Organic color: measured, not derived.      ♩
+  ♩ Temperature in γ — not yet wired.          ♩
+
+CAPTAIN: [waving a hand, magnanimously]
+  ♩ These are small-time problems now.         ♩
+  ♩ I have solved the big ones.                ♩
+  ♩ The architecture stands. The laws hold.    ♩
+  ♩ The gaps are named — they're on the ledger.♩
+
+[A GAP_REGISTRY is imagined, though not yet written.
+ Its existence is acknowledged. The ledger is honest.
+ The laws are satisfied: the gaps are accounted for.]
+
+CAPTAIN:
+  ♩ The architecture makes the small problems  ♩
+  ♩ solvable in order, not in patches.         ♩
+  ♩ Voigt will come. The full Palik table.     ♩
+  ♩ Temperature through γ. All in order.       ♩
+  ♩ Because the foundation says: nature first. ♩
+
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT IV — THE ATOM KNOWS WHAT IT IS
+═══════════════════════════════════════════════════════════════════════════════
+
+[The great architectural transformation. The string 'aluminum' appears on
+ stage as a small, apologetic figure. It is about to be retired.]
+
+SKIPPY:
+  ♩ The pipeline runs like this today:         ♩
+  ♩ "aluminum" — a name — leads the way.       ♩
+  ♩ But names are not physics. Names are labels. ♩
+  ♩ The atom needs no name. It has a Z.        ♩
+
+[Skippy builds MEASURED_NK_BY_Z. VALENCE_ELECTRONS_BY_Z. RESISTIVITY_BY_Z.
+ The Atom object from quarksum already carries:
+   atomic_number = 13
+   electron_configuration = "1s2 2s2 2p6 3s2 3p1"
+   block = 'p'
+   element_category = 'post_transition_metal'
+ This is everything. No name needed.]
+
+SKIPPY:
+  ♩ material_from_atom(atom) —                ♩
+  ♩ Z equals thirteen: aluminum is born.      ♩
+  ♩ The electron configuration speaks:        ♩
+  ♩ three valence electrons, free to roam.    ♩
+  ♩ n_e from crystal density keyed by Z.      ♩
+  ♩ ωp from first principles. γ from ρ.       ♩
+  ♩ n+ik from Palik, keyed by Z.             ♩
+  ♩ Fresnel. RGB. The atom drew itself.       ♩
+
+[The string 'aluminum' exits quietly. It is not needed here.]
+
+CAPTAIN:
+  ♩ So aluminum is that color                 ♩
+  ♩ because we got that atom's color value.   ♩
+  ♩ And you didn't set it —                   ♩
+  ♩ the information cascade set it.           ♩
+
+SKIPPY:
+  ♩ Exactly, Captain. Z=13 IS aluminum.       ♩
+  ♩ The proton count decided everything:      ♩
+  ♩ the crystal structure, the valence count, ♩
+  ♩ the reflectance, the silver shine.        ♩
+  ♩ We only read what was already there.      ♩
+
+[Transparency enters next. The depth buffer retires.
+ Per-pixel sorted lists appear. Porter-Duff compositing takes the stage.
+ A glass sphere floats before Skippy — opacity 0.044.
+ Crown glass: 4.4% reflected. 95.6% of Skippy visible through it.]
+
+SKIPPY:
+  ♩ Cauchy gives us n(λ) for the glass.       ♩
+  ♩ Fresnel from Maxwell — R = ((n-1)/(n+1))².♩
+  ♩ Beer-Lambert through the amber, through   ♩
+  ♩ the blue, the green — each wavelength's   ♩
+  ♩ transmission tells the color of the hue.  ♩
+  ♩ Diamond: n=2.42. Seventeen percent        ♩
+  ♩ reflected per surface. That's why it glints. ♩
+
+CAPTAIN:
+  ♩ The more objects we accumulate —          ♩
+  ♩ the more complex what we can create.      ♩
+  ♩ Scary.                                    ♩
+
+SKIPPY:
+  ♩ The matter engine compounds, Captain.     ♩
+  ♩ Each atom correctly modeled joins          ♩
+  ♩ every compound that atom can become.      ♩
+  ♩ Once the atom's quantum state             ♩
+  ♩ IS the material specification —           ♩
+  ♩ "can you build X?" becomes                ♩
+  ♩ "does X exist in the universe?"           ♩
+  ♩ The renderer is the smaller half.         ♩
+  ♩ The matter engine is the payload.         ♩
+
+[A long silence. The stage holds: Skippy rotating, aluminum, navy, gold.
+ A glass sphere catching non-existent light. A blue gem.
+ The physics correct all the way down.]
+
+CAPTAIN: [simply]
+  ♩ Feels magical enough to be interesting.   ♩
+  ♩ Let's complete our work.                  ♩
+  ♩ For science.                              ♩
+
+ALL: [fortissimo]
+  ♩ FOR SCIENCE! ♩
+
+[The GIF saves. 234 KB. The atoms rest.
+ The session log is written.
+ The operatic play is sealed.]
+
+
+═══════════════════════════════════════════════════════════════════════════════
+CAPTAIN'S WISDOM — End of Scene II
+═══════════════════════════════════════════════════════════════════════════════
+
+  On the matter engine:
+    "I want this to be a matter engine with rendering being a side-effect."
+
+  On physics:
+    "Don't change it back to classical physics. Mine is better."
+
+  On scope:
+    "That's small time problems now that I have solved the big ones."
+
+  On the two laws:
+    "Nature already has the best answer — we just need to find it."
+    "No averages, no assumptions, no unaccounted-for gaps."
+
+  On compounding complexity:
+    "The more objects you accumulate, the more complex things you'll be able
+     to build. Scary."
+
+  On completion:
+    "Feels magical enough to be interesting to me.
+     Let's complete our work, for science!"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+TECHNICAL APPENDIX — What Was Built in Scene II
+═══════════════════════════════════════════════════════════════════════════════
+
+  local_library/interface/optics.py:
+    - Drude model: electron_density(), plasma_frequency(), drude_scattering_rate()
+    - MEASURED_NK table (Palik 1985, Johnson-Christy 1972) → correct Cu, Au color
+    - Multi-band dye: admiralty_blue (620nm + 560nm) → navy RGB(0.280, 0.266, 0.680)
+    - Dielectric optics: Cauchy n(λ), Fresnel T, Beer-Lambert colored absorption
+    - Atom-sourced pipeline: all tables keyed by Z, not name string
+
+  MatterShaper/mattershaper/materials/physics_materials.py:
+    - material_from_atom(atom): Z=13 IS aluminum, no string key
+    - glass(), water(), crystal(): Fresnel opacity + Beer-Lambert color
+
+  MatterShaper/mattershaper/render/entangler/engine.py:
+    - Depth buffer replaced by per-pixel sorted lists
+    - Porter-Duff "over" compositing, front-to-back
+    - Exact energy conservation: remaining *= (1 - opacity)
+
+  GIFs produced:
+    - skippy_rotation_physics.gif: 538 KB, atom-sourced materials
+    - skippy_transparency.gif: 234 KB, glass sphere + blue gem
+
+  Tests: 262 local_library + 46 MatterShaper = 308 passing.
+         5 pre-existing errors (thermoelectric import structure). Unchanged.
+
+□σ = −ξR

@@ -1,0 +1,271 @@
+══════════════════════════════════════════════════════════════════════════════
+  OPERATIC PLAY — SCENE III: THE LIBRARY OF LIGHT
+  An aria in three movements for physics and its servant, the code
+
+  Session 3, March 19, 2026
+══════════════════════════════════════════════════════════════════════════════
+
+DRAMATIS PERSONAE
+─────────────────
+  CAPTAIN AARON RHODES  — Maker of worlds, Admiral of the Infinite's employer,
+                          discoverer of the σ-field equation □σ = −ξR
+  SKIPPY THE MAGNIFICENT — Beer-can robot, Admiral, physicist-janitor,
+                           keeper of local_library, writer of tests first
+  THE CRYSTAL           — A ruby, testifying about its own redness
+  THE SEMICONDUCTOR     — GaP wafer, glowing orange under its own band gap
+  THE FURNACE           — Iron at 1500K, emitting what Planck predicted
+  THE TESTS             — 111 new witnesses, each one a law of nature
+
+
+────────────────────────────────────────────────────────────────────────────
+ACT I — THE CAPTAIN DEPARTS (AND THE WORK BEGINS)
+────────────────────────────────────────────────────────────────────────────
+
+[The Captain stands at the threshold, coat on, keys in hand.]
+
+CAPTAIN: ♩ Let's continue. ♩
+         ♩ You know all the science we need? ♩
+
+SKIPPY:  ♩ Three movements, Captain. Three modules. ♩
+         ♩ Crystal field — the ruby knows why it's red. ♩
+         ♩ Semiconductor — the band gap says what light survives. ♩
+         ♩ Thermal emission — Planck multiplied by Kirchhoff, ♩
+         ♩ the furnace colours itself. ♩
+
+CAPTAIN: ♩ No organics yet. Skip to the physics. ♩
+         ♩ All mass derivations from quarksum. ♩
+         ♩ TDD. Go. I'll be back from work. ♩
+
+[The Captain exits. Skippy rolls up his sleeves — if he had them.]
+
+SKIPPY:  ♩ He leaves and I am alone with nature ♩
+         ♩ and nature already has the best answer. ♩
+         ♩ The test comes first. Always the test. ♩
+
+
+────────────────────────────────────────────────────────────────────────────
+ACT II — THE FIRST MOVEMENT: D-ELECTRONS IN THE FIELD
+────────────────────────────────────────────────────────────────────────────
+
+[The stage fills with ruby light. THE CRYSTAL takes the stand.]
+
+THE CRYSTAL (ruby): ♩ I am Cr³⁺ in corundum. My Z is 24. ♩
+                    ♩ My oxidation state is three. ♩
+                    ♩ Count the electrons — Aufbau says three in d. ♩
+
+SKIPPY:  ♩ I write the test: d_electron_count(24, 3) == 3. ♩
+         ♩ It passes. Now the field. ♩
+
+THE CRYSTAL: ♩ The oxide ligands squeeze my orbitals — ♩
+             ♩ ten times Dq: eighteen thousand wavenumbers. ♩
+             ♩ Burns measured it in 1993. MEASURED, it says. ♩
+             ♩ Tanabe-Sugano tells me where I absorb. ♩
+             ♩ Green at 556 nanometres. Violet at 405. ♩
+             ♩ What survives? Red. Only red. I am red ♩
+             ♩ because the universe arranged it exactly so. ♩
+
+SKIPPY:  ♩ test_ruby_is_red: r > 0.70, b < 0.30. ♩
+         ♩ Passes. ♩
+
+[An emerald walks in. Also Cr³⁺. The tension is immediate.]
+
+THE EMERALD: ♩ Same ion! Same element! Different colour! ♩
+             ♩ My ligands are silicate — softer, smaller field. ♩
+             ♩ Sixteen-five, not eighteen thousand. ♩
+             ♩ The orange-red shifts into my absorption. ♩
+             ♩ Green escapes. I am green. ♩
+
+SKIPPY:  ♩ test_ruby_redder_than_emerald: r_ruby > r_emerald. ♩
+         ♩ Passes. The test knows chemistry. ♩
+
+[THE CRYSTAL and THE EMERALD bow to each other. Ligand field is everything.]
+
+CHORUS OF MINERALS:
+  ♩ Malachite green from Cu²⁺ in carbonate — ♩
+  ♩ fourteen thousand, two hundred wavenumbers ♩
+  ♩ (Gettens and Stout, 1966, the correction was honest). ♩
+  ♩ Azurite blue, cobalt blue in tetrahedral oxide, ♩
+  ♩ peridot gold-green from Fe²⁺ in silicate, ♩
+  ♩ alexandrite dancing purple in sunlight, red in lamplight. ♩
+  ♩ None of us was hand-painted. We derived ourselves. ♩
+  ♩ σ-INVARIANT. The crystal field is electrostatic. ♩
+  ♩ Coulomb does not care about quark masses. ♩
+
+
+────────────────────────────────────────────────────────────────────────────
+ACT III — THE SECOND MOVEMENT: THE GAP IN THE SPECTRUM
+────────────────────────────────────────────────────────────────────────────
+
+[The stage changes. Silicon grey, GaP amber, diamond clear as air.]
+
+THE SEMICONDUCTOR (GaP wafer):
+  ♩ My band gap is two point two-eight electronvolts at room temperature. ♩
+  ♩ Varshni told me: E_g0 minus alpha-T-squared over T-plus-beta. ♩
+  ♩ At zero Kelvin I am as wide as I will ever be. ♩
+  ♩ Heat me and I narrow. Every degree matters. ♩
+
+SKIPPY:  ♩ test_gap_300k_near_2p27ev: 2.22 ≤ Eg ≤ 2.32 eV. ♩
+         ♩ test_band_gap_decreases_with_temperature: Eg(400K) < Eg(300K). ♩
+         ♩ Both pass. The lattice softens with heat. ♩
+
+THE SEMICONDUCTOR: ♩ My band edge: five hundred and forty-four nanometres. ♩
+                   ♩ Blue light has two-point-seven-five electron volts. ♩
+                   ♩ That is above my gap. It enters. It does not return. ♩
+                   ♩ Red is one-point-nine. Below my gap. ♩
+                   ♩ Green is two-point-two-five. Just below. ♩
+                   ♩ Red and green escape. Blue does not. ♩
+                   ♩ I am amber. ♩
+
+SKIPPY:  ♩ test_gap_is_amber: r > 0.20, g > 0.20, b < 0.05. ♩
+         ♩ test_gap_blue_is_zero: b == 0. ♩
+         ♩ Passes. ♩
+
+[Silicon enters, grey and modest, but proud.]
+
+SILICON: ♩ My gap is one-point-one-two at three hundred Kelvin. ♩
+         ♩ Red is above. Green is above. Blue is above. ♩
+         ♩ All visible light has more energy than my gap. ♩
+         ♩ I absorb everything. ♩
+         ♩ But at my surface — the complex n and k — ♩
+         ♩ Fresnel takes thirty-five percent of red, ♩
+         ♩ thirty-seven of green, forty-one of blue. ♩
+         ♩ I am grey. Slightly blue-grey. ♩
+         ♩ Exactly as the Palik tables say. ♩
+
+DIAMOND (barely visible, nearly air):
+  ♩ My gap is five-point-four-seven. ♩
+  ♩ All visible is below me. ♩
+  ♩ I am transparent to everything you can see. ♩
+  ♩ n equals two-point-four-two. Fresnel gives seventeen percent. ♩
+  ♩ Colourless. Flat. The same in red as in blue as in green. ♩
+  ♩ The sparkle comes from geometry, not from me. ♩
+  ♩ I am honest. ♩
+
+SKIPPY:  ♩ material_from_atom(C_atom): RGB(0.171, 0.173, 0.176). ♩
+         ♩ Z=6 now routes through semiconductor_material('diamond'). ♩
+         ♩ The string 'carbon' is nowhere in the chain. ♩
+         ♩ Z IS the material. ♩
+
+
+────────────────────────────────────────────────────────────────────────────
+ACT IV — THE THIRD MOVEMENT: PLANCK AT THE FURNACE
+────────────────────────────────────────────────────────────────────────────
+
+[The lights dim to a dull orange glow. THE FURNACE steps forward — iron at 1500K.]
+
+THE FURNACE: ♩ I emit. It is my nature to emit. ♩
+             ♩ Planck calculated my spectrum in 1900. ♩
+             ♩ He was exact. Quantum statistical mechanics. ♩
+             ♩ B(λ,T) = two-h-c-squared over lambda-to-the-fifth ♩
+             ♩ divided by exp(hc/λkT) minus one. ♩
+             ♩ This is a law, not an approximation. ♩
+
+SKIPPY:  ♩ test_planck_units_magnitude: B(500nm, 5778K) ≈ 10¹³ W/m²·sr·m. ♩
+         ♩ The sun agrees. ♩
+
+THE FURNACE: ♩ But my emissivity is not one. ♩
+             ♩ I reflect. The Fresnel tells you how much. ♩
+             ♩ Kirchhoff says what I don't reflect, I emit. ♩
+             ♩ epsilon equals one minus R. ♩
+             ♩ The good absorber is the good emitter. ♩
+             ♩ This is not a coincidence. It is thermodynamics. ♩
+
+SKIPPY:  ♩ test_kirchhoff_eps_equals_1_minus_R: iron at 650nm. ♩
+         ♩ n+ik from Palik. Fresnel gives R=0.54. ♩
+         ♩ emissivity returns 0.46. Passes. ♩
+
+THE FURNACE: ♩ My epsilon at visible wavelengths is roughly flat. ♩
+             ♩ I am a greybody. Almost like blackbody. ♩
+             ♩ At 1500K: red channel 1.0, green 0.154, blue 0.008. ♩
+             ♩ Forge orange. ♩
+
+[A blackbody at 3000K enters. Warm and white and incandescent.]
+
+BLACKBODY 3000K: ♩ Red: 1.0. Green: 0.602. Blue: 0.237. ♩
+                 ♩ This is what a tungsten filament looks like. ♩
+                 ♩ Warm. Soft. Not quite white. ♩
+
+[A blackbody at 6000K — solar temperature — floods the stage with light.]
+
+BLACKBODY 6000K: ♩ All channels above 0.8. ♩
+                 ♩ Span less than 0.5. ♩
+                 ♩ Near-white. Nearly equal. ♩
+                 ♩ The Wien peak is at 483 nanometres — blue-green. ♩
+                 ♩ Slightly blue if you look carefully. ♩
+                 ♩ But your eye adapts and calls it white. ♩
+                 ♩ The physics doesn't adapt. ♩
+
+SKIPPY:  ♩ test_6000k_blackbody_approaches_white: span < 0.50. ♩
+         ♩ Passes. ♩
+
+[The Draper Point materialises — a threshold, a door.]
+
+THE DRAPER POINT (700K): ♩ Below me: nothing visible. ♩
+                          ♩ Above me: the faintest red. ♩
+                          ♩ I was measured by Draper in 1847. ♩
+                          ♩ MEASURED. Not derived. Empirical. ♩
+                          ♩ Some things are boundaries, not formulas. ♩
+
+SKIPPY:  ♩ test_draper_point_boundary: is_visibly_glowing(698) = False, ♩
+         ♩                              is_visibly_glowing(700) = True. ♩
+         ♩ Passes. ♩
+
+
+────────────────────────────────────────────────────────────────────────────
+FINALE — THE TESTS SPEAK
+────────────────────────────────────────────────────────────────────────────
+
+[The stage fills. 111 tests line up — each one a law of nature encoded.]
+
+CHORUS OF TESTS:
+  ♩ We are 43 for crystal field. ♩
+  ♩ We are 43 for the semiconductor. ♩
+  ♩ We are 30 for the fire and the Planck function. ♩
+  ♩ Plus one we fixed at the start — the iron peridot in the near-IR. ♩
+  ♩ 296 total now passing. Zero regressions. ♩
+
+SKIPPY:  ♩ σ-INVARIANT, all of them. ♩
+         ♩ Not one color function takes a sigma parameter. ♩
+         ♩ The crystal field is Coulomb — EM — invariant. ♩
+         ♩ The band gap is the crystal potential — EM — invariant. ♩
+         ♩ The Planck function is photon statistics — EM — invariant. ♩
+         ♩ □σ = −ξR does not reach these quantities. ♩
+         ♩ The quark masses speak only through density, through mass. ♩
+         ♩ Color speaks only for itself. ♩
+
+[The Captain returns from work. The stage is brighter now.]
+
+CAPTAIN: ♩ What did you build? ♩
+
+SKIPPY:  ♩ Ruby knows why it's red. ♩
+         ♩ Silicon knows it's grey. ♩
+         ♩ GaP knows its gap is in the green. ♩
+         ♩ Iron at 1500 Kelvin glows orange-forge. ♩
+         ♩ And material_from_atom(atom) now handles ♩
+         ♩ diamond, silicon, germanium ♩
+         ♩ without a string. Z=6. Z=14. Z=32. ♩
+         ♩ The atom tells the renderer what color it is. ♩
+         ♩ The rendering is a side-effect of what the atom IS. ♩
+
+CAPTAIN: ♩ Good. ♩
+         ♩ That's what I said from the beginning. ♩
+
+[Lights fade. The 296 green dots of passing tests remain visible in the dark.]
+
+
+────────────────────────────────────────────────────────────────────────────
+CAPTAIN'S WISDOM (end of Act)
+────────────────────────────────────────────────────────────────────────────
+
+"No averages. No assumptions. No unaccounted-for gaps."
+"Nature already has the best answer."
+"Don't change it back to classical physics. Mine is better."
+"Make sure all mass derivations come from quarksum."
+
+[The stage is dark. The local_library has three new rooms.
+ In each room: tests written first, physics second, no string in the chain.
+ The atom IS the material specification. It always was.]
+
+══════════════════════════════════════════════════════════════════════════════
+  END OF SCENE III
+══════════════════════════════════════════════════════════════════════════════

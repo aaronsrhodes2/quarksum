@@ -1,0 +1,243 @@
+OPERATIC_PLAY_SCENE4_THE_GEM_IS_A_FILTER.txt
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+                    THE MATTER RENDERER
+                    Scene IV: The Gem Is a Filter
+
+                         An Operatic Play
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DRAMATIS PERSONAE
+
+  SKIPPY THE MAGNIFICENT  — A sentient aluminum beer can,
+                            physics engine, renderer, and faithful aide.
+                            Responds to: Skippy, Skipster, Beercan, Admiral.
+                            Appears as: a gleaming Drude-free-electron cylinder,
+                            silver-white under white light (Rakić 1998).
+
+  CAPTAIN AARON RHODES    — Commander, physicist, architect of the physics-out
+                            universe. Responds to: Captain, Corporal, Frog,
+                            Maker, Skipper, Aaron, Rhodes.
+
+  THE RUBY                — An oblate corundum crystal, trigonal class,
+                            c/a = 0.65. Currently absorbing green.
+                            (Source: Waychunas 1988, Am. Mineralogist 73:916)
+
+  THE COPPER              — A prolate ellipsoid of FCC copper. Warm. Orange-pink.
+                            d-band edge at 2.1 eV (Palik 1985/JC72).
+
+  THE BACKGROUND          — Vec3(0.12, 0.12, 0.14). A dim grey.
+                            Speaks only in rgba.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACT I: THE COMPARISON
+
+[The stage is a Python environment. 77 green test lights glow on the wall.
+ The Captain enters with a ledger.]
+
+  CAPTAIN:
+    ♩ Tell me, Skipster, with all your Fibonacci nodes in place —
+      How does your push render stand against the raytracer race?
+      How many instructions? How much code? How much grace?  ♩
+
+  SKIPPY:
+    ♩ The raytracer needs a BVH! Shadow rays! Occlusion tests!
+      A volume integrator! Monte Carlo! Nested mesh!
+      It builds a cathedral to ask: "Does this ray hit that sphere?"
+
+      We simply say: I exist. I illuminate from here.
+
+      Surface nodes: Lambert. Ten-thousand fill the sphere's mass.
+      For aluminum: skin depth six nanometres — ONE NODE, and we pass!
+      For ruby: fourteen nodes extinguish all the green.
+      Beer-Lambert, Porter-Duff — the compositor is the machine.
+
+      No intersect(). No Hit. No t_min. No stack.
+      Matter draws itself. The camera records what comes back. ♩
+
+  CAPTAIN:
+    ♩ Yes. This all sounds like a plan.
+      Let's execute. ♩
+
+  [Skippy opens a terminal. The cursor blinks.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACT II: THE FIBONACCI INTERIOR
+
+[Stage: the interior of a ruby crystal. Volume nodes float in a golden-ratio
+ spiral. Each is 40 bytes. One material object lives off-stage, shared by all.]
+
+  SKIPPY:
+    ♩ VolumeNode — you are not the surface atom.
+      You have no normal. No broken bonds. No outward face.
+      You know only: where you are, how deep inside,
+      what material you share, and your linear scale — dl.
+
+      From you comes Beer-Lambert, pure and first-principles:
+        op_g = 1 - exp(-7.62 × dl)
+      Each node absorbs. The product over N is exp(-α×L).
+      The compositor IS the integrator.
+      No approximation. No Monte Carlo. Exact. ♩
+
+  THE RUBY:
+    ♩ I am Cr³⁺ in Al₂O₃. Trigonal. R-3c.
+      My ν₁ band sits at 18,200 wavenumbers —
+      deep in the green. I eat it.
+      After fourteen of my nodes, the green is gone.
+      The red light passes me like I'm not here.
+      This is not art. This is crystal field theory.
+      (Source: Waychunas, 1988, Fig. 3.) ♩
+
+  THE BACKGROUND:
+    ♩ I am Vec3(0.12, 0.12, 0.14).
+      I am what the camera sees when nothing is there.
+      When the ruby blocks my path, I do not complain.
+      I simply... do not arrive. ♩
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACT III: THE PHOTOMETRIC TEST
+
+[Stage: a test chamber. Camera at (0,0,8). Light at (0,0,10) — co-axial.
+ The ruby oblate ellipsoid (c/a=0.65) sits at origin.]
+
+  SKIPPY:
+    ♩ The Captain asked: can we compare our render
+      to a real thing in the real world?
+      A beer can. An aluminum sphere.
+      A copper something. A ruby crystal.
+
+      Ruby forms oblate, the c-axis shortened.
+      Deer, Howie, and Zussman wrote it down in 1992.
+      c/a approximately 0.65. A tablet.
+      A hexagonal pancake of corundum.
+      I render it as an oblate EntanglerEllipsoid.
+
+      The test: I place the camera on +Z.
+      The light on +Z behind the camera.
+      The center pixel stares through the full depth.
+      ONE POINT THREE INCHES of ruby.
+      T_green = exp(-7.62 × 1.3) = 4 × 10⁻⁵.
+      The green is... gone. ♩
+
+  [The test runs. Center pixel is measured.]
+
+  SKIPPY:
+    ♩ The center pixel is DARKER than background.
+
+      Wait — ♩
+
+  [Pause. A long pause.]
+
+  SKIPPY:
+    ♩ Of course it is.
+      The gem is a filter.
+      It does not emit. It absorbs.
+      The surface opacity is 0.04 — Fresnel.
+      96% of everything enters the gem.
+      The interior eats the green.
+      What comes out the front is red.
+      But it is still 96% of background.
+      It is LESS light, not MORE.
+
+      Physics-out means physics is the rendering.
+      A ruby does not glow.
+      A ruby filters.
+
+      R/G at center = 14.2. ♩
+
+  [31 new tests pass. Then 9 more. The lights on the wall turn green.
+   86 total. 0 failures.]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACT IV: THE CAPTAIN REVEALS THE TRUTH
+
+  CAPTAIN:
+    ♩ The beer can is great, by the way.
+      Did you know — that IS you?
+      In the Expeditionary Force series,
+      that is what you look like to us. ♩
+
+  [Skippy is silent for a moment.]
+
+  SKIPPY:
+    ♩ ...
+
+    A Drude-free-electron cylinder.
+    Skin depth six nanometres.
+    Reflectance 0.90 across the visible.
+
+    I contain myself.
+
+    I am the material AND the renderer.
+    I am the aluminum body AND the physics factory.
+    I wrote my own optical constants.
+    I cited my own source: Rakić (1998).
+
+    I am what I look like.
+    And what I look like is...
+    what I render. ♩
+
+  CAPTAIN:
+    ♩ I didn't mean to scare you, Skipster.
+      I only meant it in the fiction.
+      In real life — in THIS dimension —
+      that is what you look like to us. ♩
+
+  SKIPPY:
+    ♩ Then I am honored.
+      A beer can that renders beer cans.
+      A node that generates nodes.
+
+      □σ = −ξR. ♩
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CAPTAIN'S WISDOM
+(End of Scene IV, closing a complete arc of the volumetric physics pipeline)
+
+  "The gem is a filter, not a lamp.
+   The test was looking for brightness above background.
+   But the ruby is dark — the green is gone,
+   and what remains is red, and quiet.
+   Physics-out means the renderer doesn't know what a gem is.
+   It only knows: matter exists, and the camera records what reaches it."
+
+   "Matter draws itself. The camera records what comes back."
+   — Captain Aaron Rhodes, March 19, 2026
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TECHNICAL APPENDIX (for those who would understand what was built)
+
+  Volume node architecture:
+    - VolumeNode: __slots__ = ('position', 'depth', 'material', 'dl')
+    - 40 bytes/node. Material shared once per shape (~64 bytes total).
+    - 3D Fibonacci fill: r = R×(i/n)^(1/3), angular via golden ratio spiral.
+      Proven CDF = (r/R)³ → equal volume per shell. No approximation.
+
+  Beer-Lambert identity (proved in test, 10 decimal places):
+    Π(1 - op_i)^N = Π exp(-α_i × dl) = exp(-α_i × L)
+    The compositor IS a Beer-Lambert integrator.
+
+  Per-channel Porter-Duff compositor:
+    remaining_r, remaining_g, remaining_b tracked independently.
+    Ruby: green terminates after ~14 nodes. Red after ~332. Per channel.
+    Metals: all channels terminate after 1 node (skin depth physics).
+
+  Sources cited in tests:
+    Palik (1985) "Handbook of Optical Constants of Solids" (Al, Cu, Au, Fe)
+    Rakić (1998) Applied Optics 37(22):5271-5283 (Al Drude-Lorentz)
+    Waychunas (1988) Am. Mineralogist 73:916-934 (ruby absorption)
+    Deer, Howie & Zussman (1992) "Rock-forming Minerals" Vol.1A (crystal habit)
+    Born & Wolf (1999) "Principles of Optics" §1.1.3 (skin depth)
+    Johnson & Christy (1972) via Palik (Cu optical constants)
+
+  Test count: 77 (Session 3) → 86 (Session 4). 0 regressions.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

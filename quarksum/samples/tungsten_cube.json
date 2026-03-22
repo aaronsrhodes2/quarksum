@@ -1,0 +1,16 @@
+{
+  "name": "Tungsten Cube (1 cm³)",
+  "description": "A 1 cm³ cube of pure tungsten (W, Z=74). Density 19.25 g/cm³, highest melting point of any element (3695 K), used in radiation shielding and high-temperature tooling. Study heavy-element nuclear structure and extreme binding energy.",
+  "stated_mass_kg": 0.01925,
+  "children": [
+    {
+      "materials": [
+        {
+          "material": "Tungsten",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 100.0
+    }
+  ]
+}

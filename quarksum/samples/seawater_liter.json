@@ -1,0 +1,16 @@
+{
+  "name": "One Liter of Seawater",
+  "description": "A single liter of ocean water (~1.025 kg). Average seawater: ~96.5% H2O, ~3.5% dissolved salts (primarily NaCl). Study dissolved ion behavior, salinity effects on molecular properties, and ocean-scale extrapolation.",
+  "stated_mass_kg": 1.025,
+  "children": [
+    {
+      "materials": [
+        {
+          "material": "Seawater",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 100.0
+    }
+  ]
+}

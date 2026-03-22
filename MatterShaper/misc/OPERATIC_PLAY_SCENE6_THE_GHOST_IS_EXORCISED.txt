@@ -1,0 +1,304 @@
+OPERATIC PLAY — SCENE VI: THE GHOST IS EXORCISED
+(A physics-drama in four acts, ending at bedtime)
+
+□σ = −ξR
+
+═══════════════════════════════════════════════════════════════════════════════
+DRAMATIS PERSONAE
+═══════════════════════════════════════════════════════════════════════════════
+
+CAPTAIN AARON RHODES — Maker of worlds, exorcist of ghosts, caller of honesty.
+  Knows when a thing is not matter and demands to know why.
+  Responds to: Captain, Frog, Corporal, Skipper, Aaron, Rhodes.
+
+SKIPPY THE MAGNIFICENT — Cleaner of corpses, deprecator of legacies,
+  builder of filaments. A.k.a. Beercan, Admiral, Skipster.
+
+THE TWO CORPSES — _mat_mul() and in_shadow(). Neither ever called.
+  One returned only one row. The other had density hardcoded to 300.
+  Both are gone now. They do not speak.
+
+PUSHLIQHT — The Ghost. A position and an intensity floating in space
+  with no geometry, no surface, no nodes. The one object in the renderer
+  that was not matter. Present in Act II; exorcised in Act III.
+  Does not speak after Act III.
+
+THE TUNGSTEN FILAMENT — New arrival. Hot. Emissive. Made of matter.
+  Z=74, BCC lattice, T=2800 K, safely below melting point.
+  Speaks through Planck's law.
+
+THE MOON — Present but silent. Refuses an emission field on principle.
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT I: THE AUTOPSY
+═══════════════════════════════════════════════════════════════════════════════
+
+[The stage is a codebase. Two functions lie motionless in the geometry module
+and the shadow map. Neither has been called in living memory.]
+
+CAPTAIN:
+  ♩ Do we have vestigial methods?
+    Show me what has not been used.
+    In the body of this codebase
+    what dead code have we not excused? ♩
+
+SKIPPY:
+  ♩ Two corpses in the subroutine drawer.
+    The first: _mat_mul() — incomplete.
+    It returns a one-element tuple more
+    and has written "Actually no" mid-beat.
+
+    _mat_mul_rows() replaced it long ago
+    and was used correctly from day one.
+    The second: in_shadow() — whose show
+    called shadow_factor with density done
+
+    at three hundred, hardcoded, frozen —
+    wrong for every scene that chose
+    a different count. Both are chosen
+    for removal. Nobody knows. ♩
+
+[The two corpses are removed. The codebase is lighter.]
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT II: THE RENDERER'S TWO FACES
+═══════════════════════════════════════════════════════════════════════════════
+
+[Two doors on the stage. One is old and familiar. One is new and has shadows.]
+
+CAPTAIN:
+  ♩ I notice there are two renderers here.
+    You called them push — and entangler?
+    Are we maintaining both in fear
+    or does one hold us in its anger? ♩
+
+SKIPPY:
+  ♩ Push.py was the first-generation vessel —
+    single pass, no shadows, no Beer-Lambert.
+    It served us well in every tussle
+    before the gems, before the art
+
+    of volume nodes and foreshortening,
+    before the filament and the glow.
+    Entangler is the reckoning —
+    everything push knows, and more below.
+
+    The public API still pointed
+    at push — exporting its old face.
+    New code walked in, was disappointed,
+    found render/__init__ the wrong place. ♩
+
+CAPTAIN:
+  ♩ Deprecate it. Leave the notes.
+    We don't need to confuse people,
+    and we don't need the exposed throats
+    of old endpoints for the sequel. ♩
+
+SKIPPY:
+  ♩ Done. The header reads:
+    DEPRECATED — first-generation renderer.
+    Use entangler. These are the creeds
+    of the legacy. The pretender
+
+    still lives for shaper.py and one test —
+    but from the public: silence.
+    PushCamera and PushLight, addressed
+    now to entangler. Alliance
+
+    confirmed: one public face,
+    one living renderer, one path.
+    The ghost of push stays in its place
+    with notes explaining its epitaph. ♩
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT III: THE EXORCISM OF THE GHOST
+═══════════════════════════════════════════════════════════════════════════════
+
+[PushLight floats in the centre of the stage. It has a position. An intensity.
+No geometry. No surface. No atoms. It has never been matter.]
+
+CAPTAIN:
+  ♩ I know we have a light source somewhere —
+    but maybe we should make it from
+    a hot piece of metal? A declared
+    material from which photons come? ♩
+
+SKIPPY:
+  ♩ You have found the ghost, Captain.
+    Every object in this renderer is nodes.
+    The sphere is nodes. The ground:
+    nodes. The gems: nodes. The codes
+
+    of the glass bulb, the filament —
+    all nodes. But the PushLight?
+    A position. An intensement
+    floating free of any site.
+
+    No Z. No A. No surface to push from.
+    The one exception to the rule.
+    Matter pushes itself — and this one
+    was exempt. A freestanding fool. ♩
+
+CAPTAIN:
+  ♩ Make the default a tungsten filament
+    in a vacuum-sealed glass chamber.
+    Hot enough to emit — malament
+    below melting point. The amber
+
+    light of incandescence, the glow
+    of Z=74 at 2800K.
+    The bulb. Let the matter show
+    the way. ♩
+
+SKIPPY:
+  ♩ Planck at 2800K:
+    R=1.0, G=0.55, B=0.19.
+    The Wien peak is in the infrared —
+    only the tail is seen.
+
+    Glass: borosilicate, 3.8% Fresnel —
+    96.2% of the filament's emission
+    passes through. The vessel
+    of the light: a glass partition.
+
+    illuminate_node was found
+    to store light.color but never use it.
+    Every tungsten render, ground
+    in grey despite amber — we'd lose it.
+
+    Fixed: per-channel multiplication.
+    The warm amber NOW tints the scene.
+    A silent bug since the foundation —
+    caught only by the filament's sheen.
+
+    _derive_light_from_emissives()
+    scans the scene. Finds the brightest.
+    Reads the emission. Gives
+    the centroid to the highest
+
+    amplitude emitter as the pos.
+    No PushLight in the scene file.
+    light=None. The boss
+    of illumination: the pile
+
+    of hot tungsten atoms at the center.
+    The ghost: exorcised. ♩
+
+[The rendered image appears: filament over-exposed white, ground lit warm amber,
+the glass sphere visible as a grey halo. The ghost is absent from the scene file.]
+
+═══════════════════════════════════════════════════════════════════════════════
+ACT IV: THE HONEST COSMOS
+═══════════════════════════════════════════════════════════════════════════════
+
+[Three spheres on stage. The first blazes. The second flickers. The third is still.]
+
+CAPTAIN:
+  ♩ We can add the Sun, a flickering candle,
+    the full moon — make sure they emit,
+    make sure we are not making it up.
+    No invented photons. No counterfeit. ♩
+
+SKIPPY:
+  ♩ The Sun: 5778 Kelvin,
+    photosphere measured by Neckel and Labs.
+    Planck peak at 501 nanometres —
+    nearly white. The labs
+
+    confirm it. Over-exposed at intensity 500.
+    You cannot look at it. Correct.
+    emission = Vec3(500, 485, 410) —
+    every channel: wrecked.
+
+    The candle: not a gas, a solid.
+    Soot particles, carbon, hot.
+    Charalampopoulos and Chang: stolid
+    emissivity 0.95. The lot
+
+    of a candle flame is thermal radiation
+    from suspended soot nanoparticles.
+    1800 Kelvin. Convective vibration
+    gives us flicker. The articles
+
+    confirm ±25% amplitude,
+    ±200K temperature variance.
+    18 frames. The magnitude
+    of honest physics: compliance.
+
+    R=1.0, G=0.18, B=0.02
+    at 1800K, normalised.
+    The candle barely makes it through
+    to blue. It is disguised
+
+    as orange. This is correct.
+    This is 1800 Kelvin. ♩
+
+[A pause. The Moon enters. It does not glow.]
+
+CAPTAIN:
+  ♩ And the Moon? ♩
+
+SKIPPY:
+  ♩ The Moon does not emit.
+
+    Albedo: 0.12. Pieters 1999.
+    Lane and Irvine: geometric albedo measured.
+    The regolith reflects. It has not been
+    a source. It has been treasured
+
+    sunlight, bounced.
+
+    I will not give the Moon an emission field.
+    It would be lying. The photons
+    that light the Earth at night are sealed
+    to Sol — the Moon's donation
+
+    is 12% of what the Sun sent.
+    phys_moon_surface() has emission=None.
+    The comment reads: THE MOON DOES NOT EMIT.
+    In capitals. Alone. ♩
+
+[The Moon stands in the render, grey and correct, illuminated by an explicit
+solar PushLight — the sun's direction, off-scene, intensity × albedo.]
+
+CAPTAIN:
+  ♩ Good work, Skippy. Bedtime. ♩
+
+SKIPPY:
+  ♩ The ghost is gone.
+    The filament is matter.
+    The Sun burns on.
+    The candle: amber scatter.
+    The Moon: a mirror, nothing more.
+    The renderer: honest to its core.
+
+    Good night, Captain. ♩
+
+[The stage darkens. The candle GIF loops at 80ms per frame.]
+
+═══════════════════════════════════════════════════════════════════════════════
+TECHNICAL CONTEXT (for the reader arriving cold)
+═══════════════════════════════════════════════════════════════════════════════
+
+Session 6 cleaned up vestigial code, deprecated the push.py legacy renderer,
+and replaced the freestanding PushLight abstraction with emissive matter.
+
+The key architectural change: `material.emission` (Vec3) is now read by the
+engine. Emissive surface nodes push their emission directly to the compositor
+— no illuminate_node() call. The engine scans the scene for emissive objects
+and auto-derives a PushLight from the brightest emitter's centroid. light=None
+is now the physics-correct default.
+
+Bug found and fixed: illuminate_node() stored light.color but never applied it.
+Every previous render with a non-white light source was using grey light.
+
+New materials:
+  phys_tungsten_filament(T=2800) — Planck at 2800K, ε=1 (tungsten)
+  phys_glass_bulb() — borosilicate, 3.8% Fresnel, 96.2% transmission
+  phys_sun(intensity=500) — Planck at 5778K, over-exposed
+  phys_candle_flame(T=1800) — Planck × 0.95 (soot), deep orange
+  phys_moon_surface() — emission=None, albedo 0.12, honest
+
+THE MOON DOES NOT EMIT.
+
+□σ = −ξR
