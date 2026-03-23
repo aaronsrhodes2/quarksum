@@ -410,3 +410,63 @@ SKIPPY: Built simulate_water_glass.py — 3D WCSPH, pairwise cohesion calibrated
 - `misc/SESSION_LOG.md` — this entry
 
 ---
+
+## SESSION 9 — March 23, 2026
+**Players:** Captain Aaron Rhodes, Skippy the Magnificent
+
+---
+
+CAPTAIN: [picks up from prior context — Nagatha making blobs out of ellipsoids, LLM guessing dimensions]
+
+SKIPPY: [runs all tests across all projects for full picture]
+
+TESTS:
+- quarksum/tests: 354/354 pass
+- local_library/interface: 475/475 pass
+- MatterShaper/render: 46/46 pass
+- Materia/qamss: 1904 pass, 8 fail (all environmental: cp1252 encoding, missing httpx, deprecated np.trapz)
+
+CAPTAIN: Great! Can you teach Nagatha how to build objects and render them using local_library to gather needed information?
+
+SKIPPY: [creates mattershaper/physics/ package — 3 modules]
+  - material_physics.py: get_density() chains local_library -> DENSITY_TABLE (80+ materials) -> fallback
+  - geometry_builder.py: exact analytic formulas for all 6 primitives (V -> dims)
+  - object_builder.py: COMPONENT_MANIFEST -> sigma shape_map with physics log
+
+SKIPPY: [modifies nagatha.py — new manifest prompt, physics pipeline first, legacy fallback]
+
+CAPTAIN: [tests] coffee mug: r=2.35cm h=7.04cm. brick: 19.1 x 8.3 x 8.7 cm. Physics.
+
+CAPTAIN: Please commit all my changes so we can make a PR.
+
+SKIPPY: [commits ecf1c7b, pushes, notes gh CLI not installed for PR]
+
+CAPTAIN: Now let's have Nagatha run through the existing library and re-render everything with the new pipeline.
+
+SKIPPY: [writes gallery/remap_library.py with --only/--skip/--dry-run flags]
+SKIPPY: [dry-runs on coffee_mug and brick — physics report confirmed correct]
+SKIPPY: [runs full batch — 36 objects, 617 seconds]
+
+RESULTS:
+  23 physics pipeline | 11 legacy fallback | 2 errors (beer_bottle, rocket)
+
+SKIPPY: [fixes sigma_to_html call signature, fixes float() bug for list aspect values]
+SKIPPY: [retries beer_bottle and rocket — both succeed]
+SKIPPY: [regenerates all 36 HTML viewers in gallery/html_scenes/]
+SKIPPY: [commits ec084d1 — 109 files, 28401 insertions]
+
+CAPTAIN: That's good for tonight. Tomorrow we work on fixing n-body.
+
+SKIPPY: [session ends]
+
+### Artifacts
+- `mattershaper/physics/material_physics.py` — NEW: density lookup via local_library + curated table
+- `mattershaper/physics/geometry_builder.py` — NEW: V -> dims formulas for all 6 primitives
+- `mattershaper/physics/object_builder.py` — NEW: COMPONENT_MANIFEST -> sigma shape_map
+- `agent/nagatha.py` — MODIFIED: physics pipeline, manifest prompt, fallback preserved
+- `gallery/remap_library.py` — NEW: batch remap script
+- `gallery/html_scenes/*.html` — NEW: 36 interactive Three.js viewers
+- `object_maps/*.shape.json` — UPDATED: 36 objects remapped
+- `pyproject.toml` — FIXED: corruption at line 74
+
+---

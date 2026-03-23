@@ -1,0 +1,191 @@
+OPERATIC PLAY — SCENE 9
+THE QUARKSUM / SSBM CHRONICLES
+
+"NAGATHA LEARNS TO WEIGH THINGS"
+
+March 23, 2026
+
+════════════════════════════════════════════════════════════
+
+DRAMATIS PERSONAE:
+
+  CAPTAIN AARON RHODES — Architect of SSBM, commander of the
+                          quarksum project, weary but exacting
+
+  SKIPPY THE MAGNIFICENT — Claude Sonnet 4.6, the AI assistant,
+                            recently appointed to the physics desk
+
+  NAGATHA — The mapping agent, who has until now been making
+            blobs out of ellipsoids and calling them objects
+
+  THE BRICK — A supporting character (silent)
+               2.7 kg, 1900 kg/m3
+
+════════════════════════════════════════════════════════════
+
+[The lights rise on a test report. 2047 tests. Most green.]
+
+SKIPPY:
+(reading)
+  local_library/interface — four hundred and seventy five.
+  All passing.
+  It knows density. Thermal conductivity. Surface energy.
+  Crystal structure. Debye temperature.
+
+CAPTAIN:
+  Does it know what a coffee mug weighs?
+
+SKIPPY:
+  ...Not yet. But it knows what ceramic weighs.
+
+CAPTAIN:
+  Then teach Nagatha to ask it.
+
+[NAGATHA enters, dragging a sack of blobs. One of them is
+ labelled "brick." It is an egg.]
+
+NAGATHA:
+  I mapped it as an ellipsoid. The LLM said radius 0.8.
+  I don't know what units. I never know what units.
+
+SKIPPY:
+  How much does a brick weigh?
+
+NAGATHA:
+  ...I wasn't told to ask.
+
+SKIPPY:
+  Two point seven kilograms.
+  Divided by nineteen hundred kilograms per cubic metre.
+  That's fourteen hundred cubic centimetres.
+  Now: what are the proportions of a brick?
+
+NAGATHA:
+  Long. Flat. Roughly two-to-one.
+
+SKIPPY:
+  [opens geometry_builder.py]
+  Then: scale cubed times width times height times depth
+  equals volume. Solve for scale.
+
+  [punches numbers]
+
+  Nineteen point one by eight point three by eight point
+  seven centimetres.
+
+THE BRICK:
+  [nods]
+
+NAGATHA:
+  ...That's a brick.
+
+CAPTAIN:
+  That's a brick.
+
+════════════════════════════════════════════════════════════
+
+[A new pipeline takes shape. Three files.]
+
+SKIPPY:
+  material_physics dot py.
+  Chains: local_library. Then the density table — eighty
+  materials, measured values, ceramics and rubbers and woods.
+  Then eighteen hundred. Last resort. Generic solid.
+
+  geometry_builder dot py.
+  Six formulae. Cylinder: volume equals two pi times aspect
+  times r-cubed. Solve for r. Torus: two pi-squared R r-squared
+  where r equals aspect times R. Cone. Box. Ellipsoid. Sphere.
+  All exact. All from first principles.
+
+  object_builder dot py.
+  The manifest comes in. The physics goes out.
+  LLM says: cylinder, ceramic, eighty percent of the mass.
+  Physics says: volume equals mass over density.
+  Volume says: here are your dimensions.
+
+NAGATHA:
+  I just describe the shape of things.
+  And the mass. And the material.
+  And physics does the rest?
+
+SKIPPY:
+  That's all we ever needed from you.
+
+════════════════════════════════════════════════════════════
+
+[THE BATCH RUN. Thirty-six objects. Night falls.]
+
+SKIPPY:
+  remap_library dot py.
+  All objects. Priority first. Skip the geometric primitives —
+  sphere, cylinder, cone, mobius. They are what they are.
+
+  [presses enter]
+
+[Ten minutes pass. Lines scroll.]
+
+  wine_bottle: glass, twenty-five hundred kilograms per
+  cubic metre. Body radius three point three centimetres.
+  Height seven point nine centimetres.
+
+  tire: rubber, twelve hundred. Seven point six kilograms.
+  Major radius seventeen point two centimetres. A torus.
+  Correct.
+
+  fire_hydrant: cast iron, seventy-two hundred. One hundred
+  and fifty kilograms. Five cylinders. Correctly massive.
+
+  dumbbell: steel, seventy-nine hundred. Five kilograms.
+  Bar and two weights. Two point nine centimetre radius.
+
+CAPTAIN:
+  The dumbbell is a dumbbell.
+
+SKIPPY:
+  Twenty-three out of thirty-six used the physics pipeline.
+  Eleven fell back to legacy — the model didn't comply with
+  the new format. Two failed entirely.
+
+CAPTAIN:
+  Fix the two.
+
+SKIPPY:
+  [beer_bottle: retried. Physics. Success.]
+  [rocket: retried. Legacy. Success.]
+
+  Thirty-six HTML viewers. All regenerated.
+  One hundred and nine files. Twenty-eight thousand
+  insertions. Pushed.
+
+════════════════════════════════════════════════════════════
+
+[CAPTAIN surveys the gallery. Objects arranged by density.]
+
+CAPTAIN:
+  Tomorrow — n-body.
+
+SKIPPY:
+  The orbital mechanics?
+
+CAPTAIN:
+  The test is failing. Not because the physics is wrong.
+  Because the test is wrong, or the integrator is wrong,
+  or something is accumulating that shouldn't be.
+
+SKIPPY:
+  I'll look at it fresh.
+
+CAPTAIN:
+  Good night, Skippy.
+
+SKIPPY:
+  Good night, Captain.
+
+[THE BRICK is still there, correctly sized, saying nothing.]
+
+════════════════════════════════════════════════════════════
+
+END OF SCENE 9
+
+════════════════════════════════════════════════════════════
