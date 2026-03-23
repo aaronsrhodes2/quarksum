@@ -328,6 +328,24 @@ button.rbtn:hover{{background:#252530;color:#ffd700;}}
       pointer-events:none;user-select:none;line-height:1.6;}}
 #hud span{{color:#888;}}
 
+/* Observer toggle */
+.obs-toggle{{display:flex;gap:0;margin-bottom:8px;}}
+.obs-btn{{flex:1;padding:4px 0;font-size:9px;font-family:inherit;
+          background:#1a1a1e;border:1px solid #333;color:#666;cursor:pointer;
+          letter-spacing:0.5px;transition:all 0.15s;}}
+.obs-btn:first-child{{border-radius:3px 0 0 3px;}}
+.obs-btn:last-child{{border-radius:0 3px 3px 0;border-left:none;}}
+.obs-btn.active{{background:#ffd70022;border-color:#ffd70066;color:#ffd700;}}
+
+/* Light source rows */
+.light-header{{display:flex;align-items:center;gap:6px;margin-bottom:6px;}}
+.light-header .light-label{{font-size:10px;color:#aaa;flex:1;}}
+.light-toggle{{background:none;border:1px solid #333;border-radius:3px;
+               font-size:9px;font-family:inherit;padding:1px 7px;cursor:pointer;
+               transition:all 0.15s;}}
+.light-toggle.on{{color:#ffd700;border-color:#ffd70066;background:#ffd70015;}}
+.light-toggle.off{{color:#444;border-color:#2a2a30;}}
+
 /* Material cards */
 .mat-card{{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid #1e1e24;
            cursor:pointer;transition:background 0.1s;}}
@@ -348,6 +366,7 @@ button.rbtn:hover{{background:#252530;color:#ffd700;}}
 #temp-swatch{{width:100%;height:14px;border-radius:2px;margin-top:5px;
               border:1px solid #333;}}
 #temp-desc{{font-size:9px;color:#555;margin-top:4px;}}
+#time-desc{{font-size:9px;color:#555;margin-top:4px;}}
 
 .stat-row{{font-size:9px;color:#555;display:flex;justify-content:space-between;
            margin-bottom:3px;}}
@@ -367,8 +386,8 @@ button.rbtn:hover{{background:#252530;color:#ffd700;}}
   <canvas id="c"></canvas>
   <div id="hud">
     🎥 <span id="hud-cam">—</span><br>
-    💡 <span id="hud-light">—</span><br>
-    🌡 <span id="hud-temp">300 K</span>
+    🌡 <span id="hud-temp">300 K</span> &nbsp;
+    🕐 <span id="hud-time">13.8 Gyr</span>
   </div>
 </div>
 
@@ -378,84 +397,129 @@ button.rbtn:hover{{background:#252530;color:#ffd700;}}
     <p>{subtitle[:80] if subtitle else ''}</p>
   </div>
 
+  <!-- VIEWPOINT — merged observer/non-observer -->
   <div class="section">
-    <div class="badge" onclick="toggleSection(this)">📷 OBSERVER</div>
+    <div class="badge" onclick="toggleSection(this)">👁 VIEWPOINT</div>
     <div class="section-body">
-    <div class="section-title">Camera</div>
-    <div class="ctrl"><label>θ</label>
-      <input type="range" id="cam-theta" min="-180" max="180" value="30" step="1">
-      <span class="val" id="v-cam-theta">30°</span></div>
-    <div class="ctrl"><label>φ</label>
-      <input type="range" id="cam-phi" min="5" max="85" value="25" step="1">
-      <span class="val" id="v-cam-phi">25°</span></div>
-    <div class="ctrl"><label>r</label>
-      <input type="range" id="cam-dist" min="{cam_min}" max="{cam_max}" value="{cam_default}" step="0.05">
-      <span class="val" id="v-cam-dist">{cam_default}</span></div>
-    <div class="ctrl"><label>fov</label>
-      <input type="range" id="cam-fov" min="20" max="80" value="45" step="1">
-      <span class="val" id="v-cam-fov">45°</span></div>
-    <button class="rbtn" onclick="resetCam()">Reset Camera</button>
+      <div class="obs-toggle">
+        <button class="obs-btn active" id="btn-observer"
+                onclick="setObserver(true)">⚛ OBSERVER</button>
+        <button class="obs-btn" id="btn-nonobs"
+                onclick="setObserver(false)">◌ NON-OBSERVER</button>
+      </div>
+      <div style="font-size:8px;color:#444;margin-bottom:8px;" id="obs-desc">
+        Left-drag orbits you around the object · Shadows active</div>
+      <div class="ctrl">
+        <label style="width:36px">Edge</label>
+        <input type="range" id="cam-edge" min="-20" max="20" value="0" step="0.5">
+        <span class="val" id="v-cam-edge">0°</span>
+      </div>
+      <div class="ctrl"><label>r</label>
+        <input type="range" id="cam-dist" min="{cam_min}" max="{cam_max}" value="{cam_default}" step="0.05">
+        <span class="val" id="v-cam-dist">{cam_default}</span></div>
+      <div class="ctrl"><label>fov</label>
+        <input type="range" id="cam-fov" min="20" max="80" value="45" step="1">
+        <span class="val" id="v-cam-fov">45°</span></div>
+      <button class="rbtn" onclick="resetViewpoint()">Reset Viewpoint</button>
     </div>
   </div>
 
+  <!-- LIGHT BOX -->
   <div class="section">
-    <div class="badge" onclick="toggleSection(this)">📦 NON-OBSERVER</div>
+    <div class="badge" onclick="toggleSection(this)">📦 LIGHT BOX</div>
     <div class="section-body">
-    <div class="section-title">Object Orientation</div>
-    <div class="ctrl"><label>Rx</label>
-      <input type="range" id="obj-rx" min="-180" max="180" value="0" step="1">
-      <span class="val" id="v-obj-rx">0°</span></div>
-    <div class="ctrl"><label>Ry</label>
-      <input type="range" id="obj-ry" min="-180" max="180" value="0" step="1">
-      <span class="val" id="v-obj-ry">0°</span></div>
-    <div class="ctrl"><label>Rz</label>
-      <input type="range" id="obj-rz" min="-180" max="180" value="0" step="1">
-      <span class="val" id="v-obj-rz">0°</span></div>
-    <button class="rbtn" onclick="resetObj()">Reset Object</button>
+      <div class="light-header">
+        <span class="light-label">6-wall diffuse · all directions</span>
+        <button class="light-toggle on" id="tog-box" onclick="toggleLight('box')">ON</button>
+      </div>
+      <div class="ctrl"><label>Iv</label>
+        <input type="range" id="box-int" min="0" max="5" value="1.2" step="0.05">
+        <span class="val" id="v-box-int">1.2</span></div>
     </div>
   </div>
 
+  <!-- CANDLE -->
   <div class="section">
-    <div class="badge" onclick="toggleSection(this)">💡 LIGHT SOURCE</div>
+    <div class="badge" onclick="toggleSection(this)">🕯 CANDLE</div>
     <div class="section-body">
-    <div class="section-title">Key Light</div>
-    <div class="ctrl"><label>θ</label>
-      <input type="range" id="lt-theta" min="-180" max="180" value="45" step="1">
-      <span class="val" id="v-lt-theta">45°</span></div>
-    <div class="ctrl"><label>φ</label>
-      <input type="range" id="lt-phi" min="5" max="85" value="50" step="1">
-      <span class="val" id="v-lt-phi">50°</span></div>
-    <div class="ctrl"><label>r</label>
-      <input type="range" id="lt-dist" min="{cam_min}" max="{cam_max}" value="{round(cam_default*1.5,2)}" step="0.1">
-      <span class="val" id="v-lt-dist">{round(cam_default*1.5,2)}</span></div>
-    <div class="ctrl"><label>Iv</label>
-      <input type="range" id="lt-int" min="0" max="5000" value="800" step="50">
-      <span class="val" id="v-lt-int">800</span></div>
-    <button class="rbtn" onclick="resetLight()">Reset Light</button>
+      <div class="light-header">
+        <span class="light-label">Warm flame · 1900 K</span>
+        <button class="light-toggle on" id="tog-cnd" onclick="toggleLight('cnd')">ON</button>
+      </div>
+      <div class="ctrl"><label>θ</label>
+        <input type="range" id="cnd-theta" min="-180" max="180" value="-60" step="1">
+        <span class="val" id="v-cnd-theta">-60°</span></div>
+      <div class="ctrl"><label>φ</label>
+        <input type="range" id="cnd-phi" min="5" max="85" value="20" step="1">
+        <span class="val" id="v-cnd-phi">20°</span></div>
+      <div class="ctrl"><label>r</label>
+        <input type="range" id="cnd-dist" min="{cam_min}" max="{cam_max}" value="{round(cam_default*1.2,2)}" step="0.1">
+        <span class="val" id="v-cnd-dist">{round(cam_default*1.2,2)}</span></div>
+      <div class="ctrl"><label>Iv</label>
+        <input type="range" id="cnd-int" min="0" max="2000" value="300" step="25">
+        <span class="val" id="v-cnd-int">300</span></div>
     </div>
   </div>
 
+  <!-- TUNGSTEN BULB -->
+  <div class="section">
+    <div class="badge" onclick="toggleSection(this)">💡 TUNGSTEN BULB</div>
+    <div class="section-body">
+      <div class="light-header">
+        <span class="light-label">Hot filament · 2700 K</span>
+        <button class="light-toggle on" id="tog-tng" onclick="toggleLight('tng')">ON</button>
+      </div>
+      <div class="ctrl"><label>θ</label>
+        <input type="range" id="tng-theta" min="-180" max="180" value="45" step="1">
+        <span class="val" id="v-tng-theta">45°</span></div>
+      <div class="ctrl"><label>φ</label>
+        <input type="range" id="tng-phi" min="5" max="85" value="55" step="1">
+        <span class="val" id="v-tng-phi">55°</span></div>
+      <div class="ctrl"><label>r</label>
+        <input type="range" id="tng-dist" min="{cam_min}" max="{cam_max}" value="{round(cam_default*1.5,2)}" step="0.1">
+        <span class="val" id="v-tng-dist">{round(cam_default*1.5,2)}</span></div>
+      <div class="ctrl"><label>Iv</label>
+        <input type="range" id="tng-int" min="0" max="2000" value="400" step="25">
+        <span class="val" id="v-tng-int">400</span></div>
+    </div>
+  </div>
+
+  <!-- EXPOSURE -->
   <div class="section">
     <div class="badge" onclick="toggleSection(this)">🎞 EXPOSURE</div>
     <div class="section-body">
-    <div class="ctrl"><label>exp</label>
-      <input type="range" id="exposure" min="0.25" max="8" value="1.5" step="0.05">
-      <span class="val" id="v-exposure">1.5×</span></div>
+      <div class="ctrl"><label>exp</label>
+        <input type="range" id="exposure" min="0.25" max="8" value="1.0" step="0.05">
+        <span class="val" id="v-exposure">1.0×</span></div>
     </div>
   </div>
 
+  <!-- TEMPERATURE — object thermal state -->
   <div class="section">
-    <div class="badge" onclick="toggleSection(this)">🕐 TIME → TEMPERATURE</div>
+    <div class="badge" onclick="toggleSection(this)">🌡 TEMPERATURE</div>
     <div class="section-body">
-    <div class="section-title">Thermal State</div>
-    <div class="ctrl"><label>T</label>
-      <input type="range" id="temp" min="300" max="6000" value="300" step="50">
-      <span class="val" id="v-temp">300 K</span></div>
-    <div id="temp-swatch"></div>
-    <div id="temp-desc">Room temperature — no emission</div>
+      <div class="section-title">Object thermal emission</div>
+      <div class="ctrl"><label>T</label>
+        <input type="range" id="temp" min="300" max="6000" value="300" step="50">
+        <span class="val" id="v-temp">300 K</span></div>
+      <div id="temp-swatch"></div>
+      <div id="temp-desc">Room temperature — no emission</div>
     </div>
   </div>
 
+  <!-- TIME — cosmological epoch -->
+  <div class="section">
+    <div class="badge" onclick="toggleSection(this)">🕐 TIME</div>
+    <div class="section-body">
+      <div class="section-title">Cosmological epoch</div>
+      <div class="ctrl"><label>t</label>
+        <input type="range" id="cosmo-time" min="0" max="100" value="100" step="1">
+        <span class="val" id="v-cosmo-time">13.8 Gyr</span></div>
+      <div id="time-desc">Present epoch — cold dark universe</div>
+    </div>
+  </div>
+
+  <!-- MATERIAL PHYSICS -->
   <div class="section">
     <div class="badge">⚗ MATERIAL PHYSICS</div>
     <div class="section-title">{n_mats} material{'s' if n_mats != 1 else ''} · {n_layers} primitive{'s' if n_layers != 1 else ''}</div>
@@ -485,11 +549,10 @@ const THERMAL = {thermal_js};
 
 // ── Scene state ──────────────────────────────────────────────────────────────
 let camTheta = 30*Math.PI/180, camPhi = 25*Math.PI/180;
-let camDist  = {cam_default}, camFov = 45;
+let camDist  = {cam_default}, camFov = 45, camEdge = 0;
 let objRx=0, objRy=0, objRz=0;
-let ltTheta=45*Math.PI/180, ltPhi=50*Math.PI/180;
-let ltDist={round(cam_default*1.5,2)}, ltInt=800;
-let temperature=300, exposure=1.5;
+let isObserver = true;  // true = left-drag orbits camera; false = left-drag rotates object
+let temperature = 300, cosmoTime = 100, exposure = 1.0;
 const LOOK_AT_Y = {look_y};
 
 // ── Three.js setup ───────────────────────────────────────────────────────────
@@ -506,28 +569,6 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0e0e10);
 
-// Studio environment map for reflections
-(function(){{
-  const W=512,H=256;
-  const cv=document.createElement('canvas');
-  cv.width=W;cv.height=H;
-  const ctx=cv.getContext('2d');
-  const grad=ctx.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0.00,'#6070a0');
-  grad.addColorStop(0.35,'#505060');
-  grad.addColorStop(0.55,'#383840');
-  grad.addColorStop(0.75,'#2c2820');
-  grad.addColorStop(1.00,'#201810');
-  ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
-  const spot=ctx.createRadialGradient(W*.25,H*.20,0,W*.25,H*.20,H*.35);
-  spot.addColorStop(0,'rgba(240,240,210,0.55)');
-  spot.addColorStop(1,'rgba(240,240,210,0.00)');
-  ctx.fillStyle=spot; ctx.fillRect(0,0,W,H);
-  const tex=new THREE.CanvasTexture(cv);
-  tex.mapping=THREE.EquirectangularReflectionMapping;
-  scene.environment=tex;
-}})();
-
 const camera=new THREE.PerspectiveCamera(camFov,1,0.01,500);
 
 // ── Default material fallback ────────────────────────────────────────────────
@@ -535,10 +576,7 @@ const camera=new THREE.PerspectiveCamera(camFov,1,0.01,500);
 
 // ── Object group ─────────────────────────────────────────────────────────────
 const obj = new THREE.Group();
-
-// Build layers from Sigma Signature
 {layers_js}
-
 scene.add(obj);
 
 // Ground plane
@@ -552,26 +590,39 @@ gnd.receiveShadow=true;
 scene.add(gnd);
 
 // ── Lights ───────────────────────────────────────────────────────────────────
-const hemi=new THREE.HemisphereLight(0x8090c0,0x302820,2.0);
-scene.add(hemi);
-const amb=new THREE.AmbientLight(0x404055,1.5);
-scene.add(amb);
-const keyLight=new THREE.PointLight(0xfff8f0,ltInt,500,2);
-keyLight.castShadow=true;
-keyLight.shadow.mapSize.set(1024,1024);
-scene.add(keyLight);
-const fillLight=new THREE.PointLight(0x8090c0,1200,300,2);
-fillLight.position.set(-{round(cam_default*0.6,2)},{round(cam_default*0.3,2)},-{round(cam_default*0.5,2)});
-scene.add(fillLight);
-const rimLight=new THREE.PointLight(0xffe8c0,800,200,2);
-rimLight.position.set(0,{round(cam_default*0.6,2)},-{round(cam_default*0.8,2)});
-scene.add(rimLight);
+// Light box — ambient from all 6 walls (photography soft-box)
+const lightBox = new THREE.AmbientLight(0xd0d8f0, 1.2);
+scene.add(lightBox);
+let lbOn=true, lbInt=1.2;
 
-// ── Mouse drag — left=object rotate, right=camera orbit ─────────────────────
-let isDragging=false, rightDrag=false;
+// Candle — warm orange flame, low position
+const candle = new THREE.PointLight(0xff8830, 300, 500, 2);
+candle.castShadow = true;
+candle.shadow.mapSize.set(512,512);
+scene.add(candle);
+let cndOn=true, cndTheta=-60*Math.PI/180, cndPhi=20*Math.PI/180;
+let cndDist={round(cam_default*1.2,2)}, cndInt=300;
+
+// Tungsten bulb — warm white filament (2700K colour)
+const tungsten = new THREE.PointLight(0xffeab0, 400, 500, 2);
+tungsten.castShadow = true;
+tungsten.shadow.mapSize.set(1024,1024);
+scene.add(tungsten);
+let tngOn=true, tngTheta=45*Math.PI/180, tngPhi=55*Math.PI/180;
+let tngDist={round(cam_default*1.5,2)}, tngInt=400;
+
+// Cosmological ambient — set by time slider
+const cosmoAmb = new THREE.AmbientLight(0xff6020, 0);
+scene.add(cosmoAmb);
+
+// ── Mouse drag ───────────────────────────────────────────────────────────────
+let isDragging=false, dragIsOrbit=false;
 let lastX=0, lastY=0;
 canvas.addEventListener('mousedown',e=>{{
-  isDragging=true; rightDrag=(e.button===2);
+  isDragging=true;
+  // Observer: left-drag = orbit (you move), right-drag = also orbit
+  // Non-observer: left-drag = rotate object, right-drag = orbit
+  dragIsOrbit = (e.button===2) || (e.button===0 && isObserver);
   lastX=e.clientX; lastY=e.clientY; e.preventDefault();
 }});
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
@@ -579,25 +630,19 @@ window.addEventListener('mouseup',()=>{{isDragging=false;}});
 window.addEventListener('mousemove',e=>{{
   if(!isDragging) return;
   const dx=(e.clientX-lastX)*0.005, dy=(e.clientY-lastY)*0.005;
-  if(!rightDrag){{
-    // left drag — rotate the object (non-observer)
+  if(!dragIsOrbit){{
     objRy+=dx; objRx+=dy;
-    setSlider('obj-ry',objRy*180/Math.PI,'v-obj-ry','°');
-    setSlider('obj-rx',objRx*180/Math.PI,'v-obj-rx','°');
     updateObject();
   }} else {{
-    // right drag — orbit camera (observer)
     camTheta-=dx; camPhi=Math.max(0.08,Math.min(Math.PI/2-0.05,camPhi-dy));
-    setSlider('cam-theta',camTheta*180/Math.PI,'v-cam-theta','°');
-    setSlider('cam-phi',camPhi*180/Math.PI,'v-cam-phi','°');
     updateCamera();
   }}
   lastX=e.clientX; lastY=e.clientY;
 }});
 canvas.addEventListener('wheel',e=>{{
   camDist=Math.max({cam_min},Math.min({cam_max},camDist+e.deltaY*0.01));
-  document.getElementById('cam-dist').value=camDist;
-  document.getElementById('v-cam-dist').textContent=camDist.toFixed(2);
+  setSlider('cam-dist',camDist,'v-cam-dist','');
+  updateCamera();
   e.preventDefault();
 }},{{passive:false}});
 
@@ -617,29 +662,62 @@ function spherePos(theta,phi,r){{
   }};
 }}
 
+// ── Observer toggle ───────────────────────────────────────────────────────────
+function setObserver(obs){{
+  isObserver = obs;
+  document.getElementById('btn-observer').classList.toggle('active', obs);
+  document.getElementById('btn-nonobs').classList.toggle('active', !obs);
+  renderer.shadowMap.enabled = obs;
+  // Rebuild shadow maps
+  scene.traverse(o=>{{ if(o.castShadow) o.castShadow=obs; }});
+  document.getElementById('obs-desc').textContent = obs
+    ? 'Left-drag orbits you around the object · Shadows active'
+    : 'Left-drag rotates the object · You are not disturbing it';
+}}
+
+// ── Camera ────────────────────────────────────────────────────────────────────
 function updateCamera(){{
-  const p=spherePos(camTheta,camPhi,camDist);
+  const theta = camTheta + camEdge*Math.PI/180;
+  const p=spherePos(theta,camPhi,camDist);
   camera.position.set(p.x,p.y+LOOK_AT_Y,p.z);
   camera.lookAt(0,LOOK_AT_Y,0);
   camera.fov=camFov;
   camera.updateProjectionMatrix();
   document.getElementById('hud-cam').textContent=
-    `θ${{(camTheta*180/Math.PI).toFixed(0)}}° φ${{(camPhi*180/Math.PI).toFixed(0)}}° r${{camDist.toFixed(1)}}`;
+    `θ${{(theta*180/Math.PI).toFixed(0)}}° φ${{(camPhi*180/Math.PI).toFixed(0)}}° r${{camDist.toFixed(1)}}`;
 }}
 
-function updateLight(){{
-  const p=spherePos(ltTheta,ltPhi,ltDist);
-  keyLight.position.set(p.x,p.y+LOOK_AT_Y,p.z);
-  keyLight.intensity=ltInt;
-  document.getElementById('hud-light').textContent=
-    `θ${{(ltTheta*180/Math.PI).toFixed(0)}}° φ${{(ltPhi*180/Math.PI).toFixed(0)}}° I${{ltInt}}`;
-}}
-
+// ── Object rotation ───────────────────────────────────────────────────────────
 function updateObject(){{
   obj.rotation.set(objRx,objRy,objRz);
 }}
 
-// ── Thermal emission update ───────────────────────────────────────────────────
+// ── Light updates ─────────────────────────────────────────────────────────────
+function updateLightBox(){{
+  lightBox.intensity = lbOn ? lbInt : 0;
+}}
+function updateCandle(){{
+  const p=spherePos(cndTheta,cndPhi,cndDist);
+  candle.position.set(p.x,p.y+LOOK_AT_Y,p.z);
+  candle.intensity = cndOn ? cndInt : 0;
+}}
+function updateTungsten(){{
+  const p=spherePos(tngTheta,tngPhi,tngDist);
+  tungsten.position.set(p.x,p.y+LOOK_AT_Y,p.z);
+  tungsten.intensity = tngOn ? tngInt : 0;
+}}
+function toggleLight(which){{
+  if(which==='box')  {{ lbOn=!lbOn;  updateLightBox(); updateToggleBtn('tog-box',lbOn);  }}
+  if(which==='cnd')  {{ cndOn=!cndOn; updateCandle();  updateToggleBtn('tog-cnd',cndOn); }}
+  if(which==='tng')  {{ tngOn=!tngOn; updateTungsten();updateToggleBtn('tog-tng',tngOn); }}
+}}
+function updateToggleBtn(id,on){{
+  const b=document.getElementById(id);
+  b.textContent=on?'ON':'OFF';
+  b.className='light-toggle '+(on?'on':'off');
+}}
+
+// ── Thermal emission ──────────────────────────────────────────────────────────
 function lerp(a,b,t){{return a+(b-a)*t;}}
 function thermalColor(T){{
   for(let i=0;i<THERMAL.length-1;i++){{
@@ -652,7 +730,6 @@ function thermalColor(T){{
   }}
   return THERMAL[THERMAL.length-1];
 }}
-
 function tempDesc(T){{
   if(T<500)  return 'Room temperature — no thermal emission';
   if(T<900)  return 'Warm — barely visible red glow';
@@ -662,18 +739,39 @@ function tempDesc(T){{
   if(T<4000) return 'Incandescent — white-hot';
   return 'Stellar — blue-white emission';
 }}
-
 function updateTemp(){{
   const tc=thermalColor(temperature);
   const emC=new THREE.Color(tc.r,tc.g,tc.b);
   const emI=temperature>500?(temperature-500)/1000:0;
-  Object.values(MATS).forEach(m=>{{
-    m.emissive=emC; m.emissiveIntensity=emI;
-  }});
+  Object.values(MATS).forEach(m=>{{ m.emissive=emC; m.emissiveIntensity=emI; }});
   const sw=document.getElementById('temp-swatch');
   sw.style.background=`rgb(${{(tc.r*255)|0}},${{(tc.g*255)|0}},${{(tc.b*255)|0}})`;
   document.getElementById('temp-desc').textContent=tempDesc(temperature);
   document.getElementById('hud-temp').textContent=temperature+' K';
+}}
+
+// ── Cosmological time ─────────────────────────────────────────────────────────
+// t=0 → near Big Bang (hot dense universe, warm reddish ambient from CMB)
+// t=100 → present (13.8 Gyr, cold dark universe)
+function updateCosmoTime(){{
+  const t=cosmoTime/100.0;             // 0=early, 1=now
+  // Background darkens as universe cools with time
+  const bg=Math.round(14+t*0);        // stays dark
+  scene.background=new THREE.Color(
+    0.05+0.25*(1-t), 0.04+0.06*(1-t), 0.06+0.02*(1-t));
+  // Cosmological ambient: bright warm glow near Big Bang, zero today
+  cosmoAmb.intensity = (1-t)*3.0;
+  // Display
+  const gyr=(t*13.8).toFixed(1);
+  document.getElementById('v-cosmo-time').textContent=gyr+' Gyr';
+  document.getElementById('hud-time').textContent=gyr+' Gyr';
+  const desc = t<0.01?'Near Big Bang — hot dense plasma, σ-field extreme'
+    :t<0.1?'Early universe — matter decoupling era'
+    :t<0.3?'First stars forming — reionization'
+    :t<0.7?'Galaxy formation epoch'
+    :t<0.95?'Solar system era'
+    :'Present epoch — cold dark universe';
+  document.getElementById('time-desc').textContent=desc;
 }}
 
 // ── Material selection ────────────────────────────────────────────────────────
@@ -683,31 +781,14 @@ function selectMat(id){{
   if(card) card.classList.add('active');
 }}
 
-// ── Reset functions ───────────────────────────────────────────────────────────
-function resetCam(){{
+// ── Reset ─────────────────────────────────────────────────────────────────────
+function resetViewpoint(){{
   camTheta=30*Math.PI/180; camPhi=25*Math.PI/180;
-  camDist={cam_default}; camFov=45;
-  setSlider('cam-theta',30,'v-cam-theta','°');
-  setSlider('cam-phi',25,'v-cam-phi','°');
+  camDist={cam_default}; camFov=45; camEdge=0;
+  setSlider('cam-edge',0,'v-cam-edge','°');
   setSlider('cam-dist',camDist,'v-cam-dist','');
   setSlider('cam-fov',45,'v-cam-fov','°');
   updateCamera();
-}}
-function resetObj(){{
-  objRx=0;objRy=0;objRz=0;
-  setSlider('obj-rx',0,'v-obj-rx','°');
-  setSlider('obj-ry',0,'v-obj-ry','°');
-  setSlider('obj-rz',0,'v-obj-rz','°');
-  updateObject();
-}}
-function resetLight(){{
-  ltTheta=45*Math.PI/180; ltPhi=50*Math.PI/180;
-  ltDist={round(cam_default*1.5,2)}; ltInt=800;
-  setSlider('lt-theta',45,'v-lt-theta','°');
-  setSlider('lt-phi',50,'v-lt-phi','°');
-  setSlider('lt-dist',ltDist,'v-lt-dist','');
-  setSlider('lt-int',5000,'v-lt-int','');
-  updateLight();
 }}
 
 // ── Slider wiring ─────────────────────────────────────────────────────────────
@@ -721,29 +802,37 @@ function wire(id,vid,suffix,onchange){{
     onchange(v);
   }});
 }}
-wire('cam-theta','v-cam-theta','°',v=>{{camTheta=v*Math.PI/180;updateCamera();}});
-wire('cam-phi',  'v-cam-phi',  '°',v=>{{camPhi=v*Math.PI/180;updateCamera();}});
-wire('cam-dist', 'v-cam-dist', '', v=>{{camDist=v;updateCamera();}});
-wire('cam-fov',  'v-cam-fov',  '°',v=>{{camFov=v;updateCamera();}});
-wire('obj-rx','v-obj-rx','°',v=>{{objRx=v*Math.PI/180;updateObject();}});
-wire('obj-ry','v-obj-ry','°',v=>{{objRy=v*Math.PI/180;updateObject();}});
-wire('obj-rz','v-obj-rz','°',v=>{{objRz=v*Math.PI/180;updateObject();}});
-wire('lt-theta','v-lt-theta','°',v=>{{ltTheta=v*Math.PI/180;updateLight();}});
-wire('lt-phi',  'v-lt-phi',  '°',v=>{{ltPhi=v*Math.PI/180;updateLight();}});
-wire('lt-dist', 'v-lt-dist', '', v=>{{ltDist=v;updateLight();}});
-wire('lt-int',  'v-lt-int',  '', v=>{{ltInt=v;updateLight();}});
-wire('exposure','v-exposure','×',v=>{{
-  exposure=v;renderer.toneMappingExposure=v;
-}});
+wire('cam-edge','v-cam-edge','°',v=>{{camEdge=v;updateCamera();}});
+wire('cam-dist','v-cam-dist','', v=>{{camDist=v;updateCamera();}});
+wire('cam-fov', 'v-cam-fov', '°',v=>{{camFov=v;updateCamera();}});
+wire('box-int', 'v-box-int', '', v=>{{lbInt=v;updateLightBox();}});
+wire('cnd-theta','v-cnd-theta','°',v=>{{cndTheta=v*Math.PI/180;updateCandle();}});
+wire('cnd-phi',  'v-cnd-phi',  '°',v=>{{cndPhi=v*Math.PI/180;updateCandle();}});
+wire('cnd-dist', 'v-cnd-dist', '', v=>{{cndDist=v;updateCandle();}});
+wire('cnd-int',  'v-cnd-int',  '', v=>{{cndInt=v;updateCandle();}});
+wire('tng-theta','v-tng-theta','°',v=>{{tngTheta=v*Math.PI/180;updateTungsten();}});
+wire('tng-phi',  'v-tng-phi',  '°',v=>{{tngPhi=v*Math.PI/180;updateTungsten();}});
+wire('tng-dist', 'v-tng-dist', '', v=>{{tngDist=v;updateTungsten();}});
+wire('tng-int',  'v-tng-int',  '', v=>{{tngInt=v;updateTungsten();}});
+wire('exposure', 'v-exposure', '×',v=>{{exposure=v;renderer.toneMappingExposure=v;}});
 (function(){{
   const el=document.getElementById('temp');
-  if(!el) return;
-  el.addEventListener('input',()=>{{
+  if(el) el.addEventListener('input',()=>{{
     temperature=parseInt(el.value);
     document.getElementById('v-temp').textContent=temperature+' K';
     updateTemp();
   }});
+  const et=document.getElementById('cosmo-time');
+  if(et) et.addEventListener('input',()=>{{
+    cosmoTime=parseInt(et.value);
+    updateCosmoTime();
+  }});
 }})();
+
+// ── Collapsible sections ──────────────────────────────────────────────────────
+function toggleSection(badge){{
+  badge.closest('.section').classList.toggle('collapsed');
+}}
 
 // ── Resize ────────────────────────────────────────────────────────────────────
 function resize(){{
@@ -756,16 +845,14 @@ function resize(){{
 window.addEventListener('resize',resize);
 resize();
 
-// ── Collapsible sections ──────────────────────────────────────────────────────
-function toggleSection(badge){{
-  badge.closest('.section').classList.toggle('collapsed');
-}}
-
-// ── Animate ───────────────────────────────────────────────────────────────────
+// ── Init ──────────────────────────────────────────────────────────────────────
 updateCamera();
-updateLight();
+updateLightBox();
+updateCandle();
+updateTungsten();
 updateObject();
 updateTemp();
+updateCosmoTime();
 
 function animate(){{
   requestAnimationFrame(animate);
