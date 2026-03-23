@@ -1,0 +1,96 @@
+{
+  "name": "tire",
+  "layers": [
+    {
+      "type": "torus",
+      "material": "rubber",
+      "pos": [
+        0.0,
+        0.431,
+        0.0
+      ],
+      "major_radius": 1.725,
+      "minor_radius": 0.431,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "torus",
+      "material": "rubber",
+      "pos": [
+        0.0,
+        1.124,
+        0.0
+      ],
+      "major_radius": 1.049,
+      "minor_radius": 0.262,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "torus",
+      "material": "rubber",
+      "pos": [
+        0.0,
+        1.512,
+        0.0
+      ],
+      "major_radius": 0.504,
+      "minor_radius": 0.126,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "provenance": "Based on a standard car tire with an inner tube and tread pattern.",
+  "physics": {
+    "total_mass_kg": 9.5,
+    "components": [
+      {
+        "component": "tire_tube",
+        "material": "rubber",
+        "density_kg_m3": 1200,
+        "phase": "solid",
+        "mass_kg": 7.6,
+        "volume_cm3": 6333.33,
+        "dims": {
+          "major_radius": 1.725,
+          "minor_radius": 0.431
+        }
+      },
+      {
+        "component": "tire_wall",
+        "material": "rubber",
+        "density_kg_m3": 1200,
+        "phase": "solid",
+        "mass_kg": 1.71,
+        "volume_cm3": 1425.0,
+        "dims": {
+          "major_radius": 1.049,
+          "minor_radius": 0.262
+        }
+      },
+      {
+        "component": "tire_tread",
+        "material": "rubber",
+        "density_kg_m3": 1200,
+        "phase": "solid",
+        "mass_kg": 0.19,
+        "volume_cm3": 158.33,
+        "dims": {
+          "major_radius": 0.504,
+          "minor_radius": 0.126
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
+}

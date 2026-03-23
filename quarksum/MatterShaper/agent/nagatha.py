@@ -101,8 +101,71 @@ class AgentBrain:
             prompt += f"- Color: `{name}.color.json`\n"
         return prompt
 
+    def build_manifest_prompt(self, object_name):
+        """Build the user prompt that asks for a COMPONENT_MANIFEST.
+
+        The LLM describes topology and proportions; Python derives sizes from physics.
+        """
+        return f"""Describe "{object_name}" as a COMPONENT_MANIFEST for the MatterShaper physics engine.
+
+Output ONE JSON block labelled COMPONENT_MANIFEST:
+```json
+COMPONENT_MANIFEST
+{{
+  "object_name": "{object_name}",
+  "total_mass_kg": <realistic mass in kg>,
+  "components": [
+    {{
+      "name": "descriptive name",
+      "material": "real-world material name",
+      "shape_type": "cylinder",
+      "mass_fraction": 0.8,
+      "aspect": 1.5,
+      "pos_role": "base",
+      "rotate": [0, 0, 0]
+    }}
+  ],
+  "provenance": "source / reasoning"
+}}
+```
+
+SHAPE TYPES and their aspect meaning:
+  "sphere"    — aspect ignored (symmetric)
+  "ellipsoid" — aspect: [x, y, z] proportion list, e.g. [1, 2, 1] = twice as tall as wide
+  "cylinder"  — aspect: height/diameter ratio, e.g. 1.5 = taller than wide
+  "box"       — aspect: [w, h, d] proportion list, e.g. [3, 1, 2] = wide flat slab
+  "torus"     — aspect: minor/major ratio (tube thickness), e.g. 0.25
+  "cone"      — aspect: height/(2×base_radius), taper: top_radius/base_radius
+
+MATERIAL NAMES — use real-world names, physics will look up density:
+  metals:   "steel", "aluminum", "copper", "brass", "chrome", "cast_iron"
+  ceramics: "ceramic", "porcelain", "terracotta", "glass"
+  wood:     "oak", "dark_wood", "pine", "bamboo"
+  polymers: "rubber", "plastic", "nylon", "foam"
+  other:    "leather", "fabric", "wax", "concrete", "stone", "brick"
+
+POSITION ROLES — how this component relates to others:
+  "base"      — starts at ground (y=0), stacks upward
+  "stack"     — placed on top of previous component
+  "top"       — at the top of the main body
+  "side"      — attached to the side of the main body, at mid-height
+  "side_low"  — side attachment, lower third
+  "side_high" — side attachment, upper third
+  "cap_top"   — flat layer on top of main body
+  "cap_bottom"— flat layer at base
+  "interior"  — same centre as main body (inset or hollow detail)
+
+RULES:
+- total_mass_kg should reflect real-world weight (e.g. coffee mug: 0.35, brick: 2.5)
+- mass_fraction for all components must sum to 1.0
+- Keep to ≤12 components
+- Include 2-5 different materials
+- rotate values are in radians
+
+Describe "{object_name}" now."""
+
     def build_mapping_prompt(self, object_name):
-        """Build the user prompt for mapping a specific object."""
+        """Build the legacy user prompt for mapping (direct shape JSON)."""
         return f"""Map the following object into Sigma Signature format: "{object_name}"
 
 Output ONE JSON block — the SHAPE MAP — labelled "SHAPE_MAP":
@@ -320,6 +383,57 @@ def parse_maps_from_response(text):
     color_map = None
 
     return shape_map, color_map
+
+
+def parse_manifest_from_response(text):
+    """Extract a COMPONENT_MANIFEST JSON block from LLM response."""
+    import re
+    blocks = re.findall(r'```json\s*\n?(.*?)\n?```', text, re.DOTALL)
+    for block in blocks:
+        block = block.strip()
+        lines = block.split('\n')
+        if lines[0].strip().upper() in ('COMPONENT_MANIFEST', 'MANIFEST'):
+            block = '\n'.join(lines[1:])
+        try:
+            parsed = json.loads(block)
+        except json.JSONDecodeError:
+            continue
+        # Unwrap if model nested it
+        for wrapper in ('COMPONENT_MANIFEST', 'component_manifest', 'manifest'):
+            if wrapper in parsed and isinstance(parsed[wrapper], dict):
+                parsed = parsed[wrapper]
+                break
+        if 'components' in parsed:
+            return parsed
+    return None
+
+
+def _try_physics_builder(manifest):
+    """Build a shape_map from a COMPONENT_MANIFEST using the physics engine.
+
+    Returns shape_map on success, None on any error.
+    """
+    sys.path.insert(0, str(PROJECT_DIR))
+    try:
+        from mattershaper.physics.object_builder import build_sigma_from_manifest, validate_manifest
+        errors = validate_manifest(manifest)
+        if errors:
+            print(f"[Nagatha] Manifest validation: {errors}")
+            return None
+        shape_map = build_sigma_from_manifest(manifest)
+
+        # Print physics report
+        print("[Nagatha] Physics build complete:")
+        for entry in shape_map.get('physics', {}).get('components', []):
+            print(f"  {entry['component']:20s}  "
+                  f"{entry['material']:15s}  "
+                  f"rho={entry['density_kg_m3']:6.0f} kg/m³  "
+                  f"V={entry['volume_cm3']:7.1f} cm³  "
+                  f"dims={entry['dims']}")
+        return shape_map
+    except Exception as e:
+        print(f"[Nagatha] Physics builder error: {e}")
+        return None
 
 
 def _normalize_shape_map(shape_map):
@@ -1219,6 +1333,42 @@ class Nagatha:
         else:
             print(f"[Nagatha] I don't have offline dimensions for '{object_name}', but I shall sort it out.")
 
+        # ── Physics pipeline: COMPONENT_MANIFEST → physics builder ──────
+        print("[Nagatha] Asking LLM for component topology (physics will size it)...")
+        manifest_prompt = self.brain.build_manifest_prompt(object_name)
+        shape_map = None
+        try:
+            manifest_response = self.llm.generate(self._system_prompt, manifest_prompt)
+            manifest = parse_manifest_from_response(manifest_response)
+            if manifest:
+                shape_map = _try_physics_builder(manifest)
+        except Exception as e:
+            print(f"[Nagatha] Manifest step failed ({e}), falling back to legacy mapping.")
+
+        if shape_map:
+            print("[Nagatha] Physics build succeeded — skipping legacy shape LLM call.")
+            color_map = _resolve_color_map(shape_map)
+            errors, warnings = validate_maps(shape_map, color_map)
+            for w in warnings:
+                print(f"  [note] {w}")
+            for e in errors:
+                print(f"  [problem] {e}")
+            if not errors:
+                shape_map, color_map, _ = self.analyze_and_fix(shape_map, color_map)
+                safe_name = object_name.lower().replace(' ', '_')
+                render_path = str(RENDERS_DIR / f"{safe_name}_map.png")
+                rendered = render_from_maps(shape_map, color_map, render_path)
+                if rendered:
+                    print(f"[Nagatha] Render complete. Every pixel a solved equation.")
+                n_layers = len(shape_map['layers'])
+                n_mats = len(color_map['materials'])
+                print(f"\n[Nagatha] Physics build: {n_layers} primitives, {n_mats} materials.")
+                return shape_map, color_map
+            else:
+                print("[Nagatha] Physics build had errors — falling back to legacy mapping.")
+                shape_map = None
+
+        # ── Legacy pipeline: direct SHAPE_MAP from LLM ──────────────────
         user_prompt = self.brain.build_mapping_prompt(object_name)
 
         for attempt in range(max_retries + 1):
@@ -1226,7 +1376,7 @@ class Nagatha:
                 print(f"\n[Nagatha] Right, having another go. Attempt {attempt + 1} of {max_retries + 1}.")
 
             # Step 1: Generate
-            print("[Nagatha] Thinking about primitives...")
+            print("[Nagatha] Thinking about primitives (legacy mode)...")
             try:
                 response = self.llm.generate(self._system_prompt, user_prompt)
             except Exception as e:

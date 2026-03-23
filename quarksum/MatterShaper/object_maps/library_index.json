@@ -651,6 +651,54 @@
       "created_by": "nagitha",
       "approved_by": "auto",
       "approved_date": "2026-03-23T07:07:58.468885+00:00"
+    },
+    "broom": {
+      "key": "broom",
+      "name": "broom",
+      "aliases": [
+        "broom"
+      ],
+      "shape_path": "object_maps/broom.shape.json",
+      "color_path": "object_maps/broom.color.json",
+      "primitives": 16,
+      "materials": 2,
+      "approved": true,
+      "created_date": "2026-03-23T07:09:35.236982+00:00",
+      "created_by": "nagitha",
+      "approved_by": "auto",
+      "approved_date": "2026-03-23T07:09:35.237303+00:00"
+    },
+    "shoe": {
+      "key": "shoe",
+      "name": "shoe",
+      "aliases": [
+        "shoe"
+      ],
+      "shape_path": "object_maps/shoe.shape.json",
+      "color_path": "object_maps/shoe.color.json",
+      "primitives": 15,
+      "materials": 2,
+      "approved": true,
+      "created_date": "2026-03-23T07:11:08.544072+00:00",
+      "created_by": "nagitha",
+      "approved_by": "auto",
+      "approved_date": "2026-03-23T07:11:08.544362+00:00"
+    },
+    "tire": {
+      "key": "tire",
+      "name": "tire",
+      "aliases": [
+        "tire"
+      ],
+      "shape_path": "object_maps/tire.shape.json",
+      "color_path": "object_maps/tire.color.json",
+      "primitives": 3,
+      "materials": 1,
+      "approved": true,
+      "created_date": "2026-03-23T07:44:24.889626+00:00",
+      "created_by": "nagitha",
+      "approved_by": "auto",
+      "approved_date": "2026-03-23T07:44:24.889939+00:00"
     }
   }
 }

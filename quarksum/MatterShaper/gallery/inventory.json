@@ -475,7 +475,53 @@
       "primitives": 4,
       "entangler_objects": 11,
       "html_file": "renders/hammer.html"
+    },
+    {
+      "key": "brick",
+      "name": "brick",
+      "filename": "brick.png",
+      "renderer": "entangler",
+      "width": 512,
+      "height": 512,
+      "density": 1200,
+      "render_time_s": 0.1,
+      "timestamp": 1774249023,
+      "primitives": 2,
+      "entangler_objects": 2,
+      "html_file": "renders/brick.html"
+    },
+    {
+      "key": "broom",
+      "name": "broom",
+      "filename": "broom.png",
+      "renderer": "entangler",
+      "width": 512,
+      "height": 512,
+      "density": 1200,
+      "render_time_s": 0.08,
+      "timestamp": 1774249775,
+      "primitives": 16,
+      "entangler_objects": 8,
+      "html_file": "renders/broom.html"
+    },
+    {
+      "key": "shoe",
+      "name": "shoe",
+      "filename": "shoe.png",
+      "renderer": "entangler",
+      "width": 512,
+      "height": 512,
+      "density": 1200,
+      "render_time_s": 0.11,
+      "timestamp": 1774249868,
+      "primitives": 15,
+      "entangler_objects": 15,
+      "html_file": "renders/shoe.html"
+    },
+    {
+      "error": "No renderable layers in tire",
+      "html_file": "renders/tire.html"
     }
   ],
-  "rotation_index": 134
+  "rotation_index": 171
 }

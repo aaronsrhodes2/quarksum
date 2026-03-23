@@ -1,0 +1,289 @@
+{
+  "layers": [
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        -0.15,
+        0
+      ],
+      "radii": [
+        0.12,
+        0.06,
+        0.03
+      ],
+      "material": "black_rubber"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.05,
+        -0.04
+      ],
+      "radii": [
+        0.3814697265625,
+        0.19073486328125,
+        0.095367431640625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.08
+      ],
+      "radii": [
+        0.286102294921875,
+        0.1430511474609375,
+        0.095367431640625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        0.08
+      ],
+      "radii": [
+        0.286102294921875,
+        0.1430511474609375,
+        0.095367431640625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.04
+      ],
+      "radii": [
+        0.286102294921875,
+        0.1430511474609375,
+        0.095367431640625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.12
+      ],
+      "radii": [
+        0.286102294921875,
+        0.1430511474609375,
+        0.095367431640625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.16
+      ],
+      "radii": [
+        0.19073486328125,
+        0.095367431640625,
+        0.0476837158203125
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.18
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.2
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.24
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.28
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.32
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.36
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.4
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.15,
+        -0.42
+      ],
+      "radii": [
+        0.095367431640625,
+        0.0476837158203125,
+        0.02384185791015625
+      ],
+      "rotate": [
+        -90,
+        0,
+        0
+      ],
+      "material": "dark_brown_leather"
+    }
+  ],
+  "provenance": {
+    "source": "https://www.shoefitr.com/blog/2023/11/shoe-sizes-and-measurements",
+    "dimensions": "Average men's shoe dimensions in centimeters",
+    "scale": "1 unit = 10 cm"
+  }
+}
