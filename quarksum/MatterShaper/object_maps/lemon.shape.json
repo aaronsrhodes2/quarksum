@@ -1,0 +1,71 @@
+{
+  "name": "Lemon",
+  "reference": "Standard lemon \u2014 9cm long, 6cm diameter",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "body",
+      "label": "Lemon body",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.3,
+        0
+      ],
+      "radii": [
+        0.3,
+        0.22,
+        0.22
+      ],
+      "rotate": [
+        0,
+        0,
+        0.15
+      ],
+      "material": "skin_yellow"
+    },
+    {
+      "id": "tip_l",
+      "label": "Left tip",
+      "type": "ellipsoid",
+      "pos": [
+        -0.3,
+        0.32,
+        0
+      ],
+      "radii": [
+        0.1,
+        0.06,
+        0.06
+      ],
+      "rotate": [
+        0,
+        0,
+        0.2
+      ],
+      "material": "skin_yellow"
+    },
+    {
+      "id": "tip_r",
+      "label": "Right tip",
+      "type": "ellipsoid",
+      "pos": [
+        0.3,
+        0.28,
+        0
+      ],
+      "radii": [
+        0.1,
+        0.06,
+        0.06
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.2
+      ],
+      "material": "skin_yellow"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "Pillar Candle",
+  "reference": "Pillar candle \u2014 15cm tall, 7cm diameter",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "body",
+      "label": "Wax body",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0,
+        0
+      ],
+      "height": 1.5,
+      "base_radius": 0.35,
+      "top_radius": 0.34,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "candle_wax"
+    },
+    {
+      "id": "top",
+      "label": "Melted wax pool",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.48,
+        0
+      ],
+      "radii": [
+        0.33,
+        0.025,
+        0.33
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "candle_wax"
+    },
+    {
+      "id": "wick",
+      "label": "Wick",
+      "type": "cone",
+      "base_pos": [
+        0,
+        1.45,
+        0
+      ],
+      "height": 0.12,
+      "base_radius": 0.008,
+      "top_radius": 0.005,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "stem_brown"
+    },
+    {
+      "id": "flame_core",
+      "label": "Flame inner",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.65,
+        0
+      ],
+      "radii": [
+        0.025,
+        0.08,
+        0.025
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "flame_core"
+    },
+    {
+      "id": "flame_outer",
+      "label": "Flame outer",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.68,
+        0
+      ],
+      "radii": [
+        0.035,
+        0.1,
+        0.035
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "flame_tip"
+    }
+  ]
+}

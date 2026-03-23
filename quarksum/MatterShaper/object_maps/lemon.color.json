@@ -1,0 +1,21 @@
+{
+  "name": "Lemon Colors",
+  "reference": "Materials for Lemon",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "skin_yellow": {
+      "label": "Yellow fruit skin",
+      "color": [
+        0.92,
+        0.82,
+        0.15
+      ],
+      "reflectance": 0.1,
+      "roughness": 0.45,
+      "density_kg_m3": 900,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Cellulose + carotenoids"
+    }
+  }
+}

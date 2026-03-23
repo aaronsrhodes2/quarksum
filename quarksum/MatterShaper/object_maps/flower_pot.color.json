@@ -1,0 +1,21 @@
+{
+  "name": "Flower Pot Colors",
+  "reference": "Materials for Flower Pot",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "terracotta": {
+      "label": "Terracotta clay",
+      "color": [
+        0.76,
+        0.4,
+        0.22
+      ],
+      "reflectance": 0.08,
+      "roughness": 0.7,
+      "density_kg_m3": 1800,
+      "mean_Z": 14,
+      "mean_A": 28,
+      "composition": "Fired clay"
+    }
+  }
+}

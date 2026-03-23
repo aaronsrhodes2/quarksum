@@ -1,0 +1,60 @@
+{
+  "materials": {
+    "extinguisher_body": {
+      "color": [
+        0.25,
+        0.75,
+        1.0
+      ],
+      "label": "Extinguisher Body",
+      "reflectance": 0.05,
+      "roughness": 0.6,
+      "density_kg_m3": 1000,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Auto-estimated material"
+    },
+    "nozzle_exterior": {
+      "color": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "label": "Nozzle Exterior",
+      "reflectance": 0.05,
+      "roughness": 0.6,
+      "density_kg_m3": 1000,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Auto-estimated material"
+    },
+    "handle": {
+      "color": [
+        0.6,
+        0.4,
+        0.2
+      ],
+      "label": "Handle",
+      "reflectance": 0.05,
+      "roughness": 0.6,
+      "density_kg_m3": 1000,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Auto-estimated material"
+    },
+    "pressure_gauge": {
+      "color": [
+        1.0,
+        1.0,
+        0.5
+      ],
+      "label": "Pressure Gauge",
+      "reflectance": 0.05,
+      "roughness": 0.6,
+      "density_kg_m3": 1000,
+      "mean_Z": 7,
+      "mean_A": 14,
+      "composition": "Auto-estimated material"
+    }
+  }
+}

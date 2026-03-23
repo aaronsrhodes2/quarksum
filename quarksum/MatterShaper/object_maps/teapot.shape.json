@@ -1,0 +1,284 @@
+{
+  "name": "Teapot",
+  "reference": "Classic round teapot \u2014 12cm body, 15cm tall with lid",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "body",
+      "label": "Round body",
+      "type": "sphere",
+      "pos": [
+        0,
+        0.5,
+        0
+      ],
+      "radius": 0.5,
+      "material": "white_ceramic"
+    },
+    {
+      "id": "base",
+      "label": "Base ring",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.03,
+        0
+      ],
+      "radii": [
+        0.3,
+        0.03,
+        0.3
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "lid_seat",
+      "label": "Lid seat",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.95,
+        0
+      ],
+      "radii": [
+        0.2,
+        0.03,
+        0.2
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "lid",
+      "label": "Lid dome",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.02,
+        0
+      ],
+      "radii": [
+        0.22,
+        0.08,
+        0.22
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "lid_knob",
+      "label": "Lid knob",
+      "type": "sphere",
+      "pos": [
+        0,
+        1.12,
+        0
+      ],
+      "radius": 0.06,
+      "material": "brass"
+    },
+    {
+      "id": "spout_base",
+      "label": "Spout base",
+      "type": "ellipsoid",
+      "pos": [
+        0.45,
+        0.5,
+        0
+      ],
+      "radii": [
+        0.08,
+        0.1,
+        0.06
+      ],
+      "rotate": [
+        0,
+        0,
+        0.3
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "spout_mid",
+      "label": "Spout mid",
+      "type": "ellipsoid",
+      "pos": [
+        0.58,
+        0.6,
+        0
+      ],
+      "radii": [
+        0.06,
+        0.08,
+        0.05
+      ],
+      "rotate": [
+        0,
+        0,
+        0.5
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "spout_tip",
+      "label": "Spout tip",
+      "type": "ellipsoid",
+      "pos": [
+        0.68,
+        0.72,
+        0
+      ],
+      "radii": [
+        0.04,
+        0.06,
+        0.04
+      ],
+      "rotate": [
+        0,
+        0,
+        0.7
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "handle_0",
+      "label": "Handle segment 0",
+      "type": "ellipsoid",
+      "pos": [
+        -0.45,
+        0.65,
+        0
+      ],
+      "radii": [
+        0.05,
+        0.06,
+        0.04
+      ],
+      "rotate": [
+        0,
+        0,
+        1.884
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "handle_1",
+      "label": "Handle segment 1",
+      "type": "ellipsoid",
+      "pos": [
+        -0.3442,
+        0.58,
+        0
+      ],
+      "radii": [
+        0.05,
+        0.06,
+        0.04
+      ],
+      "rotate": [
+        0,
+        0,
+        1.952
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "handle_2",
+      "label": "Handle segment 2",
+      "type": "ellipsoid",
+      "pos": [
+        -0.2788,
+        0.51,
+        0
+      ],
+      "radii": [
+        0.05,
+        0.06,
+        0.04
+      ],
+      "rotate": [
+        0,
+        0,
+        2.38
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "handle_3",
+      "label": "Handle segment 3",
+      "type": "ellipsoid",
+      "pos": [
+        -0.2788,
+        0.44,
+        0
+      ],
+      "radii": [
+        0.05,
+        0.06,
+        0.04
+      ],
+      "rotate": [
+        0,
+        0,
+        -2.38
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "handle_4",
+      "label": "Handle segment 4",
+      "type": "ellipsoid",
+      "pos": [
+        -0.3442,
+        0.37,
+        0
+      ],
+      "radii": [
+        0.05,
+        0.06,
+        0.04
+      ],
+      "rotate": [
+        0,
+        0,
+        -1.952
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "handle_5",
+      "label": "Handle segment 5",
+      "type": "ellipsoid",
+      "pos": [
+        -0.45,
+        0.3,
+        0
+      ],
+      "radii": [
+        0.05,
+        0.06,
+        0.04
+      ],
+      "rotate": [
+        0,
+        0,
+        -1.884
+      ],
+      "material": "white_ceramic"
+    }
+  ]
+}

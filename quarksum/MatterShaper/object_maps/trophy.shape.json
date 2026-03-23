@@ -1,0 +1,128 @@
+{
+  "name": "Trophy Cup",
+  "reference": "Award trophy \u2014 30cm tall",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "base_plate",
+      "label": "Base plate",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.03,
+        0
+      ],
+      "radii": [
+        0.5,
+        0.03,
+        0.5
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "dark_wood"
+    },
+    {
+      "id": "base_col",
+      "label": "Base column",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.06,
+        0
+      ],
+      "height": 0.5,
+      "base_radius": 0.15,
+      "top_radius": 0.1,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "brass"
+    },
+    {
+      "id": "stem",
+      "label": "Stem",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.55,
+        0
+      ],
+      "height": 0.6,
+      "base_radius": 0.08,
+      "top_radius": 0.06,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "brass"
+    },
+    {
+      "id": "cup_base",
+      "label": "Cup taper",
+      "type": "cone",
+      "base_pos": [
+        0,
+        1.1,
+        0
+      ],
+      "height": 0.5,
+      "base_radius": 0.08,
+      "top_radius": 0.45,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "brass"
+    },
+    {
+      "id": "cup_body",
+      "label": "Cup bowl",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.8,
+        0
+      ],
+      "radii": [
+        0.48,
+        0.35,
+        0.48
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "brass"
+    },
+    {
+      "id": "cup_rim",
+      "label": "Cup rim",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        2.1,
+        0
+      ],
+      "radii": [
+        0.5,
+        0.02,
+        0.5
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "brass"
+    }
+  ]
+}

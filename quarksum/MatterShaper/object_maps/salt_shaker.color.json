@@ -1,0 +1,35 @@
+{
+  "name": "Salt Shaker Colors",
+  "reference": "Materials for Salt Shaker",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "clear_glass": {
+      "label": "Clear glass",
+      "color": [
+        0.85,
+        0.9,
+        0.88
+      ],
+      "reflectance": 0.45,
+      "roughness": 0.02,
+      "density_kg_m3": 2500,
+      "mean_Z": 10,
+      "mean_A": 20,
+      "composition": "Soda-lime glass"
+    },
+    "chrome": {
+      "label": "Chrome plate",
+      "color": [
+        0.75,
+        0.75,
+        0.78
+      ],
+      "reflectance": 0.85,
+      "roughness": 0.05,
+      "density_kg_m3": 7190,
+      "mean_Z": 24,
+      "mean_A": 52,
+      "composition": "Cr plating"
+    }
+  }
+}

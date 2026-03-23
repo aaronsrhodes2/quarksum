@@ -1,0 +1,100 @@
+{
+  "name": "Chess Pawn",
+  "reference": "Staunton chess pawn \u2014 5cm tall",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "base",
+      "label": "Wide base",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.02,
+        0
+      ],
+      "radii": [
+        0.2,
+        0.025,
+        0.2
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "marble_white"
+    },
+    {
+      "id": "pedestal",
+      "label": "Pedestal",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.03,
+        0
+      ],
+      "height": 0.1,
+      "base_radius": 0.18,
+      "top_radius": 0.12,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "marble_white"
+    },
+    {
+      "id": "shaft",
+      "label": "Shaft",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.12,
+        0
+      ],
+      "height": 0.22,
+      "base_radius": 0.1,
+      "top_radius": 0.07,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "marble_white"
+    },
+    {
+      "id": "collar",
+      "label": "Collar ring",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.34,
+        0
+      ],
+      "radii": [
+        0.09,
+        0.015,
+        0.09
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "marble_white"
+    },
+    {
+      "id": "head",
+      "label": "Head sphere",
+      "type": "sphere",
+      "pos": [
+        0,
+        0.43,
+        0
+      ],
+      "radius": 0.08,
+      "material": "marble_white"
+    }
+  ]
+}

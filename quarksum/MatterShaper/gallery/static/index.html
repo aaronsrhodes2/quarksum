@@ -5,578 +5,723 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nagatha's Gallery</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #0a0a0f;
-    color: #e0e0e0;
-    font-family: 'Courier New', monospace;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#0a0a0f;
+  color:#e0e0e0;
+  font-family:'Courier New', monospace;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
 
-  /* ── Toolbar ── */
-  #toolbar {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 8px 16px;
-    background: #111118;
-    border-bottom: 1px solid #2a2a35;
-    flex-shrink: 0;
-  }
-  #toolbar h1 {
-    font-size: 16px;
-    color: #c8a050;
-    white-space: nowrap;
-  }
-  #toolbar label { font-size: 12px; color: #888; white-space: nowrap; }
-  #toolbar input[type=range] { width: 120px; }
-  #density-val { color: #c8a050; font-size: 12px; min-width: 40px; }
-  #toolbar button {
-    background: #1a1a25;
-    color: #c8a050;
-    border: 1px solid #3a3a45;
-    padding: 4px 12px;
-    font-family: inherit;
-    font-size: 12px;
-    cursor: pointer;
-  }
-  #toolbar button:hover { background: #252530; }
-  #auto-status {
-    font-size: 11px;
-    color: #666;
-    margin-left: auto;
-    white-space: nowrap;
-  }
+/* ── Top bar ── */
+#topbar {
+  background:#111118;
+  border-bottom:1px solid #2a2a35;
+  flex-shrink:0;
+  padding:8px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+#topbar-row1 {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+#topbar h1 {
+  font-size:14px;
+  color:#c8a050;
+  white-space:nowrap;
+  letter-spacing:2px;
+}
+#prompt-input {
+  flex:1;
+  background:#0e0e18;
+  border:1px solid #2a2a40;
+  color:#e0e0e0;
+  font-family:inherit;
+  font-size:12px;
+  padding:5px 10px;
+  outline:none;
+  border-radius:2px;
+}
+#prompt-input:focus { border-color:#c8a050; }
+#prompt-input::placeholder { color:#444; }
+#submit-btn {
+  background:#1a1a28;
+  border:1px solid #3a3a55;
+  color:#c8a050;
+  font-family:inherit;
+  font-size:12px;
+  padding:5px 14px;
+  cursor:pointer;
+  border-radius:2px;
+  white-space:nowrap;
+}
+#submit-btn:hover { background:#252535; }
+#submit-btn:disabled { color:#444; cursor:default; }
 
-  /* ── Main layout ── */
-  #main {
-    display: flex;
-    flex: 1;
-    min-height: 0;
-  }
+/* ── Status row ── */
+#topbar-row2 {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.indicator {
+  display:flex;
+  align-items:center;
+  gap:4px;
+  font-size:10px;
+  color:#444;
+  padding:2px 7px;
+  border:1px solid #222;
+  border-radius:10px;
+  transition:color 0.3s, border-color 0.3s;
+}
+.indicator.active-net  { color:#4af; border-color:#4af4; }
+.indicator.active-db   { color:#4f4; border-color:#4f44; }
+.indicator.active-local{ color:#fa4; border-color:#fa44; }
+.indicator .dot {
+  width:6px; height:6px; border-radius:50%;
+  background:currentColor;
+  opacity:0.3;
+  transition:opacity 0.3s;
+}
+.indicator.active-net .dot,
+.indicator.active-db .dot,
+.indicator.active-local .dot { opacity:1; }
 
-  /* ── 2x2 grid ── */
-  #grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 2px;
-    padding: 2px;
-    min-width: 0;
-  }
-  .viewport {
-    position: relative;
-    background: #0e0e14;
-    border: 1px solid #1a1a25;
-    overflow: hidden;
-  }
-  .viewport canvas { display: block; width: 100%; height: 100%; }
-  .viewport-label {
-    position: absolute;
-    top: 8px;
-    left: 10px;
-    font-size: 13px;
-    color: #c8a050;
-    text-shadow: 0 0 6px rgba(0,0,0,0.9);
-    pointer-events: none;
-  }
-  .viewport-slot {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    font-size: 10px;
-    color: #555;
-    pointer-events: none;
-  }
-  .viewport-rendering {
-    position: absolute;
-    bottom: 8px;
-    left: 10px;
-    font-size: 10px;
-    color: #666;
-    pointer-events: none;
-  }
+.sys-stat {
+  font-size:10px;
+  color:#555;
+  padding:2px 7px;
+  border:1px solid #1a1a20;
+  border-radius:10px;
+}
+.sys-stat span { color:#0cf; }
+.sys-stat.warn span { color:#f84; }
+.sys-stat.crit span { color:#f44; }
 
-  /* ── Sidebar ── */
-  #sidebar {
-    width: 220px;
-    background: #0d0d14;
-    border-left: 1px solid #2a2a35;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-  }
-  #sidebar h2 {
-    font-size: 13px;
-    color: #888;
-    padding: 10px 12px 6px;
-    border-bottom: 1px solid #1a1a25;
-  }
-  #inventory-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 6px;
-  }
-  .inv-item {
-    display: flex;
-    gap: 8px;
-    padding: 6px;
-    border-bottom: 1px solid #151520;
-    cursor: pointer;
-    align-items: center;
-  }
-  .inv-item:hover { background: #151520; }
-  .inv-thumb {
-    width: 48px;
-    height: 48px;
-    background: #111;
-    border: 1px solid #222;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-  .inv-info { font-size: 11px; }
-  .inv-name { color: #c8a050; }
-  .inv-time { color: #555; font-size: 10px; }
-  .inv-meta { color: #444; font-size: 10px; }
+#status-msg {
+  font-size:10px;
+  color:#555;
+  margin-left:auto;
+  white-space:nowrap;
+  max-width:340px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 
-  #object-count {
-    padding: 8px 12px;
-    font-size: 11px;
-    color: #555;
-    border-top: 1px solid #1a1a25;
-  }
+/* ── Activity log ── */
+#activity {
+  background:#0c0c12;
+  border-bottom:1px solid #2a2a35;
+  flex-shrink:0;
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.25s ease;
+}
+#activity.open { max-height:220px; }
+#activity-inner {
+  display:flex;
+  flex-direction:column;
+  height:220px;
+}
+#activity-header {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 14px;
+  border-bottom:1px solid #1a1a22;
+  flex-shrink:0;
+}
+#activity-title {
+  font-size:10px;
+  color:#888;
+  flex:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#activity-status {
+  font-size:10px;
+  padding:1px 8px;
+  border-radius:8px;
+  border:1px solid #333;
+  color:#666;
+}
+#activity-status.running { color:#4af; border-color:#4af4; }
+#activity-status.done    { color:#4f4; border-color:#4f44; }
+#activity-status.error   { color:#f44; border-color:#f444; }
+#activity-close {
+  background:none;border:none;color:#444;cursor:pointer;
+  font-size:14px;padding:0 2px;line-height:1;
+}
+#activity-close:hover { color:#888; }
+#activity-log {
+  flex:1;
+  overflow-y:auto;
+  padding:6px 14px;
+  font-size:10px;
+  line-height:1.6;
+  color:#555;
+}
+#activity-log::-webkit-scrollbar { width:3px; }
+#activity-log::-webkit-scrollbar-thumb { background:#222; }
+.log-line { white-space:pre-wrap; word-break:break-all; }
+.log-line.nagatha { color:#c8a050; }
+.log-line.error   { color:#f66; }
+.log-line.gallery { color:#0cf; }
+.log-line.done    { color:#4f4; }
+
+/* ── Main area ── */
+#main {
+  display:flex;
+  flex:1;
+  min-height:0;
+}
+
+/* ── Viewer (iframe) ── */
+#viewer-wrap {
+  flex:1;
+  position:relative;
+  min-width:0;
+  background:#0e0e14;
+}
+#viewer-frame {
+  width:100%;
+  height:100%;
+  border:none;
+  display:block;
+}
+#viewer-placeholder {
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:#333;
+  font-size:13px;
+  gap:10px;
+  pointer-events:none;
+}
+#viewer-placeholder .big { font-size:40px; }
+
+/* ── Inventory sidebar ── */
+#sidebar {
+  width:200px;
+  min-width:200px;
+  background:#0d0d14;
+  border-left:1px solid #1a1a25;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+#sidebar-header {
+  padding:8px 10px;
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:#555;
+  text-transform:uppercase;
+  border-bottom:1px solid #1a1a25;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+#sidebar-header span { color:#333; }
+#render-all-btn {
+  background:#111;
+  border:1px solid #2a2a30;
+  color:#888;
+  font-size:9px;
+  font-family:inherit;
+  padding:2px 6px;
+  cursor:pointer;
+  border-radius:2px;
+}
+#render-all-btn:hover { color:#c8a050; border-color:#c8a050; }
+
+#inventory-list {
+  flex:1;
+  overflow-y:auto;
+  padding:4px 0;
+}
+#inventory-list::-webkit-scrollbar { width:4px; }
+#inventory-list::-webkit-scrollbar-thumb { background:#222; }
+
+.inv-item {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:5px 10px;
+  cursor:pointer;
+  border-left:2px solid transparent;
+  transition:background 0.1s;
+}
+.inv-item:hover { background:#13131c; }
+.inv-item.active { border-left-color:#c8a050; background:#14141e; }
+.inv-thumb {
+  width:36px;
+  height:36px;
+  object-fit:cover;
+  border-radius:2px;
+  background:#111;
+  flex-shrink:0;
+  border:1px solid #1e1e28;
+}
+.inv-info { min-width:0; }
+.inv-name {
+  font-size:10px;
+  color:#bbb;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.inv-meta { font-size:9px; color:#444; margin-top:1px; }
+.inv-item .view-badge {
+  font-size:8px;
+  color:#4af;
+  margin-left:auto;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+/* objects not yet rendered */
+.obj-item {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:5px 10px;
+  cursor:pointer;
+  border-left:2px solid transparent;
+  opacity:0.5;
+  transition:opacity 0.1s;
+}
+.obj-item:hover { opacity:0.85; background:#13131c; }
+.obj-dot {
+  width:36px;
+  height:36px;
+  border-radius:2px;
+  background:#111;
+  border:1px solid #1a1a22;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+  flex-shrink:0;
+}
+
+#library-section {
+  border-top:1px solid #1a1a25;
+  padding:6px 0;
+}
+#library-header {
+  padding:4px 10px 6px;
+  font-size:9px;
+  letter-spacing:1px;
+  color:#333;
+  text-transform:uppercase;
+}
 </style>
 </head>
 <body>
 
-<div id="toolbar">
-  <h1>Nagatha's Gallery</h1>
-  <label>Density:</label>
-  <input type="range" id="density" min="200" max="3000" step="100" value="1200">
-  <span id="density-val">1200</span>
-  <button id="btn-cycle">Cycle Now</button>
-  <button id="btn-render-all">Render All</button>
-  <span id="auto-status">Auto-cycle: 60s</span>
+<!-- ── TOP BAR ── -->
+<div id="topbar">
+  <div id="topbar-row1">
+    <h1>⚛ NAGATHA</h1>
+    <input id="prompt-input" type="text"
+           placeholder="Ask Nagatha to render something… e.g. 'a basketball on a concrete block'"
+           onkeydown="if(event.key==='Enter')submitPrompt()">
+    <button id="submit-btn" onclick="submitPrompt()">Submit</button>
+  </div>
+  <div id="topbar-row2">
+    <div class="indicator" id="ind-net">
+      <div class="dot"></div>🌐 Net
+    </div>
+    <div class="indicator" id="ind-db">
+      <div class="dot"></div>📁 DB
+    </div>
+    <div class="indicator" id="ind-local">
+      <div class="dot"></div>💚 Local
+    </div>
+    <div class="sys-stat" id="stat-cpu">CPU <span id="cpu-val">—</span></div>
+    <div class="sys-stat" id="stat-ram">RAM <span id="ram-val">—</span></div>
+    <div class="sys-stat" id="stat-disk">Disk <span id="disk-val">—</span></div>
+    <div id="status-msg">Ready</div>
+  </div>
 </div>
 
+<!-- ── ACTIVITY LOG ── -->
+<div id="activity">
+  <div id="activity-inner">
+    <div id="activity-header">
+      <span id="activity-title">Nagatha</span>
+      <span id="activity-status">idle</span>
+      <button id="activity-close" onclick="closeActivity()" title="Dismiss">✕</button>
+    </div>
+    <div id="activity-log"></div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
 <div id="main">
-  <div id="grid">
-    <div class="viewport" id="vp-0">
-      <canvas></canvas>
-      <div class="viewport-label" id="label-0">-</div>
-      <div class="viewport-slot">TL</div>
-      <div class="viewport-rendering" id="status-0"></div>
+
+  <!-- Viewer -->
+  <div id="viewer-wrap">
+    <div id="viewer-placeholder">
+      <div class="big">⚛</div>
+      <div>Select an object from the inventory to view</div>
+      <div style="font-size:10px;color:#222;">or click Render All to generate scenes</div>
     </div>
-    <div class="viewport" id="vp-1">
-      <canvas></canvas>
-      <div class="viewport-label" id="label-1">-</div>
-      <div class="viewport-slot">TR</div>
-      <div class="viewport-rendering" id="status-1"></div>
+    <iframe id="viewer-frame" style="display:none" sandbox="allow-scripts allow-same-origin"></iframe>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div id="sidebar-header">
+      Inventory <span id="inv-count">0</span>
+      <button id="render-all-btn" onclick="renderAll()">Render All</button>
     </div>
-    <div class="viewport" id="vp-2">
-      <canvas></canvas>
-      <div class="viewport-label" id="label-2">-</div>
-      <div class="viewport-slot">BL</div>
-      <div class="viewport-rendering" id="status-2"></div>
-    </div>
-    <div class="viewport" id="vp-3">
-      <canvas></canvas>
-      <div class="viewport-label" id="label-3">-</div>
-      <div class="viewport-slot">BR</div>
-      <div class="viewport-rendering" id="status-3"></div>
+    <div id="inventory-list"></div>
+    <div id="library-section">
+      <div id="library-header">Library (not rendered)</div>
+      <div id="library-list"></div>
     </div>
   </div>
 
-  <div id="sidebar">
-    <h2>Render Inventory</h2>
-    <div id="inventory-list"></div>
-    <div id="object-count">-</div>
-  </div>
 </div>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
+<script>
+'use strict';
 
-<script type="module">
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// ── State ─────────────────────────────────────────────────────────────────────
+let _objects   = [];   // full library from /api/objects
+let _inventory = [];   // rendered items from /api/inventory
+let _activeKey = null;
 
-// ── ObjectViewer ─────────────────────────────────────────────
-
-class ObjectViewer {
-  constructor(container) {
-    this.container = container;
-    this.canvas = container.querySelector('canvas');
-
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x0e0e14);
-
-    this.camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100);
-    this.camera.position.set(2, 1.5, 2);
-
-    this.renderer = new THREE.WebGLRenderer({
-      canvas: this.canvas,
-      antialias: true,
-    });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    this.controls = new OrbitControls(this.camera, this.canvas);
-    this.controls.enableDamping = true;
-    this.controls.dampingFactor = 0.08;
-    this.controls.target.set(0, 0.4, 0);
-
-    // Lighting
-    const ambient = new THREE.AmbientLight(0x222233, 0.6);
-    this.scene.add(ambient);
-
-    const key = new THREE.DirectionalLight(0xfff0dd, 1.2);
-    key.position.set(3, 5, 2);
-    this.scene.add(key);
-
-    const fill = new THREE.DirectionalLight(0x8090cc, 0.4);
-    fill.position.set(-3, 3, 1);
-    this.scene.add(fill);
-
-    const rim = new THREE.DirectionalLight(0xccccdd, 0.3);
-    rim.position.set(0, 2, -4);
-    this.scene.add(rim);
-
-    // Floor grid
-    const grid = new THREE.GridHelper(4, 20, 0x1a1a25, 0x121218);
-    this.scene.add(grid);
-
-    this.objectGroup = new THREE.Group();
-    this.scene.add(this.objectGroup);
-
-    this.loaded = false;
-    this.resize();
-  }
-
-  resize() {
-    const rect = this.container.getBoundingClientRect();
-    const w = rect.width;
-    const h = rect.height;
-    if (w === 0 || h === 0) return;
-    this.camera.aspect = w / h;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(w, h);
-  }
-
-  loadObject(shapeJSON, colorJSON) {
-    // Clear previous
-    while (this.objectGroup.children.length > 0) {
-      const c = this.objectGroup.children[0];
-      c.geometry?.dispose();
-      c.material?.dispose();
-      this.objectGroup.remove(c);
+// ── System stats ──────────────────────────────────────────────────────────────
+async function pollSystem() {
+  try {
+    const d = await fetch('/api/system').then(r=>r.json());
+    function setStatEl(elId, valId, val, warnAt, critAt) {
+      const pct = Math.round(val);
+      document.getElementById(valId).textContent = pct + '%';
+      const el = document.getElementById(elId);
+      el.classList.remove('warn','crit');
+      if (pct >= critAt) el.classList.add('crit');
+      else if (pct >= warnAt) el.classList.add('warn');
     }
+    setStatEl('stat-cpu',  'cpu-val',  d.cpu_pct,  75, 90);
+    setStatEl('stat-ram',  'ram-val',  d.ram_pct,  75, 90);
+    setStatEl('stat-disk', 'disk-val', d.disk_pct, 80, 95);
+  } catch(e) {}
+}
+setInterval(pollSystem, 5000);
+pollSystem();
 
-    const materials = colorJSON.materials || {};
+// ── Indicators ────────────────────────────────────────────────────────────────
+function setIndicator(id, active) {
+  document.getElementById(id).classList.toggle(
+    id === 'ind-net'   ? 'active-net'   :
+    id === 'ind-db'    ? 'active-db'    : 'active-local',
+    active
+  );
+}
+function flashIndicator(id, ms=3000) {
+  setIndicator(id, true);
+  setTimeout(()=>setIndicator(id, false), ms);
+}
 
-    // Build material cache
-    const matCache = {};
-    const getMat = (matId) => {
-      if (matCache[matId]) return matCache[matId];
-      const m = materials[matId];
-      if (!m) {
-        matCache[matId] = new THREE.MeshStandardMaterial({ color: 0x888888 });
-        return matCache[matId];
-      }
-      const c = m.color || [0.5, 0.5, 0.5];
-      matCache[matId] = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(c[0], c[1], c[2]),
-        roughness: m.roughness ?? 0.5,
-        metalness: m.reflectance ?? 0.1,
-      });
-      return matCache[matId];
-    };
+// ── Status message ────────────────────────────────────────────────────────────
+function setStatus(msg) {
+  document.getElementById('status-msg').textContent = msg;
+}
 
-    const layers = shapeJSON.layers || [];
-    const bbox = new THREE.Box3();
+// ── Load objects + inventory ──────────────────────────────────────────────────
+async function loadData() {
+  const [objs, inv] = await Promise.all([
+    fetch('/api/objects').then(r=>r.json()),
+    fetch('/api/inventory').then(r=>r.json()),
+  ]);
+  _objects   = objs;
+  _inventory = inv.renders || [];
+  renderSidebar();
+}
 
-    // Helper: get position from layer (handles 'pos' vs 'center')
-    const getPos = (l) => l.pos || l.center || [0, 0, 0];
+function renderSidebar() {
+  const renderedKeys = new Set(_inventory.map(r=>r.key));
 
-    for (const layer of layers) {
-      const mat = getMat(layer.material);
-      let mesh;
+  // Inventory section
+  const invList = document.getElementById('inventory-list');
+  document.getElementById('inv-count').textContent = _inventory.length;
+  invList.innerHTML = '';
+  [..._inventory].reverse().forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'inv-item' + (r.key===_activeKey?' active':'');
+    div.dataset.key = r.key;
+    div.onclick = () => loadViewer(r.key, r.html_file);
+    div.innerHTML = `
+      <img class="inv-thumb" src="/renders/${r.key}.png" onerror="this.style.display='none'">
+      <div class="inv-info">
+        <div class="inv-name">${r.name || r.key}</div>
+        <div class="inv-meta">${r.density||'?'}px · ${(r.render_time_s||0).toFixed(1)}s</div>
+      </div>
+      ${r.html_file ? '<span class="view-badge">3D</span>' : ''}
+    `;
+    invList.appendChild(div);
+  });
 
-      if (layer.type === 'sphere') {
-        const geo = new THREE.SphereGeometry(layer.radius, 32, 24);
-        mesh = new THREE.Mesh(geo, mat);
-        const p = getPos(layer);
-        mesh.position.set(p[0], p[1], p[2]);
+  // Library section — unrendered objects
+  const libList = document.getElementById('library-list');
+  const unrendered = _objects.filter(o=>!renderedKeys.has(o.key));
+  libList.innerHTML = '';
+  unrendered.forEach(o => {
+    const div = document.createElement('div');
+    div.className = 'obj-item';
+    div.dataset.key = o.key;
+    div.onclick = () => triggerRender(o.key);
+    div.title = `Click to render ${o.name}`;
+    div.innerHTML = `
+      <div class="obj-dot">◦</div>
+      <div class="inv-info">
+        <div class="inv-name">${o.name}</div>
+        <div class="inv-meta">${o.primitives} prim</div>
+      </div>
+    `;
+    libList.appendChild(div);
+  });
+}
 
-      } else if (layer.type === 'ellipsoid') {
-        const geo = new THREE.SphereGeometry(1, 32, 24);
-        mesh = new THREE.Mesh(geo, mat);
-        const p = getPos(layer);
-        const r = layer.radii;
-        mesh.position.set(p[0], p[1], p[2]);
-        mesh.scale.set(r[0], r[1], r[2]);
-        const rot = layer.rotate || [0, 0, 0];
-        mesh.rotation.set(rot[0], rot[1], rot[2], 'XYZ');
+// ── Viewer ────────────────────────────────────────────────────────────────────
+function loadViewer(key, htmlFile) {
+  _activeKey = key;
+  document.querySelectorAll('.inv-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.key === key);
+  });
 
-      } else if (layer.type === 'cone') {
-        const geo = new THREE.CylinderGeometry(
-          layer.top_radius, layer.base_radius, layer.height, 32
-        );
-        mesh = new THREE.Mesh(geo, mat);
-        const p = layer.base_pos || getPos(layer);
-        // three.js centers cylinder at origin, so shift up by half height
-        mesh.position.set(p[0], p[1] + layer.height / 2, p[2]);
-        const rot = layer.rotate || [0, 0, 0];
-        mesh.rotation.set(rot[0], rot[1], rot[2], 'XYZ');
+  const frame = document.getElementById('viewer-frame');
+  const placeholder = document.getElementById('viewer-placeholder');
 
-      } else {
-        continue;
-      }
-
-      this.objectGroup.add(mesh);
-      const meshBox = new THREE.Box3().setFromObject(mesh);
-      bbox.union(meshBox);
-    }
-
-    // Auto-fit camera
-    if (!bbox.isEmpty()) {
-      const center = new THREE.Vector3();
-      bbox.getCenter(center);
-      const size = new THREE.Vector3();
-      bbox.getSize(size);
-      const extent = size.length();
-
-      this.controls.target.copy(center);
-      const dist = Math.max(0.6, extent * 1.8);
-      this.camera.position.set(
-        center.x + dist * 0.7,
-        center.y + extent * 0.4,
-        center.z + dist * 0.7
-      );
-      this.camera.near = extent * 0.01;
-      this.camera.far = extent * 20;
-      this.camera.updateProjectionMatrix();
-      this.controls.update();
-    }
-
-    this.loaded = true;
+  if (htmlFile) {
+    placeholder.style.display = 'none';
+    frame.style.display = 'block';
+    frame.src = '/' + htmlFile + '?t=' + Date.now();
+    flashIndicator('ind-local');
+  } else {
+    // No HTML yet — show placeholder and trigger render
+    placeholder.style.display = 'flex';
+    frame.style.display = 'none';
+    setStatus(`No scene for ${key} yet — rendering now…`);
+    triggerRender(key, true);
   }
-
-  update() {
-    this.controls.update();
-    this.renderer.render(this.scene, this.camera);
-  }
 }
 
+// ── Render trigger ────────────────────────────────────────────────────────────
+const _polling = new Set();
 
-// ── App State ────────────────────────────────────────────────
-
-const viewers = [];
-const slotLabels = ['TL', 'TR', 'BL', 'BR'];
-let cycleTimer = null;
-
-// ── Init viewers ─────────────────────────────────────────────
-
-for (let i = 0; i < 4; i++) {
-  const container = document.getElementById(`vp-${i}`);
-  viewers.push(new ObjectViewer(container));
-}
-
-// ── Render loop ──────────────────────────────────────────────
-
-function animate() {
-  requestAnimationFrame(animate);
-  for (const v of viewers) v.update();
-}
-animate();
-
-// ── Resize ───────────────────────────────────────────────────
-
-window.addEventListener('resize', () => {
-  for (const v of viewers) v.resize();
-});
-// Also resize after a short delay (layout stabilization)
-setTimeout(() => { for (const v of viewers) v.resize(); }, 100);
-
-
-// ── API helpers ──────────────────────────────────────────────
-
-async function fetchJSON(url) {
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return r.json();
-}
-
-async function loadObjectInSlot(key, slot) {
-  const label = document.getElementById(`label-${slot}`);
-  const status = document.getElementById(`status-${slot}`);
+async function triggerRender(key, loadAfter=false) {
+  if (_polling.has(key)) return;
+  const obj = _objects.find(o=>o.key===key);
+  setStatus(`Rendering ${obj?.name || key}…`);
+  flashIndicator('ind-local', 60000);
 
   try {
-    label.textContent = `Loading ${key}...`;
-    const [shape, color] = await Promise.all([
-      fetchJSON(`/api/object/${key}/shape`),
-      fetchJSON(`/api/object/${key}/color`),
-    ]);
-
-    viewers[slot].loadObject(shape, color);
-    label.textContent = shape.name || key;
-
-    // Trigger entangler render in background
-    const density = document.getElementById('density').value;
-    status.textContent = 'Rendering...';
-    fetch(`/api/render/${key}?density=${density}`, { method: 'POST' })
-      .then(r => r.json())
-      .then(data => {
-        if (data.status === 'rendering') {
-          pollRenderStatus(key, slot);
-        } else {
-          status.textContent = '';
-        }
-      });
-
-  } catch (e) {
-    label.textContent = `Error: ${e.message}`;
-    console.error(e);
+    await fetch(`/api/render/${key}`, {method:'POST'});
+    _polling.add(key);
+    pollRender(key, loadAfter);
+  } catch(e) {
+    setStatus(`Error starting render for ${key}`);
   }
 }
 
-async function pollRenderStatus(key, slot) {
-  const status = document.getElementById(`status-${slot}`);
+function pollRender(key, loadAfter) {
   const check = async () => {
     try {
-      const data = await fetchJSON(`/api/render-status/${key}`);
-      if (data.status === 'done') {
-        status.textContent = 'Rendered';
-        setTimeout(() => { status.textContent = ''; }, 3000);
-        refreshInventory();
-      } else if (data.status === 'error') {
-        status.textContent = 'Render error';
+      const d = await fetch(`/api/render-status/${key}`).then(r=>r.json());
+      if (d.status === 'done') {
+        _polling.delete(key);
+        setStatus(`Done: ${key}`);
+        await loadData();
+        if (loadAfter) {
+          const r = _inventory.find(r=>r.key===key);
+          if (r) loadViewer(key, r.html_file);
+        }
+      } else if (d.status === 'error') {
+        _polling.delete(key);
+        setStatus(`Render failed: ${key}`);
       } else {
-        setTimeout(check, 2000);
+        setTimeout(check, 1500);
       }
-    } catch { setTimeout(check, 3000); }
+    } catch(e) {
+      setTimeout(check, 2000);
+    }
   };
-  check();
+  setTimeout(check, 1500);
 }
 
+// ── Render All ────────────────────────────────────────────────────────────────
+async function renderAll() {
+  const btn = document.getElementById('render-all-btn');
+  btn.disabled = true;
+  btn.textContent = 'Rendering…';
+  const keys = _objects.map(o=>o.key);
+  setStatus(`Queuing ${keys.length} renders…`);
+  for (const key of keys) {
+    try { await fetch(`/api/render/${key}`, {method:'POST'}); } catch(e) {}
+  }
+  // Poll first one, then refresh sidebar periodically
+  if (keys.length > 0) {
+    pollRender(keys[0], true);
+  }
+  let remaining = keys.length;
+  const tick = setInterval(async ()=>{
+    await loadData();
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(tick);
+      btn.disabled = false;
+      btn.textContent = 'Render All';
+      setStatus('All renders complete');
+    }
+  }, 3000);
+}
 
-// ── Cycle ────────────────────────────────────────────────────
+// ── Activity log ─────────────────────────────────────────────────────────────
+let _activeJob = null;
+let _logOffset = 0;
+let _pollTimer = null;
 
+function openActivity(title) {
+  document.getElementById('activity').classList.add('open');
+  document.getElementById('activity-title').textContent = title;
+  document.getElementById('activity-log').innerHTML = '';
+  document.getElementById('activity-status').textContent = 'running';
+  document.getElementById('activity-status').className = 'running';
+  _logOffset = 0;
+}
+
+function closeActivity() {
+  document.getElementById('activity').classList.remove('open');
+  if (_pollTimer) { clearTimeout(_pollTimer); _pollTimer = null; }
+}
+
+function appendLog(lines) {
+  const el = document.getElementById('activity-log');
+  lines.forEach(line => {
+    const div = document.createElement('div');
+    div.className = 'log-line';
+    if (line.startsWith('[Nagatha]')) {
+      div.className += ' nagatha';
+      line = line.replace('[Nagatha]', '⚛');
+    } else if (line.includes('ERROR') || line.includes("I'm sorry")) {
+      div.className += ' error';
+    } else if (line.startsWith('[Gallery]')) {
+      div.className += ' gallery';
+      line = line.replace('[Gallery]', '◈');
+    } else if (line.includes('successfully') || line.includes('registered')) {
+      div.className += ' done';
+    }
+    div.textContent = line;
+    el.appendChild(div);
+  });
+  el.scrollTop = el.scrollHeight;
+}
+
+async function pollJob() {
+  if (!_activeJob) return;
+  try {
+    const d = await fetch(`/api/prompt/${_activeJob}?since=${_logOffset}`).then(r=>r.json());
+    if (d.log && d.log.length > 0) {
+      appendLog(d.log);
+      _logOffset = d.total;
+    }
+    const statusEl = document.getElementById('activity-status');
+    if (d.status === 'running') {
+      statusEl.textContent = `running ${d.elapsed}s`;
+      statusEl.className = 'running';
+      flashIndicator('ind-local', 2000);
+      _pollTimer = setTimeout(pollJob, 800);
+    } else if (d.status === 'done') {
+      statusEl.textContent = `done in ${d.elapsed}s`;
+      statusEl.className = 'done';
+      setStatus(`Nagatha done: "${d.prompt}"`);
+      document.getElementById('submit-btn').disabled = false;
+      flashIndicator('ind-local', 1000);
+      _activeJob = null;
+      // Reload sidebar and auto-load new object
+      await loadData();
+      if (d.new_key) {
+        const r = _inventory.find(r => r.key === d.new_key);
+        if (r) loadViewer(r.key, r.html_file);
+      }
+    } else {
+      statusEl.textContent = 'error';
+      statusEl.className = 'error';
+      setStatus(`Nagatha error on: "${d.prompt}"`);
+      document.getElementById('submit-btn').disabled = false;
+      _activeJob = null;
+    }
+  } catch(e) {
+    _pollTimer = setTimeout(pollJob, 1500);
+  }
+}
+
+// ── Nagatha prompt ────────────────────────────────────────────────────────────
+async function submitPrompt() {
+  const input = document.getElementById('prompt-input');
+  const prompt = input.value.trim();
+  if (!prompt) return;
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  setStatus(`Sending to Nagatha: "${prompt}"`);
+
+  try {
+    const resp = await fetch('/api/prompt', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({prompt}),
+    }).then(r=>r.json());
+
+    input.value = '';
+    _activeJob = resp.job_id;
+    _logOffset = 0;
+    openActivity(`⚛ Nagatha — "${prompt}"`);
+    pollJob();
+  } catch(e) {
+    setStatus('Error sending to Nagatha');
+    btn.disabled = false;
+  }
+}
+
+// ── Auto-cycle (every 60s, load next object) ──────────────────────────────────
 async function cycleNext() {
   try {
-    const data = await fetchJSON('/api/next');
-    await loadObjectInSlot(data.key, data.slot);
-    updateAutoStatus();
-  } catch (e) {
-    console.error('Cycle error:', e);
-  }
-}
-
-function updateAutoStatus() {
-  const el = document.getElementById('auto-status');
-  el.textContent = `Auto-cycle: 60s | ${new Date().toLocaleTimeString()}`;
-}
-
-
-// ── Inventory ────────────────────────────────────────────────
-
-async function refreshInventory() {
-  try {
-    const data = await fetchJSON('/api/inventory');
-    const list = document.getElementById('inventory-list');
-    const renders = (data.renders || []).slice().reverse();
-
-    list.innerHTML = renders.map(r => `
-      <div class="inv-item" data-key="${r.key}">
-        <img class="inv-thumb" src="/renders/${r.filename}"
-             onerror="this.style.display='none'" alt="${r.name}">
-        <div class="inv-info">
-          <div class="inv-name">${r.name || r.key}</div>
-          <div class="inv-time">${new Date(r.timestamp * 1000).toLocaleString()}</div>
-          <div class="inv-meta">${r.render_time_s}s | d=${r.density}</div>
-        </div>
-      </div>
-    `).join('');
-
-    document.getElementById('object-count').textContent =
-      `${renders.length} renders | ${Object.keys(data).length ? data.rotation_index || 0 : 0} cycles`;
-
-  } catch (e) {
-    console.error('Inventory error:', e);
-  }
-}
-
-
-// ── Initial load ─────────────────────────────────────────────
-
-async function init() {
-  try {
-    const objects = await fetchJSON('/api/objects');
-    document.getElementById('object-count').textContent =
-      `${objects.length} objects in library`;
-
-    // Load first 4 objects into the grid
-    const initial = objects.slice(0, 4);
-    for (let i = 0; i < initial.length; i++) {
-      await loadObjectInSlot(initial[i].key, i);
+    const d = await fetch('/api/next').then(r=>r.json());
+    if (d.html_ready && d.html_url) {
+      loadViewer(d.key, d.html_url.replace(/^\//, ''));
     }
-
-    refreshInventory();
-
-    // Start auto-cycle
-    cycleTimer = setInterval(cycleNext, 60000);
-    updateAutoStatus();
-
-  } catch (e) {
-    console.error('Init error:', e);
-  }
+  } catch(e) {}
 }
+setInterval(cycleNext, 60000);
 
-
-// ── Controls ─────────────────────────────────────────────────
-
-document.getElementById('density').addEventListener('input', (e) => {
-  document.getElementById('density-val').textContent = e.target.value;
-});
-
-document.getElementById('btn-cycle').addEventListener('click', cycleNext);
-
-document.getElementById('btn-render-all').addEventListener('click', async () => {
-  try {
-    const objects = await fetchJSON('/api/objects');
-    const density = document.getElementById('density').value;
-    for (const obj of objects) {
-      fetch(`/api/render/${obj.key}?density=${density}`, { method: 'POST' });
+// ── Boot ──────────────────────────────────────────────────────────────────────
+loadData().then(() => {
+  // Auto-load the most recent render if one exists
+  if (_inventory.length > 0) {
+    const last = _inventory[_inventory.length - 1];
+    if (last.html_file) {
+      loadViewer(last.key, last.html_file);
     }
-    document.getElementById('auto-status').textContent =
-      `Rendering all ${objects.length} objects...`;
-  } catch (e) {
-    console.error(e);
   }
+  setStatus(`${_objects.length} objects · ${_inventory.length} rendered`);
 });
-
-// Click inventory item to load in next slot
-document.getElementById('inventory-list').addEventListener('click', (e) => {
-  const item = e.target.closest('.inv-item');
-  if (!item) return;
-  const key = item.dataset.key;
-  // Load into slot 0 (TL)
-  loadObjectInSlot(key, 0);
-});
-
-
-// ── Go ───────────────────────────────────────────────────────
-init();
-
 </script>
 </body>
 </html>

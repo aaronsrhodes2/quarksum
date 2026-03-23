@@ -1,0 +1,35 @@
+{
+  "name": "Beer Bottle Colors",
+  "reference": "Materials for Beer Bottle",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "amber_glass": {
+      "label": "Amber glass",
+      "color": [
+        0.55,
+        0.3,
+        0.08
+      ],
+      "reflectance": 0.3,
+      "roughness": 0.05,
+      "density_kg_m3": 2500,
+      "mean_Z": 10,
+      "mean_A": 20,
+      "composition": "Sulfur-carbon tinted glass"
+    },
+    "steel": {
+      "label": "Brushed steel",
+      "color": [
+        0.58,
+        0.6,
+        0.62
+      ],
+      "reflectance": 0.65,
+      "roughness": 0.3,
+      "density_kg_m3": 7800,
+      "mean_Z": 26,
+      "mean_A": 56,
+      "composition": "Fe-C alloy"
+    }
+  }
+}

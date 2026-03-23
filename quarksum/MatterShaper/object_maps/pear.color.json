@@ -1,0 +1,49 @@
+{
+  "name": "Pear Colors",
+  "reference": "Materials for Pear",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "skin_green": {
+      "label": "Green fruit skin",
+      "color": [
+        0.3,
+        0.58,
+        0.15
+      ],
+      "reflectance": 0.08,
+      "roughness": 0.5,
+      "density_kg_m3": 900,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Cellulose + chlorophyll"
+    },
+    "skin_yellow": {
+      "label": "Yellow fruit skin",
+      "color": [
+        0.92,
+        0.82,
+        0.15
+      ],
+      "reflectance": 0.1,
+      "roughness": 0.45,
+      "density_kg_m3": 900,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Cellulose + carotenoids"
+    },
+    "stem_brown": {
+      "label": "Brown stem",
+      "color": [
+        0.35,
+        0.25,
+        0.12
+      ],
+      "reflectance": 0.05,
+      "roughness": 0.8,
+      "density_kg_m3": 600,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Lignin + cellulose"
+    }
+  }
+}

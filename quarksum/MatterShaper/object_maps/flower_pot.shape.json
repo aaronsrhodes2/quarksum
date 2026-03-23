@@ -1,0 +1,69 @@
+{
+  "name": "Flower Pot",
+  "reference": "Standard terracotta pot \u2014 15cm tall, 16cm top diameter",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "saucer",
+      "label": "Saucer",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.02,
+        0
+      ],
+      "radii": [
+        0.9,
+        0.025,
+        0.9
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "body",
+      "label": "Pot body",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.05,
+        0
+      ],
+      "height": 1.4,
+      "base_radius": 0.5,
+      "top_radius": 0.78,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "rim",
+      "label": "Rim lip",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.44,
+        0
+      ],
+      "radii": [
+        0.82,
+        0.04,
+        0.82
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "terracotta"
+    }
+  ]
+}

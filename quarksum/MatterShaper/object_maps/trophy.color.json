@@ -1,0 +1,35 @@
+{
+  "name": "Trophy Cup Colors",
+  "reference": "Materials for Trophy Cup",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "dark_wood": {
+      "label": "Dark walnut wood",
+      "color": [
+        0.35,
+        0.22,
+        0.12
+      ],
+      "reflectance": 0.12,
+      "roughness": 0.5,
+      "density_kg_m3": 650,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Cellulose + lignin"
+    },
+    "brass": {
+      "label": "Polished brass",
+      "color": [
+        0.78,
+        0.62,
+        0.22
+      ],
+      "reflectance": 0.72,
+      "roughness": 0.15,
+      "density_kg_m3": 8500,
+      "mean_Z": 29,
+      "mean_A": 63,
+      "composition": "Cu-Zn alloy"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Table Lamp Colors",
+  "reference": "Materials for Table Lamp",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "brass": {
+      "label": "Polished brass",
+      "color": [
+        0.78,
+        0.62,
+        0.22
+      ],
+      "reflectance": 0.72,
+      "roughness": 0.15,
+      "density_kg_m3": 8500,
+      "mean_Z": 29,
+      "mean_A": 63,
+      "composition": "Cu-Zn alloy"
+    },
+    "cream_fabric": {
+      "label": "Cream linen",
+      "color": [
+        0.88,
+        0.82,
+        0.72
+      ],
+      "reflectance": 0.05,
+      "roughness": 0.9,
+      "density_kg_m3": 300,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Linen fiber"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "name": "Ceramic Vase",
+  "reference": "Decorative vase \u2014 30cm tall, 12cm max diameter",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "base",
+      "label": "Base ring",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.02,
+        0
+      ],
+      "radii": [
+        0.35,
+        0.025,
+        0.35
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "blue_ceramic"
+    },
+    {
+      "id": "body_low",
+      "label": "Lower body",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0,
+        0
+      ],
+      "height": 0.8,
+      "base_radius": 0.32,
+      "top_radius": 0.58,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "blue_ceramic"
+    },
+    {
+      "id": "body_wide",
+      "label": "Widest section",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.0,
+        0
+      ],
+      "radii": [
+        0.6,
+        0.3,
+        0.6
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "blue_ceramic"
+    },
+    {
+      "id": "body_upper",
+      "label": "Upper taper",
+      "type": "cone",
+      "base_pos": [
+        0,
+        1.2,
+        0
+      ],
+      "height": 0.8,
+      "base_radius": 0.55,
+      "top_radius": 0.3,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "blue_ceramic"
+    },
+    {
+      "id": "neck",
+      "label": "Neck",
+      "type": "cone",
+      "base_pos": [
+        0,
+        1.95,
+        0
+      ],
+      "height": 0.6,
+      "base_radius": 0.28,
+      "top_radius": 0.35,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "blue_ceramic"
+    },
+    {
+      "id": "rim",
+      "label": "Rim",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        2.55,
+        0
+      ],
+      "radii": [
+        0.36,
+        0.02,
+        0.36
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "blue_ceramic"
+    }
+  ]
+}

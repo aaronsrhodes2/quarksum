@@ -1,0 +1,128 @@
+{
+  "name": "Wine Glass",
+  "reference": "Standard 250ml wine glass \u2014 21cm tall, 8cm bowl dia",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "base",
+      "label": "Circular base",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.02,
+        0
+      ],
+      "radii": [
+        0.38,
+        0.02,
+        0.38
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "clear_glass"
+    },
+    {
+      "id": "stem",
+      "label": "Stem",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.04,
+        0
+      ],
+      "height": 0.9,
+      "base_radius": 0.04,
+      "top_radius": 0.04,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "clear_glass"
+    },
+    {
+      "id": "bowl_base",
+      "label": "Bowl base taper",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.9,
+        0
+      ],
+      "height": 0.4,
+      "base_radius": 0.05,
+      "top_radius": 0.38,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "clear_glass"
+    },
+    {
+      "id": "bowl_mid",
+      "label": "Bowl widest",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        1.4,
+        0
+      ],
+      "radii": [
+        0.4,
+        0.2,
+        0.4
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "clear_glass"
+    },
+    {
+      "id": "bowl_top",
+      "label": "Bowl narrowing",
+      "type": "cone",
+      "base_pos": [
+        0,
+        1.5,
+        0
+      ],
+      "height": 0.5,
+      "base_radius": 0.38,
+      "top_radius": 0.34,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "clear_glass"
+    },
+    {
+      "id": "rim",
+      "label": "Rim",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        2.0,
+        0
+      ],
+      "radii": [
+        0.35,
+        0.015,
+        0.35
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "clear_glass"
+    }
+  ]
+}

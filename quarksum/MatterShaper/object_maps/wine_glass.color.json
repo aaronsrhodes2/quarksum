@@ -1,0 +1,21 @@
+{
+  "name": "Wine Glass Colors",
+  "reference": "Materials for Wine Glass",
+  "provenance": "Procedural generator material palette",
+  "materials": {
+    "clear_glass": {
+      "label": "Clear glass",
+      "color": [
+        0.85,
+        0.9,
+        0.88
+      ],
+      "reflectance": 0.45,
+      "roughness": 0.02,
+      "density_kg_m3": 2500,
+      "mean_Z": 10,
+      "mean_A": 20,
+      "composition": "Soda-lime glass"
+    }
+  }
+}

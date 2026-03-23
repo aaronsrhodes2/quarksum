@@ -1,0 +1,90 @@
+{
+  "name": "Pear",
+  "reference": "Bartlett pear \u2014 10cm tall, 7cm wide at base",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "base",
+      "label": "Wide bottom",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.3,
+        0
+      ],
+      "radii": [
+        0.35,
+        0.32,
+        0.35
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "skin_green"
+    },
+    {
+      "id": "mid",
+      "label": "Mid taper",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.55,
+        0
+      ],
+      "radii": [
+        0.28,
+        0.22,
+        0.28
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "skin_green"
+    },
+    {
+      "id": "neck",
+      "label": "Narrow neck",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.78,
+        0
+      ],
+      "radii": [
+        0.16,
+        0.18,
+        0.16
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "skin_yellow"
+    },
+    {
+      "id": "stem",
+      "label": "Stem",
+      "type": "cone",
+      "base_pos": [
+        0,
+        0.92,
+        0
+      ],
+      "height": 0.15,
+      "base_radius": 0.02,
+      "top_radius": 0.01,
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "stem_brown"
+    }
+  ]
+}

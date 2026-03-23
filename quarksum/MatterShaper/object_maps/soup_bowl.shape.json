@@ -1,0 +1,71 @@
+{
+  "name": "Soup Bowl",
+  "reference": "Ceramic soup bowl \u2014 8cm tall, 16cm diameter",
+  "scale_note": "1 unit = 10cm",
+  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "layers": [
+    {
+      "id": "outer",
+      "label": "Outer wall",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.25,
+        0
+      ],
+      "radii": [
+        0.8,
+        0.4,
+        0.8
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "base",
+      "label": "Flat base",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.02,
+        0
+      ],
+      "radii": [
+        0.45,
+        0.025,
+        0.45
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "white_ceramic"
+    },
+    {
+      "id": "rim",
+      "label": "Rim",
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.55,
+        0
+      ],
+      "radii": [
+        0.82,
+        0.02,
+        0.82
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": "white_ceramic"
+    }
+  ]
+}

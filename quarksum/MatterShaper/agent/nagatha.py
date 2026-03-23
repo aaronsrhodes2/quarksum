@@ -119,6 +119,15 @@ COLOR_MAP
 {{...}}
 ```
 
+CRITICAL FIELD NAME RULES — use EXACTLY these keys, no substitutes:
+- Shape map top-level array key: "layers" (NOT "shape", "primitives", "components")
+- Layer position key: "pos" (NOT "position", "center", "location")
+- Ellipsoid size key: "radii" (NOT "size", "scale", "dimensions")
+- Sphere size key: "radius" (NOT "size", "r")
+- Use type "cone" for cylinders/rods (NOT "cylinder") — set base_radius == top_radius for cylinders
+- Each layer MUST have a "material" key referencing a material_id in the COLOR_MAP
+- Materials must be a JSON object {{"id": {{...}}}} NOT a list
+
 Remember:
 - Research real dimensions (cite your source in provenance)
 - Use 1 unit = 10cm scale
@@ -145,7 +154,7 @@ class LLMBackend:
 class OllamaBackend(LLMBackend):
     """Local LLM via Ollama (fully offline)."""
 
-    def __init__(self, model="llama3.1:8b", host="http://localhost:11434"):
+    def __init__(self, model="qwen2.5:14b", host="http://localhost:11434"):
         self.model = model
         self.host = host
 
@@ -265,17 +274,205 @@ def parse_maps_from_response(text):
         except json.JSONDecodeError:
             continue
 
+        # Unwrap if model nested content under the label key
+        # e.g. {"SHAPE_MAP": {"layers": [...]}} → {"layers": [...]}
+        for wrapper_key in ('SHAPE_MAP', 'COLOR_MAP', 'shape_map', 'color_map',
+                            'SHAPE MAP', 'COLOR MAP'):
+            if wrapper_key in parsed and isinstance(parsed[wrapper_key], dict):
+                parsed = parsed[wrapper_key]
+                break
+
+        # Normalize materials list → dict if model returned list format
+        # e.g. {"materials": [{"id": "wood", ...}]} → {"materials": {"wood": {...}}}
+        if 'materials' in parsed and isinstance(parsed['materials'], list):
+            mats = {}
+            for i, m in enumerate(parsed['materials']):
+                if isinstance(m, dict):
+                    mat_key = m.get('id', m.get('material_id', f'mat_{i}'))
+                    mats[mat_key] = {k: v for k, v in m.items() if k not in ('id', 'material_id')}
+                else:
+                    mats[f'mat_{i}'] = m
+            parsed['materials'] = mats
+
         # Determine if this is a shape or color map
+        has_layers = 'layers' in parsed
+        has_materials = 'materials' in parsed
         if label and 'SHAPE' in label:
             shape_map = parsed
         elif label and 'COLOR' in label:
             color_map = parsed
-        elif 'layers' in parsed:
+        elif has_layers and has_materials:
+            # Single block with both — split it
+            shape_map = {k: v for k, v in parsed.items() if k != 'materials'}
+            color_map = {'materials': parsed['materials']}
+        elif has_layers:
             shape_map = parsed
-        elif 'materials' in parsed:
+        elif has_materials:
             color_map = parsed
 
+    # Apply field-name normalizations
+    if shape_map:
+        shape_map = _normalize_shape_map(shape_map)
+    if color_map or shape_map:
+        color_map = _normalize_color_map(color_map or {}, shape_map)
+
     return shape_map, color_map
+
+
+def _normalize_shape_map(shape_map):
+    """Normalize alternate field names that models like qwen2.5 may produce."""
+    if not isinstance(shape_map, dict):
+        return shape_map
+
+    # "shape" key → "layers"
+    if 'shape' in shape_map and 'layers' not in shape_map:
+        shape_map['layers'] = shape_map.pop('shape')
+
+    # Also handle "primitives", "components", "objects" as aliases
+    for alias in ('primitives', 'components', 'objects'):
+        if alias in shape_map and 'layers' not in shape_map:
+            shape_map['layers'] = shape_map.pop(alias)
+
+    layers = shape_map.get('layers', [])
+    if not isinstance(layers, list):
+        return shape_map
+
+    for layer in layers:
+        if not isinstance(layer, dict):
+            continue
+
+        # "position" → "pos"
+        if 'position' in layer and 'pos' not in layer:
+            layer['pos'] = layer.pop('position')
+
+        # "size" → "radii" (for ellipsoid) or extract radius (for sphere)
+        if 'size' in layer and 'radii' not in layer and 'radius' not in layer:
+            sz = layer.pop('size')
+            lt = layer.get('type', '')
+            if lt == 'sphere' and isinstance(sz, list) and len(sz) >= 1:
+                layer['radius'] = max(sz) if sz else 0.1
+            else:
+                layer['radii'] = sz if isinstance(sz, list) else [sz, sz, sz]
+
+        # "cylinder" → "cone" with equal radii (a cylinder is a degenerate cone)
+        if layer.get('type') == 'cylinder':
+            layer['type'] = 'cone'
+            # size already handled above, map to cone fields if needed
+            if 'radii' in layer and 'base_radius' not in layer:
+                r = layer['radii'][0] if isinstance(layer['radii'], list) else layer['radii']
+                h = layer['radii'][1] if isinstance(layer['radii'], list) and len(layer['radii']) > 1 else r
+                layer['base_radius'] = r
+                layer['top_radius'] = r
+                layer['height'] = h * 2
+                layer.pop('radii', None)
+            if 'pos' in layer and 'base_pos' not in layer:
+                p = layer.pop('pos')
+                layer['base_pos'] = p
+
+        # Cone: normalize pos→base_pos, fill missing height/radii
+        if layer.get('type') == 'cone':
+            # pos → base_pos (model sometimes puts center pos)
+            if 'pos' in layer and 'base_pos' not in layer:
+                p = layer.pop('pos')
+                layer['base_pos'] = p
+            # Fill missing height
+            if 'height' not in layer:
+                # Try to derive from radii if present
+                r = layer.get('radii')
+                if isinstance(r, list) and len(r) > 1:
+                    layer['height'] = r[1] * 2
+                    layer.setdefault('base_radius', r[0])
+                    layer.setdefault('top_radius', r[0])
+                    layer.pop('radii', None)
+                else:
+                    layer['height'] = 0.5  # default fallback
+            # Fill missing radii
+            if 'base_radius' not in layer:
+                layer['base_radius'] = 0.2
+            if 'top_radius' not in layer:
+                layer['top_radius'] = layer['base_radius']
+
+        # "center" → "pos"
+        if 'center' in layer and 'pos' not in layer and 'base_pos' not in layer:
+            layer['pos'] = layer.pop('center')
+
+        # Extract inline color → synthetic material reference
+        if 'material' not in layer and ('color' in layer or 'colour' in layer):
+            color_val = layer.pop('color', layer.pop('colour', None))
+            mat_id = f"mat_{layer.get('id', len(layers))}"
+            layer['_inline_color'] = color_val
+            layer['material'] = mat_id
+
+    return shape_map
+
+
+def _normalize_color_map(color_map, shape_map):
+    """Build synthetic materials from inline layer colors if color_map is missing/empty."""
+    if not isinstance(color_map, dict):
+        color_map = {}
+
+    if 'materials' not in color_map:
+        color_map['materials'] = {}
+
+    mats = color_map['materials']
+    if not isinstance(mats, dict):
+        color_map['materials'] = {}
+        mats = color_map['materials']
+
+    # Normalize each material's fields
+    for mat_id, mat in list(mats.items()):
+        if not isinstance(mat, dict):
+            continue
+        # "name" → "label"
+        if 'name' in mat and 'label' not in mat:
+            mat['label'] = mat.pop('name')
+        # Normalize color from 0-255 to 0-1
+        color = mat.get('color')
+        if isinstance(color, list) and len(color) == 3:
+            if any(c > 1 for c in color):
+                mat['color'] = [round(c / 255, 4) for c in color]
+        # Fill missing required fields with defaults
+        mat.setdefault('label', mat_id.replace('_', ' ').title())
+        mat.setdefault('reflectance', 0.1 if mat.get('metallic') else 0.05)
+        mat.setdefault('roughness', 0.3 if mat.get('metallic') else 0.6)
+        mat.setdefault('density_kg_m3', 7800 if mat.get('metallic') else 1000)
+        mat.setdefault('mean_Z', 26 if mat.get('metallic') else 7)
+        mat.setdefault('mean_A', 56 if mat.get('metallic') else 14)
+        mat.setdefault('composition', 'Auto-estimated material')
+
+    # Harvest inline colors from layers
+    for layer in (shape_map or {}).get('layers', []):
+        if not isinstance(layer, dict):
+            continue
+        inline = layer.pop('_inline_color', None)
+        mat_id = layer.get('material')
+        if inline and mat_id and mat_id not in mats:
+            # Convert hex or list color
+            if isinstance(inline, str) and inline.startswith('#'):
+                hx = inline.lstrip('#')
+                if len(hx) == 6:
+                    r = int(hx[0:2], 16) / 255
+                    g = int(hx[2:4], 16) / 255
+                    b = int(hx[4:6], 16) / 255
+                    color_list = [round(r, 3), round(g, 3), round(b, 3)]
+                else:
+                    color_list = [0.5, 0.5, 0.5]
+            elif isinstance(inline, list):
+                color_list = inline
+            else:
+                color_list = [0.5, 0.5, 0.5]
+            mats[mat_id] = {
+                'label': mat_id.replace('_', ' ').title(),
+                'color': color_list,
+                'reflectance': 0.05,
+                'roughness': 0.6,
+                'density_kg_m3': 1000,
+                'mean_Z': 7,
+                'mean_A': 14,
+                'composition': 'Unknown material (auto-synthesized)',
+            }
+
+    return color_map
 
 
 # ═══════════════════════════════════════════════════════════
