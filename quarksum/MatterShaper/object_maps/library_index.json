@@ -628,13 +628,29 @@
       ],
       "shape_path": "object_maps/ladder.shape.json",
       "color_path": "object_maps/ladder.color.json",
-      "primitives": 15,
+      "primitives": 7,
       "materials": 2,
       "approved": true,
-      "created_date": "2026-03-23T06:15:33.915942+00:00",
+      "created_date": "2026-03-23T06:49:29.333292+00:00",
       "created_by": "nagitha",
       "approved_by": "auto",
-      "approved_date": "2026-03-23T06:15:33.916238+00:00"
+      "approved_date": "2026-03-23T06:49:29.333589+00:00"
+    },
+    "brick": {
+      "key": "brick",
+      "name": "brick",
+      "aliases": [
+        "brick"
+      ],
+      "shape_path": "object_maps/brick.shape.json",
+      "color_path": "object_maps/brick.color.json",
+      "primitives": 2,
+      "materials": 2,
+      "approved": true,
+      "created_date": "2026-03-23T06:40:19.009479+00:00",
+      "created_by": "nagitha",
+      "approved_by": "auto",
+      "approved_date": "2026-03-23T06:40:19.009775+00:00"
     }
   }
 }

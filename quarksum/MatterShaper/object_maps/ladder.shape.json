@@ -2,274 +2,95 @@
   "layers": [
     {
       "type": "cone",
-      "base_radius": 0.3,
-      "top_radius": 0.3,
+      "base_radius": 0.2,
+      "top_radius": 0.2,
       "material": "aluminum",
       "base_pos": [
         0,
-        -1.5,
+        -1,
         0
+      ],
+      "height": 0.5
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.35,
+        0,
+        0
+      ],
+      "radius": 0.1,
+      "material": "black_rubber"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.35,
+        0,
+        0
+      ],
+      "radius": 0.1,
+      "material": "black_rubber"
+    },
+    {
+      "type": "cone",
+      "base_radius": 0.1,
+      "top_radius": 0,
+      "material": "aluminum",
+      "base_pos": [
+        0,
+        2.8,
+        -1.4
       ],
       "height": 0.5
     },
     {
       "type": "cone",
-      "base_radius": 0.3,
-      "top_radius": 0.3,
+      "base_radius": 0.1,
+      "top_radius": 0,
       "material": "aluminum",
       "base_pos": [
         0,
-        -3,
-        0
+        2.8,
+        1.4
       ],
       "height": 0.5
     },
     {
       "type": "cone",
-      "base_radius": 0.3,
-      "top_radius": 0.3,
+      "base_radius": 0.1,
+      "top_radius": 0,
       "material": "aluminum",
       "base_pos": [
         0,
-        -4.5,
-        0
+        -0.6,
+        -1.4
       ],
       "height": 0.5
     },
     {
       "type": "cone",
-      "base_radius": 0.3,
-      "top_radius": 0.3,
+      "base_radius": 0.1,
+      "top_radius": 0,
       "material": "aluminum",
       "base_pos": [
         0,
-        -6,
-        0
+        -0.6,
+        1.4
       ],
       "height": 0.5
-    },
-    {
-      "type": "cone",
-      "base_radius": 0.3,
-      "top_radius": 0.3,
-      "material": "aluminum",
-      "base_pos": [
-        0,
-        -7.5,
-        0
-      ],
-      "height": 0.5
-    },
-    {
-      "id": "handle_0",
-      "label": "Handle segment 1 (attachment)",
-      "type": "ellipsoid",
-      "pos": [
-        -2,
-        0,
-        0
-      ],
-      "radii": [
-        0.08,
-        0.06,
-        0.045
-      ],
-      "rotate": [
-        0,
-        0,
-        0.3
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_1",
-      "label": "Handle segment 2",
-      "type": "ellipsoid",
-      "pos": [
-        2,
-        0,
-        0
-      ],
-      "radii": [
-        0.055,
-        0.07,
-        0.04
-      ],
-      "rotate": [
-        0,
-        0,
-        0.4666666666666667
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_2",
-      "label": "Handle segment 3",
-      "type": "ellipsoid",
-      "pos": [
-        -2,
-        1.5,
-        0
-      ],
-      "radii": [
-        0.045,
-        0.065,
-        0.038
-      ],
-      "rotate": [
-        0,
-        0,
-        0.3333333333333333
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_3",
-      "label": "Handle segment 4",
-      "type": "ellipsoid",
-      "pos": [
-        2,
-        1.5,
-        0
-      ],
-      "radii": [
-        0.045,
-        0.065,
-        0.038
-      ],
-      "rotate": [
-        0,
-        0,
-        0.2
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_4",
-      "label": "Handle segment 5",
-      "type": "ellipsoid",
-      "pos": [
-        -2,
-        3,
-        0
-      ],
-      "radii": [
-        0.045,
-        0.065,
-        0.038
-      ],
-      "rotate": [
-        0,
-        0,
-        0.0666666666666667
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_5",
-      "label": "Handle segment 6",
-      "type": "ellipsoid",
-      "pos": [
-        2,
-        3,
-        0
-      ],
-      "radii": [
-        0.045,
-        0.065,
-        0.038
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.0666666666666667
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_6",
-      "label": "Handle segment 7",
-      "type": "ellipsoid",
-      "pos": [
-        -2,
-        4.5,
-        0
-      ],
-      "radii": [
-        0.045,
-        0.065,
-        0.038
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.19999999999999996
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_7",
-      "label": "Handle segment 8",
-      "type": "ellipsoid",
-      "pos": [
-        2,
-        4.5,
-        0
-      ],
-      "radii": [
-        0.045,
-        0.065,
-        0.038
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.3333333333333333
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_8",
-      "label": "Handle segment 9",
-      "type": "ellipsoid",
-      "pos": [
-        -2,
-        6,
-        0
-      ],
-      "radii": [
-        0.055,
-        0.07,
-        0.04
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.46666666666666656
-      ],
-      "material": "dark_oak_wood"
-    },
-    {
-      "id": "handle_9",
-      "label": "Handle segment 10 (attachment)",
-      "type": "ellipsoid",
-      "pos": [
-        2,
-        6,
-        0
-      ],
-      "radii": [
-        0.08,
-        0.06,
-        0.045
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.3
-      ],
-      "material": "dark_oak_wood"
     }
   ],
-  "provenance": "Dimensions based on standard step ladder dimensions (source: https://www.homedepot.com/p/Stanley-30-in-Folding-Aluminum-Step-Ladder-with-Wide-Steps-and-Easy-Grip-Handles-1498527/206404496)"
+  "provenance": "Dimensions based on a standard step ladder (source: Wikipedia).",
+  "character_detail": {
+    "type": "cone",
+    "pos": [
+      0,
+      2.4,
+      -1
+    ],
+    "base_radius": 0.05,
+    "top_radius": 0.03,
+    "material": "chrome"
+  }
 }

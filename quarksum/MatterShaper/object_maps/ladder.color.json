@@ -14,19 +14,19 @@
       "mean_A": 27,
       "composition": "Al (aluminium alloy)"
     },
-    "dark_oak_wood": {
-      "label": "dark_oak_wood",
+    "black_rubber": {
+      "label": "black_rubber",
       "color": [
-        0.28,
-        0.18,
-        0.1
+        0.14,
+        0.13,
+        0.12
       ],
-      "reflectance": 0.04,
-      "roughness": 0.65,
-      "density_kg_m3": 850,
+      "reflectance": 0.03,
+      "roughness": 0.85,
+      "density_kg_m3": 1200,
       "mean_Z": 6,
       "mean_A": 12,
-      "composition": "Cellulose + lignin (hardwood)"
+      "composition": "C₅H₈ (natural rubber / polyisoprene)"
     }
   },
   "provenance": "auto-resolved from MatterShaper material library"

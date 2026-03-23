@@ -1,0 +1,33 @@
+{
+  "materials": {
+    "red_brick": {
+      "label": "red_brick",
+      "color": [
+        0.8,
+        0.1,
+        0.08
+      ],
+      "reflectance": 0.08,
+      "roughness": 0.55,
+      "density_kg_m3": 1500,
+      "mean_Z": 8,
+      "mean_A": 16,
+      "composition": "Fe₂O₃ pigment + acrylic binder"
+    },
+    "mortar": {
+      "label": "mortar",
+      "color": [
+        0.55,
+        0.56,
+        0.58
+      ],
+      "reflectance": 0.6,
+      "roughness": 0.15,
+      "density_kg_m3": 7800,
+      "mean_Z": 26,
+      "mean_A": 56,
+      "composition": "Fe + C (carbon steel)"
+    }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
+}

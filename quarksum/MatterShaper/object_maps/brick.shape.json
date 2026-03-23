@@ -1,0 +1,37 @@
+{
+  "layers": [
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0,
+        0
+      ],
+      "radii": [
+        0.15,
+        0.075,
+        0.075
+      ],
+      "material": "red_brick"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.0625,
+        0
+      ],
+      "radii": [
+        0.14875,
+        0.0375,
+        0.0375
+      ],
+      "material": "mortar"
+    }
+  ],
+  "provenance": {
+    "source": "Dimensions from standard brick dimensions (29 cm x 14 cm x 7 cm) scaled to units.",
+    "scale_factor": "1 unit = 10 cm",
+    "research_date": "2023-10-05"
+  }
+}
