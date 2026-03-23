@@ -26,5 +26,8 @@ renders/
 *.xlsx
 *.docx
 
+# IDE settings
+.vscode/
+
 # Materia submodule / large external dirs
 quarksum/Materia/qamss
