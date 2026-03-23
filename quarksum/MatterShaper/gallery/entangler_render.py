@@ -5,9 +5,13 @@ Converts Nagatha's .shape.json + .color.json into entangler objects
 and renders via the push projection pipeline.
 
 Primitive mapping:
-  sphere   → EntanglerSphere
+  sphere    → EntanglerSphere
   ellipsoid → EntanglerEllipsoid (with rotation)
-  cone     → 8 stacked EntanglerEllipsoid slices
+  cone      → 8 stacked EntanglerEllipsoid slices
+  box       → EntanglerBox
+  cylinder  → EntanglerCylinder
+  plane     → EntanglerPlane
+  torus     → EntanglerTorus
 """
 
 import sys
@@ -25,7 +29,9 @@ if PROJECT_DIR not in sys.path:
 
 from mattershaper.render.entangler.vec import Vec3
 from mattershaper.render.entangler.shapes import (
-    EntanglerSphere, EntanglerEllipsoid, rotation_matrix,
+    EntanglerSphere, EntanglerEllipsoid,
+    EntanglerBox, EntanglerCylinder, EntanglerPlane, EntanglerTorus,
+    rotation_matrix,
 )
 from mattershaper.render.entangler.surface_nodes import generate_surface_nodes
 from mattershaper.render.entangler.projection import PushCamera, project_node
@@ -105,6 +111,34 @@ def compute_bounding_box(shape_map):
             maxs[1] = max(maxs[1], p[1] + h)
             maxs[2] = max(maxs[2], p[2] + r_max)
 
+        elif ltype == 'box':
+            p = _get_pos(layer)
+            s = layer.get('size', [1, 1, 1])
+            for i, si in enumerate(s):
+                mins[i] = min(mins[i], p[i] - si / 2)
+                maxs[i] = max(maxs[i], p[i] + si / 2)
+
+        elif ltype == 'cylinder':
+            p = _get_pos(layer)
+            r = layer.get('radius', 0.5)
+            h = layer.get('height', 1.0)
+            mins[0] = min(mins[0], p[0] - r)
+            mins[1] = min(mins[1], p[1] - h / 2)
+            mins[2] = min(mins[2], p[2] - r)
+            maxs[0] = max(maxs[0], p[0] + r)
+            maxs[1] = max(maxs[1], p[1] + h / 2)
+            maxs[2] = max(maxs[2], p[2] + r)
+
+        elif ltype == 'torus':
+            p = _get_pos(layer)
+            R = layer.get('major_radius', 0.5)
+            r = layer.get('minor_radius', 0.15)
+            for i in (0, 2):
+                mins[i] = min(mins[i], p[i] - R - r)
+                maxs[i] = max(maxs[i], p[i] + R + r)
+            mins[1] = min(mins[1], p[1] - r)
+            maxs[1] = max(maxs[1], p[1] + r)
+
     cx = (mins[0] + maxs[0]) / 2
     cy = (mins[1] + maxs[1]) / 2
     cz = (mins[2] + maxs[2]) / 2
@@ -183,6 +217,42 @@ def shape_map_to_entangler_objects(shape_map, color_map):
                     material=mat,
                 )
                 objects.append(obj)
+
+        elif ltype == 'box':
+            p   = _get_pos(layer)
+            s   = layer.get('size', [1, 1, 1])
+            rot = layer.get('rotate', [0, 0, 0])
+            obj = EntanglerBox(
+                center=Vec3(p[0], p[1], p[2]),
+                half=Vec3(s[0] / 2, s[1] / 2, s[2] / 2),
+                rotation=rotation_matrix(rot[0], rot[1], rot[2]),
+                material=mat,
+            )
+            objects.append(obj)
+
+        elif ltype == 'cylinder':
+            p   = _get_pos(layer)
+            rot = layer.get('rotate', [0, 0, 0])
+            obj = EntanglerCylinder(
+                center=Vec3(p[0], p[1], p[2]),
+                radius=float(layer.get('radius', 0.5)),
+                height=float(layer.get('height', 1.0)),
+                rotation=rotation_matrix(rot[0], rot[1], rot[2]),
+                material=mat,
+            )
+            objects.append(obj)
+
+        elif ltype == 'torus':
+            p   = _get_pos(layer)
+            rot = layer.get('rotate', [0, 0, 0])
+            obj = EntanglerTorus(
+                center=Vec3(p[0], p[1], p[2]),
+                major_radius=float(layer.get('major_radius', 0.5)),
+                minor_radius=float(layer.get('minor_radius', 0.15)),
+                rotation=rotation_matrix(rot[0], rot[1], rot[2]),
+                material=mat,
+            )
+            objects.append(obj)
 
     return objects
 

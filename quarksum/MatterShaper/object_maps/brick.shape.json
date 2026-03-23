@@ -1,37 +1,104 @@
 {
   "layers": [
     {
-      "type": "ellipsoid",
+      "type": "box",
       "pos": [
         0,
-        0,
+        -0.15,
         0
       ],
-      "radii": [
-        0.15,
-        0.075,
-        0.075
+      "size": [
+        0.24,
+        0.06,
+        0.12
       ],
       "material": "red_brick"
     },
     {
+      "id": "handle_0",
+      "label": "Handle segment 1 (attachment)",
       "type": "ellipsoid",
       "pos": [
-        0,
-        0.0625,
-        0
+        0.03,
+        -0.09,
+        0.06
       ],
       "radii": [
-        0.14875,
-        0.0375,
-        0.0375
+        0.15625,
+        0.1171875,
+        0.087890625
+      ],
+      "rotate": [
+        0,
+        0,
+        0.3
+      ],
+      "material": "mortar"
+    },
+    {
+      "id": "handle_1",
+      "label": "Handle segment 2",
+      "type": "ellipsoid",
+      "pos": [
+        -0.03,
+        -0.09,
+        0.06
+      ],
+      "radii": [
+        0.107421875,
+        0.13671875000000003,
+        0.078125
+      ],
+      "rotate": [
+        0,
+        0,
+        0.2
+      ],
+      "material": "mortar"
+    },
+    {
+      "id": "handle_2",
+      "label": "Handle segment 3",
+      "type": "ellipsoid",
+      "pos": [
+        0.03,
+        -0.09,
+        -0.06
+      ],
+      "radii": [
+        0.107421875,
+        0.13671875000000003,
+        0.078125
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.19999999999999996
+      ],
+      "material": "mortar"
+    },
+    {
+      "id": "handle_3",
+      "label": "Handle segment 4 (attachment)",
+      "type": "ellipsoid",
+      "pos": [
+        -0.03,
+        -0.09,
+        -0.06
+      ],
+      "radii": [
+        0.15625,
+        0.1171875,
+        0.087890625
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.3
       ],
       "material": "mortar"
     }
   ],
-  "provenance": {
-    "source": "Dimensions from standard brick dimensions (29 cm x 14 cm x 7 cm) scaled to units.",
-    "scale_factor": "1 unit = 10 cm",
-    "research_date": "2023-10-05"
-  }
+  "provenance": "Dimensions based on standard brick dimensions (24cm x 6cm x 12cm) and mortar joints.",
+  "character_detail": "A small crack along the top surface of the brick."
 }

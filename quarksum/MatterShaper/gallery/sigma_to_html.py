@@ -55,6 +55,26 @@ def _bbox(shape_map):
             xs += [bp[0] - mr, bp[0] + mr]
             ys += [bp[1], bp[1] + h]
             zs += [bp[2] - mr, bp[2] + mr]
+        elif t == 'box':
+            p = layer.get('pos', [0, 0, 0])
+            s = layer.get('size', [1, 1, 1])
+            xs += [p[0] - s[0]/2, p[0] + s[0]/2]
+            ys += [p[1] - s[1]/2, p[1] + s[1]/2]
+            zs += [p[2] - s[2]/2, p[2] + s[2]/2]
+        elif t == 'cylinder':
+            p = layer.get('pos', [0, 0, 0])
+            r = layer.get('radius', 0.5)
+            h = layer.get('height', 1.0)
+            xs += [p[0] - r, p[0] + r]
+            ys += [p[1] - h/2, p[1] + h/2]
+            zs += [p[2] - r, p[2] + r]
+        elif t == 'torus':
+            p = layer.get('pos', [0, 0, 0])
+            R = layer.get('major_radius', 0.5)
+            r = layer.get('minor_radius', 0.15)
+            xs += [p[0] - R - r, p[0] + R + r]
+            ys += [p[1] - r, p[1] + r]
+            zs += [p[2] - R - r, p[2] + R + r]
 
     if not xs:
         return {'cx': 0.0, 'cy': 0.5, 'cz': 0.0, 'extent': 1.0}
@@ -228,6 +248,50 @@ def _layers_js(shape_map):
                 f"var g=new THREE.CylinderGeometry({tr:.5f},{br:.5f},{h:.5f},32);"
                 f"var m=new THREE.Mesh(g,{mat_ref});"
                 f"m.position.set({float(bp[0]):.5f},{cy:.5f},{float(bp[2]):.5f});"
+                f"m.rotation.set({float(rot[0]):.5f},{float(rot[1]):.5f},{float(rot[2]):.5f});"
+                f"m.castShadow=true;obj.add(m);"
+                f"}})();"
+            )
+
+        elif t == 'box':
+            p   = layer.get('pos', [0, 0, 0])
+            s   = layer.get('size', [1, 1, 1])
+            rot = layer.get('rotate', [0, 0, 0])
+            lines.append(
+                f"(function(){{"
+                f"var g=new THREE.BoxGeometry({float(s[0]):.5f},{float(s[1]):.5f},{float(s[2]):.5f});"
+                f"var m=new THREE.Mesh(g,{mat_ref});"
+                f"m.position.set({float(p[0]):.5f},{float(p[1]):.5f},{float(p[2]):.5f});"
+                f"m.rotation.set({float(rot[0]):.5f},{float(rot[1]):.5f},{float(rot[2]):.5f});"
+                f"m.castShadow=true;obj.add(m);"
+                f"}})();"
+            )
+
+        elif t == 'cylinder':
+            p   = layer.get('pos', [0, 0, 0])
+            r   = max(float(layer.get('radius', 0.5)), 0.005)
+            h   = max(float(layer.get('height', 1.0)), 0.005)
+            rot = layer.get('rotate', [0, 0, 0])
+            lines.append(
+                f"(function(){{"
+                f"var g=new THREE.CylinderGeometry({r:.5f},{r:.5f},{h:.5f},32);"
+                f"var m=new THREE.Mesh(g,{mat_ref});"
+                f"m.position.set({float(p[0]):.5f},{float(p[1]):.5f},{float(p[2]):.5f});"
+                f"m.rotation.set({float(rot[0]):.5f},{float(rot[1]):.5f},{float(rot[2]):.5f});"
+                f"m.castShadow=true;obj.add(m);"
+                f"}})();"
+            )
+
+        elif t == 'torus':
+            p   = layer.get('pos', [0, 0, 0])
+            R   = max(float(layer.get('major_radius', 0.5)), 0.01)
+            r   = max(float(layer.get('minor_radius', 0.15)), 0.005)
+            rot = layer.get('rotate', [0, 0, 0])
+            lines.append(
+                f"(function(){{"
+                f"var g=new THREE.TorusGeometry({R:.5f},{r:.5f},16,48);"
+                f"var m=new THREE.Mesh(g,{mat_ref});"
+                f"m.position.set({float(p[0]):.5f},{float(p[1]):.5f},{float(p[2]):.5f});"
                 f"m.rotation.set({float(rot[0]):.5f},{float(rot[1]):.5f},{float(rot[2]):.5f});"
                 f"m.castShadow=true;obj.add(m);"
                 f"}})();"

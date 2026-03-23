@@ -77,3 +77,57 @@ class EntanglerEllipsoid:
         self.rotation = rotation or IDENTITY
         self.material = material
         self.shape_type = 'ellipsoid'
+
+
+class EntanglerBox:
+    """An axis-aligned box with optional rotation.
+    Defined by center and half-extents [hx, hy, hz]."""
+
+    def __init__(self, center=None, half=None, rotation=None, material=None):
+        self.center = center or Vec3(0, 0, 0)
+        self.half = half or Vec3(0.5, 0.5, 0.5)   # half-extents
+        self.rotation = rotation or IDENTITY
+        self.material = material
+        self.shape_type = 'box'
+
+
+class EntanglerCylinder:
+    """An open-ended cylinder (with end-caps) with optional rotation.
+    Axis is Y in local frame."""
+
+    def __init__(self, center=None, radius=1.0, height=1.0,
+                 rotation=None, material=None):
+        self.center = center or Vec3(0, 0, 0)
+        self.radius = radius
+        self.height = height
+        self.rotation = rotation or IDENTITY
+        self.material = material
+        self.shape_type = 'cylinder'
+
+
+class EntanglerPlane:
+    """A finite rectangular patch lying in the XZ plane in local frame.
+    Defined by center, half-widths [hx, hz], with optional rotation."""
+
+    def __init__(self, center=None, half_x=1.0, half_z=1.0,
+                 rotation=None, material=None):
+        self.center = center or Vec3(0, 0, 0)
+        self.half_x = half_x
+        self.half_z = half_z
+        self.rotation = rotation or IDENTITY
+        self.material = material
+        self.shape_type = 'plane'
+
+
+class EntanglerTorus:
+    """A torus with major radius R (centre to tube centre) and minor
+    radius r (tube radius).  Lies in the XZ plane in local frame."""
+
+    def __init__(self, center=None, major_radius=1.0, minor_radius=0.25,
+                 rotation=None, material=None):
+        self.center = center or Vec3(0, 0, 0)
+        self.major_radius = major_radius
+        self.minor_radius = minor_radius
+        self.rotation = rotation or IDENTITY
+        self.material = material
+        self.shape_type = 'torus'

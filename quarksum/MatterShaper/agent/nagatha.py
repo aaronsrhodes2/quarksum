@@ -111,18 +111,24 @@ SHAPE_MAP
 {{...}}
 ```
 
-CRITICAL FIELD NAME RULES — use EXACTLY these keys, no substitutes:
-- Shape map top-level array key: "layers" (NOT "shape", "primitives", "components")
-- Layer position key: "pos" (NOT "position", "center", "location")
-- Ellipsoid size key: "radii" (NOT "size", "scale", "dimensions")
-- Sphere size key: "radius" (NOT "size", "r")
-- Use type "cone" for cylinders/rods (NOT "cylinder") — set base_radius == top_radius for cylinders
+PRIMITIVE TYPES — choose the best fit:
+  "sphere"    — pos, radius
+  "ellipsoid" — pos, radii:[x,y,z], optional rotate:[rx,ry,rz]
+  "cone"      — base_pos, height, base_radius, top_radius, optional rotate
+  "box"       — pos (centre), size:[w,h,d], optional rotate  ← use for flat slabs too
+  "cylinder"  — pos (centre), radius, height, optional rotate
+  "torus"     — pos (centre), major_radius, minor_radius, optional rotate
+
+CRITICAL FIELD NAME RULES:
+- Shape map top-level array key: "layers"
+- Position key: "pos" (all types except cone which uses "base_pos")
+- Ellipsoid: "radii" not "size"
 - Each layer MUST have a "material" key with a descriptive real-world material name
 
-MATERIAL NAMING — use plain descriptive names; the renderer resolves them automatically:
+MATERIAL NAMING — plain names; the renderer resolves them:
   Good: "aluminum", "dark_oak_wood", "black_rubber", "chrome", "red_paint",
         "clear_glass", "terracotta", "cream_fabric", "brass", "wax"
-  Bad:  "rung_material_1", "ladder_side_mat", "mat_A"  ← don't invent IDs
+  Bad:  "rung_material_1", "ladder_side_mat", "mat_A"
 
 Remember:
 - Research real dimensions (cite your source in provenance)
@@ -342,29 +348,43 @@ def _normalize_shape_map(shape_map):
         if 'position' in layer and 'pos' not in layer:
             layer['pos'] = layer.pop('position')
 
-        # "size" → "radii" (for ellipsoid) or extract radius (for sphere)
-        if 'size' in layer and 'radii' not in layer and 'radius' not in layer:
+        lt = layer.get('type', '')
+
+        # Box: normalize size aliases → "size"
+        if lt == 'box':
+            if 'size' not in layer:
+                # try [width, height, depth] fields
+                for alias in ('dimensions', 'extents', 'scale'):
+                    if alias in layer:
+                        layer['size'] = layer.pop(alias); break
+                else:
+                    w = layer.pop('width',  layer.pop('w', None))
+                    h = layer.pop('height', layer.pop('h', None))
+                    d = layer.pop('depth',  layer.pop('d', None))
+                    if w is not None and h is not None and d is not None:
+                        layer['size'] = [w, h, d]
+                    elif 'radii' in layer:
+                        r = layer.pop('radii')
+                        layer['size'] = [r[0]*2, r[1]*2, r[2]*2] if isinstance(r, list) else [r*2]*3
+
+        # Cylinder: normalize size aliases
+        if lt == 'cylinder':
+            if 'radius' not in layer:
+                for alias in ('r', 'rad'):
+                    if alias in layer:
+                        layer['radius'] = layer.pop(alias); break
+            if 'height' not in layer:
+                for alias in ('h', 'len', 'length'):
+                    if alias in layer:
+                        layer['height'] = layer.pop(alias); break
+
+        # "size" → "radii" (for ellipsoid) or "radius" (for sphere)
+        if lt not in ('box', 'cylinder', 'torus') and 'size' in layer and 'radii' not in layer and 'radius' not in layer:
             sz = layer.pop('size')
-            lt = layer.get('type', '')
             if lt == 'sphere' and isinstance(sz, list) and len(sz) >= 1:
                 layer['radius'] = max(sz) if sz else 0.1
             else:
                 layer['radii'] = sz if isinstance(sz, list) else [sz, sz, sz]
-
-        # "cylinder" → "cone" with equal radii (a cylinder is a degenerate cone)
-        if layer.get('type') == 'cylinder':
-            layer['type'] = 'cone'
-            # size already handled above, map to cone fields if needed
-            if 'radii' in layer and 'base_radius' not in layer:
-                r = layer['radii'][0] if isinstance(layer['radii'], list) else layer['radii']
-                h = layer['radii'][1] if isinstance(layer['radii'], list) and len(layer['radii']) > 1 else r
-                layer['base_radius'] = r
-                layer['top_radius'] = r
-                layer['height'] = h * 2
-                layer.pop('radii', None)
-            if 'pos' in layer and 'base_pos' not in layer:
-                p = layer.pop('pos')
-                layer['base_pos'] = p
 
         # Cone: normalize pos→base_pos, fill missing height/radii
         if layer.get('type') == 'cone':
@@ -535,7 +555,7 @@ def validate_maps(shape_map, color_map):
             warnings.append(f"Material '{mat_id}' defined but never used")
 
     # Check layer types
-    valid_types = {'sphere', 'ellipsoid', 'cone', 'plane'}
+    valid_types = {'sphere', 'ellipsoid', 'cone', 'box', 'cylinder', 'torus'}
     for layer in layers:
         lt = layer.get('type')
         if lt not in valid_types:
@@ -552,6 +572,17 @@ def validate_maps(shape_map, color_map):
             for field in ('base_pos', 'height', 'base_radius', 'top_radius'):
                 if field not in layer:
                     errors.append(f"Cone '{layer.get('id')}' missing '{field}'")
+        elif lt == 'box':
+            if 'pos' not in layer: errors.append(f"Box '{layer.get('id')}' missing 'pos'")
+            if 'size' not in layer: errors.append(f"Box '{layer.get('id')}' missing 'size'")
+        elif lt == 'cylinder':
+            if 'pos' not in layer: errors.append(f"Cylinder '{layer.get('id')}' missing 'pos'")
+            if 'radius' not in layer: errors.append(f"Cylinder '{layer.get('id')}' missing 'radius'")
+            if 'height' not in layer: errors.append(f"Cylinder '{layer.get('id')}' missing 'height'")
+        elif lt == 'torus':
+            if 'pos' not in layer: errors.append(f"Torus '{layer.get('id')}' missing 'pos'")
+            if 'major_radius' not in layer: errors.append(f"Torus '{layer.get('id')}' missing 'major_radius'")
+            if 'minor_radius' not in layer: errors.append(f"Torus '{layer.get('id')}' missing 'minor_radius'")
 
     # Check material completeness
     for mat_id, mat in materials.items():

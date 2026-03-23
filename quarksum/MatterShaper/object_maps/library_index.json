@@ -644,13 +644,13 @@
       ],
       "shape_path": "object_maps/brick.shape.json",
       "color_path": "object_maps/brick.color.json",
-      "primitives": 2,
+      "primitives": 5,
       "materials": 2,
       "approved": true,
-      "created_date": "2026-03-23T06:40:19.009479+00:00",
+      "created_date": "2026-03-23T07:07:58.468604+00:00",
       "created_by": "nagitha",
       "approved_by": "auto",
-      "approved_date": "2026-03-23T06:40:19.009775+00:00"
+      "approved_date": "2026-03-23T07:07:58.468885+00:00"
     }
   }
 }
