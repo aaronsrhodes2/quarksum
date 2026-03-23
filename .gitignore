@@ -16,3 +16,15 @@ renders/
 *.gif
 *.svg
 *.png
+*.ppm
+
+# Large binary archives and documents
+*.zip
+*.tar.gz
+*.pdf
+*.pptx
+*.xlsx
+*.docx
+
+# Materia submodule / large external dirs
+quarksum/Materia/qamss
