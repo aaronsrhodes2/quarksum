@@ -1,0 +1,86 @@
+{
+  "name": "Earth's Layers (Simplified)",
+  "description": "Simplified cross-section of the Earth: iron-nickel inner core, molten iron outer core, silicate mantle (MgO + SiO2), granite crust (SiO2 + Al2O3), ocean (seawater), atmosphere (N2 + O2), and the surrounding Interstellar Medium (ISM). Layer ratios approximate real proportions.",
+  "stated_mass_kg": 5.972168398723462e+24,
+  "children": [
+    {
+      "materials": [
+        {
+          "material": "Iron",
+          "ratio": 0.85
+        },
+        {
+          "material": "Nickel",
+          "ratio": 0.15
+        }
+      ],
+      "thickness": 200.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Iron",
+          "ratio": 0.9
+        },
+        {
+          "material": "Nickel",
+          "ratio": 0.1
+        }
+      ],
+      "thickness": 350.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Magnesium Oxide",
+          "ratio": 0.55
+        },
+        {
+          "material": "Silicon Dioxide",
+          "ratio": 0.45
+        }
+      ],
+      "thickness": 450.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Silicon Dioxide",
+          "ratio": 0.7
+        },
+        {
+          "material": "Aluminum Oxide",
+          "ratio": 0.3
+        }
+      ],
+      "thickness": 50.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Seawater",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 60.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Air",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 150.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Interstellar Medium (ISM)",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 200.0
+    }
+  ]
+}

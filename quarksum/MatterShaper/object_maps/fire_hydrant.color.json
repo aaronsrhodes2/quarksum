@@ -1,0 +1,45 @@
+{
+  "name": "Fire Hydrant Colors",
+  "materials": {
+    "cast_iron_red": {
+      "label": "Red-painted cast iron body",
+      "color": [0.78, 0.12, 0.08],
+      "reflectance": 0.08,
+      "roughness": 0.70,
+      "density_kg_m3": 7200,
+      "mean_Z": 26,
+      "mean_A": 56,
+      "composition": "Gray cast iron (Fe + C 2.5-4%) with epoxy paint coating"
+    },
+    "nozzle_chrome": {
+      "label": "Chrome-plated nozzle outlets",
+      "color": [0.77, 0.78, 0.80],
+      "reflectance": 0.75,
+      "roughness": 0.08,
+      "density_kg_m3": 7190,
+      "mean_Z": 24,
+      "mean_A": 52,
+      "composition": "Chrome-plated brass (Cu-Zn alloy + Cr plating)"
+    },
+    "cap_brass": {
+      "label": "Brass nozzle caps — hexagonal",
+      "color": [0.72, 0.58, 0.20],
+      "reflectance": 0.35,
+      "roughness": 0.25,
+      "density_kg_m3": 8500,
+      "mean_Z": 29,
+      "mean_A": 64,
+      "composition": "Leaded brass (Cu 60% + Zn 37% + Pb 3%)"
+    },
+    "bare_steel": {
+      "label": "Unpainted steel — operating nut, chains",
+      "color": [0.50, 0.48, 0.45],
+      "reflectance": 0.40,
+      "roughness": 0.45,
+      "density_kg_m3": 7850,
+      "mean_Z": 26,
+      "mean_A": 56,
+      "composition": "Low-carbon steel (Fe + C 0.2%)"
+    }
+  }
+}

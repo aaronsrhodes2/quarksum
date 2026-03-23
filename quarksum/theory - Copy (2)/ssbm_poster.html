@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #080b12;
+  }
+
+  .page {
+    width: 8.5in;
+    height: 11in;
+    margin: 0 auto;
+    background: #080b12;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55in;
+  }
+
+  .line1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 72px;
+    color: #000000;
+    letter-spacing: -0.01em;
+    background: #ffffff;
+    padding: 12px 48px;
+  }
+
+  .line2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 72px;
+    color: #e8f0ff;
+    letter-spacing: -0.01em;
+    text-shadow: 0 0 80px rgba(100,160,255,0.3);
+  }
+
+  .line3 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 38px;
+    color: #40BE46;
+    letter-spacing: 0.04em;
+  }
+
+  @media print {
+    html, body { background: #080b12; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="line1">&xi; = 0.1582</div>
+  <div class="line2">&Lambda;<sub style="font-size:42px">eff</sub>(x) = &Lambda;<sub style="font-size:42px">QCD</sub> &middot; e<sup style="font-size:40px">&sigma;(x)</sup></div>
+  <div class="line3">&sigma; connects the small to the large</div>
+</div>
+</body>
+</html>

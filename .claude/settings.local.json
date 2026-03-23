@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip -l files.zip)",
+      "Bash(python -c \"import quarksum; print\\(''import OK, version:'', quarksum.__version__\\)\")",
+      "Bash(where python3:*)",
+      "Bash(where py:*)",
+      "Bash(.venv/bin/python --version)",
+      "Bash(py --version)",
+      "Bash(python3.11 --version)",
+      "Bash(python3.12 --version)",
+      "Bash(python3.13 --version)",
+      "Bash(\"/c/Users/aaron/AppData/Local/Microsoft/WindowsApps/python3.exe\" --version)",
+      "Bash(cmd.exe /c \"where python\")",
+      "Bash(cmd.exe /c \"where py\")",
+      "Read(//c/Users/aaron/scoop/apps/python/current/**)",
+      "Read(//c//**)",
+      "Read(//c/Users/aaron/**)",
+      "Bash(\"/c/Program Files/GIMP 3/bin/python.exe\" --version)",
+      "Bash(uv --version)",
+      "Bash(conda --version)",
+      "Bash(pipx --version)",
+      "Bash(winget install:*)",
+      "Bash(export PATH=\"/c/Users/aaron/AppData/Local/Programs/Python/Python313:$PATH\")",
+      "Bash(rm -rf .venv)",
+      "Bash(export PATH=\"/c/Users/aaron/AppData/Local/Programs/Python/Python313:/c/Users/aaron/AppData/Local/Programs/Python/Python313/Scripts:$PATH\")",
+      "Bash(python -m venv .venv)",
+      "Bash(.venv/Scripts/python.exe --version)",
+      "Bash(.venv/Scripts/pip.exe install:*)",
+      "Bash(.venv/Scripts/python.exe -c \"import quarksum; print\\(''Import OK, version:'', quarksum.__version__\\)\")",
+      "Bash(.venv/Scripts/python.exe -m quarksum --list)",
+      "Bash(.venv/Scripts/python.exe -m quarksum gold_ring)",
+      "Bash(.venv/Scripts/python.exe -m quarksum gold_ring --quark-chain)",
+      "Bash(PYTHONIOENCODING=utf-8 \"D:/Aaron/development/quarksum/quarksum/Materia/qamss/.venv/Scripts/python.exe\" render_fridge_test.py)",
+      "Bash(PYTHONIOENCODING=utf-8 D:/Aaron/development/quarksum/.venv/Scripts/python.exe render_houseplant.py)",
+      "Bash(ls D:/Aaron/development/quarksum/.venv/Scripts/python*)",
+      "Bash(ls /c/Users/aaron/AppData/Local/Programs/Python/*/python.exe)",
+      "Bash(PYTHONIOENCODING=utf-8 /c/Users/aaron/AppData/Local/Programs/Python/Python313/python.exe render_houseplant.py)",
+      "Bash(curl -s http://localhost:8420/)"
+    ]
+  }
+}

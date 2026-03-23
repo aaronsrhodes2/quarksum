@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "engine": "MatterShaper",
+  "format": "Sigma Signature v1",
+  "agent": "Nagatha",
+  "objects": {
+    "test_data": {
+      "key": "test_data",
+      "name": "Test Data",
+      "aliases": [
+        "test data",
+        "test",
+        "data"
+      ],
+      "shape_path": "test_data.shape.json",
+      "color_path": "test_data.color.json",
+      "primitives": 2,
+      "materials": 2,
+      "approved": true,
+      "approved_by": "Nagatha (auto)",
+      "approved_date": "2026-03-15T00:07:40.592760+00:00",
+      "created_by": "nagatha_harvest_v1",
+      "source": "shapenet_harvest",
+      "quality_rating": "good"
+    }
+  }
+}

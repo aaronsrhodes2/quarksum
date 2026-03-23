@@ -1,0 +1,68 @@
+{
+  "object": "mushroom",
+  "format": "sigma_v1",
+  "source": "shapenet_harvest",
+  "converter": "nagatha_mesh_to_sigma",
+  "layers": [
+    {
+      "type": "ellipsoid",
+      "label": "default_a_0",
+      "center": [
+        -0.0692,
+        -0.3746,
+        -0.0109
+      ],
+      "radii": [
+        0.1254,
+        0.1254,
+        0.0
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_b_a_a_1",
+      "center": [
+        -0.2213,
+        0.2351,
+        -0.1631
+      ],
+      "radii": [
+        0.266,
+        0.2649,
+        0.2116
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_b_b_2",
+      "center": [
+        0.1092,
+        0.2351,
+        -0.0109
+      ],
+      "radii": [
+        0.3781,
+        0.2626,
+        0.2084
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_b_a_b_3",
+      "center": [
+        -0.2106,
+        0.2351,
+        0.1738
+      ],
+      "radii": [
+        0.2631,
+        0.2366,
+        0.2008
+      ],
+      "material": "default"
+    }
+  ]
+}

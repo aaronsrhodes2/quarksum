@@ -1,0 +1,55 @@
+QuarkSum — Data Source Attribution
+===================================
+
+QuarkSum uses curated scientific data from the following sources.
+All data is redistributed under fair-use for educational and
+scientific purposes. No raw datasets are bundled verbatim; only
+derived/processed values are included in the package.
+
+
+Isotope Masses and Binding Energies
+------------------------------------
+Source:  IAEA Atomic Mass Data Center — AME2020
+         (Atomic Mass Evaluation 2020)
+Authors: W.J. Huang, M. Wang, F.G. Kondev, G. Audi, S. Naimi
+DOI:     10.1088/1674-1137/abddb0
+URL:     https://www-nds.iaea.org/amdc/
+File:    quarksum/data/isotopes.json
+
+
+Fundamental Physical Constants
+-------------------------------
+Source:  CODATA 2018 (Committee on Data of the International
+         Science Council)
+         Exact values from the 2019 SI redefinition where applicable.
+URL:     https://physics.nist.gov/cuu/Constants/
+File:    quarksum/core/constants.py
+
+
+Quark Masses
+-------------
+Source:  Particle Data Group — PDG 2024 Review of Particle Physics
+         MS-bar scheme central values for up and down quarks.
+Authors: R.L. Workman et al. (Particle Data Group)
+DOI:     10.1103/PhysRevD.110.030001
+URL:     https://pdg.lbl.gov/
+File:    quarksum/checksum/stoq_checksum.py (inline constants)
+
+
+Element Properties
+-------------------
+Source:  IUPAC Periodic Table of the Elements (2021)
+         NIST Atomic Spectra Database (ionization energies)
+         Wikipedia (element categories, discovery dates, descriptions)
+URL:     https://iupac.org/what-we-do/periodic-table-of-elements/
+         https://www.nist.gov/pml/atomic-spectra-database
+File:    quarksum/data/elements.json
+
+
+Material Properties
+--------------------
+Source:  CRC Handbook of Chemistry and Physics (density, phase data)
+         PubChem (molecular formulas, molecular weights)
+         Wikipedia (material descriptions, common names)
+URL:     https://pubchem.ncbi.nlm.nih.gov/
+File:    quarksum/data/materials.json

@@ -1,0 +1,494 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950" width="1400" height="950">
+<defs>
+  <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="bg"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<rect width="1400" height="950" fill="#020008"/>
+<text x="700" y="32" font-family="'Georgia', serif" font-size="22" fill="#cc8844" text-anchor="middle" letter-spacing="3" opacity="0.9">BLACK HOLES WE HAVE SEEN</text>
+<text x="700" y="52" font-family="'Courier New', monospace" font-size="10" fill="#886644" text-anchor="middle" opacity="0.5">Real astrophysical BHs with SSBM-computed interior properties</text>
+<text x="700" y="68" font-family="'Courier New', monospace" font-size="9" fill="#665533" text-anchor="middle" opacity="0.35">Each one is a universe. Circle size ∝ log(r_s). Color = spectral position in the chiral funnel.</text>
+  <rect x="90.0" y="85" width="5.2" height="735" fill="#fffa00" opacity="0.015"/>
+  <rect x="94.2" y="85" width="5.2" height="735" fill="#fff900" opacity="0.015"/>
+  <rect x="98.3" y="85" width="5.2" height="735" fill="#fff900" opacity="0.015"/>
+  <rect x="102.5" y="85" width="5.2" height="735" fill="#fff800" opacity="0.015"/>
+  <rect x="106.7" y="85" width="5.2" height="735" fill="#fff700" opacity="0.015"/>
+  <rect x="110.8" y="85" width="5.2" height="735" fill="#fff700" opacity="0.015"/>
+  <rect x="115.0" y="85" width="5.2" height="735" fill="#fff600" opacity="0.015"/>
+  <rect x="119.2" y="85" width="5.2" height="735" fill="#fff600" opacity="0.015"/>
+  <rect x="123.3" y="85" width="5.2" height="735" fill="#fff500" opacity="0.015"/>
+  <rect x="127.5" y="85" width="5.2" height="735" fill="#fff400" opacity="0.015"/>
+  <rect x="131.7" y="85" width="5.2" height="735" fill="#fff400" opacity="0.015"/>
+  <rect x="135.8" y="85" width="5.2" height="735" fill="#fff300" opacity="0.015"/>
+  <rect x="140.0" y="85" width="5.2" height="735" fill="#fff200" opacity="0.015"/>
+  <rect x="144.2" y="85" width="5.2" height="735" fill="#fff200" opacity="0.015"/>
+  <rect x="148.3" y="85" width="5.2" height="735" fill="#fff100" opacity="0.015"/>
+  <rect x="152.5" y="85" width="5.2" height="735" fill="#fff000" opacity="0.015"/>
+  <rect x="156.7" y="85" width="5.2" height="735" fill="#fff000" opacity="0.015"/>
+  <rect x="160.8" y="85" width="5.2" height="735" fill="#ffef00" opacity="0.015"/>
+  <rect x="165.0" y="85" width="5.2" height="735" fill="#ffee00" opacity="0.015"/>
+  <rect x="169.2" y="85" width="5.2" height="735" fill="#ffee00" opacity="0.015"/>
+  <rect x="173.3" y="85" width="5.2" height="735" fill="#ffed00" opacity="0.015"/>
+  <rect x="177.5" y="85" width="5.2" height="735" fill="#ffed00" opacity="0.015"/>
+  <rect x="181.7" y="85" width="5.2" height="735" fill="#ffec00" opacity="0.015"/>
+  <rect x="185.8" y="85" width="5.2" height="735" fill="#ffeb00" opacity="0.015"/>
+  <rect x="190.0" y="85" width="5.2" height="735" fill="#ffeb00" opacity="0.015"/>
+  <rect x="194.2" y="85" width="5.2" height="735" fill="#ffea00" opacity="0.015"/>
+  <rect x="198.3" y="85" width="5.2" height="735" fill="#ffe900" opacity="0.015"/>
+  <rect x="202.5" y="85" width="5.2" height="735" fill="#ffe900" opacity="0.015"/>
+  <rect x="206.7" y="85" width="5.2" height="735" fill="#ffe800" opacity="0.015"/>
+  <rect x="210.8" y="85" width="5.2" height="735" fill="#ffe700" opacity="0.015"/>
+  <rect x="215.0" y="85" width="5.2" height="735" fill="#ffe700" opacity="0.015"/>
+  <rect x="219.2" y="85" width="5.2" height="735" fill="#ffe600" opacity="0.015"/>
+  <rect x="223.3" y="85" width="5.2" height="735" fill="#ffe500" opacity="0.015"/>
+  <rect x="227.5" y="85" width="5.2" height="735" fill="#ffe500" opacity="0.015"/>
+  <rect x="231.7" y="85" width="5.2" height="735" fill="#ffe400" opacity="0.015"/>
+  <rect x="235.8" y="85" width="5.2" height="735" fill="#ffe300" opacity="0.015"/>
+  <rect x="240.0" y="85" width="5.2" height="735" fill="#ffe300" opacity="0.015"/>
+  <rect x="244.2" y="85" width="5.2" height="735" fill="#ffe200" opacity="0.015"/>
+  <rect x="248.3" y="85" width="5.2" height="735" fill="#ffe100" opacity="0.015"/>
+  <rect x="252.5" y="85" width="5.2" height="735" fill="#ffe100" opacity="0.015"/>
+  <rect x="256.7" y="85" width="5.2" height="735" fill="#ffe000" opacity="0.015"/>
+  <rect x="260.8" y="85" width="5.2" height="735" fill="#ffe000" opacity="0.015"/>
+  <rect x="265.0" y="85" width="5.2" height="735" fill="#ffdf00" opacity="0.015"/>
+  <rect x="269.2" y="85" width="5.2" height="735" fill="#ffde00" opacity="0.015"/>
+  <rect x="273.3" y="85" width="5.2" height="735" fill="#ffde00" opacity="0.015"/>
+  <rect x="277.5" y="85" width="5.2" height="735" fill="#ffdd00" opacity="0.015"/>
+  <rect x="281.7" y="85" width="5.2" height="735" fill="#ffdc00" opacity="0.015"/>
+  <rect x="285.8" y="85" width="5.2" height="735" fill="#ffdc00" opacity="0.015"/>
+  <rect x="290.0" y="85" width="5.2" height="735" fill="#ffdb00" opacity="0.015"/>
+  <rect x="294.2" y="85" width="5.2" height="735" fill="#ffda00" opacity="0.015"/>
+  <rect x="298.3" y="85" width="5.2" height="735" fill="#ffda00" opacity="0.015"/>
+  <rect x="302.5" y="85" width="5.2" height="735" fill="#ffd900" opacity="0.015"/>
+  <rect x="306.7" y="85" width="5.2" height="735" fill="#ffd800" opacity="0.015"/>
+  <rect x="310.8" y="85" width="5.2" height="735" fill="#ffd800" opacity="0.015"/>
+  <rect x="315.0" y="85" width="5.2" height="735" fill="#ffd700" opacity="0.015"/>
+  <rect x="319.2" y="85" width="5.2" height="735" fill="#ffd600" opacity="0.015"/>
+  <rect x="323.3" y="85" width="5.2" height="735" fill="#ffd600" opacity="0.015"/>
+  <rect x="327.5" y="85" width="5.2" height="735" fill="#ffd500" opacity="0.015"/>
+  <rect x="331.7" y="85" width="5.2" height="735" fill="#ffd400" opacity="0.015"/>
+  <rect x="335.8" y="85" width="5.2" height="735" fill="#ffd400" opacity="0.015"/>
+  <rect x="340.0" y="85" width="5.2" height="735" fill="#ffd300" opacity="0.015"/>
+  <rect x="344.2" y="85" width="5.2" height="735" fill="#ffd200" opacity="0.015"/>
+  <rect x="348.3" y="85" width="5.2" height="735" fill="#ffd200" opacity="0.015"/>
+  <rect x="352.5" y="85" width="5.2" height="735" fill="#ffd100" opacity="0.015"/>
+  <rect x="356.7" y="85" width="5.2" height="735" fill="#ffd000" opacity="0.015"/>
+  <rect x="360.8" y="85" width="5.2" height="735" fill="#ffd000" opacity="0.015"/>
+  <rect x="365.0" y="85" width="5.2" height="735" fill="#ffcf00" opacity="0.015"/>
+  <rect x="369.2" y="85" width="5.2" height="735" fill="#ffce00" opacity="0.015"/>
+  <rect x="373.3" y="85" width="5.2" height="735" fill="#ffce00" opacity="0.015"/>
+  <rect x="377.5" y="85" width="5.2" height="735" fill="#ffcd00" opacity="0.015"/>
+  <rect x="381.7" y="85" width="5.2" height="735" fill="#ffcc00" opacity="0.015"/>
+  <rect x="385.8" y="85" width="5.2" height="735" fill="#ffcc00" opacity="0.015"/>
+  <rect x="390.0" y="85" width="5.2" height="735" fill="#ffcb00" opacity="0.015"/>
+  <rect x="394.2" y="85" width="5.2" height="735" fill="#ffca00" opacity="0.015"/>
+  <rect x="398.3" y="85" width="5.2" height="735" fill="#ffca00" opacity="0.015"/>
+  <rect x="402.5" y="85" width="5.2" height="735" fill="#ffc900" opacity="0.015"/>
+  <rect x="406.7" y="85" width="5.2" height="735" fill="#ffc800" opacity="0.015"/>
+  <rect x="410.8" y="85" width="5.2" height="735" fill="#ffc800" opacity="0.015"/>
+  <rect x="415.0" y="85" width="5.2" height="735" fill="#ffc700" opacity="0.015"/>
+  <rect x="419.2" y="85" width="5.2" height="735" fill="#ffc600" opacity="0.015"/>
+  <rect x="423.3" y="85" width="5.2" height="735" fill="#ffc600" opacity="0.015"/>
+  <rect x="427.5" y="85" width="5.2" height="735" fill="#ffc500" opacity="0.015"/>
+  <rect x="431.7" y="85" width="5.2" height="735" fill="#ffc400" opacity="0.015"/>
+  <rect x="435.8" y="85" width="5.2" height="735" fill="#ffc400" opacity="0.015"/>
+  <rect x="440.0" y="85" width="5.2" height="735" fill="#ffc300" opacity="0.015"/>
+  <rect x="444.2" y="85" width="5.2" height="735" fill="#ffc200" opacity="0.015"/>
+  <rect x="448.3" y="85" width="5.2" height="735" fill="#ffc100" opacity="0.015"/>
+  <rect x="452.5" y="85" width="5.2" height="735" fill="#ffc100" opacity="0.015"/>
+  <rect x="456.7" y="85" width="5.2" height="735" fill="#ffc000" opacity="0.015"/>
+  <rect x="460.8" y="85" width="5.2" height="735" fill="#ffbf00" opacity="0.015"/>
+  <rect x="465.0" y="85" width="5.2" height="735" fill="#ffbf00" opacity="0.015"/>
+  <rect x="469.2" y="85" width="5.2" height="735" fill="#ffbe00" opacity="0.015"/>
+  <rect x="473.3" y="85" width="5.2" height="735" fill="#ffbd00" opacity="0.015"/>
+  <rect x="477.5" y="85" width="5.2" height="735" fill="#ffbd00" opacity="0.015"/>
+  <rect x="481.7" y="85" width="5.2" height="735" fill="#ffbc00" opacity="0.015"/>
+  <rect x="485.8" y="85" width="5.2" height="735" fill="#ffbb00" opacity="0.015"/>
+  <rect x="490.0" y="85" width="5.2" height="735" fill="#ffbb00" opacity="0.015"/>
+  <rect x="494.2" y="85" width="5.2" height="735" fill="#ffba00" opacity="0.015"/>
+  <rect x="498.3" y="85" width="5.2" height="735" fill="#ffb900" opacity="0.015"/>
+  <rect x="502.5" y="85" width="5.2" height="735" fill="#ffb900" opacity="0.015"/>
+  <rect x="506.7" y="85" width="5.2" height="735" fill="#ffb800" opacity="0.015"/>
+  <rect x="510.8" y="85" width="5.2" height="735" fill="#ffb700" opacity="0.015"/>
+  <rect x="515.0" y="85" width="5.2" height="735" fill="#ffb700" opacity="0.015"/>
+  <rect x="519.2" y="85" width="5.2" height="735" fill="#ffb600" opacity="0.015"/>
+  <rect x="523.3" y="85" width="5.2" height="735" fill="#ffb500" opacity="0.015"/>
+  <rect x="527.5" y="85" width="5.2" height="735" fill="#ffb400" opacity="0.015"/>
+  <rect x="531.7" y="85" width="5.2" height="735" fill="#ffb400" opacity="0.015"/>
+  <rect x="535.8" y="85" width="5.2" height="735" fill="#ffb300" opacity="0.015"/>
+  <rect x="540.0" y="85" width="5.2" height="735" fill="#ffb200" opacity="0.015"/>
+  <rect x="544.2" y="85" width="5.2" height="735" fill="#ffb200" opacity="0.015"/>
+  <rect x="548.3" y="85" width="5.2" height="735" fill="#ffb100" opacity="0.015"/>
+  <rect x="552.5" y="85" width="5.2" height="735" fill="#ffb000" opacity="0.015"/>
+  <rect x="556.7" y="85" width="5.2" height="735" fill="#ffb000" opacity="0.015"/>
+  <rect x="560.8" y="85" width="5.2" height="735" fill="#ffaf00" opacity="0.015"/>
+  <rect x="565.0" y="85" width="5.2" height="735" fill="#ffae00" opacity="0.015"/>
+  <rect x="569.2" y="85" width="5.2" height="735" fill="#ffae00" opacity="0.015"/>
+  <rect x="573.3" y="85" width="5.2" height="735" fill="#ffad00" opacity="0.015"/>
+  <rect x="577.5" y="85" width="5.2" height="735" fill="#ffac00" opacity="0.015"/>
+  <rect x="581.7" y="85" width="5.2" height="735" fill="#ffab00" opacity="0.015"/>
+  <rect x="585.8" y="85" width="5.2" height="735" fill="#ffab00" opacity="0.015"/>
+  <rect x="590.0" y="85" width="5.2" height="735" fill="#ffaa00" opacity="0.015"/>
+  <rect x="594.2" y="85" width="5.2" height="735" fill="#ffa900" opacity="0.015"/>
+  <rect x="598.3" y="85" width="5.2" height="735" fill="#ffa900" opacity="0.015"/>
+  <rect x="602.5" y="85" width="5.2" height="735" fill="#ffa800" opacity="0.015"/>
+  <rect x="606.7" y="85" width="5.2" height="735" fill="#ffa700" opacity="0.015"/>
+  <rect x="610.8" y="85" width="5.2" height="735" fill="#ffa600" opacity="0.015"/>
+  <rect x="615.0" y="85" width="5.2" height="735" fill="#ffa600" opacity="0.015"/>
+  <rect x="619.2" y="85" width="5.2" height="735" fill="#ffa500" opacity="0.015"/>
+  <rect x="623.3" y="85" width="5.2" height="735" fill="#ffa400" opacity="0.015"/>
+  <rect x="627.5" y="85" width="5.2" height="735" fill="#ffa400" opacity="0.015"/>
+  <rect x="631.7" y="85" width="5.2" height="735" fill="#ffa300" opacity="0.015"/>
+  <rect x="635.8" y="85" width="5.2" height="735" fill="#ffa200" opacity="0.015"/>
+  <rect x="640.0" y="85" width="5.2" height="735" fill="#ffa200" opacity="0.015"/>
+  <rect x="644.2" y="85" width="5.2" height="735" fill="#ffa100" opacity="0.015"/>
+  <rect x="648.3" y="85" width="5.2" height="735" fill="#ffa000" opacity="0.015"/>
+  <rect x="652.5" y="85" width="5.2" height="735" fill="#ff9f00" opacity="0.015"/>
+  <rect x="656.7" y="85" width="5.2" height="735" fill="#ff9f00" opacity="0.015"/>
+  <rect x="660.8" y="85" width="5.2" height="735" fill="#ff9e00" opacity="0.015"/>
+  <rect x="665.0" y="85" width="5.2" height="735" fill="#ff9d00" opacity="0.015"/>
+  <rect x="669.2" y="85" width="5.2" height="735" fill="#ff9d00" opacity="0.015"/>
+  <rect x="673.3" y="85" width="5.2" height="735" fill="#ff9c00" opacity="0.015"/>
+  <rect x="677.5" y="85" width="5.2" height="735" fill="#ff9b00" opacity="0.015"/>
+  <rect x="681.7" y="85" width="5.2" height="735" fill="#ff9a00" opacity="0.015"/>
+  <rect x="685.8" y="85" width="5.2" height="735" fill="#ff9a00" opacity="0.015"/>
+  <rect x="690.0" y="85" width="5.2" height="735" fill="#ff9900" opacity="0.015"/>
+  <rect x="694.2" y="85" width="5.2" height="735" fill="#ff9800" opacity="0.015"/>
+  <rect x="698.3" y="85" width="5.2" height="735" fill="#ff9700" opacity="0.015"/>
+  <rect x="702.5" y="85" width="5.2" height="735" fill="#ff9700" opacity="0.015"/>
+  <rect x="706.7" y="85" width="5.2" height="735" fill="#ff9600" opacity="0.015"/>
+  <rect x="710.8" y="85" width="5.2" height="735" fill="#ff9500" opacity="0.015"/>
+  <rect x="715.0" y="85" width="5.2" height="735" fill="#ff9500" opacity="0.015"/>
+  <rect x="719.2" y="85" width="5.2" height="735" fill="#ff9400" opacity="0.015"/>
+  <rect x="723.3" y="85" width="5.2" height="735" fill="#ff9300" opacity="0.015"/>
+  <rect x="727.5" y="85" width="5.2" height="735" fill="#ff9200" opacity="0.015"/>
+  <rect x="731.7" y="85" width="5.2" height="735" fill="#ff9200" opacity="0.015"/>
+  <rect x="735.8" y="85" width="5.2" height="735" fill="#ff9100" opacity="0.015"/>
+  <rect x="740.0" y="85" width="5.2" height="735" fill="#ff9000" opacity="0.015"/>
+  <rect x="744.2" y="85" width="5.2" height="735" fill="#ff8f00" opacity="0.015"/>
+  <rect x="748.3" y="85" width="5.2" height="735" fill="#ff8f00" opacity="0.015"/>
+  <rect x="752.5" y="85" width="5.2" height="735" fill="#ff8e00" opacity="0.015"/>
+  <rect x="756.7" y="85" width="5.2" height="735" fill="#ff8d00" opacity="0.015"/>
+  <rect x="760.8" y="85" width="5.2" height="735" fill="#ff8d00" opacity="0.015"/>
+  <rect x="765.0" y="85" width="5.2" height="735" fill="#ff8c00" opacity="0.015"/>
+  <rect x="769.2" y="85" width="5.2" height="735" fill="#ff8b00" opacity="0.015"/>
+  <rect x="773.3" y="85" width="5.2" height="735" fill="#ff8a00" opacity="0.015"/>
+  <rect x="777.5" y="85" width="5.2" height="735" fill="#ff8a00" opacity="0.015"/>
+  <rect x="781.7" y="85" width="5.2" height="735" fill="#ff8900" opacity="0.015"/>
+  <rect x="785.8" y="85" width="5.2" height="735" fill="#ff8800" opacity="0.015"/>
+  <rect x="790.0" y="85" width="5.2" height="735" fill="#ff8700" opacity="0.015"/>
+  <rect x="794.2" y="85" width="5.2" height="735" fill="#ff8700" opacity="0.015"/>
+  <rect x="798.3" y="85" width="5.2" height="735" fill="#ff8600" opacity="0.015"/>
+  <rect x="802.5" y="85" width="5.2" height="735" fill="#ff8500" opacity="0.015"/>
+  <rect x="806.7" y="85" width="5.2" height="735" fill="#ff8400" opacity="0.015"/>
+  <rect x="810.8" y="85" width="5.2" height="735" fill="#ff8400" opacity="0.015"/>
+  <rect x="815.0" y="85" width="5.2" height="735" fill="#ff8300" opacity="0.015"/>
+  <rect x="819.2" y="85" width="5.2" height="735" fill="#ff8200" opacity="0.015"/>
+  <rect x="823.3" y="85" width="5.2" height="735" fill="#ff8100" opacity="0.015"/>
+  <rect x="827.5" y="85" width="5.2" height="735" fill="#ff8100" opacity="0.015"/>
+  <rect x="831.7" y="85" width="5.2" height="735" fill="#ff8000" opacity="0.015"/>
+  <rect x="835.8" y="85" width="5.2" height="735" fill="#ff7f00" opacity="0.015"/>
+  <rect x="840.0" y="85" width="5.2" height="735" fill="#ff7e00" opacity="0.015"/>
+  <rect x="844.2" y="85" width="5.2" height="735" fill="#ff7e00" opacity="0.015"/>
+  <rect x="848.3" y="85" width="5.2" height="735" fill="#ff7d00" opacity="0.015"/>
+  <rect x="852.5" y="85" width="5.2" height="735" fill="#ff7c00" opacity="0.015"/>
+  <rect x="856.7" y="85" width="5.2" height="735" fill="#ff7b00" opacity="0.015"/>
+  <rect x="860.8" y="85" width="5.2" height="735" fill="#ff7b00" opacity="0.015"/>
+  <rect x="865.0" y="85" width="5.2" height="735" fill="#ff7a00" opacity="0.015"/>
+  <rect x="869.2" y="85" width="5.2" height="735" fill="#ff7900" opacity="0.015"/>
+  <rect x="873.3" y="85" width="5.2" height="735" fill="#ff7800" opacity="0.015"/>
+  <rect x="877.5" y="85" width="5.2" height="735" fill="#ff7800" opacity="0.015"/>
+  <rect x="881.7" y="85" width="5.2" height="735" fill="#ff7700" opacity="0.015"/>
+  <rect x="885.8" y="85" width="5.2" height="735" fill="#ff7600" opacity="0.015"/>
+  <rect x="890.0" y="85" width="5.2" height="735" fill="#ff7500" opacity="0.015"/>
+  <rect x="894.2" y="85" width="5.2" height="735" fill="#ff7400" opacity="0.015"/>
+  <rect x="898.3" y="85" width="5.2" height="735" fill="#ff7400" opacity="0.015"/>
+  <rect x="902.5" y="85" width="5.2" height="735" fill="#ff7300" opacity="0.015"/>
+  <rect x="906.7" y="85" width="5.2" height="735" fill="#ff7200" opacity="0.015"/>
+  <rect x="910.8" y="85" width="5.2" height="735" fill="#ff7100" opacity="0.015"/>
+  <rect x="915.0" y="85" width="5.2" height="735" fill="#ff7100" opacity="0.015"/>
+  <rect x="919.2" y="85" width="5.2" height="735" fill="#ff7000" opacity="0.015"/>
+  <rect x="923.3" y="85" width="5.2" height="735" fill="#ff6f00" opacity="0.015"/>
+  <rect x="927.5" y="85" width="5.2" height="735" fill="#ff6e00" opacity="0.015"/>
+  <rect x="931.7" y="85" width="5.2" height="735" fill="#ff6d00" opacity="0.015"/>
+  <rect x="935.8" y="85" width="5.2" height="735" fill="#ff6d00" opacity="0.015"/>
+  <rect x="940.0" y="85" width="5.2" height="735" fill="#ff6c00" opacity="0.015"/>
+  <rect x="944.2" y="85" width="5.2" height="735" fill="#ff6b00" opacity="0.015"/>
+  <rect x="948.3" y="85" width="5.2" height="735" fill="#ff6a00" opacity="0.015"/>
+  <rect x="952.5" y="85" width="5.2" height="735" fill="#ff6a00" opacity="0.015"/>
+  <rect x="956.7" y="85" width="5.2" height="735" fill="#ff6900" opacity="0.015"/>
+  <rect x="960.8" y="85" width="5.2" height="735" fill="#ff6800" opacity="0.015"/>
+  <rect x="965.0" y="85" width="5.2" height="735" fill="#ff6700" opacity="0.015"/>
+  <rect x="969.2" y="85" width="5.2" height="735" fill="#ff6600" opacity="0.015"/>
+  <rect x="973.3" y="85" width="5.2" height="735" fill="#ff6600" opacity="0.015"/>
+  <rect x="977.5" y="85" width="5.2" height="735" fill="#ff6500" opacity="0.015"/>
+  <rect x="981.7" y="85" width="5.2" height="735" fill="#ff6400" opacity="0.015"/>
+  <rect x="985.8" y="85" width="5.2" height="735" fill="#ff6300" opacity="0.015"/>
+  <rect x="990.0" y="85" width="5.2" height="735" fill="#ff6200" opacity="0.015"/>
+  <rect x="994.2" y="85" width="5.2" height="735" fill="#ff6200" opacity="0.015"/>
+  <rect x="998.3" y="85" width="5.2" height="735" fill="#ff6100" opacity="0.015"/>
+  <rect x="1002.5" y="85" width="5.2" height="735" fill="#ff6000" opacity="0.015"/>
+  <rect x="1006.7" y="85" width="5.2" height="735" fill="#ff5f00" opacity="0.015"/>
+  <rect x="1010.8" y="85" width="5.2" height="735" fill="#ff5e00" opacity="0.015"/>
+  <rect x="1015.0" y="85" width="5.2" height="735" fill="#ff5d00" opacity="0.015"/>
+  <rect x="1019.2" y="85" width="5.2" height="735" fill="#ff5d00" opacity="0.015"/>
+  <rect x="1023.3" y="85" width="5.2" height="735" fill="#ff5c00" opacity="0.015"/>
+  <rect x="1027.5" y="85" width="5.2" height="735" fill="#ff5b00" opacity="0.015"/>
+  <rect x="1031.7" y="85" width="5.2" height="735" fill="#ff5a00" opacity="0.015"/>
+  <rect x="1035.8" y="85" width="5.2" height="735" fill="#ff5900" opacity="0.015"/>
+  <rect x="1040.0" y="85" width="5.2" height="735" fill="#ff5900" opacity="0.015"/>
+  <rect x="1044.2" y="85" width="5.2" height="735" fill="#ff5800" opacity="0.015"/>
+  <rect x="1048.3" y="85" width="5.2" height="735" fill="#ff5700" opacity="0.015"/>
+  <rect x="1052.5" y="85" width="5.2" height="735" fill="#ff5600" opacity="0.015"/>
+  <rect x="1056.7" y="85" width="5.2" height="735" fill="#ff5500" opacity="0.015"/>
+  <rect x="1060.8" y="85" width="5.2" height="735" fill="#ff5400" opacity="0.015"/>
+  <rect x="1065.0" y="85" width="5.2" height="735" fill="#ff5400" opacity="0.015"/>
+  <rect x="1069.2" y="85" width="5.2" height="735" fill="#ff5300" opacity="0.015"/>
+  <rect x="1073.3" y="85" width="5.2" height="735" fill="#ff5200" opacity="0.015"/>
+  <rect x="1077.5" y="85" width="5.2" height="735" fill="#ff5100" opacity="0.015"/>
+  <rect x="1081.7" y="85" width="5.2" height="735" fill="#ff5000" opacity="0.015"/>
+  <rect x="1085.8" y="85" width="5.2" height="735" fill="#ff4f00" opacity="0.015"/>
+  <rect x="1090.0" y="85" width="5.2" height="735" fill="#ff4e00" opacity="0.015"/>
+  <rect x="1094.2" y="85" width="5.2" height="735" fill="#ff4e00" opacity="0.015"/>
+  <rect x="1098.3" y="85" width="5.2" height="735" fill="#ff4d00" opacity="0.015"/>
+  <rect x="1102.5" y="85" width="5.2" height="735" fill="#ff4c00" opacity="0.015"/>
+  <rect x="1106.7" y="85" width="5.2" height="735" fill="#ff4b00" opacity="0.015"/>
+  <rect x="1110.8" y="85" width="5.2" height="735" fill="#ff4a00" opacity="0.015"/>
+  <rect x="1115.0" y="85" width="5.2" height="735" fill="#ff4900" opacity="0.015"/>
+  <rect x="1119.2" y="85" width="5.2" height="735" fill="#ff4800" opacity="0.015"/>
+  <rect x="1123.3" y="85" width="5.2" height="735" fill="#ff4800" opacity="0.015"/>
+  <rect x="1127.5" y="85" width="5.2" height="735" fill="#ff4700" opacity="0.015"/>
+  <rect x="1131.7" y="85" width="5.2" height="735" fill="#ff4600" opacity="0.015"/>
+  <rect x="1135.8" y="85" width="5.2" height="735" fill="#ff4500" opacity="0.015"/>
+  <rect x="1140.0" y="85" width="5.2" height="735" fill="#ff4400" opacity="0.015"/>
+  <rect x="1144.2" y="85" width="5.2" height="735" fill="#ff4300" opacity="0.015"/>
+  <rect x="1148.3" y="85" width="5.2" height="735" fill="#ff4200" opacity="0.015"/>
+  <rect x="1152.5" y="85" width="5.2" height="735" fill="#ff4100" opacity="0.015"/>
+  <rect x="1156.7" y="85" width="5.2" height="735" fill="#ff4100" opacity="0.015"/>
+  <rect x="1160.8" y="85" width="5.2" height="735" fill="#ff4000" opacity="0.015"/>
+  <rect x="1165.0" y="85" width="5.2" height="735" fill="#ff3f00" opacity="0.015"/>
+  <rect x="1169.2" y="85" width="5.2" height="735" fill="#ff3e00" opacity="0.015"/>
+  <rect x="1173.3" y="85" width="5.2" height="735" fill="#ff3d00" opacity="0.015"/>
+  <rect x="1177.5" y="85" width="5.2" height="735" fill="#ff3c00" opacity="0.015"/>
+  <rect x="1181.7" y="85" width="5.2" height="735" fill="#ff3b00" opacity="0.015"/>
+  <rect x="1185.8" y="85" width="5.2" height="735" fill="#ff3a00" opacity="0.015"/>
+  <rect x="1190.0" y="85" width="5.2" height="735" fill="#ff3900" opacity="0.015"/>
+  <rect x="1194.2" y="85" width="5.2" height="735" fill="#ff3800" opacity="0.015"/>
+  <rect x="1198.3" y="85" width="5.2" height="735" fill="#ff3700" opacity="0.015"/>
+  <rect x="1202.5" y="85" width="5.2" height="735" fill="#ff3700" opacity="0.015"/>
+  <rect x="1206.7" y="85" width="5.2" height="735" fill="#ff3600" opacity="0.015"/>
+  <rect x="1210.8" y="85" width="5.2" height="735" fill="#ff3500" opacity="0.015"/>
+  <rect x="1215.0" y="85" width="5.2" height="735" fill="#ff3400" opacity="0.015"/>
+  <rect x="1219.2" y="85" width="5.2" height="735" fill="#ff3300" opacity="0.015"/>
+  <rect x="1223.3" y="85" width="5.2" height="735" fill="#ff3200" opacity="0.015"/>
+  <rect x="1227.5" y="85" width="5.2" height="735" fill="#ff3100" opacity="0.015"/>
+  <rect x="1231.7" y="85" width="5.2" height="735" fill="#ff3000" opacity="0.015"/>
+  <rect x="1235.8" y="85" width="5.2" height="735" fill="#ff2f00" opacity="0.015"/>
+  <rect x="1240.0" y="85" width="5.2" height="735" fill="#ff2e00" opacity="0.015"/>
+  <rect x="1244.2" y="85" width="5.2" height="735" fill="#ff2d00" opacity="0.015"/>
+  <rect x="1248.3" y="85" width="5.2" height="735" fill="#ff2c00" opacity="0.015"/>
+  <rect x="1252.5" y="85" width="5.2" height="735" fill="#ff2b00" opacity="0.015"/>
+  <rect x="1256.7" y="85" width="5.2" height="735" fill="#ff2a00" opacity="0.015"/>
+  <rect x="1260.8" y="85" width="5.2" height="735" fill="#ff2900" opacity="0.015"/>
+  <rect x="1265.0" y="85" width="5.2" height="735" fill="#ff2800" opacity="0.015"/>
+  <rect x="1269.2" y="85" width="5.2" height="735" fill="#ff2700" opacity="0.015"/>
+  <rect x="1273.3" y="85" width="5.2" height="735" fill="#ff2600" opacity="0.015"/>
+  <rect x="1277.5" y="85" width="5.2" height="735" fill="#ff2500" opacity="0.015"/>
+  <rect x="1281.7" y="85" width="5.2" height="735" fill="#ff2400" opacity="0.015"/>
+  <rect x="1285.8" y="85" width="5.2" height="735" fill="#ff2300" opacity="0.015"/>
+  <rect x="1290.0" y="85" width="5.2" height="735" fill="#ff2200" opacity="0.015"/>
+  <rect x="1294.2" y="85" width="5.2" height="735" fill="#ff2100" opacity="0.015"/>
+  <rect x="1298.3" y="85" width="5.2" height="735" fill="#ff2000" opacity="0.015"/>
+  <rect x="1302.5" y="85" width="5.2" height="735" fill="#ff1f00" opacity="0.015"/>
+  <rect x="1306.7" y="85" width="5.2" height="735" fill="#ff1e00" opacity="0.015"/>
+  <rect x="1310.8" y="85" width="5.2" height="735" fill="#ff1d00" opacity="0.015"/>
+  <rect x="1315.0" y="85" width="5.2" height="735" fill="#ff1b00" opacity="0.015"/>
+  <rect x="1319.2" y="85" width="5.2" height="735" fill="#ff1a00" opacity="0.015"/>
+  <rect x="1323.3" y="85" width="5.2" height="735" fill="#ff1900" opacity="0.015"/>
+  <rect x="1327.5" y="85" width="5.2" height="735" fill="#ff1800" opacity="0.015"/>
+  <rect x="1331.7" y="85" width="5.2" height="735" fill="#ff1700" opacity="0.015"/>
+  <rect x="1335.8" y="85" width="5.2" height="735" fill="#ff1600" opacity="0.015"/>
+  <line x1="144" y1="85" x2="144" y2="820" stroke="#fff200" stroke-width="0.3" opacity="0.1"/>
+  <text x="144" y="835" font-family="'Courier New', monospace" font-size="8" fill="#fff200" text-anchor="middle" opacity="0.35">10^31</text>
+  <line x1="253" y1="85" x2="253" y2="820" stroke="#ffe100" stroke-width="0.3" opacity="0.1"/>
+  <text x="253" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ffe100" text-anchor="middle" opacity="0.35">10^32</text>
+  <line x1="362" y1="85" x2="362" y2="820" stroke="#ffcf00" stroke-width="0.3" opacity="0.1"/>
+  <text x="362" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ffcf00" text-anchor="middle" opacity="0.35">10^33</text>
+  <line x1="470" y1="85" x2="470" y2="820" stroke="#ffbe00" stroke-width="0.3" opacity="0.1"/>
+  <text x="470" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ffbe00" text-anchor="middle" opacity="0.35">10^34</text>
+  <line x1="579" y1="85" x2="579" y2="820" stroke="#ffac00" stroke-width="0.3" opacity="0.1"/>
+  <text x="579" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ffac00" text-anchor="middle" opacity="0.35">10^35</text>
+  <line x1="688" y1="85" x2="688" y2="820" stroke="#ff9900" stroke-width="0.3" opacity="0.1"/>
+  <text x="688" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ff9900" text-anchor="middle" opacity="0.35">10^36</text>
+  <line x1="797" y1="85" x2="797" y2="820" stroke="#ff8600" stroke-width="0.3" opacity="0.1"/>
+  <text x="797" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ff8600" text-anchor="middle" opacity="0.35">10^37</text>
+  <line x1="905" y1="85" x2="905" y2="820" stroke="#ff7200" stroke-width="0.3" opacity="0.1"/>
+  <text x="905" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ff7200" text-anchor="middle" opacity="0.35">10^38</text>
+  <line x1="1014" y1="85" x2="1014" y2="820" stroke="#ff5e00" stroke-width="0.3" opacity="0.1"/>
+  <text x="1014" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ff5e00" text-anchor="middle" opacity="0.35">10^39</text>
+  <line x1="1123" y1="85" x2="1123" y2="820" stroke="#ff4800" stroke-width="0.3" opacity="0.1"/>
+  <text x="1123" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ff4800" text-anchor="middle" opacity="0.35">10^40</text>
+  <line x1="1231" y1="85" x2="1231" y2="820" stroke="#ff3000" stroke-width="0.3" opacity="0.1"/>
+  <text x="1231" y="835" font-family="'Courier New', monospace" font-size="8" fill="#ff3000" text-anchor="middle" opacity="0.35">10^41</text>
+<text x="700" y="850" font-family="'Courier New', monospace" font-size="9" fill="#886655" text-anchor="middle" opacity="0.3">Mass (kg) — log scale</text>
+<text x="199" y="100" font-family="'Courier New', monospace" font-size="9" fill="#6699cc" text-anchor="middle" opacity="0.25">STELLAR</text>
+<text x="1014" y="100" font-family="'Courier New', monospace" font-size="9" fill="#cc7744" text-anchor="middle" opacity="0.25">SUPERMASSIVE</text>
+<text x="498" y="452" font-family="'Georgia', serif" font-size="11" fill="#554433" text-anchor="middle" opacity="0.15" font-style="italic">desert</text>
+<text x="498" y="466" font-family="'Courier New', monospace" font-size="7" fill="#443322" text-anchor="middle" opacity="0.12">IMBH gap</text>
+  <circle cx="172" cy="245" r="24" fill="#ffed00" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="172" cy="245" rx="16" ry="5" fill="none" stroke="#ffed00" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="172" cy="245" rx="12" ry="4" fill="none" stroke="#ffed00" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="172" cy="245" r="8" fill="#000000" stroke="#ffed00" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="172" cy="245" r="4" fill="none" stroke="#ffed00" stroke-width="0.4" opacity="0.2"/>
+  <line x1="188" y1="245" x2="204" y2="220" stroke="#ffed00" stroke-width="0.4" opacity="0.2"/>
+  <rect x="203.9564201712666" y="210" width="175" height="82" rx="4" fill="#0a0812" stroke="#ffed00" stroke-width="0.5" opacity="0.6"/>
+  <text x="211.9564201712666" y="224" font-family="'Georgia', serif" font-size="11" fill="#ffed00" opacity="0.85" font-weight="bold">V404 Cygni</text>
+  <text x="372.9564201712666" y="224" font-family="'Courier New', monospace" font-size="9" fill="#ffed00" text-anchor="end" opacity="0.5">9 M☉</text>
+  <line x1="209.9564201712666" y1="229" x2="372.9564201712666" y2="229" stroke="#ffed00" stroke-width="0.3" opacity="0.2"/>
+  <text x="211.9564201712666" y="240" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">X-ray binary, dramatic outbursts</text>
+  <text x="211.9564201712666" y="252" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" opacity="0.4">τ interior</text>
+  <text x="372.9564201712666" y="252" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" text-anchor="end" opacity="0.4">139 μs</text>
+  <text x="211.9564201712666" y="262" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" opacity="0.4">r_s</text>
+  <text x="372.9564201712666" y="262" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" text-anchor="end" opacity="0.4">27 km</text>
+  <text x="211.9564201712666" y="272" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" opacity="0.4">S_BH</text>
+  <text x="372.9564201712666" y="272" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" text-anchor="end" opacity="0.4">10^79 k_B</text>
+  <text x="211.9564201712666" y="282" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" opacity="0.4">recycle</text>
+  <text x="372.9564201712666" y="282" font-family="'Courier New', monospace" font-size="7" fill="#ffed00" text-anchor="end" opacity="0.4">1.2e-24</text>
+  <circle cx="212" cy="405" r="26" fill="#ffe700" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="212" cy="405" rx="18" ry="5" fill="none" stroke="#ffe700" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="212" cy="405" rx="13" ry="4" fill="none" stroke="#ffe700" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="212" cy="405" r="9" fill="#000000" stroke="#ffe700" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="212" cy="405" r="5" fill="none" stroke="#ffe700" stroke-width="0.4" opacity="0.2"/>
+  <line x1="230" y1="405" x2="246" y2="380" stroke="#ffe700" stroke-width="0.4" opacity="0.2"/>
+  <rect x="246.24339597548885" y="370" width="175" height="82" rx="4" fill="#0a0812" stroke="#ffe700" stroke-width="0.5" opacity="0.6"/>
+  <text x="254.24339597548885" y="384" font-family="'Georgia', serif" font-size="11" fill="#ffe700" opacity="0.85" font-weight="bold">Cygnus X-1</text>
+  <text x="415.24339597548885" y="384" font-family="'Courier New', monospace" font-size="9" fill="#ffe700" text-anchor="end" opacity="0.5">21 M☉</text>
+  <line x1="252.24339597548885" y1="389" x2="415.24339597548885" y2="389" stroke="#ffe700" stroke-width="0.3" opacity="0.2"/>
+  <text x="254.24339597548885" y="400" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">First accepted BH (1964)</text>
+  <text x="254.24339597548885" y="412" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" opacity="0.4">τ interior</text>
+  <text x="415.24339597548885" y="412" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" text-anchor="end" opacity="0.4">328 μs</text>
+  <text x="254.24339597548885" y="422" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" opacity="0.4">r_s</text>
+  <text x="415.24339597548885" y="422" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" text-anchor="end" opacity="0.4">63 km</text>
+  <text x="254.24339597548885" y="432" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" opacity="0.4">S_BH</text>
+  <text x="415.24339597548885" y="432" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" text-anchor="end" opacity="0.4">10^80 k_B</text>
+  <text x="254.24339597548885" y="442" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" opacity="0.4">recycle</text>
+  <text x="415.24339597548885" y="442" font-family="'Courier New', monospace" font-size="7" fill="#ffe700" text-anchor="end" opacity="0.4">5.1e-25</text>
+  <circle cx="263" cy="565" r="29" fill="#ffdf00" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="263" cy="565" rx="19" ry="6" fill="none" stroke="#ffdf00" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="263" cy="565" rx="15" ry="4" fill="none" stroke="#ffdf00" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="263" cy="565" r="10" fill="#000000" stroke="#ffdf00" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="263" cy="565" r="5" fill="none" stroke="#ffdf00" stroke-width="0.4" opacity="0.2"/>
+  <line x1="282" y1="565" x2="299" y2="540" stroke="#ffdf00" stroke-width="0.4" opacity="0.2"/>
+  <rect x="299.20884528343055" y="530" width="175" height="82" rx="4" fill="#0a0812" stroke="#ffdf00" stroke-width="0.5" opacity="0.6"/>
+  <text x="307.20884528343055" y="544" font-family="'Georgia', serif" font-size="11" fill="#ffdf00" opacity="0.85" font-weight="bold">GW150914</text>
+  <text x="468.20884528343055" y="544" font-family="'Courier New', monospace" font-size="9" fill="#ffdf00" text-anchor="end" opacity="0.5">62 M☉</text>
+  <line x1="305.20884528343055" y1="549" x2="468.20884528343055" y2="549" stroke="#ffdf00" stroke-width="0.3" opacity="0.2"/>
+  <text x="307.20884528343055" y="560" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">First gravitational wave (2015)</text>
+  <text x="307.20884528343055" y="572" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" opacity="0.4">τ interior</text>
+  <text x="468.20884528343055" y="572" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" text-anchor="end" opacity="0.4">960 μs</text>
+  <text x="307.20884528343055" y="582" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" opacity="0.4">r_s</text>
+  <text x="468.20884528343055" y="582" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" text-anchor="end" opacity="0.4">183 km</text>
+  <text x="307.20884528343055" y="592" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" opacity="0.4">S_BH</text>
+  <text x="468.20884528343055" y="592" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" text-anchor="end" opacity="0.4">10^81 k_B</text>
+  <text x="307.20884528343055" y="602" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" opacity="0.4">recycle</text>
+  <text x="468.20884528343055" y="602" font-family="'Courier New', monospace" font-size="7" fill="#ffdf00" text-anchor="end" opacity="0.4">1.7e-25</text>
+  <circle cx="786" cy="345" r="58" fill="#ff8800" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="786" cy="345" rx="38" ry="12" fill="none" stroke="#ff8800" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="786" cy="345" rx="29" ry="9" fill="none" stroke="#ff8800" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="786" cy="345" r="19" fill="#000000" stroke="#ff8800" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="786" cy="345" r="11" fill="none" stroke="#ff8800" stroke-width="0.4" opacity="0.2"/>
+  <line x1="824" y1="345" x2="846" y2="320" stroke="#ff8800" stroke-width="0.4" opacity="0.2"/>
+  <rect x="845.8091172089764" y="310" width="175" height="82" rx="4" fill="#0a0812" stroke="#ff8800" stroke-width="0.5" opacity="0.6"/>
+  <text x="853.8091172089764" y="324" font-family="'Georgia', serif" font-size="11" fill="#ff8800" opacity="0.85" font-weight="bold">Sgr A*</text>
+  <text x="1014.8091172089764" y="324" font-family="'Courier New', monospace" font-size="9" fill="#ff8800" text-anchor="end" opacity="0.5">4e+06 M☉</text>
+  <line x1="851.8091172089764" y1="329" x2="1014.8091172089764" y2="329" stroke="#ff8800" stroke-width="0.3" opacity="0.2"/>
+  <text x="853.8091172089764" y="340" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">Our galaxy, imaged by EHT (2022)</text>
+  <text x="853.8091172089764" y="352" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" opacity="0.4">τ interior</text>
+  <text x="1014.8091172089764" y="352" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" text-anchor="end" opacity="0.4">1.0 min</text>
+  <text x="853.8091172089764" y="362" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" opacity="0.4">r_s</text>
+  <text x="1014.8091172089764" y="362" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" text-anchor="end" opacity="0.4">12 Gm</text>
+  <text x="853.8091172089764" y="372" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" opacity="0.4">S_BH</text>
+  <text x="1014.8091172089764" y="372" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" text-anchor="end" opacity="0.4">10^90 k_B</text>
+  <text x="853.8091172089764" y="382" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" opacity="0.4">recycle</text>
+  <text x="1014.8091172089764" y="382" font-family="'Courier New', monospace" font-size="7" fill="#ff8800" text-anchor="end" opacity="0.4">2.7e-30</text>
+  <circle cx="1135" cy="225" r="77" fill="#ff4500" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="1135" cy="225" rx="51" ry="15" fill="none" stroke="#ff4500" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="1135" cy="225" rx="38" ry="12" fill="none" stroke="#ff4500" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="1135" cy="225" r="26" fill="#000000" stroke="#ff4500" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="1135" cy="225" r="14" fill="none" stroke="#ff4500" stroke-width="0.4" opacity="0.2"/>
+  <line x1="1084" y1="225" x2="891" y2="200" stroke="#ff4500" stroke-width="0.4" opacity="0.2"/>
+  <rect x="890.7567554295731" y="190" width="175" height="82" rx="4" fill="#0a0812" stroke="#ff4500" stroke-width="0.5" opacity="0.6"/>
+  <text x="898.7567554295731" y="204" font-family="'Georgia', serif" font-size="11" fill="#ff4500" opacity="0.85" font-weight="bold">M87*</text>
+  <text x="1059.756755429573" y="204" font-family="'Courier New', monospace" font-size="9" fill="#ff4500" text-anchor="end" opacity="0.5">6e+09 M☉</text>
+  <line x1="896.7567554295731" y1="209" x2="1059.756755429573" y2="209" stroke="#ff4500" stroke-width="0.3" opacity="0.2"/>
+  <text x="898.7567554295731" y="220" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">First BH image (EHT, 2019)</text>
+  <text x="898.7567554295731" y="232" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" opacity="0.4">τ interior</text>
+  <text x="1059.756755429573" y="232" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" text-anchor="end" opacity="0.4">1.2 days</text>
+  <text x="898.7567554295731" y="242" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" opacity="0.4">r_s</text>
+  <text x="1059.756755429573" y="242" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" text-anchor="end" opacity="0.4">128 AU</text>
+  <text x="898.7567554295731" y="252" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" opacity="0.4">S_BH</text>
+  <text x="1059.756755429573" y="252" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" text-anchor="end" opacity="0.4">10^97 k_B</text>
+  <text x="898.7567554295731" y="262" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" opacity="0.4">recycle</text>
+  <text x="1059.756755429573" y="262" font-family="'Courier New', monospace" font-size="7" fill="#ff4500" text-anchor="end" opacity="0.4">1.7e-33</text>
+  <circle cx="1190" cy="385" r="80" fill="#ff3900" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="1190" cy="385" rx="53" ry="16" fill="none" stroke="#ff3900" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="1190" cy="385" rx="40" ry="12" fill="none" stroke="#ff3900" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="1190" cy="385" r="27" fill="#000000" stroke="#ff3900" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="1190" cy="385" r="15" fill="none" stroke="#ff3900" stroke-width="0.4" opacity="0.2"/>
+  <line x1="1137" y1="385" x2="944" y2="360" stroke="#ff3900" stroke-width="0.4" opacity="0.2"/>
+  <rect x="943.5947800012241" y="350" width="175" height="82" rx="4" fill="#0a0812" stroke="#ff3900" stroke-width="0.5" opacity="0.6"/>
+  <text x="951.5947800012241" y="364" font-family="'Georgia', serif" font-size="11" fill="#ff3900" opacity="0.85" font-weight="bold">NGC 4889</text>
+  <text x="1112.594780001224" y="364" font-family="'Courier New', monospace" font-size="9" fill="#ff3900" text-anchor="end" opacity="0.5">2e+10 M☉</text>
+  <line x1="949.5947800012241" y1="369" x2="1112.594780001224" y2="369" stroke="#ff3900" stroke-width="0.3" opacity="0.2"/>
+  <text x="951.5947800012241" y="380" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">Coma Cluster giant</text>
+  <text x="951.5947800012241" y="392" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" opacity="0.4">τ interior</text>
+  <text x="1112.594780001224" y="392" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" text-anchor="end" opacity="0.4">3.8 days</text>
+  <text x="951.5947800012241" y="402" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" opacity="0.4">r_s</text>
+  <text x="1112.594780001224" y="402" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" text-anchor="end" opacity="0.4">415 AU</text>
+  <text x="951.5947800012241" y="412" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" opacity="0.4">S_BH</text>
+  <text x="1112.594780001224" y="412" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" text-anchor="end" opacity="0.4">10^98 k_B</text>
+  <text x="951.5947800012241" y="422" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" opacity="0.4">recycle</text>
+  <text x="1112.594780001224" y="422" font-family="'Courier New', monospace" font-size="7" fill="#ff3900" text-anchor="end" opacity="0.4">5.2e-34</text>
+  <circle cx="1244" cy="545" r="83" fill="#ff2d00" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="1244" cy="545" rx="55" ry="17" fill="none" stroke="#ff2d00" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="1244" cy="545" rx="41" ry="12" fill="none" stroke="#ff2d00" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="1244" cy="545" r="28" fill="#000000" stroke="#ff2d00" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="1244" cy="545" r="15" fill="none" stroke="#ff2d00" stroke-width="0.4" opacity="0.2"/>
+  <line x1="1189" y1="545" x2="995" y2="520" stroke="#ff2d00" stroke-width="0.4" opacity="0.2"/>
+  <rect x="995.189803003685" y="510" width="175" height="82" rx="4" fill="#0a0812" stroke="#ff2d00" stroke-width="0.5" opacity="0.6"/>
+  <text x="1003.189803003685" y="524" font-family="'Georgia', serif" font-size="11" fill="#ff2d00" opacity="0.85" font-weight="bold">TON 618</text>
+  <text x="1164.189803003685" y="524" font-family="'Courier New', monospace" font-size="9" fill="#ff2d00" text-anchor="end" opacity="0.5">7e+10 M☉</text>
+  <line x1="1001.189803003685" y1="529" x2="1164.189803003685" y2="529" stroke="#ff2d00" stroke-width="0.3" opacity="0.2"/>
+  <text x="1003.189803003685" y="540" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">Ultra-massive quasar BH</text>
+  <text x="1003.189803003685" y="552" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" opacity="0.4">τ interior</text>
+  <text x="1164.189803003685" y="552" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" text-anchor="end" opacity="0.4">11.8 days</text>
+  <text x="1003.189803003685" y="562" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" opacity="0.4">r_s</text>
+  <text x="1164.189803003685" y="562" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" text-anchor="end" opacity="0.4">1303 AU</text>
+  <text x="1003.189803003685" y="572" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" opacity="0.4">S_BH</text>
+  <text x="1164.189803003685" y="572" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" text-anchor="end" opacity="0.4">10^99 k_B</text>
+  <text x="1003.189803003685" y="582" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" opacity="0.4">recycle</text>
+  <text x="1164.189803003685" y="582" font-family="'Courier New', monospace" font-size="7" fill="#ff2d00" text-anchor="end" opacity="0.4">1.6e-34</text>
+  <circle cx="1264" cy="705" r="84" fill="#ff2800" opacity="0.04" filter="url(#bg)"/>
+  <ellipse cx="1264" cy="705" rx="56" ry="17" fill="none" stroke="#ff2800" stroke-width="1.2" opacity="0.35" filter="url(#glow)"/>
+  <ellipse cx="1264" cy="705" rx="42" ry="13" fill="none" stroke="#ff2800" stroke-width="0.7" opacity="0.2"/>
+  <circle cx="1264" cy="705" r="28" fill="#000000" stroke="#ff2800" stroke-width="1" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="1264" cy="705" r="15" fill="none" stroke="#ff2800" stroke-width="0.4" opacity="0.2"/>
+  <line x1="1208" y1="705" x2="1014" y2="680" stroke="#ff2800" stroke-width="0.4" opacity="0.2"/>
+  <rect x="1013.9112457649458" y="670" width="175" height="82" rx="4" fill="#0a0812" stroke="#ff2800" stroke-width="0.5" opacity="0.6"/>
+  <text x="1021.9112457649458" y="684" font-family="'Georgia', serif" font-size="11" fill="#ff2800" opacity="0.85" font-weight="bold">Phoenix A</text>
+  <text x="1182.9112457649458" y="684" font-family="'Courier New', monospace" font-size="9" fill="#ff2800" text-anchor="end" opacity="0.5">1e+11 M☉</text>
+  <line x1="1019.9112457649458" y1="689" x2="1182.9112457649458" y2="689" stroke="#ff2800" stroke-width="0.3" opacity="0.2"/>
+  <text x="1021.9112457649458" y="700" font-family="'Courier New', monospace" font-size="7" fill="#887766" opacity="0.4">Most massive known (~100B M☉)</text>
+  <text x="1021.9112457649458" y="712" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" opacity="0.4">τ interior</text>
+  <text x="1182.9112457649458" y="712" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" text-anchor="end" opacity="0.4">17.9 days</text>
+  <text x="1021.9112457649458" y="722" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" opacity="0.4">r_s</text>
+  <text x="1182.9112457649458" y="722" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" text-anchor="end" opacity="0.4">1974 AU</text>
+  <text x="1021.9112457649458" y="732" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" opacity="0.4">S_BH</text>
+  <text x="1182.9112457649458" y="732" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" text-anchor="end" opacity="0.4">10^99 k_B</text>
+  <text x="1021.9112457649458" y="742" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" opacity="0.4">recycle</text>
+  <text x="1182.9112457649458" y="742" font-family="'Courier New', monospace" font-size="7" fill="#ff2800" text-anchor="end" opacity="0.4">1.1e-34</text>
+<line x1="90" y1="850" x2="1340" y2="850" stroke="#332211" stroke-width="0.5" opacity="0.3"/>
+<text x="700" y="865" font-family="'Georgia', serif" font-size="12" fill="#cc9966" text-anchor="middle" opacity="0.6" font-style="italic">Same physics inside every one:</text>
+<text x="700" y="883" font-family="'Courier New', monospace" font-size="10" fill="#aa8855" text-anchor="middle" opacity="0.45">ξ = 0.1582  ·  σ_conv = 1.086  ·  T_crossing = 207 GeV  ·  E_baby = ξMc²  ·  τ = πGM/c³</text>
+<text x="700" y="900" font-family="'Courier New', monospace" font-size="9" fill="#886644" text-anchor="middle" opacity="0.35">Interior time spans 6 orders of magnitude. The conversion physics does not change.</text>
+<text x="700" y="917" font-family="'Georgia', serif" font-size="11" fill="#aa8855" text-anchor="middle" opacity="0.4" font-style="italic">From 139 microseconds (V404 Cygni) to 18 days (Phoenix A) — each one births a universe.</text>
+</svg>

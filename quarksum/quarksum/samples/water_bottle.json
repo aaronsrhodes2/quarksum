@@ -1,0 +1,52 @@
+{
+  "name": "Stainless Steel Water Bottle",
+  "description": "Double-walled stainless steel vacuum bottle: inner wall, vacuum gap (near-vacuum), outer wall, with water inside. Study vacuum insulation, radiative heat transfer, and why your coffee stays hot.",
+  "stated_mass_kg": 0.8,
+  "children": [
+    {
+      "materials": [
+        {
+          "material": "Water",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 400.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Stainless Steel 304",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 30.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Helium",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 50.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Stainless Steel 304",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 30.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Air",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 100.0
+    }
+  ]
+}

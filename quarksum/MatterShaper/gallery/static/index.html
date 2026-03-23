@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nagatha's Gallery</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Toolbar ── */
+  #toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    background: #111118;
+    border-bottom: 1px solid #2a2a35;
+    flex-shrink: 0;
+  }
+  #toolbar h1 {
+    font-size: 16px;
+    color: #c8a050;
+    white-space: nowrap;
+  }
+  #toolbar label { font-size: 12px; color: #888; white-space: nowrap; }
+  #toolbar input[type=range] { width: 120px; }
+  #density-val { color: #c8a050; font-size: 12px; min-width: 40px; }
+  #toolbar button {
+    background: #1a1a25;
+    color: #c8a050;
+    border: 1px solid #3a3a45;
+    padding: 4px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  #toolbar button:hover { background: #252530; }
+  #auto-status {
+    font-size: 11px;
+    color: #666;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── Main layout ── */
+  #main {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* ── 2x2 grid ── */
+  #grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    padding: 2px;
+    min-width: 0;
+  }
+  .viewport {
+    position: relative;
+    background: #0e0e14;
+    border: 1px solid #1a1a25;
+    overflow: hidden;
+  }
+  .viewport canvas { display: block; width: 100%; height: 100%; }
+  .viewport-label {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 13px;
+    color: #c8a050;
+    text-shadow: 0 0 6px rgba(0,0,0,0.9);
+    pointer-events: none;
+  }
+  .viewport-slot {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 10px;
+    color: #555;
+    pointer-events: none;
+  }
+  .viewport-rendering {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    font-size: 10px;
+    color: #666;
+    pointer-events: none;
+  }
+
+  /* ── Sidebar ── */
+  #sidebar {
+    width: 220px;
+    background: #0d0d14;
+    border-left: 1px solid #2a2a35;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  #sidebar h2 {
+    font-size: 13px;
+    color: #888;
+    padding: 10px 12px 6px;
+    border-bottom: 1px solid #1a1a25;
+  }
+  #inventory-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px;
+  }
+  .inv-item {
+    display: flex;
+    gap: 8px;
+    padding: 6px;
+    border-bottom: 1px solid #151520;
+    cursor: pointer;
+    align-items: center;
+  }
+  .inv-item:hover { background: #151520; }
+  .inv-thumb {
+    width: 48px;
+    height: 48px;
+    background: #111;
+    border: 1px solid #222;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .inv-info { font-size: 11px; }
+  .inv-name { color: #c8a050; }
+  .inv-time { color: #555; font-size: 10px; }
+  .inv-meta { color: #444; font-size: 10px; }
+
+  #object-count {
+    padding: 8px 12px;
+    font-size: 11px;
+    color: #555;
+    border-top: 1px solid #1a1a25;
+  }
+</style>
+</head>
+<body>
+
+<div id="toolbar">
+  <h1>Nagatha's Gallery</h1>
+  <label>Density:</label>
+  <input type="range" id="density" min="200" max="3000" step="100" value="1200">
+  <span id="density-val">1200</span>
+  <button id="btn-cycle">Cycle Now</button>
+  <button id="btn-render-all">Render All</button>
+  <span id="auto-status">Auto-cycle: 60s</span>
+</div>
+
+<div id="main">
+  <div id="grid">
+    <div class="viewport" id="vp-0">
+      <canvas></canvas>
+      <div class="viewport-label" id="label-0">-</div>
+      <div class="viewport-slot">TL</div>
+      <div class="viewport-rendering" id="status-0"></div>
+    </div>
+    <div class="viewport" id="vp-1">
+      <canvas></canvas>
+      <div class="viewport-label" id="label-1">-</div>
+      <div class="viewport-slot">TR</div>
+      <div class="viewport-rendering" id="status-1"></div>
+    </div>
+    <div class="viewport" id="vp-2">
+      <canvas></canvas>
+      <div class="viewport-label" id="label-2">-</div>
+      <div class="viewport-slot">BL</div>
+      <div class="viewport-rendering" id="status-2"></div>
+    </div>
+    <div class="viewport" id="vp-3">
+      <canvas></canvas>
+      <div class="viewport-label" id="label-3">-</div>
+      <div class="viewport-slot">BR</div>
+      <div class="viewport-rendering" id="status-3"></div>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    <h2>Render Inventory</h2>
+    <div id="inventory-list"></div>
+    <div id="object-count">-</div>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ── ObjectViewer ─────────────────────────────────────────────
+
+class ObjectViewer {
+  constructor(container) {
+    this.container = container;
+    this.canvas = container.querySelector('canvas');
+
+    this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color(0x0e0e14);
+
+    this.camera = new THREE.PerspectiveCamera(45, 1, 0.01, 100);
+    this.camera.position.set(2, 1.5, 2);
+
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas,
+      antialias: true,
+    });
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    this.controls = new OrbitControls(this.camera, this.canvas);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.08;
+    this.controls.target.set(0, 0.4, 0);
+
+    // Lighting
+    const ambient = new THREE.AmbientLight(0x222233, 0.6);
+    this.scene.add(ambient);
+
+    const key = new THREE.DirectionalLight(0xfff0dd, 1.2);
+    key.position.set(3, 5, 2);
+    this.scene.add(key);
+
+    const fill = new THREE.DirectionalLight(0x8090cc, 0.4);
+    fill.position.set(-3, 3, 1);
+    this.scene.add(fill);
+
+    const rim = new THREE.DirectionalLight(0xccccdd, 0.3);
+    rim.position.set(0, 2, -4);
+    this.scene.add(rim);
+
+    // Floor grid
+    const grid = new THREE.GridHelper(4, 20, 0x1a1a25, 0x121218);
+    this.scene.add(grid);
+
+    this.objectGroup = new THREE.Group();
+    this.scene.add(this.objectGroup);
+
+    this.loaded = false;
+    this.resize();
+  }
+
+  resize() {
+    const rect = this.container.getBoundingClientRect();
+    const w = rect.width;
+    const h = rect.height;
+    if (w === 0 || h === 0) return;
+    this.camera.aspect = w / h;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(w, h);
+  }
+
+  loadObject(shapeJSON, colorJSON) {
+    // Clear previous
+    while (this.objectGroup.children.length > 0) {
+      const c = this.objectGroup.children[0];
+      c.geometry?.dispose();
+      c.material?.dispose();
+      this.objectGroup.remove(c);
+    }
+
+    const materials = colorJSON.materials || {};
+
+    // Build material cache
+    const matCache = {};
+    const getMat = (matId) => {
+      if (matCache[matId]) return matCache[matId];
+      const m = materials[matId];
+      if (!m) {
+        matCache[matId] = new THREE.MeshStandardMaterial({ color: 0x888888 });
+        return matCache[matId];
+      }
+      const c = m.color || [0.5, 0.5, 0.5];
+      matCache[matId] = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(c[0], c[1], c[2]),
+        roughness: m.roughness ?? 0.5,
+        metalness: m.reflectance ?? 0.1,
+      });
+      return matCache[matId];
+    };
+
+    const layers = shapeJSON.layers || [];
+    const bbox = new THREE.Box3();
+
+    // Helper: get position from layer (handles 'pos' vs 'center')
+    const getPos = (l) => l.pos || l.center || [0, 0, 0];
+
+    for (const layer of layers) {
+      const mat = getMat(layer.material);
+      let mesh;
+
+      if (layer.type === 'sphere') {
+        const geo = new THREE.SphereGeometry(layer.radius, 32, 24);
+        mesh = new THREE.Mesh(geo, mat);
+        const p = getPos(layer);
+        mesh.position.set(p[0], p[1], p[2]);
+
+      } else if (layer.type === 'ellipsoid') {
+        const geo = new THREE.SphereGeometry(1, 32, 24);
+        mesh = new THREE.Mesh(geo, mat);
+        const p = getPos(layer);
+        const r = layer.radii;
+        mesh.position.set(p[0], p[1], p[2]);
+        mesh.scale.set(r[0], r[1], r[2]);
+        const rot = layer.rotate || [0, 0, 0];
+        mesh.rotation.set(rot[0], rot[1], rot[2], 'XYZ');
+
+      } else if (layer.type === 'cone') {
+        const geo = new THREE.CylinderGeometry(
+          layer.top_radius, layer.base_radius, layer.height, 32
+        );
+        mesh = new THREE.Mesh(geo, mat);
+        const p = layer.base_pos || getPos(layer);
+        // three.js centers cylinder at origin, so shift up by half height
+        mesh.position.set(p[0], p[1] + layer.height / 2, p[2]);
+        const rot = layer.rotate || [0, 0, 0];
+        mesh.rotation.set(rot[0], rot[1], rot[2], 'XYZ');
+
+      } else {
+        continue;
+      }
+
+      this.objectGroup.add(mesh);
+      const meshBox = new THREE.Box3().setFromObject(mesh);
+      bbox.union(meshBox);
+    }
+
+    // Auto-fit camera
+    if (!bbox.isEmpty()) {
+      const center = new THREE.Vector3();
+      bbox.getCenter(center);
+      const size = new THREE.Vector3();
+      bbox.getSize(size);
+      const extent = size.length();
+
+      this.controls.target.copy(center);
+      const dist = Math.max(0.6, extent * 1.8);
+      this.camera.position.set(
+        center.x + dist * 0.7,
+        center.y + extent * 0.4,
+        center.z + dist * 0.7
+      );
+      this.camera.near = extent * 0.01;
+      this.camera.far = extent * 20;
+      this.camera.updateProjectionMatrix();
+      this.controls.update();
+    }
+
+    this.loaded = true;
+  }
+
+  update() {
+    this.controls.update();
+    this.renderer.render(this.scene, this.camera);
+  }
+}
+
+
+// ── App State ────────────────────────────────────────────────
+
+const viewers = [];
+const slotLabels = ['TL', 'TR', 'BL', 'BR'];
+let cycleTimer = null;
+
+// ── Init viewers ─────────────────────────────────────────────
+
+for (let i = 0; i < 4; i++) {
+  const container = document.getElementById(`vp-${i}`);
+  viewers.push(new ObjectViewer(container));
+}
+
+// ── Render loop ──────────────────────────────────────────────
+
+function animate() {
+  requestAnimationFrame(animate);
+  for (const v of viewers) v.update();
+}
+animate();
+
+// ── Resize ───────────────────────────────────────────────────
+
+window.addEventListener('resize', () => {
+  for (const v of viewers) v.resize();
+});
+// Also resize after a short delay (layout stabilization)
+setTimeout(() => { for (const v of viewers) v.resize(); }, 100);
+
+
+// ── API helpers ──────────────────────────────────────────────
+
+async function fetchJSON(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+  return r.json();
+}
+
+async function loadObjectInSlot(key, slot) {
+  const label = document.getElementById(`label-${slot}`);
+  const status = document.getElementById(`status-${slot}`);
+
+  try {
+    label.textContent = `Loading ${key}...`;
+    const [shape, color] = await Promise.all([
+      fetchJSON(`/api/object/${key}/shape`),
+      fetchJSON(`/api/object/${key}/color`),
+    ]);
+
+    viewers[slot].loadObject(shape, color);
+    label.textContent = shape.name || key;
+
+    // Trigger entangler render in background
+    const density = document.getElementById('density').value;
+    status.textContent = 'Rendering...';
+    fetch(`/api/render/${key}?density=${density}`, { method: 'POST' })
+      .then(r => r.json())
+      .then(data => {
+        if (data.status === 'rendering') {
+          pollRenderStatus(key, slot);
+        } else {
+          status.textContent = '';
+        }
+      });
+
+  } catch (e) {
+    label.textContent = `Error: ${e.message}`;
+    console.error(e);
+  }
+}
+
+async function pollRenderStatus(key, slot) {
+  const status = document.getElementById(`status-${slot}`);
+  const check = async () => {
+    try {
+      const data = await fetchJSON(`/api/render-status/${key}`);
+      if (data.status === 'done') {
+        status.textContent = 'Rendered';
+        setTimeout(() => { status.textContent = ''; }, 3000);
+        refreshInventory();
+      } else if (data.status === 'error') {
+        status.textContent = 'Render error';
+      } else {
+        setTimeout(check, 2000);
+      }
+    } catch { setTimeout(check, 3000); }
+  };
+  check();
+}
+
+
+// ── Cycle ────────────────────────────────────────────────────
+
+async function cycleNext() {
+  try {
+    const data = await fetchJSON('/api/next');
+    await loadObjectInSlot(data.key, data.slot);
+    updateAutoStatus();
+  } catch (e) {
+    console.error('Cycle error:', e);
+  }
+}
+
+function updateAutoStatus() {
+  const el = document.getElementById('auto-status');
+  el.textContent = `Auto-cycle: 60s | ${new Date().toLocaleTimeString()}`;
+}
+
+
+// ── Inventory ────────────────────────────────────────────────
+
+async function refreshInventory() {
+  try {
+    const data = await fetchJSON('/api/inventory');
+    const list = document.getElementById('inventory-list');
+    const renders = (data.renders || []).slice().reverse();
+
+    list.innerHTML = renders.map(r => `
+      <div class="inv-item" data-key="${r.key}">
+        <img class="inv-thumb" src="/renders/${r.filename}"
+             onerror="this.style.display='none'" alt="${r.name}">
+        <div class="inv-info">
+          <div class="inv-name">${r.name || r.key}</div>
+          <div class="inv-time">${new Date(r.timestamp * 1000).toLocaleString()}</div>
+          <div class="inv-meta">${r.render_time_s}s | d=${r.density}</div>
+        </div>
+      </div>
+    `).join('');
+
+    document.getElementById('object-count').textContent =
+      `${renders.length} renders | ${Object.keys(data).length ? data.rotation_index || 0 : 0} cycles`;
+
+  } catch (e) {
+    console.error('Inventory error:', e);
+  }
+}
+
+
+// ── Initial load ─────────────────────────────────────────────
+
+async function init() {
+  try {
+    const objects = await fetchJSON('/api/objects');
+    document.getElementById('object-count').textContent =
+      `${objects.length} objects in library`;
+
+    // Load first 4 objects into the grid
+    const initial = objects.slice(0, 4);
+    for (let i = 0; i < initial.length; i++) {
+      await loadObjectInSlot(initial[i].key, i);
+    }
+
+    refreshInventory();
+
+    // Start auto-cycle
+    cycleTimer = setInterval(cycleNext, 60000);
+    updateAutoStatus();
+
+  } catch (e) {
+    console.error('Init error:', e);
+  }
+}
+
+
+// ── Controls ─────────────────────────────────────────────────
+
+document.getElementById('density').addEventListener('input', (e) => {
+  document.getElementById('density-val').textContent = e.target.value;
+});
+
+document.getElementById('btn-cycle').addEventListener('click', cycleNext);
+
+document.getElementById('btn-render-all').addEventListener('click', async () => {
+  try {
+    const objects = await fetchJSON('/api/objects');
+    const density = document.getElementById('density').value;
+    for (const obj of objects) {
+      fetch(`/api/render/${obj.key}?density=${density}`, { method: 'POST' });
+    }
+    document.getElementById('auto-status').textContent =
+      `Rendering all ${objects.length} objects...`;
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+// Click inventory item to load in next slot
+document.getElementById('inventory-list').addEventListener('click', (e) => {
+  const item = e.target.closest('.inv-item');
+  if (!item) return;
+  const key = item.dataset.key;
+  // Load into slot 0 (TL)
+  loadObjectInSlot(key, 0);
+});
+
+
+// ── Go ───────────────────────────────────────────────────────
+init();
+
+</script>
+</body>
+</html>

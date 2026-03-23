@@ -1,0 +1,68 @@
+{
+  "object": "bottle",
+  "format": "sigma_v1",
+  "source": "shapenet_harvest",
+  "converter": "nagatha_mesh_to_sigma",
+  "layers": [
+    {
+      "type": "ellipsoid",
+      "label": "default_a_a_0",
+      "center": [
+        -0.0847,
+        -0.2687,
+        -0.0
+      ],
+      "radii": [
+        0.2838,
+        0.2313,
+        0.1425
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_b_a_1",
+      "center": [
+        -0.0014,
+        0.088,
+        -0.0
+      ],
+      "radii": [
+        0.2176,
+        0.2176,
+        0.11
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_b_b_2",
+      "center": [
+        -0.0014,
+        0.4124,
+        -0.0
+      ],
+      "radii": [
+        0.0876,
+        0.0876,
+        0.0401
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_a_b_3",
+      "center": [
+        0.1033,
+        -0.2699,
+        0.0
+      ],
+      "radii": [
+        0.2652,
+        0.2119,
+        0.1548
+      ],
+      "material": "default"
+    }
+  ]
+}

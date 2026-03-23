@@ -1,0 +1,68 @@
+{
+  "object": "cylinder",
+  "format": "sigma_v1",
+  "source": "shapenet_harvest",
+  "converter": "nagatha_mesh_to_sigma",
+  "layers": [
+    {
+      "type": "ellipsoid",
+      "label": "default_a_a_0",
+      "center": [
+        -0.1251,
+        -0.3475,
+        -0.0
+      ],
+      "radii": [
+        0.3034,
+        0.1525,
+        0.0
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_b_a_1",
+      "center": [
+        -0.1251,
+        0.3475,
+        -0.0
+      ],
+      "radii": [
+        0.3034,
+        0.1525,
+        0.0
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_a_b_2",
+      "center": [
+        0.1336,
+        -0.3475,
+        0.0
+      ],
+      "radii": [
+        0.2949,
+        0.1183,
+        0.0
+      ],
+      "material": "default"
+    },
+    {
+      "type": "ellipsoid",
+      "label": "default_b_b_3",
+      "center": [
+        0.1336,
+        0.3475,
+        0.0
+      ],
+      "radii": [
+        0.2949,
+        0.1183,
+        0.0
+      ],
+      "material": "default"
+    }
+  ]
+}

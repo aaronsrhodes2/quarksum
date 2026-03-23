@@ -1,0 +1,37 @@
+{
+  "name": "Wooden Chair Colors",
+  "reference": "Natural oak dining chair with darker stained accents",
+  "provenance": "Colors selected by AI from typical oak wood RGB values. Reflectance/roughness estimated from material physics (finished wood ~0.08-0.12 reflectance). No textures — flat analytical materials only.",
+  "materials": {
+    "oak_body": {
+      "label": "Natural oak — seat and splat",
+      "color": [0.55, 0.38, 0.22],
+      "reflectance": 0.08,
+      "roughness": 0.50,
+      "density_kg_m3": 750,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Quercus (cellulose + lignin)"
+    },
+    "oak_leg": {
+      "label": "Oak legs — slightly lighter, turned",
+      "color": [0.52, 0.36, 0.20],
+      "reflectance": 0.09,
+      "roughness": 0.48,
+      "density_kg_m3": 750,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Quercus (cellulose + lignin)"
+    },
+    "oak_dark": {
+      "label": "Dark stained accents — rails and stretchers",
+      "color": [0.35, 0.22, 0.12],
+      "reflectance": 0.10,
+      "roughness": 0.45,
+      "density_kg_m3": 750,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Quercus (cellulose + lignin, stained)"
+    }
+  }
+}

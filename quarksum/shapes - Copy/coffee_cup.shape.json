@@ -1,0 +1,1263 @@
+{
+  "name": "coffee_cup",
+  "description": "Intact coffee cup from packed spheres",
+  "version": "1.0",
+  "primitive_count": 122,
+  "center_of_mass": [
+    0.030663981990209574,
+    0.39999999999999986,
+    5.00510379953964e-18
+  ],
+  "bounding_box": [
+    [
+      -0.4102,
+      -0.07,
+      -0.40141975484607473
+    ],
+    [
+      0.5759884659490918,
+      0.9,
+      0.4014197548460746
+    ]
+  ],
+  "primitives": [
+    {
+      "type": "sphere",
+      "pos": [
+        0.323,
+        0.04,
+        0.0
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.29101294433248137,
+        0.04,
+        0.14014444773497128
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.20138720600037097,
+        0.04,
+        0.25253156883717365
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07187426166788957,
+        0.04,
+        0.314901715634729
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07187426166788953,
+        0.04,
+        0.314901715634729
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.2013872060003709,
+        0.04,
+        0.25253156883717365
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.29101294433248137,
+        0.04,
+        0.1401444477349713
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.323,
+        0.04,
+        3.955609161245951e-17
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.29101294433248137,
+        0.04,
+        -0.14014444773497123
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.201387206000371,
+        0.04,
+        -0.2525315688371736
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07187426166788961,
+        0.04,
+        -0.314901715634729
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07187426166788921,
+        0.04,
+        -0.31490171563472913
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.20138720600037088,
+        0.04,
+        -0.25253156883717365
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.2910129443324815,
+        0.04,
+        -0.1401444477349711
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.32844,
+        0.17,
+        0.0
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.29591421497387055,
+        0.17,
+        0.1425047752757708
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.20477899052248247,
+        0.17,
+        0.2567847321017997
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07308477554861192,
+        0.17,
+        0.32020532347699815
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07308477554861188,
+        0.17,
+        0.32020532347699815
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.20477899052248244,
+        0.17,
+        0.25678473210179975
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.2959142149738705,
+        0.17,
+        0.14250477527577082
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.32844,
+        0.17,
+        4.022229947119567e-17
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.29591421497387055,
+        0.17,
+        -0.14250477527577077
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.2047789905224825,
+        0.17,
+        -0.2567847321017997
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07308477554861197,
+        0.17,
+        -0.32020532347699815
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07308477554861155,
+        0.17,
+        -0.3202053234769982
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.20477899052248238,
+        0.17,
+        -0.25678473210179975
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.2959142149738706,
+        0.17,
+        -0.1425047752757706
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.33388,
+        0.3,
+        0.0
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.3008154856152597,
+        0.3,
+        0.1448651028165703
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.20817077504459397,
+        0.3,
+        0.2610378953664258
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07429528942933428,
+        0.3,
+        0.3255089313192673
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07429528942933424,
+        0.3,
+        0.3255089313192673
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.20817077504459394,
+        0.3,
+        0.26103789536642585
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.30081548561525967,
+        0.3,
+        0.14486510281657033
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.33388,
+        0.3,
+        4.088850732993183e-17
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.3008154856152597,
+        0.3,
+        -0.14486510281657028
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.20817077504459403,
+        0.3,
+        -0.26103789536642574
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07429528942933432,
+        0.3,
+        -0.3255089313192673
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.0742952894293339,
+        0.3,
+        -0.32550893131926734
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.20817077504459391,
+        0.3,
+        -0.26103789536642585
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.3008154856152598,
+        0.3,
+        -0.1448651028165701
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.33932,
+        0.43,
+        0.0
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.30571675625664885,
+        0.43,
+        0.14722543035736982
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.2115625595667055,
+        0.43,
+        0.2652910586310519
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07550580331005662,
+        0.43,
+        0.3308125391615364
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07550580331005659,
+        0.43,
+        0.3308125391615364
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.21156255956670544,
+        0.43,
+        0.2652910586310519
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.30571675625664885,
+        0.43,
+        0.14722543035736987
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.33932,
+        0.43,
+        4.155471518866799e-17
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.30571675625664885,
+        0.43,
+        -0.1472254303573698
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.21156255956670553,
+        0.43,
+        -0.26529105863105185
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07550580331005667,
+        0.43,
+        -0.3308125391615364
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07550580331005624,
+        0.43,
+        -0.33081253916153647
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.21156255956670542,
+        0.43,
+        -0.2652910586310519
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.30571675625664896,
+        0.43,
+        -0.14722543035736962
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.34476,
+        0.56,
+        0.0
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.310618026898038,
+        0.56,
+        0.14958575789816933
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.214954344088817,
+        0.56,
+        0.26954422189567795
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07671631719077897,
+        0.56,
+        0.33611614700380554
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07671631719077893,
+        0.56,
+        0.33611614700380554
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.21495434408881697,
+        0.56,
+        0.269544221895678
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.31061802689803797,
+        0.56,
+        0.14958575789816939
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.34476,
+        0.56,
+        4.222092304740415e-17
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.310618026898038,
+        0.56,
+        -0.1495857578981693
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.21495434408881703,
+        0.56,
+        -0.26954422189567795
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07671631719077902,
+        0.56,
+        -0.33611614700380554
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.0767163171907786,
+        0.56,
+        -0.3361161470038056
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.21495434408881692,
+        0.56,
+        -0.269544221895678
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.31061802689803814,
+        0.56,
+        -0.14958575789816914
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.3502,
+        0.6900000000000001,
+        0.0
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.3155192975394272,
+        0.6900000000000001,
+        0.15194608543896887
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.2183461286109285,
+        0.6900000000000001,
+        0.27379738516030405
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07792683107150132,
+        0.6900000000000001,
+        0.3414197548460746
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07792683107150128,
+        0.6900000000000001,
+        0.3414197548460746
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.21834612861092847,
+        0.6900000000000001,
+        0.2737973851603041
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.31551929753942715,
+        0.6900000000000001,
+        0.1519460854389689
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.3502,
+        0.6900000000000001,
+        4.288713090614031e-17
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.3155192975394272,
+        0.6900000000000001,
+        -0.15194608543896881
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.21834612861092856,
+        0.6900000000000001,
+        -0.273797385160304
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.07792683107150138,
+        0.6900000000000001,
+        -0.3414197548460746
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.07792683107150093,
+        0.6900000000000001,
+        -0.34141975484607473
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.21834612861092845,
+        0.6900000000000001,
+        -0.2737973851603041
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.31551929753942726,
+        0.6900000000000001,
+        -0.15194608543896865
+      ],
+      "radius": 0.06,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.36,
+        0.72,
+        0.0
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.338289343482927,
+        0.72,
+        0.12312725159724074
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.27577599952283205,
+        0.72,
+        0.23140353948715411
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.18000000000000002,
+        0.72,
+        0.31176914536239786
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.06251334396009495,
+        0.72,
+        0.3545307910843949
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.0625133439600949,
+        0.72,
+        0.3545307910843949
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.1799999999999999,
+        0.72,
+        0.3117691453623979
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.27577599952283205,
+        0.72,
+        0.2314035394871542
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.338289343482927,
+        0.72,
+        0.12312725159724079
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.36,
+        0.72,
+        4.4087284769304716e-17
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.338289343482927,
+        0.72,
+        -0.12312725159724071
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.2757759995228322,
+        0.72,
+        -0.231403539487154
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.18000000000000016,
+        0.72,
+        -0.3117691453623978
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.06251334396009492,
+        0.72,
+        -0.3545307910843949
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.06251334396009478,
+        0.72,
+        -0.3545307910843949
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.17999999999999974,
+        0.72,
+        -0.311769145362398
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.275775999522832,
+        0.72,
+        -0.23140353948715425
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.338289343482927,
+        0.72,
+        -0.1231272515972407
+      ],
+      "radius": 0.035,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.38,
+        0.7250000000000001,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.44942139825880933,
+        0.675,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.5050930371948847,
+        0.625,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.5359884659490918,
+        0.5750000000000001,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.5359884659490918,
+        0.525,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.5050930371948847,
+        0.47500000000000003,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.44942139825880933,
+        0.42500000000000004,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.38,
+        0.37500000000000006,
+        0
+      ],
+      "radius": 0.04,
+      "material": "ceramic"
+    },
+    {
+      "type": "ellipsoid",
+      "pos": [
+        0,
+        0.62,
+        0
+      ],
+      "radii": [
+        0.28,
+        0.01,
+        0.28
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ],
+      "material": {
+        "name": "coffee",
+        "color": [
+          0.25,
+          0.14,
+          0.07
+        ],
+        "reflectance": 0.35,
+        "roughness": 0.05
+      }
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.22,
+        0.015,
+        0.0
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.17798373876248844,
+        0.015,
+        0.1293127555043441
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.06798373876248844,
+        0.015,
+        0.2092324335849338
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.06798373876248842,
+        0.015,
+        0.2092324335849338
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.1779837387624884,
+        0.015,
+        0.12931275550434412
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.22,
+        0.015,
+        2.694222958124177e-17
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.17798373876248846,
+        0.015,
+        -0.12931275550434407
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        -0.06798373876248846,
+        0.015,
+        -0.2092324335849338
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.0679837387624884,
+        0.015,
+        -0.2092324335849338
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0.1779837387624884,
+        0.015,
+        -0.12931275550434415
+      ],
+      "radius": 0.05,
+      "material": "ceramic"
+    },
+    {
+      "type": "sphere",
+      "pos": [
+        0,
+        0.01,
+        0
+      ],
+      "radius": 0.08,
+      "material": "ceramic"
+    }
+  ]
+}

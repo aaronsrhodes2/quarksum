@@ -1,0 +1,102 @@
+{
+  "name": "Solar System (Sun to Oort Cloud)",
+  "description": "Simplified radial cross-section from the Sun through the solar system to the Oort Cloud. Hydrogen-helium stellar core, rocky inner planets (silicate proxy), gas giant region (hydrogen-methane), the Kuiper Belt ice region, and the vast Oort Cloud of icy-rocky debris. Layer thicknesses are proportional to order-of-magnitude scale, not to true AU distances. Demonstrates the dramatic density gradient from stellar plasma (~1400 kg/m³) to near-perfect vacuum (~10⁻²⁵ kg/m³).",
+  "stated_mass_kg": 1.991077989796853e+30,
+  "children": [
+    {
+      "materials": [
+        {
+          "material": "Hydrogen",
+          "ratio": 0.73
+        },
+        {
+          "material": "Helium",
+          "ratio": 0.25
+        },
+        {
+          "material": "Iron",
+          "ratio": 0.02
+        }
+      ],
+      "thickness": 200.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Silicon Dioxide",
+          "ratio": 0.5
+        },
+        {
+          "material": "Iron",
+          "ratio": 0.3
+        },
+        {
+          "material": "Magnesium Oxide",
+          "ratio": 0.2
+        }
+      ],
+      "thickness": 60.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Interstellar Medium (ISM)",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 40.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Hydrogen",
+          "ratio": 0.8
+        },
+        {
+          "material": "Helium",
+          "ratio": 0.15
+        },
+        {
+          "material": "Methane",
+          "ratio": 0.05
+        }
+      ],
+      "thickness": 100.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Interstellar Medium (ISM)",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 80.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Water",
+          "ratio": 0.5
+        },
+        {
+          "material": "Ammonia",
+          "ratio": 0.25
+        },
+        {
+          "material": "Methane",
+          "ratio": 0.25
+        }
+      ],
+      "thickness": 80.0
+    },
+    {
+      "materials": [
+        {
+          "material": "Oort Cloud",
+          "ratio": 1.0
+        }
+      ],
+      "thickness": 250.0
+    }
+  ]
+}

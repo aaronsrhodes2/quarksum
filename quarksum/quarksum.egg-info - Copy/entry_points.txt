@@ -1,0 +1,2 @@
+[console_scripts]
+quarksum = quarksum.__main__:main

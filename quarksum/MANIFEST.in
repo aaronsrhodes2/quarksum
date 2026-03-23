@@ -1,0 +1,5 @@
+include LICENSE
+include NOTICE
+include README.md
+recursive-include quarksum/data *.json
+recursive-include quarksum/samples *.json
