@@ -1,128 +1,94 @@
 {
-  "name": "Beer Bottle",
-  "reference": "330ml longneck beer bottle \u2014 24cm tall, 6.5cm body dia",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "beer bottle",
   "layers": [
     {
-      "id": "base",
-      "label": "Base",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "glass",
       "pos": [
-        0,
-        0.01,
-        0
+        0.0,
+        0.315,
+        0.0
       ],
-      "radii": [
-        0.33,
-        0.02,
-        0.33
-      ],
+      "radius": 0.262,
+      "height": 0.629,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "amber_glass"
+      ]
     },
     {
-      "id": "body",
-      "label": "Body",
-      "type": "cone",
-      "base_pos": [
-        0,
-        0,
-        0
-      ],
-      "height": 1.4,
-      "base_radius": 0.32,
-      "top_radius": 0.33,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "amber_glass"
-    },
-    {
-      "id": "shoulder",
-      "label": "Shoulder taper",
-      "type": "cone",
-      "base_pos": [
-        0,
-        1.35,
-        0
-      ],
-      "height": 0.4,
-      "base_radius": 0.33,
-      "top_radius": 0.13,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "amber_glass"
-    },
-    {
-      "id": "neck",
-      "label": "Neck",
-      "type": "cone",
-      "base_pos": [
-        0,
-        1.7,
-        0
-      ],
-      "height": 0.65,
-      "base_radius": 0.13,
-      "top_radius": 0.13,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "amber_glass"
-    },
-    {
-      "id": "lip",
-      "label": "Lip ring",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "paper",
       "pos": [
-        0,
-        2.35,
-        0
+        0.0,
+        0.808,
+        0.0
       ],
-      "radii": [
-        0.15,
-        0.025,
-        0.15
-      ],
+      "radius": 0.149,
+      "height": 0.358,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "amber_glass"
+      ]
     },
     {
-      "id": "cap",
-      "label": "Bottle cap",
-      "type": "ellipsoid",
+      "type": "sphere",
+      "material": "plastic",
       "pos": [
-        0,
-        2.4,
-        0
+        0.0,
+        0.845,
+        0.0
       ],
-      "radii": [
-        0.14,
-        0.03,
-        0.14
-      ],
+      "radius": 0.216,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "steel"
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on typical dimensions and materials of a standard beer bottle.",
+  "physics": {
+    "total_mass_kg": 0.4,
+    "components": [
+      {
+        "component": "bottle_body",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.34,
+        "volume_cm3": 136.0,
+        "dims": {
+          "radius": 0.262,
+          "height": 0.629
+        }
+      },
+      {
+        "component": "bottle_label",
+        "material": "paper",
+        "density_kg_m3": 800,
+        "phase": "solid",
+        "mass_kg": 0.02,
+        "volume_cm3": 25.0,
+        "dims": {
+          "radius": 0.149,
+          "height": 0.358
+        }
+      },
+      {
+        "component": "bottle_cap",
+        "material": "plastic",
+        "density_kg_m3": 950,
+        "phase": "solid",
+        "mass_kg": 0.04,
+        "volume_cm3": 42.11,
+        "dims": {
+          "radius": 0.216
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

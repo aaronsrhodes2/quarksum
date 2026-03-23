@@ -1,53 +1,38 @@
 {
-  "name": "Orange",
-  "reference": "Navel orange \u2014 8cm diameter",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "orange",
   "layers": [
     {
-      "id": "body",
-      "label": "Orange body",
       "type": "sphere",
+      "material": "fruit",
       "pos": [
-        0,
-        0.4,
-        0
+        0.0,
+        0.271,
+        0.0
       ],
-      "radius": 0.4,
-      "material": "skin_orange"
-    },
-    {
-      "id": "navel",
-      "label": "Navel dimple",
-      "type": "sphere",
-      "pos": [
-        0,
-        0.02,
-        0
-      ],
-      "radius": 0.06,
-      "material": "skin_yellow"
-    },
-    {
-      "id": "stem_bump",
-      "label": "Stem end bump",
-      "type": "ellipsoid",
-      "pos": [
-        0,
-        0.8,
-        0
-      ],
-      "radii": [
-        0.04,
-        0.02,
-        0.04
-      ],
+      "radius": 0.271,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "stem_brown"
+      ]
     }
-  ]
+  ],
+  "provenance": "An orange is primarily a spherical fruit with an average mass of around 150 grams.",
+  "physics": {
+    "total_mass_kg": 0.15,
+    "components": [
+      {
+        "component": "main_orange_fruit",
+        "material": "fruit",
+        "density_kg_m3": 1800.0,
+        "phase": "solid",
+        "mass_kg": 0.15,
+        "volume_cm3": 83.33,
+        "dims": {
+          "radius": 0.271
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

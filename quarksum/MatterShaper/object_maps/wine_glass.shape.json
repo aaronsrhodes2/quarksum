@@ -1,128 +1,158 @@
 {
-  "name": "Wine Glass",
-  "reference": "Standard 250ml wine glass \u2014 21cm tall, 8cm bowl dia",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "wine glass",
   "layers": [
     {
-      "id": "base",
-      "label": "Circular base",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "glass",
       "pos": [
-        0,
-        0.02,
-        0
+        0.0,
+        0.226,
+        0.0
       ],
-      "radii": [
-        0.38,
-        0.02,
-        0.38
-      ],
+      "radius": 0.113,
+      "height": 0.451,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "clear_glass"
+      ]
     },
     {
-      "id": "stem",
-      "label": "Stem",
-      "type": "cone",
-      "base_pos": [
-        0,
-        0.04,
-        0
-      ],
-      "height": 0.9,
-      "base_radius": 0.04,
-      "top_radius": 0.04,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "clear_glass"
-    },
-    {
-      "id": "bowl_base",
-      "label": "Bowl base taper",
-      "type": "cone",
-      "base_pos": [
-        0,
-        0.9,
-        0
-      ],
-      "height": 0.4,
-      "base_radius": 0.05,
-      "top_radius": 0.38,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "clear_glass"
-    },
-    {
-      "id": "bowl_mid",
-      "label": "Bowl widest",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "glass",
       "pos": [
-        0,
-        1.4,
-        0
+        0.0,
+        0.809,
+        0.0
       ],
-      "radii": [
-        0.4,
-        0.2,
-        0.4
-      ],
+      "radius": 0.089,
+      "height": 0.716,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "clear_glass"
+      ]
     },
     {
-      "id": "bowl_top",
-      "label": "Bowl narrowing",
       "type": "cone",
+      "material": "glass",
       "base_pos": [
-        0,
-        1.5,
-        0
+        0.0,
+        1.474,
+        0.0
       ],
-      "height": 0.5,
-      "base_radius": 0.38,
-      "top_radius": 0.34,
+      "height": 0.615,
+      "base_radius": 0.205,
+      "top_radius": 0.02,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "clear_glass"
+      ]
     },
     {
-      "id": "rim",
-      "label": "Rim",
-      "type": "ellipsoid",
-      "pos": [
-        0,
-        2.0,
-        0
+      "type": "cone",
+      "material": "glass",
+      "base_pos": [
+        0.0,
+        2.062,
+        0.0
       ],
-      "radii": [
-        0.35,
-        0.015,
-        0.35
-      ],
+      "height": 0.559,
+      "base_radius": 0.215,
+      "top_radius": 0.021,
       "rotate": [
         0,
         0,
         0
+      ]
+    },
+    {
+      "type": "cone",
+      "material": "glass",
+      "base_pos": [
+        0.0,
+        2.558,
+        0.0
       ],
-      "material": "clear_glass"
+      "height": 0.435,
+      "base_radius": 0.218,
+      "top_radius": 0.022,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on typical wine glass dimensions and mass distribution.",
+  "physics": {
+    "total_mass_kg": 0.3,
+    "components": [
+      {
+        "component": "stem_base",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.045,
+        "volume_cm3": 18.0,
+        "dims": {
+          "radius": 0.113,
+          "height": 0.451
+        }
+      },
+      {
+        "component": "stem",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.045,
+        "volume_cm3": 18.0,
+        "dims": {
+          "radius": 0.089,
+          "height": 0.716
+        }
+      },
+      {
+        "component": "bowl_base",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.075,
+        "volume_cm3": 30.0,
+        "dims": {
+          "height": 0.615,
+          "base_radius": 0.205,
+          "top_radius": 0.02
+        }
+      },
+      {
+        "component": "bowl_middle",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.075,
+        "volume_cm3": 30.0,
+        "dims": {
+          "height": 0.559,
+          "base_radius": 0.215,
+          "top_radius": 0.021
+        }
+      },
+      {
+        "component": "bowl_top",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.06,
+        "volume_cm3": 24.0,
+        "dims": {
+          "height": 0.435,
+          "base_radius": 0.218,
+          "top_radius": 0.022
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

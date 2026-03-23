@@ -1,47 +1,19 @@
 {
-  "name": "Banana Colors",
-  "reference": "Ripe Cavendish banana — yellow with light brown spots, green tinge near stem",
-  "provenance": "Colors selected by AI from typical ripe banana RGB values. No textures — flat analytical materials only.",
   "materials": {
-    "peel_yellow": {
-      "label": "Ripe banana peel — bright yellow",
-      "color": [0.92, 0.82, 0.20],
-      "reflectance": 0.06,
-      "roughness": 0.60,
-      "density_kg_m3": 980,
-      "mean_Z": 7,
-      "mean_A": 14,
-      "composition": "Cellulose peel (carotenoids, xanthophylls)"
-    },
-    "stem_brown": {
-      "label": "Stem — woody brown-green",
-      "color": [0.40, 0.35, 0.15],
-      "reflectance": 0.04,
-      "roughness": 0.75,
-      "density_kg_m3": 800,
-      "mean_Z": 6,
-      "mean_A": 12,
-      "composition": "Lignified stem tissue"
-    },
-    "tip_dark": {
-      "label": "Blossom tip — dried dark brown",
-      "color": [0.25, 0.18, 0.10],
-      "reflectance": 0.03,
-      "roughness": 0.80,
-      "density_kg_m3": 600,
-      "mean_Z": 6,
-      "mean_A": 12,
-      "composition": "Dried flower remnant"
-    },
-    "bruise_brown": {
-      "label": "Bruise spot — brown discoloration",
-      "color": [0.45, 0.32, 0.12],
-      "reflectance": 0.05,
-      "roughness": 0.65,
-      "density_kg_m3": 980,
-      "mean_Z": 7,
-      "mean_A": 14,
-      "composition": "Oxidized polyphenols (enzymatic browning)"
+    "fruit": {
+      "label": "fruit",
+      "color": [
+        0.55,
+        0.56,
+        0.58
+      ],
+      "reflectance": 0.6,
+      "roughness": 0.15,
+      "density_kg_m3": 7800,
+      "mean_Z": 26,
+      "mean_A": 56,
+      "composition": "Fe + C (carbon steel)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

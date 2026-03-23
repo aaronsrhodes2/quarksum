@@ -1,104 +1,33 @@
 {
   "layers": [
     {
+      "material": "red_brick",
       "type": "box",
       "pos": [
         0,
-        -0.15,
+        0,
         0
       ],
       "size": [
-        0.24,
-        0.06,
-        0.12
-      ],
-      "material": "red_brick"
-    },
-    {
-      "id": "handle_0",
-      "label": "Handle segment 1 (attachment)",
-      "type": "ellipsoid",
-      "pos": [
-        0.03,
-        -0.09,
-        0.06
-      ],
-      "radii": [
-        0.15625,
-        0.1171875,
-        0.087890625
-      ],
-      "rotate": [
-        0,
-        0,
+        1,
+        0.25,
         0.3
-      ],
-      "material": "mortar"
+      ]
     },
     {
-      "id": "handle_1",
-      "label": "Handle segment 2",
-      "type": "ellipsoid",
+      "material": "mortar",
+      "type": "box",
       "pos": [
-        -0.03,
-        -0.09,
-        0.06
-      ],
-      "radii": [
-        0.107421875,
-        0.13671875000000003,
-        0.078125
-      ],
-      "rotate": [
         0,
-        0,
-        0.2
+        0.125,
+        0
       ],
-      "material": "mortar"
-    },
-    {
-      "id": "handle_2",
-      "label": "Handle segment 3",
-      "type": "ellipsoid",
-      "pos": [
-        0.03,
-        -0.09,
-        -0.06
-      ],
-      "radii": [
-        0.107421875,
-        0.13671875000000003,
-        0.078125
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.19999999999999996
-      ],
-      "material": "mortar"
-    },
-    {
-      "id": "handle_3",
-      "label": "Handle segment 4 (attachment)",
-      "type": "ellipsoid",
-      "pos": [
-        -0.03,
-        -0.09,
-        -0.06
-      ],
-      "radii": [
-        0.15625,
-        0.1171875,
-        0.087890625
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.3
-      ],
-      "material": "mortar"
+      "size": [
+        1,
+        0.025,
+        0.3
+      ]
     }
   ],
-  "provenance": "Dimensions based on standard brick dimensions (24cm x 6cm x 12cm) and mortar joints.",
-  "character_detail": "A small crack along the top surface of the brick."
+  "provenance": "Dimensions sourced from standard brick specifications (https://www.brickdimensions.com/standard-brick-sizes/)"
 }

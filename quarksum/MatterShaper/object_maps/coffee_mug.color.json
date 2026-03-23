@@ -1,57 +1,33 @@
 {
-  "name": "Coffee Mug Colors",
-  "reference": "Classic white ceramic mug with dark coffee",
-  "provenance": "Colors selected by AI from typical glazed ceramic RGB values. Reflectance/roughness estimated from material physics (glazed ceramic ~0.12 reflectance, coffee liquid ~0.38). No textures — flat analytical materials only.",
   "materials": {
-    "ceramic_body": {
-      "label": "White ceramic outer wall",
-      "color": [0.92, 0.90, 0.85],
-      "reflectance": 0.12,
-      "roughness": 0.25,
-      "density_kg_m3": 2400,
-      "mean_Z": 11,
-      "mean_A": 22,
-      "composition": "Fired clay (SiO2, Al2O3) with glaze"
-    },
-    "ceramic_rim": {
-      "label": "Glazed rim highlight",
-      "color": [0.95, 0.93, 0.88],
-      "reflectance": 0.20,
-      "roughness": 0.12,
-      "density_kg_m3": 2400,
-      "mean_Z": 11,
-      "mean_A": 22,
-      "composition": "Glazed ceramic edge"
-    },
-    "ceramic_base": {
-      "label": "Unglazed base ring",
-      "color": [0.82, 0.78, 0.72],
-      "reflectance": 0.06,
+    "white_porcelain": {
+      "label": "white_porcelain",
+      "color": [
+        0.95,
+        0.95,
+        0.94
+      ],
+      "reflectance": 0.08,
       "roughness": 0.55,
-      "density_kg_m3": 2400,
-      "mean_Z": 11,
-      "mean_A": 22,
-      "composition": "Unglazed bisque clay"
+      "density_kg_m3": 1500,
+      "mean_Z": 8,
+      "mean_A": 16,
+      "composition": "TiO₂ pigment + acrylic binder"
     },
-    "ceramic_handle": {
-      "label": "Handle (same glaze as body)",
-      "color": [0.90, 0.88, 0.83],
-      "reflectance": 0.11,
-      "roughness": 0.28,
-      "density_kg_m3": 2400,
-      "mean_Z": 11,
-      "mean_A": 22,
-      "composition": "Glazed ceramic handle"
-    },
-    "coffee_liquid": {
-      "label": "Black coffee surface",
-      "color": [0.22, 0.12, 0.06],
-      "reflectance": 0.38,
-      "roughness": 0.03,
-      "density_kg_m3": 1000,
-      "mean_Z": 7,
-      "mean_A": 14,
-      "composition": "Water + dissolved organics"
+    "black_rubber": {
+      "label": "black_rubber",
+      "color": [
+        0.14,
+        0.13,
+        0.12
+      ],
+      "reflectance": 0.03,
+      "roughness": 0.85,
+      "density_kg_m3": 1200,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "C₅H₈ (natural rubber / polyisoprene)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

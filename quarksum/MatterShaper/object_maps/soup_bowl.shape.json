@@ -1,71 +1,68 @@
 {
-  "name": "Soup Bowl",
-  "reference": "Ceramic soup bowl \u2014 8cm tall, 16cm diameter",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "soup bowl",
   "layers": [
     {
-      "id": "outer",
-      "label": "Outer wall",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "ceramic",
       "pos": [
-        0,
-        0.25,
-        0
+        0.0,
+        0.37,
+        0.0
       ],
-      "radii": [
-        0.8,
-        0.4,
-        0.8
-      ],
+      "radius": 0.309,
+      "height": 0.741,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "white_ceramic"
+      ]
     },
     {
-      "id": "base",
-      "label": "Flat base",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "ceramic",
       "pos": [
-        0,
-        0.02,
-        0
+        0.0,
+        1.013,
+        0.0
       ],
-      "radii": [
-        0.45,
-        0.025,
-        0.45
-      ],
+      "radius": 0.151,
+      "height": 0.544,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "white_ceramic"
-    },
-    {
-      "id": "rim",
-      "label": "Rim",
-      "type": "ellipsoid",
-      "pos": [
-        0,
-        0.55,
-        0
-      ],
-      "radii": [
-        0.82,
-        0.02,
-        0.82
-      ],
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "white_ceramic"
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on typical ceramic soup bowl dimensions and weight.",
+  "physics": {
+    "total_mass_kg": 0.6,
+    "components": [
+      {
+        "component": "bowl body",
+        "material": "ceramic",
+        "density_kg_m3": 2300,
+        "phase": "solid",
+        "mass_kg": 0.51,
+        "volume_cm3": 221.74,
+        "dims": {
+          "radius": 0.309,
+          "height": 0.741
+        }
+      },
+      {
+        "component": "bowl rim",
+        "material": "ceramic",
+        "density_kg_m3": 2300,
+        "phase": "solid",
+        "mass_kg": 0.09,
+        "volume_cm3": 39.13,
+        "dims": {
+          "radius": 0.151,
+          "height": 0.544
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

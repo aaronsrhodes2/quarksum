@@ -1,69 +1,68 @@
 {
-  "name": "Flower Pot",
-  "reference": "Standard terracotta pot \u2014 15cm tall, 16cm top diameter",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "flower pot",
   "layers": [
     {
-      "id": "saucer",
-      "label": "Saucer",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "terracotta",
       "pos": [
-        0,
-        0.02,
-        0
+        0.0,
+        0.688,
+        0.0
       ],
-      "radii": [
-        0.9,
-        0.025,
-        0.9
-      ],
+      "radius": 0.573,
+      "height": 1.375,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "terracotta"
+      ]
     },
     {
-      "id": "body",
-      "label": "Pot body",
-      "type": "cone",
-      "base_pos": [
-        0,
-        0.05,
-        0
-      ],
-      "height": 1.4,
-      "base_radius": 0.5,
-      "top_radius": 0.78,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "terracotta"
-    },
-    {
-      "id": "rim",
-      "label": "Rim lip",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "terracotta",
       "pos": [
-        0,
-        1.44,
-        0
+        0.0,
+        1.492,
+        0.0
       ],
-      "radii": [
-        0.82,
-        0.04,
-        0.82
-      ],
+      "radius": 0.584,
+      "height": 0.234,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "terracotta"
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on typical terracotta flower pot dimensions and mass.",
+  "physics": {
+    "total_mass_kg": 3.0,
+    "components": [
+      {
+        "component": "main body",
+        "material": "terracotta",
+        "density_kg_m3": 1800,
+        "phase": "solid",
+        "mass_kg": 2.55,
+        "volume_cm3": 1416.67,
+        "dims": {
+          "radius": 0.573,
+          "height": 1.375
+        }
+      },
+      {
+        "component": "rim",
+        "material": "terracotta",
+        "density_kg_m3": 1800,
+        "phase": "solid",
+        "mass_kg": 0.45,
+        "volume_cm3": 250.0,
+        "dims": {
+          "radius": 0.584,
+          "height": 0.234
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

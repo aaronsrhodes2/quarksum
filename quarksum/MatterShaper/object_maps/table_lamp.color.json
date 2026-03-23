@@ -1,35 +1,47 @@
 {
-  "name": "Table Lamp Colors",
-  "reference": "Materials for Table Lamp",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "brass": {
-      "label": "Polished brass",
+    "aluminum": {
+      "label": "aluminum",
       "color": [
         0.78,
-        0.62,
-        0.22
+        0.79,
+        0.8
       ],
-      "reflectance": 0.72,
-      "roughness": 0.15,
-      "density_kg_m3": 8500,
-      "mean_Z": 29,
-      "mean_A": 63,
-      "composition": "Cu-Zn alloy"
+      "reflectance": 0.55,
+      "roughness": 0.2,
+      "density_kg_m3": 2700,
+      "mean_Z": 13,
+      "mean_A": 27,
+      "composition": "Al (aluminium alloy)"
     },
-    "cream_fabric": {
-      "label": "Cream linen",
+    "white_paint": {
+      "label": "white_paint",
       "color": [
-        0.88,
-        0.82,
-        0.72
+        0.95,
+        0.95,
+        0.94
       ],
-      "reflectance": 0.05,
-      "roughness": 0.9,
-      "density_kg_m3": 300,
-      "mean_Z": 6,
-      "mean_A": 12,
-      "composition": "Linen fiber"
+      "reflectance": 0.08,
+      "roughness": 0.55,
+      "density_kg_m3": 1500,
+      "mean_Z": 8,
+      "mean_A": 16,
+      "composition": "TiO₂ pigment + acrylic binder"
+    },
+    "clear_glass": {
+      "label": "clear_glass",
+      "color": [
+        0.85,
+        0.9,
+        0.92
+      ],
+      "reflectance": 0.4,
+      "roughness": 0.02,
+      "density_kg_m3": 2500,
+      "mean_Z": 10,
+      "mean_A": 20,
+      "composition": "SiO₂ (soda-lime glass)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

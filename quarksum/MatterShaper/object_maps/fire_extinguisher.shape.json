@@ -1,54 +1,64 @@
 {
   "layers": [
     {
-      "type": "ellipsoid",
+      "material": "red_paint",
+      "type": "cylinder",
       "pos": [
         0,
-        1.25,
+        1.5,
         0
       ],
-      "radii": [
-        0.3,
-        1.25,
-        0.3
-      ],
-      "material": "extinguisher_body"
+      "radius": 2,
+      "height": 6
     },
     {
-      "type": "cone",
-      "top_radius": 0,
-      "base_radius": 0.1,
-      "height": 0.4,
-      "material": "nozzle_exterior",
-      "base_pos": [
+      "material": "chrome",
+      "type": "box",
+      "pos": [
         0,
-        2.6,
+        7.5,
         0
+      ],
+      "size": [
+        4,
+        2,
+        1
       ]
     },
     {
+      "material": "black_rubber",
       "type": "sphere",
       "pos": [
         0,
-        2.85,
-        -0.1
+        8.5,
+        -1.5
       ],
-      "radius": 0.03,
-      "material": "handle"
+      "radius": 0.5
     },
     {
-      "type": "ellipsoid",
+      "material": "black_rubber",
+      "type": "sphere",
       "pos": [
         0,
-        2.7,
-        0.15
+        8.5,
+        1.5
       ],
-      "radii": [
-        0.04,
-        0.06,
-        0.04
+      "radius": 0.5
+    },
+    {
+      "material": "chrome",
+      "type": "box",
+      "pos": [
+        0,
+        9,
+        0
       ],
-      "material": "pressure_gauge"
+      "size": [
+        2,
+        2,
+        0.5
+      ]
     }
-  ]
+  ],
+  "provenance": "Dimensions based on a standard 3kg fire extinguisher (source: Wikipedia)."
 }

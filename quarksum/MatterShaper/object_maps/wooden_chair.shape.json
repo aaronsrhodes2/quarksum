@@ -1,124 +1,225 @@
 {
-  "name": "Wooden Chair",
-  "reference": "Standard wooden dining chair — seat 46cm high, 43cm wide × 41cm deep, back 86cm total height, legs ~4cm square",
-  "scale_note": "1 unit = 10cm. Chair centered at origin, legs on y=0 plane.",
-  "provenance": "AI-mapped from standard dining chair dimensions (18in seat height, 17×16in seat, 34in total back height). Primitives chosen and positioned by AI; rendering is pure analytic ray tracing.",
   "layers": [
     {
-      "id": "seat",
-      "label": "Seat — flat slab",
-      "type": "ellipsoid",
-      "pos": [0, 0.46, 0],
-      "radii": [0.22, 0.025, 0.21],
-      "rotate": [0, 0, 0],
-      "material": "oak_body"
+      "type": "box",
+      "pos": [
+        0,
+        -1.5,
+        0
+      ],
+      "size": [
+        2,
+        0.3,
+        2
+      ],
+      "material": "light_brown_wood"
     },
     {
-      "id": "seat_underside",
-      "label": "Seat underside reinforcement",
-      "type": "ellipsoid",
-      "pos": [0, 0.43, 0],
-      "radii": [0.20, 0.02, 0.19],
-      "rotate": [0, 0, 0],
-      "material": "oak_body"
-    },
-    {
-      "id": "leg_front_left",
-      "label": "Front left leg",
       "type": "cone",
-      "base_pos": [-0.19, 0, 0.17],
-      "height": 0.46,
-      "base_radius": 0.025,
-      "top_radius": 0.022,
-      "rotate": [0, 0, 0],
-      "material": "oak_leg"
+      "base_pos": [
+        -0.8,
+        0.4,
+        -0.9
+      ],
+      "height": 1,
+      "base_radius": 0.5,
+      "top_radius": 0.2,
+      "material": "light_brown_wood"
     },
     {
-      "id": "leg_front_right",
-      "label": "Front right leg",
       "type": "cone",
-      "base_pos": [0.19, 0, 0.17],
-      "height": 0.46,
-      "base_radius": 0.025,
-      "top_radius": 0.022,
-      "rotate": [0, 0, 0],
-      "material": "oak_leg"
+      "base_pos": [
+        0.8,
+        0.4,
+        -0.9
+      ],
+      "height": 1,
+      "base_radius": 0.5,
+      "top_radius": 0.2,
+      "material": "light_brown_wood"
     },
     {
-      "id": "leg_back_left",
-      "label": "Back left leg (extends up to back)",
       "type": "cone",
-      "base_pos": [-0.19, 0, -0.17],
-      "height": 0.86,
-      "base_radius": 0.025,
-      "top_radius": 0.018,
-      "rotate": [0, 0, 0],
-      "material": "oak_leg"
+      "base_pos": [
+        -0.8,
+        0.4,
+        0.9
+      ],
+      "height": 1,
+      "base_radius": 0.5,
+      "top_radius": 0.2,
+      "material": "light_brown_wood"
     },
     {
-      "id": "leg_back_right",
-      "label": "Back right leg (extends up to back)",
       "type": "cone",
-      "base_pos": [0.19, 0, -0.17],
-      "height": 0.86,
-      "base_radius": 0.025,
-      "top_radius": 0.018,
-      "rotate": [0, 0, 0],
-      "material": "oak_leg"
+      "base_pos": [
+        0.8,
+        0.4,
+        0.9
+      ],
+      "height": 1,
+      "base_radius": 0.5,
+      "top_radius": 0.2,
+      "material": "light_brown_wood"
     },
     {
-      "id": "back_top_rail",
-      "label": "Back top rail — horizontal bar connecting back legs at top",
-      "type": "ellipsoid",
-      "pos": [0, 0.84, -0.17],
-      "radii": [0.21, 0.025, 0.020],
-      "rotate": [0, 0, 0],
-      "material": "oak_dark"
+      "type": "box",
+      "pos": [
+        -0.4,
+        1.6,
+        -0.9
+      ],
+      "size": [
+        0.2,
+        0.7,
+        0.3
+      ],
+      "material": "light_brown_wood"
     },
     {
-      "id": "back_mid_rail",
-      "label": "Back middle rail — horizontal support",
-      "type": "ellipsoid",
-      "pos": [0, 0.66, -0.17],
-      "radii": [0.18, 0.018, 0.015],
-      "rotate": [0, 0, 0],
-      "material": "oak_dark"
+      "type": "box",
+      "pos": [
+        0.4,
+        1.6,
+        -0.9
+      ],
+      "size": [
+        0.2,
+        0.7,
+        0.3
+      ],
+      "material": "light_brown_wood"
     },
     {
-      "id": "back_splat",
-      "label": "Back splat — vertical center board",
-      "type": "ellipsoid",
-      "pos": [0, 0.72, -0.17],
-      "radii": [0.08, 0.14, 0.012],
-      "rotate": [0, 0, 0],
-      "material": "oak_body"
+      "type": "box",
+      "pos": [
+        -0.4,
+        1.6,
+        0.9
+      ],
+      "size": [
+        0.2,
+        0.7,
+        0.3
+      ],
+      "material": "light_brown_wood"
     },
     {
-      "id": "stretcher_front",
-      "label": "Front stretcher — horizontal bar between front legs",
-      "type": "ellipsoid",
-      "pos": [0, 0.12, 0.17],
-      "radii": [0.19, 0.015, 0.015],
-      "rotate": [0, 0, 0],
-      "material": "oak_dark"
+      "type": "box",
+      "pos": [
+        0.4,
+        1.6,
+        0.9
+      ],
+      "size": [
+        0.2,
+        0.7,
+        0.3
+      ],
+      "material": "light_brown_wood"
     },
     {
-      "id": "stretcher_left",
-      "label": "Left side stretcher",
+      "id": "handle_0",
+      "label": "Handle segment 1 (attachment)",
       "type": "ellipsoid",
-      "pos": [-0.19, 0.14, 0],
-      "radii": [0.015, 0.015, 0.17],
-      "rotate": [0, 0, 0],
-      "material": "oak_dark"
+      "pos": [
+        -0.8,
+        1.5,
+        -0.9
+      ],
+      "radii": [
+        0.15625,
+        0.1171875,
+        0.087890625
+      ],
+      "rotate": [
+        0,
+        0,
+        0.3
+      ],
+      "material": "dark_brown_wood"
     },
     {
-      "id": "stretcher_right",
-      "label": "Right side stretcher",
+      "id": "handle_1",
+      "label": "Handle segment 2",
       "type": "ellipsoid",
-      "pos": [0.19, 0.14, 0],
-      "radii": [0.015, 0.015, 0.17],
-      "rotate": [0, 0, 0],
-      "material": "oak_dark"
+      "pos": [
+        0.8,
+        1.5,
+        -0.9
+      ],
+      "radii": [
+        0.107421875,
+        0.13671875000000003,
+        0.078125
+      ],
+      "rotate": [
+        0,
+        0,
+        0.2
+      ],
+      "material": "dark_brown_wood"
+    },
+    {
+      "id": "handle_2",
+      "label": "Handle segment 3",
+      "type": "ellipsoid",
+      "pos": [
+        -0.8,
+        1.5,
+        0.9
+      ],
+      "radii": [
+        0.107421875,
+        0.13671875000000003,
+        0.078125
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.19999999999999996
+      ],
+      "material": "dark_brown_wood"
+    },
+    {
+      "id": "handle_3",
+      "label": "Handle segment 4 (attachment)",
+      "type": "ellipsoid",
+      "pos": [
+        0.8,
+        1.5,
+        0.9
+      ],
+      "radii": [
+        0.15625,
+        0.1171875,
+        0.087890625
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.3
+      ],
+      "material": "dark_brown_wood"
     }
-  ]
+  ],
+  "provenance": {
+    "source": "Dimensions and proportions based on a standard wooden chair from Wikipedia",
+    "scale": "1 unit = 10 cm",
+    "coordinate_system": "Y up, object centered on X/Z plane, base at Y=0"
+  },
+  "character_detail": {
+    "type": "ellipsoid",
+    "pos": [
+      0.25,
+      1.8,
+      -0.7
+    ],
+    "radii": [
+      0.1,
+      0.05,
+      0.1
+    ],
+    "material": "light_brown_wood"
+  }
 }

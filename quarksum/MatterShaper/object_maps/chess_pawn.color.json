@@ -1,21 +1,19 @@
 {
-  "name": "Chess Pawn Colors",
-  "reference": "Materials for Chess Pawn",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "marble_white": {
-      "label": "White marble",
+    "plastic": {
+      "label": "plastic",
       "color": [
-        0.9,
-        0.88,
-        0.84
+        0.1,
+        0.1,
+        0.11
       ],
-      "reflectance": 0.25,
-      "roughness": 0.15,
-      "density_kg_m3": 2700,
-      "mean_Z": 10,
-      "mean_A": 20,
-      "composition": "CaCO3 crystalline"
+      "reflectance": 0.06,
+      "roughness": 0.45,
+      "density_kg_m3": 1050,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "ABS (acrylonitrile butadiene styrene)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

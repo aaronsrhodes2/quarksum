@@ -1,21 +1,7 @@
 {
   "materials": {
-    "black_rubber": {
-      "label": "black_rubber",
-      "color": [
-        0.14,
-        0.13,
-        0.12
-      ],
-      "reflectance": 0.03,
-      "roughness": 0.85,
-      "density_kg_m3": 1200,
-      "mean_Z": 6,
-      "mean_A": 12,
-      "composition": "C₅H₈ (natural rubber / polyisoprene)"
-    },
-    "dark_brown_leather": {
-      "label": "dark_brown_leather",
+    "black_leather": {
+      "label": "black_leather",
       "color": [
         0.06,
         0.06,

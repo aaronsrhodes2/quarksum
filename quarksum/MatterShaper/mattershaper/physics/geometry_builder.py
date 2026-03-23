@@ -112,15 +112,15 @@ def dims_from_component(shape_type: str, volume_m3: float,
     elif st == 'ellipsoid':
         return ellipsoid_dims(volume_m3, aspect if isinstance(aspect, list) else None)
     elif st == 'cylinder':
-        ar = float(aspect) if aspect is not None else 1.5
+        ar = float(aspect[0] if isinstance(aspect, list) else aspect) if aspect is not None else 1.5
         return cylinder_dims(volume_m3, ar)
     elif st == 'box':
         return box_dims(volume_m3, aspect if isinstance(aspect, list) else None)
     elif st == 'torus':
-        ar = float(aspect) if aspect is not None else 0.25
+        ar = float(aspect[0] if isinstance(aspect, list) else aspect) if aspect is not None else 0.25
         return torus_dims(volume_m3, ar)
     elif st == 'cone':
-        ar = float(aspect) if aspect is not None else 1.5
+        ar = float(aspect[0] if isinstance(aspect, list) else aspect) if aspect is not None else 1.5
         return cone_dims(volume_m3, ar, taper)
     else:
         # Unknown: treat as sphere of same volume

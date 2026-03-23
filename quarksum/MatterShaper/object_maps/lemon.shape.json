@@ -1,71 +1,74 @@
 {
-  "name": "Lemon",
-  "reference": "Standard lemon \u2014 9cm long, 6cm diameter",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "lemon",
   "layers": [
     {
-      "id": "body",
-      "label": "Lemon body",
       "type": "ellipsoid",
+      "material": "citrus_fruit",
       "pos": [
-        0,
-        0.3,
-        0
+        0.0,
+        0.263,
+        0.0
       ],
       "radii": [
-        0.3,
-        0.22,
-        0.22
+        0.219,
+        0.263,
+        0.219
       ],
       "rotate": [
         0,
         0,
-        0.15
-      ],
-      "material": "skin_yellow"
+        0
+      ]
     },
     {
-      "id": "tip_l",
-      "label": "Left tip",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "citrus_fruit",
       "pos": [
-        -0.3,
-        0.32,
-        0
+        0.297,
+        0.132,
+        0.0
       ],
-      "radii": [
-        0.1,
-        0.06,
-        0.06
-      ],
+      "radius": 0.13,
+      "height": 0.052,
       "rotate": [
         0,
         0,
-        0.2
-      ],
-      "material": "skin_yellow"
-    },
-    {
-      "id": "tip_r",
-      "label": "Right tip",
-      "type": "ellipsoid",
-      "pos": [
-        0.3,
-        0.28,
-        0
-      ],
-      "radii": [
-        0.1,
-        0.06,
-        0.06
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.2
-      ],
-      "material": "skin_yellow"
+        3.14
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on the average weight and shape of a lemon.",
+  "physics": {
+    "total_mass_kg": 0.1,
+    "components": [
+      {
+        "component": "main body",
+        "material": "citrus_fruit",
+        "density_kg_m3": 1800.0,
+        "phase": "solid",
+        "mass_kg": 0.095,
+        "volume_cm3": 52.78,
+        "dims": {
+          "radii": [
+            0.219,
+            0.263,
+            0.219
+          ]
+        }
+      },
+      {
+        "component": "stem",
+        "material": "citrus_fruit",
+        "density_kg_m3": 1800.0,
+        "phase": "solid",
+        "mass_kg": 0.005,
+        "volume_cm3": 2.78,
+        "dims": {
+          "radius": 0.13,
+          "height": 0.052
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

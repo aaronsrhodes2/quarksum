@@ -22,11 +22,11 @@
       "material": "rubber",
       "pos": [
         0.0,
-        1.124,
+        0.431,
         0.0
       ],
-      "major_radius": 1.049,
-      "minor_radius": 0.262,
+      "major_radius": 0.844,
+      "minor_radius": 0.127,
       "rotate": [
         0,
         0,
@@ -38,11 +38,11 @@
       "material": "rubber",
       "pos": [
         0.0,
-        1.512,
+        0.431,
         0.0
       ],
-      "major_radius": 0.504,
-      "minor_radius": 0.126,
+      "major_radius": 0.302,
+      "minor_radius": 0.106,
       "rotate": [
         0,
         0,
@@ -50,12 +50,12 @@
       ]
     }
   ],
-  "provenance": "Based on a standard car tire with an inner tube and tread pattern.",
+  "provenance": "Based on a standard car tire with an outer diameter of approximately 60 cm and an inner tube diameter of about 45 cm.",
   "physics": {
-    "total_mass_kg": 9.5,
+    "total_mass_kg": 8.0,
     "components": [
       {
-        "component": "tire_tube",
+        "component": "main_tube",
         "material": "rubber",
         "density_kg_m3": 1200,
         "phase": "solid",
@@ -67,27 +67,27 @@
         }
       },
       {
+        "component": "inner_tube",
+        "material": "rubber",
+        "density_kg_m3": 1200,
+        "phase": "solid",
+        "mass_kg": 0.32,
+        "volume_cm3": 266.67,
+        "dims": {
+          "major_radius": 0.844,
+          "minor_radius": 0.127
+        }
+      },
+      {
         "component": "tire_wall",
         "material": "rubber",
         "density_kg_m3": 1200,
         "phase": "solid",
-        "mass_kg": 1.71,
-        "volume_cm3": 1425.0,
+        "mass_kg": 0.08,
+        "volume_cm3": 66.67,
         "dims": {
-          "major_radius": 1.049,
-          "minor_radius": 0.262
-        }
-      },
-      {
-        "component": "tire_tread",
-        "material": "rubber",
-        "density_kg_m3": 1200,
-        "phase": "solid",
-        "mass_kg": 0.19,
-        "volume_cm3": 158.33,
-        "dims": {
-          "major_radius": 0.504,
-          "minor_radius": 0.126
+          "major_radius": 0.302,
+          "minor_radius": 0.106
         }
       }
     ],

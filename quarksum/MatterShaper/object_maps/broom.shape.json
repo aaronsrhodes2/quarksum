@@ -1,233 +1,74 @@
 {
+  "name": "broom",
   "layers": [
     {
-      "type": "cone",
-      "base_pos": [
-        0,
-        -0.15,
-        0
-      ],
-      "height": 0.3,
-      "base_radius": 0.02,
-      "top_radius": 0.005,
-      "material": "dark_brown_wood"
-    },
-    {
-      "type": "box",
-      "pos": [
-        0,
-        -0.175,
-        0
-      ],
-      "size": [
-        0.04,
-        0.32,
-        0.04
-      ],
-      "material": "black_rubber"
-    },
-    {
       "type": "cylinder",
+      "material": "wood",
       "pos": [
-        0,
-        0.06,
-        0
+        0.0,
+        0.429,
+        0.0
       ],
-      "radius": 0.01,
-      "height": 0.58,
-      "material": "dark_brown_wood"
+      "radius": 0.358,
+      "height": 0.859,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     },
     {
       "type": "box",
+      "material": "fabric",
       "pos": [
-        0,
-        0.32,
-        0
+        0.0,
+        1.018,
+        0.0
       ],
       "size": [
-        0.06,
-        0.04,
-        0.06
+        1.06,
+        0.318,
+        0.636
       ],
       "rotate": [
-        90,
+        0,
         0,
         0
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        -0.025,
-        0.32,
-        -0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        -0.025,
-        0.32,
-        0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        0.025,
-        0.32,
-        -0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        0.025,
-        0.32,
-        0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        -0.06,
-        0.38,
-        -0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        -0.06,
-        0.38,
-        0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        0.06,
-        0.38,
-        -0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        0.06,
-        0.38,
-        0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        -0.06,
-        0.38,
-        -0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        -0.06,
-        0.38,
-        0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        0.06,
-        0.38,
-        -0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
-    },
-    {
-      "type": "box",
-      "pos": [
-        0.06,
-        0.38,
-        0.025
-      ],
-      "size": [
-        0.01,
-        0.04,
-        0.01
-      ],
-      "material": "black_rubber"
+      ]
     }
   ],
-  "provenance": {
-    "source": "Dimensions based on a standard household broom",
-    "scale_factor": "1 unit = 10 cm"
-  },
-  "character_detail": "A small knot in the wood handle near the top of the broom."
+  "provenance": "Based on typical broom dimensions and materials",
+  "physics": {
+    "total_mass_kg": 0.3,
+    "components": [
+      {
+        "component": "handle",
+        "material": "wood",
+        "density_kg_m3": 650,
+        "phase": "solid",
+        "mass_kg": 0.225,
+        "volume_cm3": 346.15,
+        "dims": {
+          "radius": 0.358,
+          "height": 0.859
+        }
+      },
+      {
+        "component": "bristles",
+        "material": "fabric",
+        "density_kg_m3": 350,
+        "phase": "solid",
+        "mass_kg": 0.075,
+        "volume_cm3": 214.29,
+        "dims": {
+          "size": [
+            1.06,
+            0.318,
+            0.636
+          ]
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

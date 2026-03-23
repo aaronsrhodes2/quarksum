@@ -1,128 +1,96 @@
 {
-  "name": "Ceramic Vase",
-  "reference": "Decorative vase \u2014 30cm tall, 12cm max diameter",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "vase",
   "layers": [
     {
-      "id": "base",
-      "label": "Base ring",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "ceramic",
       "pos": [
-        0,
-        0.02,
-        0
+        0.0,
+        0.592,
+        0.0
       ],
-      "radii": [
-        0.35,
-        0.025,
-        0.35
-      ],
+      "radius": 0.296,
+      "height": 1.184,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "blue_ceramic"
+      ]
     },
     {
-      "id": "body_low",
-      "label": "Lower body",
-      "type": "cone",
-      "base_pos": [
-        0,
-        0,
-        0
-      ],
-      "height": 0.8,
-      "base_radius": 0.32,
-      "top_radius": 0.58,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "blue_ceramic"
-    },
-    {
-      "id": "body_wide",
-      "label": "Widest section",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "ceramic",
       "pos": [
-        0,
-        1.0,
-        0
+        0.0,
+        1.733,
+        0.0
       ],
-      "radii": [
-        0.6,
-        0.3,
-        0.6
-      ],
+      "radius": 0.137,
+      "height": 1.099,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "blue_ceramic"
+      ]
     },
     {
-      "id": "body_upper",
-      "label": "Upper taper",
-      "type": "cone",
-      "base_pos": [
-        0,
-        1.2,
-        0
-      ],
-      "height": 0.8,
-      "base_radius": 0.55,
-      "top_radius": 0.3,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "blue_ceramic"
-    },
-    {
-      "id": "neck",
-      "label": "Neck",
-      "type": "cone",
-      "base_pos": [
-        0,
-        1.95,
-        0
-      ],
-      "height": 0.6,
-      "base_radius": 0.28,
-      "top_radius": 0.35,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "blue_ceramic"
-    },
-    {
-      "id": "rim",
-      "label": "Rim",
-      "type": "ellipsoid",
+      "type": "torus",
+      "material": "ceramic",
       "pos": [
-        0,
-        2.55,
-        0
+        0.0,
+        0.082,
+        0.0
       ],
-      "radii": [
-        0.36,
-        0.02,
-        0.36
-      ],
+      "major_radius": 0.328,
+      "minor_radius": 0.082,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "blue_ceramic"
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on a typical ceramic vase with a cylindrical body, neck, and base ring.",
+  "physics": {
+    "total_mass_kg": 1.0,
+    "components": [
+      {
+        "component": "main_body",
+        "material": "ceramic",
+        "density_kg_m3": 2300,
+        "phase": "solid",
+        "mass_kg": 0.75,
+        "volume_cm3": 326.09,
+        "dims": {
+          "radius": 0.296,
+          "height": 1.184
+        }
+      },
+      {
+        "component": "neck",
+        "material": "ceramic",
+        "density_kg_m3": 2300,
+        "phase": "solid",
+        "mass_kg": 0.15,
+        "volume_cm3": 65.22,
+        "dims": {
+          "radius": 0.137,
+          "height": 1.099
+        }
+      },
+      {
+        "component": "base_ring",
+        "material": "ceramic",
+        "density_kg_m3": 2300,
+        "phase": "solid",
+        "mass_kg": 0.1,
+        "volume_cm3": 43.48,
+        "dims": {
+          "major_radius": 0.328,
+          "minor_radius": 0.082
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

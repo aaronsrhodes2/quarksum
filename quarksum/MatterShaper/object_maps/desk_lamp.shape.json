@@ -1,120 +1,156 @@
 {
-  "name": "Desk Lamp",
-  "reference": "Classic table desk lamp — 48cm tall, 30cm shade bottom dia, 14cm base dia, tapered fabric shade",
-  "scale_note": "1 unit = 10cm. Lamp centered at origin, base on y=0 plane.",
-  "provenance": "AI-mapped from standard desk lamp proportions (19in tall, 12in shade bottom, 10in shade top, 5.5in base). Primitives chosen and positioned by AI; rendering is pure analytic ray tracing.",
+  "name": "desk lamp",
   "layers": [
     {
-      "id": "base_bottom",
-      "label": "Base — heavy flat disc for stability",
+      "type": "cylinder",
+      "material": "cast_iron",
+      "pos": [
+        0.0,
+        0.131,
+        0.0
+      ],
+      "radius": 0.261,
+      "height": 0.261,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "cylinder",
+      "material": "aluminum",
+      "pos": [
+        0.0,
+        0.541,
+        0.0
+      ],
+      "radius": 0.187,
+      "height": 0.56,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
       "type": "ellipsoid",
-      "pos": [0, 0.02, 0],
-      "radii": [0.14, 0.025, 0.14],
-      "rotate": [0, 0, 0],
-      "material": "brass_dark"
+      "material": "plastic",
+      "pos": [
+        0.0,
+        1.286,
+        0.0
+      ],
+      "radii": [
+        0.465,
+        0.465,
+        0.232
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     },
     {
-      "id": "base_dome",
-      "label": "Base — rounded dome top",
-      "type": "ellipsoid",
-      "pos": [0, 0.05, 0],
-      "radii": [0.12, 0.03, 0.12],
-      "rotate": [0, 0, 0],
-      "material": "brass_polished"
+      "type": "cylinder",
+      "material": "brass",
+      "pos": [
+        0.0,
+        1.829,
+        0.0
+      ],
+      "radius": 0.155,
+      "height": 0.155,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     },
     {
-      "id": "stem_lower",
-      "label": "Stem — lower section",
-      "type": "cone",
-      "base_pos": [0, 0.06, 0],
-      "height": 0.16,
-      "base_radius": 0.022,
-      "top_radius": 0.018,
-      "rotate": [0, 0, 0],
-      "material": "brass_polished"
-    },
-    {
-      "id": "stem_knob",
-      "label": "Stem — decorative knob at midpoint",
       "type": "sphere",
-      "pos": [0, 0.24, 0],
-      "radius": 0.028,
-      "material": "brass_polished"
-    },
-    {
-      "id": "stem_upper",
-      "label": "Stem — upper section",
-      "type": "cone",
-      "base_pos": [0, 0.26, 0],
-      "height": 0.08,
-      "base_radius": 0.018,
-      "top_radius": 0.015,
-      "rotate": [0, 0, 0],
-      "material": "brass_polished"
-    },
-    {
-      "id": "harp_left",
-      "label": "Harp — left arm (holds shade)",
-      "type": "ellipsoid",
-      "pos": [-0.04, 0.38, 0],
-      "radii": [0.008, 0.06, 0.008],
-      "rotate": [0, 0, 0.15],
-      "material": "brass_dark"
-    },
-    {
-      "id": "harp_right",
-      "label": "Harp — right arm (holds shade)",
-      "type": "ellipsoid",
-      "pos": [0.04, 0.38, 0],
-      "radii": [0.008, 0.06, 0.008],
-      "rotate": [0, 0, -0.15],
-      "material": "brass_dark"
-    },
-    {
-      "id": "harp_top",
-      "label": "Harp — top bridge connecting arms",
-      "type": "ellipsoid",
-      "pos": [0, 0.43, 0],
-      "radii": [0.035, 0.008, 0.008],
-      "rotate": [0, 0, 0],
-      "material": "brass_dark"
-    },
-    {
-      "id": "finial",
-      "label": "Finial — decorative top knob",
-      "type": "sphere",
-      "pos": [0, 0.45, 0],
-      "radius": 0.015,
-      "material": "brass_polished"
-    },
-    {
-      "id": "shade",
-      "label": "Lampshade — tapered cone (wider at bottom)",
-      "type": "cone",
-      "base_pos": [0, 0.30, 0],
-      "height": 0.14,
-      "base_radius": 0.15,
-      "top_radius": 0.12,
-      "rotate": [0, 0, 0],
-      "material": "shade_fabric"
-    },
-    {
-      "id": "shade_rim_bottom",
-      "label": "Shade bottom rim",
-      "type": "ellipsoid",
-      "pos": [0, 0.30, 0],
-      "radii": [0.155, 0.008, 0.155],
-      "rotate": [0, 0, 0],
-      "material": "shade_trim"
-    },
-    {
-      "id": "shade_rim_top",
-      "label": "Shade top rim",
-      "type": "ellipsoid",
-      "pos": [0, 0.44, 0],
-      "radii": [0.125, 0.008, 0.125],
-      "rotate": [0, 0, 0],
-      "material": "shade_trim"
+      "material": "glass",
+      "pos": [
+        0.0,
+        2.118,
+        0.0
+      ],
+      "radius": 0.212,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on typical desk lamp dimensions and materials.",
+  "physics": {
+    "total_mass_kg": 1.0,
+    "components": [
+      {
+        "component": "base",
+        "material": "cast_iron",
+        "density_kg_m3": 7200,
+        "phase": "solid",
+        "mass_kg": 0.4,
+        "volume_cm3": 55.56,
+        "dims": {
+          "radius": 0.261,
+          "height": 0.261
+        }
+      },
+      {
+        "component": "stem",
+        "material": "aluminum",
+        "density_kg_m3": 3262.2,
+        "phase": "solid",
+        "mass_kg": 0.2,
+        "volume_cm3": 61.31,
+        "dims": {
+          "radius": 0.187,
+          "height": 0.56
+        }
+      },
+      {
+        "component": "shade",
+        "material": "plastic",
+        "density_kg_m3": 950,
+        "phase": "solid",
+        "mass_kg": 0.2,
+        "volume_cm3": 210.53,
+        "dims": {
+          "radii": [
+            0.465,
+            0.465,
+            0.232
+          ]
+        }
+      },
+      {
+        "component": "bulb holder",
+        "material": "brass",
+        "density_kg_m3": 8500,
+        "phase": "solid",
+        "mass_kg": 0.1,
+        "volume_cm3": 11.76,
+        "dims": {
+          "radius": 0.155,
+          "height": 0.155
+        }
+      },
+      {
+        "component": "bulb",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.1,
+        "volume_cm3": 40.0,
+        "dims": {
+          "radius": 0.212
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

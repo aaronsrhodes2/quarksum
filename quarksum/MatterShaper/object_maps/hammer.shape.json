@@ -1,90 +1,74 @@
 {
-  "name": "Claw Hammer",
-  "reference": "Standard claw hammer \u2014 33cm long",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "hammer",
   "layers": [
     {
-      "id": "handle",
-      "label": "Wood handle",
-      "type": "cone",
-      "base_pos": [
-        0,
-        0,
-        0
-      ],
-      "height": 2.5,
-      "base_radius": 0.12,
-      "top_radius": 0.1,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "light_wood"
-    },
-    {
-      "id": "head",
-      "label": "Steel head",
       "type": "ellipsoid",
+      "material": "steel",
       "pos": [
-        0,
-        2.55,
-        0
+        0.0,
+        0.185,
+        0.0
       ],
       "radii": [
-        0.45,
-        0.12,
-        0.12
+        0.185,
+        0.185,
+        0.37
       ],
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "steel"
+      ]
     },
     {
-      "id": "face",
-      "label": "Striking face",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "wood",
       "pos": [
-        0.45,
-        2.55,
-        0
+        0.0,
+        0.906,
+        0.0
       ],
-      "radii": [
-        0.06,
-        0.11,
-        0.11
-      ],
+      "radius": 0.358,
+      "height": 1.073,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "steel"
-    },
-    {
-      "id": "claw",
-      "label": "Claw",
-      "type": "ellipsoid",
-      "pos": [
-        -0.4,
-        2.58,
-        0
-      ],
-      "radii": [
-        0.12,
-        0.08,
-        0.1
-      ],
-      "rotate": [
-        0,
-        0,
-        -0.3
-      ],
-      "material": "steel"
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on standard carpenter's hammer dimensions and materials.",
+  "physics": {
+    "total_mass_kg": 0.7,
+    "components": [
+      {
+        "component": "head",
+        "material": "steel",
+        "density_kg_m3": 7900,
+        "phase": "solid",
+        "mass_kg": 0.42,
+        "volume_cm3": 53.16,
+        "dims": {
+          "radii": [
+            0.185,
+            0.185,
+            0.37
+          ]
+        }
+      },
+      {
+        "component": "handle",
+        "material": "wood",
+        "density_kg_m3": 650,
+        "phase": "solid",
+        "mass_kg": 0.28,
+        "volume_cm3": 430.77,
+        "dims": {
+          "radius": 0.358,
+          "height": 1.073
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

@@ -1,284 +1,339 @@
 {
-  "name": "Teapot",
-  "reference": "Classic round teapot \u2014 12cm body, 15cm tall with lid",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
   "layers": [
     {
-      "id": "body",
-      "label": "Round body",
-      "type": "sphere",
-      "pos": [
-        0,
-        0.5,
-        0
-      ],
-      "radius": 0.5,
-      "material": "white_ceramic"
-    },
-    {
-      "id": "base",
-      "label": "Base ring",
-      "type": "ellipsoid",
-      "pos": [
-        0,
-        0.03,
-        0
-      ],
-      "radii": [
-        0.3,
-        0.03,
-        0.3
-      ],
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "white_ceramic"
-    },
-    {
-      "id": "lid_seat",
-      "label": "Lid seat",
-      "type": "ellipsoid",
-      "pos": [
-        0,
-        0.95,
-        0
-      ],
-      "radii": [
-        0.2,
-        0.03,
-        0.2
-      ],
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "white_ceramic"
-    },
-    {
-      "id": "lid",
-      "label": "Lid dome",
-      "type": "ellipsoid",
-      "pos": [
-        0,
-        1.02,
-        0
-      ],
-      "radii": [
-        0.22,
-        0.08,
-        0.22
-      ],
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "white_ceramic"
-    },
-    {
-      "id": "lid_knob",
-      "label": "Lid knob",
-      "type": "sphere",
-      "pos": [
-        0,
-        1.12,
-        0
-      ],
-      "radius": 0.06,
-      "material": "brass"
-    },
-    {
-      "id": "spout_base",
-      "label": "Spout base",
-      "type": "ellipsoid",
-      "pos": [
-        0.45,
-        0.5,
-        0
-      ],
-      "radii": [
-        0.08,
-        0.1,
-        0.06
-      ],
-      "rotate": [
-        0,
-        0,
-        0.3
-      ],
-      "material": "white_ceramic"
-    },
-    {
-      "id": "spout_mid",
-      "label": "Spout mid",
-      "type": "ellipsoid",
-      "pos": [
-        0.58,
-        0.6,
-        0
-      ],
-      "radii": [
-        0.06,
-        0.08,
-        0.05
-      ],
-      "rotate": [
-        0,
-        0,
-        0.5
-      ],
-      "material": "white_ceramic"
-    },
-    {
-      "id": "spout_tip",
-      "label": "Spout tip",
-      "type": "ellipsoid",
-      "pos": [
-        0.68,
-        0.72,
-        0
-      ],
-      "radii": [
-        0.04,
-        0.06,
-        0.04
-      ],
-      "rotate": [
-        0,
-        0,
-        0.7
-      ],
-      "material": "white_ceramic"
-    },
-    {
       "id": "handle_0",
-      "label": "Handle segment 0",
+      "label": "Handle segment 1 (attachment)",
       "type": "ellipsoid",
       "pos": [
-        -0.45,
-        0.65,
+        0,
+        12,
         0
       ],
       "radii": [
-        0.05,
-        0.06,
-        0.04
+        1.4551915228366852,
+        1.0913936421275139,
+        0.8185452315956354
       ],
       "rotate": [
         0,
         0,
-        1.884
+        0.3
       ],
-      "material": "white_ceramic"
+      "material": "terracotta"
     },
     {
       "id": "handle_1",
-      "label": "Handle segment 1",
-      "type": "ellipsoid",
-      "pos": [
-        -0.3442,
-        0.58,
-        0
-      ],
-      "radii": [
-        0.05,
-        0.06,
-        0.04
-      ],
-      "rotate": [
-        0,
-        0,
-        1.952
-      ],
-      "material": "white_ceramic"
-    },
-    {
-      "id": "handle_2",
       "label": "Handle segment 2",
       "type": "ellipsoid",
       "pos": [
-        -0.2788,
-        0.51,
-        0
+        0,
+        18,
+        4
       ],
       "radii": [
-        0.05,
-        0.06,
-        0.04
+        1.000444171950221,
+        1.2732925824820998,
+        0.7275957614183426
       ],
       "rotate": [
         0,
         0,
-        2.38
+        0.5142857142857143
       ],
-      "material": "white_ceramic"
+      "material": "terracotta"
     },
     {
-      "id": "handle_3",
+      "id": "handle_2",
       "label": "Handle segment 3",
       "type": "ellipsoid",
       "pos": [
-        -0.2788,
-        0.44,
-        0
+        0,
+        18,
+        -4
       ],
       "radii": [
-        0.05,
-        0.06,
-        0.04
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
       ],
       "rotate": [
         0,
         0,
-        -2.38
+        0.42857142857142855
       ],
-      "material": "white_ceramic"
+      "material": "terracotta"
     },
     {
-      "id": "handle_4",
+      "id": "handle_3",
       "label": "Handle segment 4",
       "type": "ellipsoid",
       "pos": [
-        -0.3442,
-        0.37,
-        0
+        6,
+        18,
+        -1
       ],
       "radii": [
-        0.05,
-        0.06,
-        0.04
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
       ],
       "rotate": [
         0,
         0,
-        -1.952
+        0.3428571428571428
       ],
-      "material": "white_ceramic"
+      "material": "terracotta"
     },
     {
-      "id": "handle_5",
+      "id": "handle_4",
       "label": "Handle segment 5",
       "type": "ellipsoid",
       "pos": [
-        -0.45,
-        0.3,
-        0
+        -6,
+        18,
+        -1
       ],
       "radii": [
-        0.05,
-        0.06,
-        0.04
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
       ],
       "rotate": [
         0,
         0,
-        -1.884
+        0.2571428571428572
       ],
-      "material": "white_ceramic"
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_5",
+      "label": "Handle segment 6",
+      "type": "ellipsoid",
+      "pos": [
+        6,
+        18,
+        1
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        0.1714285714285714
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_6",
+      "label": "Handle segment 7",
+      "type": "ellipsoid",
+      "pos": [
+        -6,
+        18,
+        1
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        0.08571428571428574
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_7",
+      "label": "Handle segment 8",
+      "type": "ellipsoid",
+      "pos": [
+        6,
+        18,
+        -7
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        0.0
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_8",
+      "label": "Handle segment 9",
+      "type": "ellipsoid",
+      "pos": [
+        -6,
+        18,
+        -7
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.08571428571428567
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_9",
+      "label": "Handle segment 10",
+      "type": "ellipsoid",
+      "pos": [
+        6,
+        18,
+        7
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.17142857142857149
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_10",
+      "label": "Handle segment 11",
+      "type": "ellipsoid",
+      "pos": [
+        -6,
+        18,
+        7
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.2571428571428572
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_11",
+      "label": "Handle segment 12",
+      "type": "ellipsoid",
+      "pos": [
+        6,
+        18,
+        -13
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.3428571428571428
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_12",
+      "label": "Handle segment 13",
+      "type": "ellipsoid",
+      "pos": [
+        -6,
+        18,
+        -13
+      ],
+      "radii": [
+        0.8185452315956354,
+        1.1823431123048067,
+        0.6912159733474255
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.4285714285714285
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_13",
+      "label": "Handle segment 14",
+      "type": "ellipsoid",
+      "pos": [
+        6,
+        18,
+        13
+      ],
+      "radii": [
+        1.000444171950221,
+        1.2732925824820998,
+        0.7275957614183426
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.5142857142857143
+      ],
+      "material": "terracotta"
+    },
+    {
+      "id": "handle_14",
+      "label": "Handle segment 15 (attachment)",
+      "type": "ellipsoid",
+      "pos": [
+        -6,
+        18,
+        13
+      ],
+      "radii": [
+        1.4551915228366852,
+        1.0913936421275139,
+        0.8185452315956354
+      ],
+      "rotate": [
+        0,
+        0,
+        -0.3
+      ],
+      "material": "terracotta"
     }
-  ]
+  ],
+  "provenance": {
+    "source": "https://en.wikipedia.org/wiki/Teapot",
+    "dimensions": [
+      {
+        "part": "body",
+        "height": 27.5,
+        "width": 14
+      },
+      {
+        "part": "spout",
+        "length": 8,
+        "diameter": 3
+      },
+      {
+        "part": "handle",
+        "length": 10,
+        "width": 3
+      }
+    ]
+  }
 }

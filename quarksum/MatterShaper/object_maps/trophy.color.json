@@ -1,35 +1,61 @@
 {
-  "name": "Trophy Cup Colors",
-  "reference": "Materials for Trophy Cup",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "dark_wood": {
-      "label": "Dark walnut wood",
+    "bronze": {
+      "label": "bronze",
       "color": [
-        0.35,
-        0.22,
-        0.12
-      ],
-      "reflectance": 0.12,
-      "roughness": 0.5,
-      "density_kg_m3": 650,
-      "mean_Z": 6,
-      "mean_A": 12,
-      "composition": "Cellulose + lignin"
-    },
-    "brass": {
-      "label": "Polished brass",
-      "color": [
-        0.78,
-        0.62,
+        0.71,
+        0.6,
         0.22
       ],
-      "reflectance": 0.72,
-      "roughness": 0.15,
+      "reflectance": 0.55,
+      "roughness": 0.2,
       "density_kg_m3": 8500,
       "mean_Z": 29,
-      "mean_A": 63,
-      "composition": "Cu-Zn alloy"
+      "mean_A": 64,
+      "composition": "Cu + Zn (brass alloy)"
+    },
+    "marble": {
+      "label": "marble",
+      "color": [
+        0.92,
+        0.9,
+        0.88
+      ],
+      "reflectance": 0.2,
+      "roughness": 0.15,
+      "density_kg_m3": 2700,
+      "mean_Z": 12,
+      "mean_A": 24,
+      "composition": "CaCO₃ (calcite marble)"
+    },
+    "gold_paint": {
+      "label": "gold_paint",
+      "color": [
+        0.83,
+        0.68,
+        0.22
+      ],
+      "reflectance": 0.75,
+      "roughness": 0.08,
+      "density_kg_m3": 19320,
+      "mean_Z": 79,
+      "mean_A": 197,
+      "composition": "Au (metallic gold)"
+    },
+    "black_marble": {
+      "label": "black_marble",
+      "color": [
+        0.06,
+        0.06,
+        0.07
+      ],
+      "reflectance": 0.04,
+      "roughness": 0.6,
+      "density_kg_m3": 1500,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Carbon black pigment + binder"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

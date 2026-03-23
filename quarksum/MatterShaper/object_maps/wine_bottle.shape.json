@@ -1,98 +1,170 @@
 {
-  "name": "Wine Bottle",
-  "reference": "Standard 750ml Bordeaux-style wine bottle, ~30cm tall",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "AI-mapped from published dimensions",
+  "name": "wine bottle",
   "layers": [
     {
-      "id": "body_lower",
-      "label": "Body — lower cylinder, widest section",
-      "type": "ellipsoid",
-      "pos": [0.0, -0.40, 0.0],
-      "radii": [0.375, 0.35, 0.375],
-      "rotate": [0, 0, 0],
-      "material": "glass_dark_green"
+      "type": "cylinder",
+      "material": "glass",
+      "pos": [
+        0.0,
+        0.396,
+        0.0
+      ],
+      "radius": 0.33,
+      "height": 0.791,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     },
     {
-      "id": "body_mid",
-      "label": "Body — middle section",
       "type": "ellipsoid",
-      "pos": [0.0, -0.05, 0.0],
-      "radii": [0.375, 0.40, 0.375],
-      "rotate": [0, 0, 0],
-      "material": "glass_dark_green"
+      "material": "glass",
+      "pos": [
+        0.0,
+        1.163,
+        0.0
+      ],
+      "radii": [
+        0.186,
+        0.372,
+        0.186
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     },
     {
-      "id": "shoulder",
-      "label": "Shoulder — tapers from body to neck",
-      "type": "ellipsoid",
-      "pos": [0.0, 0.35, 0.0],
-      "radii": [0.30, 0.20, 0.30],
-      "rotate": [0, 0, 0],
-      "material": "glass_dark_green"
+      "type": "cylinder",
+      "material": "glass",
+      "pos": [
+        0.0,
+        1.797,
+        0.0
+      ],
+      "radius": 0.105,
+      "height": 0.523,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     },
     {
-      "id": "neck_lower",
-      "label": "Neck — lower section",
       "type": "ellipsoid",
-      "pos": [0.0, 0.60, 0.0],
-      "radii": [0.14, 0.18, 0.14],
-      "rotate": [0, 0, 0],
-      "material": "glass_dark_green"
+      "material": "glass",
+      "pos": [
+        0.0,
+        0.218,
+        0.0
+      ],
+      "radii": [
+        0.109,
+        0.218,
+        0.109
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     },
     {
-      "id": "neck_upper",
-      "label": "Neck — upper section near lip",
-      "type": "ellipsoid",
-      "pos": [0.0, 0.82, 0.0],
-      "radii": [0.13, 0.15, 0.13],
-      "rotate": [0, 0, 0],
-      "material": "glass_dark_green"
-    },
-    {
-      "id": "lip",
-      "label": "Lip — thickened glass rim at top",
-      "type": "ellipsoid",
-      "pos": [0.0, 0.95, 0.0],
-      "radii": [0.16, 0.04, 0.16],
-      "rotate": [0, 0, 0],
-      "material": "glass_dark_green"
-    },
-    {
-      "id": "foil_cap",
-      "label": "Foil capsule over cork",
-      "type": "ellipsoid",
-      "pos": [0.0, 0.90, 0.0],
-      "radii": [0.15, 0.08, 0.15],
-      "rotate": [0, 0, 0],
-      "material": "foil_burgundy"
-    },
-    {
-      "id": "label_front",
-      "label": "Front label — paper rectangle",
-      "type": "ellipsoid",
-      "pos": [0.0, -0.10, 0.36],
-      "radii": [0.22, 0.25, 0.01],
-      "rotate": [0, 0, 0],
-      "material": "label_cream"
-    },
-    {
-      "id": "base_punt",
-      "label": "Base — concave punt indentation",
-      "type": "ellipsoid",
-      "pos": [0.0, -0.72, 0.0],
-      "radii": [0.30, 0.06, 0.30],
-      "rotate": [0, 0, 0],
-      "material": "glass_dark_green"
-    },
-    {
-      "id": "wine_level",
-      "label": "Wine visible through glass — fill level",
-      "type": "ellipsoid",
-      "pos": [0.0, -0.20, 0.0],
-      "radii": [0.34, 0.45, 0.34],
-      "rotate": [0, 0, 0],
-      "material": "wine_red"
+      "type": "box",
+      "material": "paper",
+      "pos": [
+        0.0,
+        0.396,
+        0.0
+      ],
+      "size": [
+        0.531,
+        0.266,
+        0.159
+      ],
+      "rotate": [
+        0,
+        0,
+        0
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on standard wine bottle dimensions and materials.",
+  "physics": {
+    "total_mass_kg": 0.9,
+    "components": [
+      {
+        "component": "bottle_body",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.675,
+        "volume_cm3": 270.0,
+        "dims": {
+          "radius": 0.33,
+          "height": 0.791
+        }
+      },
+      {
+        "component": "shoulder",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.135,
+        "volume_cm3": 54.0,
+        "dims": {
+          "radii": [
+            0.186,
+            0.372,
+            0.186
+          ]
+        }
+      },
+      {
+        "component": "neck",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.045,
+        "volume_cm3": 18.0,
+        "dims": {
+          "radius": 0.105,
+          "height": 0.523
+        }
+      },
+      {
+        "component": "base_cap",
+        "material": "glass",
+        "density_kg_m3": 2500,
+        "phase": "solid",
+        "mass_kg": 0.027,
+        "volume_cm3": 10.8,
+        "dims": {
+          "radii": [
+            0.109,
+            0.218,
+            0.109
+          ]
+        }
+      },
+      {
+        "component": "bottle_label",
+        "material": "paper",
+        "density_kg_m3": 800,
+        "phase": "solid",
+        "mass_kg": 0.018,
+        "volume_cm3": 22.5,
+        "dims": {
+          "size": [
+            0.531,
+            0.266,
+            0.159
+          ]
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

@@ -1,90 +1,74 @@
 {
-  "name": "Pear",
-  "reference": "Bartlett pear \u2014 10cm tall, 7cm wide at base",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
+  "name": "pear",
   "layers": [
     {
-      "id": "base",
-      "label": "Wide bottom",
       "type": "ellipsoid",
+      "material": "fruit",
       "pos": [
-        0,
-        0.3,
-        0
+        0.0,
+        0.369,
+        0.0
       ],
       "radii": [
-        0.35,
-        0.32,
-        0.35
+        0.185,
+        0.369,
+        0.185
       ],
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "skin_green"
+      ]
     },
     {
-      "id": "mid",
-      "label": "Mid taper",
-      "type": "ellipsoid",
+      "type": "cylinder",
+      "material": "wood",
       "pos": [
-        0,
-        0.55,
-        0
+        0.0,
+        0.774,
+        0.0
       ],
-      "radii": [
-        0.28,
-        0.22,
-        0.28
-      ],
+      "radius": 0.183,
+      "height": 0.073,
       "rotate": [
         0,
         0,
         0
-      ],
-      "material": "skin_green"
-    },
-    {
-      "id": "neck",
-      "label": "Narrow neck",
-      "type": "ellipsoid",
-      "pos": [
-        0,
-        0.78,
-        0
-      ],
-      "radii": [
-        0.16,
-        0.18,
-        0.16
-      ],
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "skin_yellow"
-    },
-    {
-      "id": "stem",
-      "label": "Stem",
-      "type": "cone",
-      "base_pos": [
-        0,
-        0.92,
-        0
-      ],
-      "height": 0.15,
-      "base_radius": 0.02,
-      "top_radius": 0.01,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "stem_brown"
+      ]
     }
-  ]
+  ],
+  "provenance": "Based on typical pear dimensions and mass",
+  "physics": {
+    "total_mass_kg": 0.1,
+    "components": [
+      {
+        "component": "main_body",
+        "material": "fruit",
+        "density_kg_m3": 1800.0,
+        "phase": "solid",
+        "mass_kg": 0.095,
+        "volume_cm3": 52.78,
+        "dims": {
+          "radii": [
+            0.185,
+            0.369,
+            0.185
+          ]
+        }
+      },
+      {
+        "component": "stem",
+        "material": "wood",
+        "density_kg_m3": 650,
+        "phase": "solid",
+        "mass_kg": 0.005,
+        "volume_cm3": 7.69,
+        "dims": {
+          "radius": 0.183,
+          "height": 0.073
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
 }

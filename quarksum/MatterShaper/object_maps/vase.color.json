@@ -1,21 +1,19 @@
 {
-  "name": "Ceramic Vase Colors",
-  "reference": "Materials for Ceramic Vase",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "blue_ceramic": {
-      "label": "Blue glazed ceramic",
+    "ceramic": {
+      "label": "ceramic",
       "color": [
-        0.25,
-        0.4,
-        0.72
+        0.92,
+        0.88,
+        0.82
       ],
-      "reflectance": 0.14,
-      "roughness": 0.22,
+      "reflectance": 0.05,
+      "roughness": 0.6,
       "density_kg_m3": 2400,
       "mean_Z": 11,
       "mean_A": 22,
-      "composition": "Cobalt-glazed ceramic"
+      "composition": "SiO₂ + Al₂O₃ (porcelain)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

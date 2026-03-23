@@ -1,119 +1,78 @@
 {
-  "name": "Table Lamp",
-  "reference": "Bedside lamp \u2014 40cm tall, 25cm shade diameter",
-  "scale_note": "1 unit = 10cm",
-  "provenance": "Procedural generator \u2014 parametric template, no LLM",
   "layers": [
     {
-      "id": "base",
-      "label": "Heavy base",
-      "type": "ellipsoid",
+      "material": "aluminum",
+      "type": "cylinder",
       "pos": [
         0,
-        0.05,
+        15,
         0
       ],
-      "radii": [
-        0.5,
-        0.05,
-        0.5
-      ],
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "brass"
+      "radius": 2,
+      "height": 30
     },
     {
-      "id": "stem_low",
-      "label": "Lower stem",
+      "material": "white_paint",
+      "type": "box",
+      "pos": [
+        0,
+        45,
+        0
+      ],
+      "size": [
+        8,
+        6,
+        1
+      ]
+    },
+    {
+      "material": "aluminum",
+      "type": "cylinder",
+      "pos": [
+        0,
+        52.5,
+        0
+      ],
+      "radius": 1,
+      "height": 3
+    },
+    {
+      "material": "clear_glass",
       "type": "cone",
       "base_pos": [
         0,
-        0.08,
+        56,
         0
       ],
-      "height": 1.0,
-      "base_radius": 0.08,
-      "top_radius": 0.06,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "brass"
+      "height": 10,
+      "base_radius": 2.5,
+      "top_radius": 0
     },
     {
-      "id": "stem_mid",
-      "label": "Stem knob",
-      "type": "sphere",
+      "material": "aluminum",
+      "type": "cylinder",
       "pos": [
         0,
-        1.1,
+        63,
         0
       ],
-      "radius": 0.1,
-      "material": "brass"
+      "radius": 1,
+      "height": 3
     },
     {
-      "id": "stem_upper",
-      "label": "Upper stem",
-      "type": "cone",
-      "base_pos": [
-        0,
-        1.15,
-        0
-      ],
-      "height": 0.6,
-      "base_radius": 0.06,
-      "top_radius": 0.05,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "brass"
-    },
-    {
-      "id": "shade",
-      "label": "Lampshade",
-      "type": "cone",
-      "base_pos": [
-        0,
-        1.7,
-        0
-      ],
-      "height": 0.8,
-      "base_radius": 1.25,
-      "top_radius": 0.6,
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "cream_fabric"
-    },
-    {
-      "id": "shade_rim",
-      "label": "Shade bottom rim",
-      "type": "ellipsoid",
+      "material": "white_paint",
+      "type": "box",
       "pos": [
         0,
-        1.72,
+        67.5,
         0
       ],
-      "radii": [
-        1.26,
-        0.015,
-        1.26
-      ],
-      "rotate": [
-        0,
-        0,
-        0
-      ],
-      "material": "brass"
+      "size": [
+        4,
+        2,
+        1
+      ]
     }
-  ]
+  ],
+  "provenance": "Dimensions sourced from standard table lamp dimensions available online."
 }

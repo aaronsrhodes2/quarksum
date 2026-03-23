@@ -1,21 +1,19 @@
 {
-  "name": "Flower Pot Colors",
-  "reference": "Materials for Flower Pot",
-  "provenance": "Procedural generator material palette",
   "materials": {
     "terracotta": {
-      "label": "Terracotta clay",
+      "label": "terracotta",
       "color": [
-        0.76,
-        0.4,
+        0.72,
+        0.38,
         0.22
       ],
-      "reflectance": 0.08,
-      "roughness": 0.7,
-      "density_kg_m3": 1800,
-      "mean_Z": 14,
-      "mean_A": 28,
-      "composition": "Fired clay"
+      "reflectance": 0.04,
+      "roughness": 0.8,
+      "density_kg_m3": 1900,
+      "mean_Z": 12,
+      "mean_A": 24,
+      "composition": "Fired clay (SiO₂ + Fe₂O₃)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

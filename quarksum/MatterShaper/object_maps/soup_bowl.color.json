@@ -1,21 +1,19 @@
 {
-  "name": "Soup Bowl Colors",
-  "reference": "Materials for Soup Bowl",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "white_ceramic": {
-      "label": "White glazed ceramic",
+    "ceramic": {
+      "label": "ceramic",
       "color": [
         0.92,
-        0.9,
-        0.85
+        0.88,
+        0.82
       ],
-      "reflectance": 0.12,
-      "roughness": 0.25,
+      "reflectance": 0.05,
+      "roughness": 0.6,
       "density_kg_m3": 2400,
       "mean_Z": 11,
       "mean_A": 22,
-      "composition": "SiO2 + Al2O3 glaze"
+      "composition": "SiO₂ + Al₂O₃ (porcelain)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

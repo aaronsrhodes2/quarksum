@@ -1,0 +1,108 @@
+{
+  "name": "dumbbell",
+  "layers": [
+    {
+      "type": "cylinder",
+      "material": "steel",
+      "pos": [
+        0.0,
+        0.411,
+        0.0
+      ],
+      "radius": 0.343,
+      "height": 0.823,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "ellipsoid",
+      "material": "steel",
+      "pos": [
+        0.516,
+        0.206,
+        0.0
+      ],
+      "radii": [
+        0.289,
+        0.289,
+        0.289
+      ],
+      "rotate": [
+        0,
+        0,
+        -3.14
+      ]
+    },
+    {
+      "type": "ellipsoid",
+      "material": "steel",
+      "pos": [
+        0.516,
+        0.617,
+        0.0
+      ],
+      "radii": [
+        0.289,
+        0.289,
+        0.289
+      ],
+      "rotate": [
+        0,
+        0,
+        3.14
+      ]
+    }
+  ],
+  "provenance": "Based on a standard steel dumbbell with two equal weights attached to either end of a cylindrical bar.",
+  "physics": {
+    "total_mass_kg": 4.0,
+    "components": [
+      {
+        "component": "bar",
+        "material": "steel",
+        "density_kg_m3": 7900,
+        "phase": "solid",
+        "mass_kg": 2.4,
+        "volume_cm3": 303.8,
+        "dims": {
+          "radius": 0.343,
+          "height": 0.823
+        }
+      },
+      {
+        "component": "weight_left",
+        "material": "steel",
+        "density_kg_m3": 7900,
+        "phase": "solid",
+        "mass_kg": 0.8,
+        "volume_cm3": 101.27,
+        "dims": {
+          "radii": [
+            0.289,
+            0.289,
+            0.289
+          ]
+        }
+      },
+      {
+        "component": "weight_right",
+        "material": "steel",
+        "density_kg_m3": 7900,
+        "phase": "solid",
+        "mass_kg": 0.8,
+        "volume_cm3": 101.27,
+        "dims": {
+          "radii": [
+            0.289,
+            0.289,
+            0.289
+          ]
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
+}

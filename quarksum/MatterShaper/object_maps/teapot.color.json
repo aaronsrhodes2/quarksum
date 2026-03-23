@@ -1,35 +1,19 @@
 {
-  "name": "Teapot Colors",
-  "reference": "Materials for Teapot",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "white_ceramic": {
-      "label": "White glazed ceramic",
+    "terracotta": {
+      "label": "terracotta",
       "color": [
-        0.92,
-        0.9,
-        0.85
-      ],
-      "reflectance": 0.12,
-      "roughness": 0.25,
-      "density_kg_m3": 2400,
-      "mean_Z": 11,
-      "mean_A": 22,
-      "composition": "SiO2 + Al2O3 glaze"
-    },
-    "brass": {
-      "label": "Polished brass",
-      "color": [
-        0.78,
-        0.62,
+        0.72,
+        0.38,
         0.22
       ],
-      "reflectance": 0.72,
-      "roughness": 0.15,
-      "density_kg_m3": 8500,
-      "mean_Z": 29,
-      "mean_A": 63,
-      "composition": "Cu-Zn alloy"
+      "reflectance": 0.04,
+      "roughness": 0.8,
+      "density_kg_m3": 1900,
+      "mean_Z": 12,
+      "mean_A": 24,
+      "composition": "Fired clay (SiO₂ + Fe₂O₃)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

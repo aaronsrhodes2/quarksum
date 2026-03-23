@@ -1,35 +1,33 @@
 {
-  "name": "Salt Shaker Colors",
-  "reference": "Materials for Salt Shaker",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "clear_glass": {
-      "label": "Clear glass",
+    "ceramic": {
+      "label": "ceramic",
       "color": [
-        0.85,
-        0.9,
-        0.88
+        0.92,
+        0.88,
+        0.82
       ],
-      "reflectance": 0.45,
-      "roughness": 0.02,
-      "density_kg_m3": 2500,
-      "mean_Z": 10,
-      "mean_A": 20,
-      "composition": "Soda-lime glass"
+      "reflectance": 0.05,
+      "roughness": 0.6,
+      "density_kg_m3": 2400,
+      "mean_Z": 11,
+      "mean_A": 22,
+      "composition": "SiO₂ + Al₂O₃ (porcelain)"
     },
-    "chrome": {
-      "label": "Chrome plate",
+    "plastic": {
+      "label": "plastic",
       "color": [
-        0.75,
-        0.75,
-        0.78
+        0.1,
+        0.1,
+        0.11
       ],
-      "reflectance": 0.85,
-      "roughness": 0.05,
-      "density_kg_m3": 7190,
-      "mean_Z": 24,
-      "mean_A": 52,
-      "composition": "Cr plating"
+      "reflectance": 0.06,
+      "roughness": 0.45,
+      "density_kg_m3": 1050,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "ABS (acrylonitrile butadiene styrene)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

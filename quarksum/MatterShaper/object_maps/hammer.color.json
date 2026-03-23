@@ -1,35 +1,33 @@
 {
-  "name": "Claw Hammer Colors",
-  "reference": "Materials for Claw Hammer",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "light_wood": {
-      "label": "Light oak wood",
-      "color": [
-        0.68,
-        0.52,
-        0.32
-      ],
-      "reflectance": 0.1,
-      "roughness": 0.6,
-      "density_kg_m3": 700,
-      "mean_Z": 6,
-      "mean_A": 12,
-      "composition": "Cellulose + lignin"
-    },
     "steel": {
-      "label": "Brushed steel",
+      "label": "steel",
       "color": [
-        0.58,
-        0.6,
-        0.62
+        0.55,
+        0.56,
+        0.58
       ],
-      "reflectance": 0.65,
-      "roughness": 0.3,
+      "reflectance": 0.6,
+      "roughness": 0.15,
       "density_kg_m3": 7800,
       "mean_Z": 26,
       "mean_A": 56,
-      "composition": "Fe-C alloy"
+      "composition": "Fe + C (carbon steel)"
+    },
+    "wood": {
+      "label": "wood",
+      "color": [
+        0.62,
+        0.48,
+        0.27
+      ],
+      "reflectance": 0.04,
+      "roughness": 0.75,
+      "density_kg_m3": 750,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Cellulose + lignin (Quercus)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }

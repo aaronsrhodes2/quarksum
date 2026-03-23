@@ -1,35 +1,19 @@
 {
-  "name": "Rubber Duck Colors",
-  "reference": "Materials for Rubber Duck",
-  "provenance": "Procedural generator material palette",
   "materials": {
-    "skin_yellow": {
-      "label": "Yellow fruit skin",
+    "black_rubber": {
+      "label": "black_rubber",
       "color": [
-        0.92,
-        0.82,
-        0.15
+        0.14,
+        0.13,
+        0.12
       ],
-      "reflectance": 0.1,
-      "roughness": 0.45,
-      "density_kg_m3": 900,
+      "reflectance": 0.03,
+      "roughness": 0.85,
+      "density_kg_m3": 1200,
       "mean_Z": 6,
       "mean_A": 12,
-      "composition": "Cellulose + carotenoids"
-    },
-    "skin_orange": {
-      "label": "Orange peel",
-      "color": [
-        0.9,
-        0.55,
-        0.1
-      ],
-      "reflectance": 0.08,
-      "roughness": 0.65,
-      "density_kg_m3": 900,
-      "mean_Z": 6,
-      "mean_A": 12,
-      "composition": "Cellulose + limonene"
+      "composition": "C₅H₈ (natural rubber / polyisoprene)"
     }
-  }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
 }
