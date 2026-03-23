@@ -59,3 +59,18 @@ quarksum = ["data/*.json", "samples/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.pip-compile]
+dependencies = ["pip-compile"]
+
+[tool.poetry]
+name = "quarksum"
+version = "1.0.0"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+poetry = "^1.0.0"#tool:runSubagent
+prompt:customizationsIndex
+description: Generate a scene of a basketball on a concrete block using mattershaper

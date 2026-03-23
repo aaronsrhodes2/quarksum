@@ -10,3 +10,9 @@ build/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+
+# Rendered images and media
+renders/
+*.gif
+*.svg
+*.png

@@ -99,7 +99,7 @@ resolve(water)
 wc = compute_quark_chain_checksum(water)
 test("Water quark-chain closure < 0.1%",
      abs(wc["mass_defect_percent"]) < 0.1,
-     f"got {wc['mass_defect_percent']:.6f}%")
+     f"got {wc['mass_defect_percent']:+.6f}%")
 
 # Particle inventory
 from quarksum.checksum.particle_inventory import compute_particle_inventory

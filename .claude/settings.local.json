@@ -36,7 +36,9 @@
       "Bash(ls D:/Aaron/development/quarksum/.venv/Scripts/python*)",
       "Bash(ls /c/Users/aaron/AppData/Local/Programs/Python/*/python.exe)",
       "Bash(PYTHONIOENCODING=utf-8 /c/Users/aaron/AppData/Local/Programs/Python/Python313/python.exe render_houseplant.py)",
-      "Bash(curl -s http://localhost:8420/)"
+      "Bash(curl -s http://localhost:8420/)",
+      "Bash(grep -r \"shape.json\\\\|color.json\\\\|Sigma Signature\\\\|sigma_signature\\\\|\\\\.shape\\\\b\" /d/Aaron/development/quarksum/quarksum/ --include=*.py -l)",
+      "Bash(git commit:*)"
     ]
   }
 }
