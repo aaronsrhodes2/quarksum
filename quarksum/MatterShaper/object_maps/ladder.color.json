@@ -1,0 +1,33 @@
+{
+  "materials": {
+    "aluminum": {
+      "label": "aluminum",
+      "color": [
+        0.78,
+        0.79,
+        0.8
+      ],
+      "reflectance": 0.55,
+      "roughness": 0.2,
+      "density_kg_m3": 2700,
+      "mean_Z": 13,
+      "mean_A": 27,
+      "composition": "Al (aluminium alloy)"
+    },
+    "dark_oak_wood": {
+      "label": "dark_oak_wood",
+      "color": [
+        0.28,
+        0.18,
+        0.1
+      ],
+      "reflectance": 0.04,
+      "roughness": 0.65,
+      "density_kg_m3": 850,
+      "mean_Z": 6,
+      "mean_A": 12,
+      "composition": "Cellulose + lignin (hardwood)"
+    }
+  },
+  "provenance": "auto-resolved from MatterShaper material library"
+}

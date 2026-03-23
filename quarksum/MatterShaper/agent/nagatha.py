@@ -105,17 +105,9 @@ class AgentBrain:
         """Build the user prompt for mapping a specific object."""
         return f"""Map the following object into Sigma Signature format: "{object_name}"
 
-Follow your permanent instructions exactly. Output TWO JSON blocks:
-
-1. First, output the SHAPE MAP as a JSON code block labeled "SHAPE_MAP":
+Output ONE JSON block — the SHAPE MAP — labelled "SHAPE_MAP":
 ```json
 SHAPE_MAP
-{{...}}
-```
-
-2. Then output the COLOR MAP as a JSON code block labeled "COLOR_MAP":
-```json
-COLOR_MAP
 {{...}}
 ```
 
@@ -125,14 +117,18 @@ CRITICAL FIELD NAME RULES — use EXACTLY these keys, no substitutes:
 - Ellipsoid size key: "radii" (NOT "size", "scale", "dimensions")
 - Sphere size key: "radius" (NOT "size", "r")
 - Use type "cone" for cylinders/rods (NOT "cylinder") — set base_radius == top_radius for cylinders
-- Each layer MUST have a "material" key referencing a material_id in the COLOR_MAP
-- Materials must be a JSON object {{"id": {{...}}}} NOT a list
+- Each layer MUST have a "material" key with a descriptive real-world material name
+
+MATERIAL NAMING — use plain descriptive names; the renderer resolves them automatically:
+  Good: "aluminum", "dark_oak_wood", "black_rubber", "chrome", "red_paint",
+        "clear_glass", "terracotta", "cream_fabric", "brass", "wax"
+  Bad:  "rung_material_1", "ladder_side_mat", "mat_A"  ← don't invent IDs
 
 Remember:
 - Research real dimensions (cite your source in provenance)
 - Use 1 unit = 10cm scale
 - Keep to ≤15 primitives
-- Include 3-5 materials for visual variety
+- Include 3-5 different materials for visual variety
 - Include a character detail
 - Y is up, object base at Y=0, centered on X/Z
 - Run your self-review checklist before outputting
@@ -313,8 +309,9 @@ def parse_maps_from_response(text):
     # Apply field-name normalizations
     if shape_map:
         shape_map = _normalize_shape_map(shape_map)
-    if color_map or shape_map:
-        color_map = _normalize_color_map(color_map or {}, shape_map)
+    # color_map is now auto-resolved from the material library; ignore any
+    # COLOR_MAP the model may have emitted.
+    color_map = None
 
     return shape_map, color_map
 
@@ -422,7 +419,19 @@ def _normalize_color_map(color_map, shape_map):
     # Normalize each material's fields
     for mat_id, mat in list(mats.items()):
         if not isinstance(mat, dict):
+            # Replace scalar/invalid values with a default grey material
+            mats[mat_id] = {
+                'label': mat_id.replace('_', ' ').title(),
+                'color': [0.5, 0.5, 0.5],
+                'reflectance': 0.05,
+                'roughness': 0.6,
+                'density_kg_m3': 1000,
+                'mean_Z': 7,
+                'mean_A': 14,
+                'composition': 'Auto-synthesized (invalid model output)',
+            }
             continue
+        mat = mats[mat_id]  # re-bind after potential replacement
         # "name" → "label"
         if 'name' in mat and 'label' not in mat:
             mat['label'] = mat.pop('name')
@@ -546,6 +555,9 @@ def validate_maps(shape_map, color_map):
 
     # Check material completeness
     for mat_id, mat in materials.items():
+        if not isinstance(mat, dict):
+            errors.append(f"Material '{mat_id}' is not an object (got {type(mat).__name__})")
+            continue
         if 'color' not in mat:
             errors.append(f"Material '{mat_id}' missing 'color'")
         elif len(mat['color']) != 3:
@@ -590,6 +602,21 @@ def _try_import_mattershaper():
         return MatterShaper, Material, Vec3
     except ImportError:
         return None, None, None
+
+
+def _resolve_color_map(shape_map):
+    """Build a COLOR_MAP by resolving each layer's material name against the
+    MatterShaper material library.  The LLM never needs to invent color values.
+    """
+    sys.path.insert(0, str(PROJECT_DIR))
+    try:
+        from mattershaper.materials.resolver import build_color_map
+        cm = build_color_map(shape_map)
+        print("[Nagatha] Colors resolved from material library.")
+        return cm
+    except Exception as e:
+        print(f"[Nagatha] Material resolver unavailable ({e}), using fallback colors.")
+        return _normalize_color_map({}, shape_map)
 
 
 def render_from_maps(shape_map, color_map, output_path, width=400, height=400):
@@ -1180,12 +1207,15 @@ class Nagatha:
             # Step 2: Parse
             print("[Nagatha] Reading what came back...")
             shape_map, color_map = parse_maps_from_response(response)
-            if not shape_map or not color_map:
+            if not shape_map:
                 print("[Nagatha] Hmm. Couldn't make sense of that response. The JSON wasn't quite right.")
                 if attempt < max_retries:
-                    user_prompt += "\n\nYour previous response could not be parsed. Make sure to output exactly two JSON code blocks — one for SHAPE_MAP and one for COLOR_MAP."
+                    user_prompt += "\n\nYour previous response could not be parsed. Make sure to output a SHAPE_MAP JSON code block."
                     continue
                 return None, None
+
+            # Step 2b: Resolve colors from material library (no LLM needed)
+            color_map = _resolve_color_map(shape_map)
 
             # Step 3: Validate
             print("[Nagatha] Running my checks...")

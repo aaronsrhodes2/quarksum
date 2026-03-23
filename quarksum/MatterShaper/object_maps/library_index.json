@@ -619,6 +619,22 @@
       "created_by": "nagitha",
       "approved_by": "auto",
       "approved_date": "2026-03-23T05:53:28.155113+00:00"
+    },
+    "ladder": {
+      "key": "ladder",
+      "name": "ladder",
+      "aliases": [
+        "ladder"
+      ],
+      "shape_path": "object_maps/ladder.shape.json",
+      "color_path": "object_maps/ladder.color.json",
+      "primitives": 15,
+      "materials": 2,
+      "approved": true,
+      "created_date": "2026-03-23T06:15:33.915942+00:00",
+      "created_by": "nagitha",
+      "approved_by": "auto",
+      "approved_date": "2026-03-23T06:15:33.916238+00:00"
     }
   }
 }
