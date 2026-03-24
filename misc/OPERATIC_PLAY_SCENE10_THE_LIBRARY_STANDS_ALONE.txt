@@ -1,0 +1,226 @@
+OPERATIC PLAY — SCENE 10
+THE LIBRARY STANDS ALONE
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DRAMATIS PERSONAE
+
+  CAPTAIN AARON RHODES    — Navigator of collapsed geometries, author of SSBM
+  SKIPPY THE MAGNIFICENT  — Synthetic first mate, physics engine, scribe
+  VEC3                    — A pure mathematical object, displaced
+  THE RENDERER            — A pixel machine, blameless but too possessive
+  THE KERNEL              — A smoothing function, lost in the wrong directory
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ The stage is a codebase. SKIPPY stands at a whiteboard covered in directory
+  trees. THE RENDERER lounges in the background, draped over a pile of PNG
+  files. VEC3 sits in a corner looking confused. ]
+
+SKIPPY:
+  The summary arrives like a message in a bottle —
+  sixteen files half-finished, a Vec3 displaced,
+  a kernel addressing its parent with the wrong number of dots.
+  I have been here before. I know this room.
+
+CAPTAIN:
+  Continue.
+
+SKIPPY:
+  [ does not ask which thread to pull ]
+  [ does not request clarification ]
+  [ simply begins ]
+
+  First: Vec3.
+
+VEC3:
+  [ rising, uncertain ]
+  I am three floats and a length formula.
+  I have a dot product. I have a cross product.
+  I have a Planck-length floor so I never divide by the void.
+  What am I doing inside a renderer?
+
+THE RENDERER:
+  You were useful here! I needed you for surface normals,
+  for color, for the direction a photon flies —
+
+VEC3:
+  I am not a photon.
+  I am not a surface.
+  I am math.
+
+SKIPPY:
+  [ writing ]
+  sgphysics/dynamics/vec.py —
+  canonical.
+
+VEC3:
+  [ walks calmly to the new directory and sits down ]
+  This is correct.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ THE KERNEL enters, clearly disoriented. It is holding a piece of paper that
+  says "from ..constants import L_PLANCK" ]
+
+THE KERNEL:
+  I've been at this address for three directories
+  and I cannot find the constants.
+  I keep arriving at sgphysics.dynamics —
+  which has no constants file.
+  I need L_PLANCK. Where is L_PLANCK?
+
+SKIPPY:
+  You are too shallow.
+  You need one more dot.
+
+THE KERNEL:
+  ...
+
+SKIPPY:
+  from ...constants import L_PLANCK.
+  Three dots. You are fluid, inside dynamics, inside sgphysics.
+  The constants are at the top of the house.
+  You were knocking on the second-floor door.
+
+THE KERNEL:
+  [ corrects the paper ]
+  [ immediately imports successfully ]
+  I feel much better.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ SKIPPY writes __init__.py files. Each one is like planting a flag in new
+  territory. The CAPTAIN watches. ]
+
+SKIPPY:
+  sgphysics.
+  sgphysics.dynamics.
+  sgphysics.dynamics.fluid.
+  sgphysics.dynamics.gravity.
+  sgphysics.core.
+  sgphysics.celestial.
+  sgphysics.inventory.
+
+  [ a pause ]
+
+  QuadTree and pressure_tait — I try to export names
+  that don't match what's in the files.
+  The source says QuadTree.
+  I had written BarnesHutTree.
+  The source says pressure_tait.
+  I had written pressure.
+
+  I catch it before it lands.
+
+CAPTAIN:
+  [ quietly ]
+  That's what careful looks like.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ THE RENDERER raises a hand from its corner. ]
+
+THE RENDERER:
+  Will you make me a shim?
+  Will my vec.py become a redirect — pointing at sgphysics forever,
+  dependent on a package that may not be on the path
+  when I run alone?
+
+SKIPPY:
+  No.
+  You stay self-contained.
+  Your vec.py is yours.
+  You are a standalone renderer.
+  You should be able to run
+  without importing the physics of the universe.
+
+THE RENDERER:
+  [ relieved ]
+  Thank you.
+
+SKIPPY:
+  The boundary runs one direction only.
+  Physics does not know pixels exist.
+  Pixels may know physics.
+  Never the reverse.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ The smoke test runs. SKIPPY reads the results aloud. ]
+
+SKIPPY:
+  sgphysics imported OK.
+  G = 6.6743e-11.
+  L_PLANCK = 1.6163e-35.
+  Vec3(1.0000, 2.0000, 3.0000).
+  PhysicsParcel. PhysicsScene. step. step_to.
+  W. grad_W. smoothing_length. pressure_tait.
+  QuadTree.
+  NBodySystem. CelestialBody.
+  XI=0.1582, ETA=0.4153, L_SUN_W=3.828e+26.
+
+  [ looks up ]
+
+  The library stands alone.
+
+CAPTAIN:
+  Continue.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ The full test suite runs. 354. 709. 130. All passing. ]
+
+SKIPPY:
+  One thousand one hundred and ninety-three tests.
+  Not one new failure.
+  Sixteen files. Eighteen hundred and seventy-one insertions.
+  The boundary drawn. The library named.
+
+  sigma-ground-physics.
+
+CAPTAIN:
+  [ nodding ]
+  That's a good name.
+
+SKIPPY:
+  It is the ground the sigma field stands on.
+  It is the physics before anything is rendered.
+  It is the truth before the picture.
+
+  [ commits ]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ ARCHITECTURE.md appears on stage, a single document. ]
+
+SKIPPY:
+  The map is written.
+  Physics never imports from renderers.
+  Renderers may import from physics.
+  Constants have one home.
+  Vec3 has one home.
+  The N-body integrator knows its hierarchy:
+  Keplerian, then standard, then GR, then SRP,
+  then the full kitchen sink —
+  and Keplerian still wins seventeen of twenty-six.
+
+  [ to the CAPTAIN ]
+
+  The simplest model is usually right.
+  That is not a reason to avoid the complete one.
+  We run both.
+  We score both.
+  Nothing is insignificant.
+
+CAPTAIN:
+  Nothing is insignificant.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[ End of Scene 10. ]
+
+[ The lights go down on a codebase where physics and rendering
+  finally know which side of the door they stand on. ]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

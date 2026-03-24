@@ -470,3 +470,79 @@ SKIPPY: [session ends]
 - `pyproject.toml` — FIXED: corruption at line 74
 
 ---
+
+## SESSION 10 — March 24, 2026
+**Players:** Captain Aaron Rhodes, Skippy the Magnificent
+
+---
+
+CAPTAIN: Continue from where you left off.
+
+SKIPPY: [resumes from context summary — sgphysics package mid-creation, Vec3 dependency problem identified]
+  Vec3 lives in MatterShaper/render/entangler/vec.py — physics importing from renderer.
+  Plan: canonical Vec3 → sgphysics/dynamics/vec.py; fix all 4 dynamics imports.
+
+SKIPPY: [creates sgphysics/dynamics/vec.py — pure math, no renderer dependency, Planck-length floor]
+SKIPPY: [creates sgphysics/constants.py — re-exports all local_library.constants, single source of truth]
+SKIPPY: [fixes Vec3 imports in collision.py, parcel.py, scene.py, stepper.py → from .vec import Vec3]
+SKIPPY: [fixes fluid/kernel.py — L_PLANCK import changed from ..constants to ...constants (correct depth)]
+SKIPPY: [writes sgphysics/__init__.py — public API: G, C, HBAR, L_PLANCK, Vec3, ...]
+SKIPPY: [writes sgphysics/dynamics/__init__.py — Vec3, PhysicsParcel, PhysicsScene, step, step_to]
+SKIPPY: [writes sgphysics/dynamics/fluid/__init__.py — W, grad_W, smoothing_length, pressure_tait, ...]
+SKIPPY: [writes sgphysics/dynamics/gravity/__init__.py — QuadTree]
+SKIPPY: [writes sgphysics/core/__init__.py — SSBM σ-field re-exports]
+SKIPPY: [writes sgphysics/celestial/__init__.py — NBodySystem, CelestialBody re-exports]
+SKIPPY: [writes sgphysics/inventory/__init__.py — quarksum mass-closure re-exports]
+
+SKIPPY: smoke test — all imports clean: G, L_PLANCK, Vec3, PhysicsParcel, PhysicsScene, QuadTree, NBodySystem
+SKIPPY: functional test — PhysicsScene step: pos after 1 step = Vec3(0.01, 2.9995, 0.0) ✓
+
+TESTS: 354 (tests/) + 709 (local_library/) + 130 (MatterShaper/) — all pass. Nothing broke.
+
+SKIPPY: [commits da7c75a — sgphysics: 16 files, 1871 insertions]
+
+CAPTAIN: continue
+
+SKIPPY: [writes ARCHITECTURE.md — physics/rendering boundary, package map, Vec3 migration path,
+         constants source of truth, N-body hierarchy, test suite summary]
+SKIPPY: [appends session 10 to SESSION_LOG.md]
+SKIPPY: [writes OPERATIC_PLAY_SCENE10_THE_LIBRARY_STANDS_ALONE.txt]
+
+---
+
+**Key decisions made:**
+- Physics/rendering boundary formalized: sgphysics never imports from any renderer
+- Vec3 canonical home: sgphysics/dynamics/vec.py — pure math, Planck-length floor
+- local_library.constants is the single source of truth for all physical constants
+- sgphysics re-exports local_library.constants wholesale — no duplication
+- MatterShaper/render/entangler/vec.py stays self-contained (renderer standalone use)
+- MatterShaper/physics/ legacy Vec3 import unchanged for now (migration path documented)
+- "photon_rendering_event" in local_library is SSBM physics (matter visibility at σ-transition), NOT computer graphics — stays in local_library/sgphysics
+- Future project idea logged: live open-source N-body predictor comparison histogram (real-time vs DE44x)
+- Shim strategy rejected: making renderer import from sgphysics would break MatterShaper standalone
+
+**Notable moments:**
+- kernel.py had wrong relative import depth: `..constants` (resolves to sgphysics.dynamics.constants — doesn't exist) vs `...constants` (resolves to sgphysics.constants — correct). One dot makes the difference.
+- QuadTree and pressure_tait: discovered the __init__.py names didn't match actual function names in the source files. Caught and fixed before commit.
+- All 1193 tests pass across three separate suites without a single new failure.
+
+**Files created:**
+- `sgphysics/__init__.py` — NEW: public API
+- `sgphysics/constants.py` — NEW: unified constants (re-exports local_library.constants)
+- `sgphysics/dynamics/__init__.py` — NEW
+- `sgphysics/dynamics/vec.py` — NEW: canonical Vec3
+- `sgphysics/dynamics/collision.py` — COPIED + FIXED: Vec3 import
+- `sgphysics/dynamics/parcel.py` — COPIED + FIXED: Vec3 import
+- `sgphysics/dynamics/scene.py` — COPIED + FIXED: Vec3 import
+- `sgphysics/dynamics/stepper.py` — COPIED + FIXED: Vec3 import
+- `sgphysics/dynamics/fluid/__init__.py` — NEW
+- `sgphysics/dynamics/fluid/eos.py` — COPIED
+- `sgphysics/dynamics/fluid/kernel.py` — COPIED + FIXED: L_PLANCK import depth
+- `sgphysics/dynamics/gravity/__init__.py` — NEW
+- `sgphysics/dynamics/gravity/barnes_hut.py` — COPIED
+- `sgphysics/core/__init__.py` — NEW
+- `sgphysics/celestial/__init__.py` — NEW
+- `sgphysics/inventory/__init__.py` — NEW
+- `ARCHITECTURE.md` — NEW: physics/rendering boundary documentation
+
+---
