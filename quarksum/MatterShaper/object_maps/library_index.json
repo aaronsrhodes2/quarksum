@@ -715,6 +715,22 @@
       "created_by": "nagitha",
       "approved_by": "auto",
       "approved_date": "2026-03-23T07:47:24.861874+00:00"
+    },
+    "toothbrush": {
+      "key": "toothbrush",
+      "name": "toothbrush",
+      "aliases": [
+        "toothbrush"
+      ],
+      "shape_path": "object_maps/toothbrush.shape.json",
+      "color_path": "object_maps/toothbrush.color.json",
+      "primitives": 4,
+      "materials": 2,
+      "approved": true,
+      "created_date": "2026-03-23T08:08:22.307199+00:00",
+      "created_by": "nagitha",
+      "approved_by": "auto",
+      "approved_date": "2026-03-23T08:08:22.307538+00:00"
     }
   }
 }

@@ -1,0 +1,124 @@
+{
+  "name": "toothbrush",
+  "layers": [
+    {
+      "type": "cylinder",
+      "material": "plastic",
+      "pos": [
+        0.0,
+        0.168,
+        0.0
+      ],
+      "radius": 0.14,
+      "height": 0.335,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "cylinder",
+      "material": "plastic",
+      "pos": [
+        0.0,
+        0.414,
+        0.0
+      ],
+      "radius": 0.098,
+      "height": 0.157,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "cylinder",
+      "material": "nylon",
+      "pos": [
+        0.0,
+        0.538,
+        0.0
+      ],
+      "radius": 0.116,
+      "height": 0.093,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "cylinder",
+      "material": "plastic",
+      "pos": [
+        0.0,
+        0.656,
+        0.0
+      ],
+      "radius": 0.059,
+      "height": 0.143,
+      "rotate": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "provenance": "Based on typical toothbrush dimensions and materials found in real-world products.",
+  "physics": {
+    "total_mass_kg": 0.03,
+    "components": [
+      {
+        "component": "handle",
+        "material": "plastic",
+        "density_kg_m3": 950,
+        "phase": "solid",
+        "mass_kg": 0.0195,
+        "volume_cm3": 20.53,
+        "dims": {
+          "radius": 0.14,
+          "height": 0.335
+        }
+      },
+      {
+        "component": "head",
+        "material": "plastic",
+        "density_kg_m3": 950,
+        "phase": "solid",
+        "mass_kg": 0.0045,
+        "volume_cm3": 4.74,
+        "dims": {
+          "radius": 0.098,
+          "height": 0.157
+        }
+      },
+      {
+        "component": "bristles",
+        "material": "nylon",
+        "density_kg_m3": 1150,
+        "phase": "solid",
+        "mass_kg": 0.0045,
+        "volume_cm3": 3.91,
+        "dims": {
+          "radius": 0.116,
+          "height": 0.093
+        }
+      },
+      {
+        "component": "cap",
+        "material": "plastic",
+        "density_kg_m3": 950,
+        "phase": "solid",
+        "mass_kg": 0.0015,
+        "volume_cm3": 1.58,
+        "dims": {
+          "radius": 0.059,
+          "height": 0.143
+        }
+      }
+    ],
+    "builder": "mattershaper.physics.object_builder"
+  }
+}
