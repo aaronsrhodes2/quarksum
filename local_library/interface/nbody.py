@@ -421,6 +421,8 @@ class NBodySystem:
         damp   = 1.0 + dE_dt * dt / ke_rel
         damp   = max(0.0, damp)
         v_cm   = (b0.mass_kg * vel_new[0] + b1.mass_kg * vel_new[1]) / M_tot
-        vel_new[0] = v_cm + math.sqrt(damp) * b0.mass_kg / M_tot * (-v_rel)
-        vel_new[1] = v_cm + math.sqrt(damp) * b1.mass_kg / M_tot * v_rel
+        # CM-frame decomposition: v_i = v_cm ± (m_other/M) * v_rel
+        # b0 gets -m_b1/M * v_rel;  b1 gets +m_b0/M * v_rel
+        vel_new[0] = v_cm - math.sqrt(damp) * b1.mass_kg / M_tot * v_rel
+        vel_new[1] = v_cm + math.sqrt(damp) * b0.mass_kg / M_tot * v_rel
         return vel_new
