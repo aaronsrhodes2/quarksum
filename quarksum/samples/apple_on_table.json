@@ -1,0 +1,24 @@
+{
+  "name": "Apple on Table",
+  "description": "A medium apple (182 g) resting on a wooden table. The apple is ~84% water by mass, 11% sucrose (table sugar), and 5% glucose (fructose in apple flesh has the same formula C₆H₁₂O₆ as glucose). The wooden table surface is modeled as a carbohydrate matrix: glucose (as cellulose polysaccharide proxy, ~90%) and carbon (as lignin aromatic polymer proxy, ~10%). Thickness values are calibrated so thickness×density gives the correct apple/table mass ratio (0.182 kg vs 5.0 kg).",
+  "stated_mass_kg": 5.182,
+  "children": [
+    {
+      "comment": "Apple (~182 g) — water + sugars",
+      "materials": [
+        {"material": "Water",   "ratio": 0.84},
+        {"material": "Sucrose", "ratio": 0.11},
+        {"material": "Glucose", "ratio": 0.05}
+      ],
+      "thickness": 5.38
+    },
+    {
+      "comment": "Wooden table surface (~5 kg) — carbohydrate + lignin proxy",
+      "materials": [
+        {"material": "Glucose", "ratio": 0.90},
+        {"material": "Carbon",  "ratio": 0.10}
+      ],
+      "thickness": 100.0
+    }
+  ]
+}

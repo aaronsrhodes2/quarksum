@@ -1,0 +1,14 @@
+{
+  "name": "Bronze Cube",
+  "description": "A 10 cm × 10 cm × 10 cm solid bronze cube. Standard tin bronze alloy: 88% copper, 12% tin by mass. Volume = 10⁻³ m³. Density of bronze ≈ 8800 kg/m³. Mass = 8800 × 10⁻³ = 8.8 kg. Copper contributes 95.7% of the electron contribution (Z=29 vs Z=50 for Sn) but tin's heavier nucleus shifts the nuclear binding energy profile. A classic benchmarking solid — uniform composition, known geometry, no voids.",
+  "stated_mass_kg": 8.8,
+  "children": [
+    {
+      "materials": [
+        {"material": "Copper", "ratio": 0.88},
+        {"material": "Tin",    "ratio": 0.12}
+      ],
+      "thickness": 1.0
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Sol Solar System",
+  "description": "The solar system from the Sun's core to the Oort Cloud. The Sun contains 99.86% of the system's mass. Layers: hydrogen-helium stellar core, rocky inner planet region (silicate proxy for Mercury/Venus/Earth/Mars), gas giant region (hydrogen-methane for Jupiter/Saturn/Uranus/Neptune), Kuiper Belt ice, and the diffuse Oort Cloud. Layer thicknesses are proportional to order-of-magnitude scale, not true AU distances.",
+  "stated_mass_kg": 1.991077989796853e+30,
+  "children": [
+    {
+      "materials": [
+        {"material": "Hydrogen", "ratio": 0.73},
+        {"material": "Helium",   "ratio": 0.25},
+        {"material": "Iron",     "ratio": 0.02}
+      ],
+      "thickness": 200.0
+    },
+    {
+      "materials": [
+        {"material": "Silicon Dioxide", "ratio": 0.5},
+        {"material": "Iron",            "ratio": 0.3},
+        {"material": "Magnesium Oxide", "ratio": 0.2}
+      ],
+      "thickness": 60.0
+    },
+    {
+      "materials": [
+        {"material": "Interstellar Medium (ISM)", "ratio": 1.0}
+      ],
+      "thickness": 40.0
+    },
+    {
+      "materials": [
+        {"material": "Hydrogen", "ratio": 0.80},
+        {"material": "Helium",   "ratio": 0.15},
+        {"material": "Methane",  "ratio": 0.05}
+      ],
+      "thickness": 300.0
+    },
+    {
+      "materials": [
+        {"material": "Water",   "ratio": 0.50},
+        {"material": "Methane", "ratio": 0.30},
+        {"material": "Ammonia", "ratio": 0.20}
+      ],
+      "thickness": 200.0
+    },
+    {
+      "materials": [
+        {"material": "Interstellar Medium (ISM)", "ratio": 1.0}
+      ],
+      "thickness": 500.0
+    }
+  ]
+}

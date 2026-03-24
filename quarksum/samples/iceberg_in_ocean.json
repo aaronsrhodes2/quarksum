@@ -1,0 +1,22 @@
+{
+  "name": "Iceberg in Ocean",
+  "description": "A large Antarctic tabular iceberg (~300 m long, ~10¹¹ kg) floating in the Southern Ocean. Approximately 89% is submerged. The ice is fresh water (H₂O) in solid form — same molecular formula as liquid water, quarksum tracks mass not phase. The surrounding seawater layer represents the ocean context the iceberg displaces and interacts with. Density of ice (917 kg/m³) vs seawater (1025 kg/m³) is what keeps 89% submerged (Archimedes' principle).",
+  "stated_mass_kg": 1.0e+11,
+  "children": [
+    {
+      "comment": "Ice body (H₂O solid — fresh water molecular formula)",
+      "materials": [
+        {"material": "Water", "ratio": 1.0}
+      ],
+      "thickness": 917.0
+    },
+    {
+      "comment": "Surrounding seawater (salt water, ~3.5% NaCl)",
+      "materials": [
+        {"material": "Seawater",        "ratio": 0.965},
+        {"material": "Sodium Chloride", "ratio": 0.035}
+      ],
+      "thickness": 5.0
+    }
+  ]
+}

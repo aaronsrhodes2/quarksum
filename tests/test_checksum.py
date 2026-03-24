@@ -1033,13 +1033,13 @@ class TestFlatModel:
 class TestBuilder:
     """Structure builder tests."""
 
-    def test_list_structures_returns_7(self):
+    def test_list_structures_returns_16(self):
         structures = list_structures()
         report("Built-in Structures", [
             f"{s['id']:30s}  mass={sci(s['stated_mass_kg'])} kg"
             for s in structures
         ])
-        assert len(structures) == 7
+        assert len(structures) == 16  # 7 originals + 9 default loads
 
     def test_all_structures_loadable(self):
         lines = []

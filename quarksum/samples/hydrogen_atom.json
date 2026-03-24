@@ -1,0 +1,13 @@
+{
+  "name": "Hydrogen Atom (H)",
+  "description": "A single hydrogen atom. ¹H: proton + electron. Atomic mass 1.007825 Da. Mass = 1.007825 × 1.66054×10⁻²⁷ kg = 1.6736×10⁻²⁷ kg. Contents: 1 proton (uud quarks), 1 electron. Nuclear binding energy: 0 MeV (no neutrons, no nucleus — just a bare proton). QCD binding energy: ~929.3 MeV (the proton's own quark confinement). The hydrogen atom is the simplest bound system: the proton proves that 99.04% of nucleon mass is QCD binding. The electron's Higgs mass (0.511 MeV) is σ-invariant.",
+  "stated_mass_kg": 1.6736e-27,
+  "children": [
+    {
+      "materials": [
+        {"material": "Hydrogen", "ratio": 1.0}
+      ],
+      "thickness": 1.0
+    }
+  ]
+}

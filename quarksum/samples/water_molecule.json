@@ -1,0 +1,13 @@
+{
+  "name": "Water Molecule (H₂O)",
+  "description": "A single water molecule. H₂O: molecular weight 18.015 Da. Mass = 18.015 × 1.66054×10⁻²⁷ kg = 2.9907×10⁻²⁶ kg. Contains exactly 2 hydrogen atoms (Z=1, A=1) and 1 oxygen atom (Z=8, A=16): 10 protons, 8 neutrons, 10 electrons. The O–H covalent bond length is 95.84 pm; bond angle 104.45°. Total nuclear binding energy: 2×(0 MeV for H) + 127.6 MeV for O-16 = 127.6 MeV. A benchmark for the smallest load — tests the single-molecule resolution of the pipeline.",
+  "stated_mass_kg": 2.9907e-26,
+  "children": [
+    {
+      "materials": [
+        {"material": "Water", "ratio": 1.0}
+      ],
+      "thickness": 1.0
+    }
+  ]
+}

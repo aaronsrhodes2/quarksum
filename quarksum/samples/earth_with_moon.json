@@ -1,0 +1,78 @@
+{
+  "name": "Earth with Moon",
+  "description": "The Earth-Moon system. Total mass 6.0466×10²⁴ kg (Earth: 5.9722×10²⁴ kg = 98.77%, Moon: 7.342×10²² kg = 1.21%). Earth layers: iron-nickel inner core, iron-nickel outer core, silicate mantle (MgO+SiO₂), granite crust (SiO₂+Al₂O₃), ocean (seawater), atmosphere (air). Moon layers: iron-dominated core, silicate mantle, anorthosite crust proxy (SiO₂+Al₂O₃). Layer thicknesses are calibrated so that thickness×density gives the correct Earth/Moon mass ratio (81.3:1) relative to the stated_mass_kg anchor.",
+  "stated_mass_kg": 6.046588e+24,
+  "children": [
+    {
+      "comment": "Earth — inner core (iron-nickel, ~1220 km radius)",
+      "materials": [
+        {"material": "Iron",   "ratio": 0.85},
+        {"material": "Nickel", "ratio": 0.15}
+      ],
+      "thickness": 40.0
+    },
+    {
+      "comment": "Earth — outer core (liquid iron-nickel, 1220–3480 km)",
+      "materials": [
+        {"material": "Iron",   "ratio": 0.90},
+        {"material": "Nickel", "ratio": 0.10}
+      ],
+      "thickness": 70.0
+    },
+    {
+      "comment": "Earth — mantle (silicate, 3480–6350 km)",
+      "materials": [
+        {"material": "Magnesium Oxide", "ratio": 0.55},
+        {"material": "Silicon Dioxide", "ratio": 0.45}
+      ],
+      "thickness": 130.0
+    },
+    {
+      "comment": "Earth — crust (continental + oceanic, 6–70 km thick)",
+      "materials": [
+        {"material": "Silicon Dioxide", "ratio": 0.70},
+        {"material": "Aluminum Oxide", "ratio": 0.30}
+      ],
+      "thickness": 10.0
+    },
+    {
+      "comment": "Earth — oceans (~3.7 km average depth, 71% of surface)",
+      "materials": [
+        {"material": "Seawater", "ratio": 1.0}
+      ],
+      "thickness": 3.0
+    },
+    {
+      "comment": "Earth — atmosphere (~100 km effective depth)",
+      "materials": [
+        {"material": "Air", "ratio": 1.0}
+      ],
+      "thickness": 100.0
+    },
+    {
+      "comment": "Moon — core (iron-dominated, ~330 km radius)",
+      "materials": [
+        {"material": "Iron",            "ratio": 0.60},
+        {"material": "Nickel",          "ratio": 0.10},
+        {"material": "Silicon Dioxide", "ratio": 0.30}
+      ],
+      "thickness": 0.46481
+    },
+    {
+      "comment": "Moon — mantle (silicate, ~1100 km thick)",
+      "materials": [
+        {"material": "Magnesium Oxide", "ratio": 0.50},
+        {"material": "Silicon Dioxide", "ratio": 0.50}
+      ],
+      "thickness": 3.11000
+    },
+    {
+      "comment": "Moon — crust (anorthosite proxy, ~50 km thick)",
+      "materials": [
+        {"material": "Silicon Dioxide", "ratio": 0.70},
+        {"material": "Aluminum Oxide",  "ratio": 0.30}
+      ],
+      "thickness": 0.73289
+    }
+  ]
+}

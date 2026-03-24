@@ -16,12 +16,14 @@ from quarksum import __version__
 
 EPILOG = """\
 examples:
-  python -m quarksum                              # Checksum Sol (default)
+  python -m quarksum                              # Load Earth with Moon (default)
+  python -m quarksum --menu                       # Interactive load selector
   python -m quarksum gold_ring                    # Checksum a built-in structure
   python -m quarksum --list                       # List all built-in structures
-  python -m quarksum --spec                       # Dump Sol's raw JSON spec
+  python -m quarksum --spec                       # Dump default structure's raw JSON spec
   python -m quarksum gold_ring --spec             # Dump a structure's raw JSON spec
-  python -m quarksum --quark-chain                # Quark-chain on Sol
+  python -m quarksum --physics                    # Full physics report (mass, tangle, ...)
+  python -m quarksum --quark-chain                # Quark-chain on default structure
   python -m quarksum gold_ring --quark-chain      # Quark-chain on structure
   python -m quarksum --material Iron --mass 1.0   # Quick single-material
   python -m quarksum --file my_structure.json     # Custom spec from file
@@ -29,11 +31,69 @@ examples:
   python -m quarksum --behaviors charm --color blue # Charm quark, blue color charge
   python -m quarksum --refresh                    # Refresh isotope data from IAEA
 
-workflow — clone Sol, rename it, checksum the copy:
-  python -m quarksum --spec > custom_sol.json     # Export Sol spec
-  # edit custom_sol.json (change name, materials, mass…)
-  python -m quarksum --file custom_sol.json       # Checksum your version
+default loads (--menu to select):
+  universe          Our Universe
+  milky_way         Milky Way Galaxy
+  sol_solar_system  Sol Solar System
+  earth_with_moon   Earth with Moon  [default]
+  iceberg_in_ocean  Iceberg in Ocean
+  apple_on_table    Apple on Table
+  bronze_cube       Bronze Cube
+  water_molecule    Water Molecule
+  hydrogen_atom     Hydrogen Atom
+
+workflow — clone a structure, rename it, checksum the copy:
+  python -m quarksum --spec > custom.json         # Export current spec
+  # edit custom.json (change name, materials, mass...)
+  python -m quarksum --file custom.json           # Checksum your version
 """
+
+
+def _run_menu(args) -> int:
+    """Interactive load selector for --menu flag."""
+    from quarksum.defaults import LOADS, by_id
+    from quarksum.builder import load_structure
+
+    print("\nQuarkSum — Select a load:", file=sys.stderr)
+    print(file=sys.stderr)
+    for i, load in enumerate(LOADS, 1):
+        marker = "  [default]" if load.id == "earth_with_moon" else ""
+        print(f"  {i:2d}. {load.name}{marker}", file=sys.stderr)
+    print(file=sys.stderr)
+    try:
+        raw = input(f"Enter number (1-{len(LOADS)}): ")
+        choice = int(raw.strip())
+    except (ValueError, EOFError, KeyboardInterrupt):
+        _err("No selection made.")
+        return 1
+
+    if not (1 <= choice <= len(LOADS)):
+        _err(f"Invalid choice: {choice}. Must be 1-{len(LOADS)}.")
+        return 1
+
+    selected = LOADS[choice - 1]
+    print(selected.message, file=sys.stderr)
+
+    structure = load_structure(selected.id)
+    if structure is None:
+        _err(f"Failed to load: {selected.id}")
+        return 1
+
+    if args.physics:
+        from quarksum.physics import compute_physics
+        result = compute_physics(structure, radius_m=selected.radius_m)
+    elif args.quark_chain:
+        from quarksum.checksum.quark_chain import compute_quark_chain_checksum
+        result = compute_quark_chain_checksum(structure)
+    elif args.inventory:
+        from quarksum.checksum.particle_inventory import compute_particle_inventory
+        result = compute_particle_inventory(structure)
+    else:
+        from quarksum.checksum.stoq_checksum import compute_stoq_checksum
+        result = compute_stoq_checksum(structure)
+
+    _json_out(result)
+    return 0
 
 
 def _json_out(data: dict) -> None:
@@ -57,7 +117,12 @@ def main(argv: list[str] | None = None) -> int:
         "structure",
         nargs="?",
         default=None,
-        help="Built-in structure name (default: solar_system_xsection)",
+        help="Built-in structure name (default: earth_with_moon)",
+    )
+    parser.add_argument(
+        "--menu",
+        action="store_true",
+        help="Interactive menu to select a default load",
     )
     parser.add_argument(
         "--list",
@@ -69,6 +134,11 @@ def main(argv: list[str] | None = None) -> int:
         "--spec",
         action="store_true",
         help="Dump a structure's raw JSON spec (for saving / editing / resubmitting)",
+    )
+    parser.add_argument(
+        "--physics",
+        action="store_true",
+        help="Full physics report: mass, particles, gravity, entanglement tangle",
     )
     parser.add_argument(
         "--quark-chain",
@@ -143,14 +213,18 @@ def main(argv: list[str] | None = None) -> int:
 
     args = parser.parse_args(argv)
 
+    if args.menu:
+        return _run_menu(args)
+
     if args.list_structures:
         from quarksum.builder import list_structures
         _json_out(list_structures())
         return 0
 
     if args.spec:
-        from quarksum.builder import load_structure_spec, DEFAULT_SAMPLE
-        name = args.structure or DEFAULT_SAMPLE
+        from quarksum.builder import load_structure_spec
+        from quarksum.defaults import DEFAULT_ID
+        name = args.structure or DEFAULT_ID
         spec = load_structure_spec(name)
         if spec is None:
             _err(f"unknown structure: '{name}'. Use --list to see available structures.")
@@ -223,12 +297,33 @@ def main(argv: list[str] | None = None) -> int:
             return 1
 
     else:
-        from quarksum.builder import load_structure, DEFAULT_SAMPLE
-        name = args.structure or DEFAULT_SAMPLE
+        from quarksum.builder import load_structure
+        from quarksum.defaults import DEFAULT_ID, by_id
+        is_default_load = (args.structure is None)
+        name = args.structure or DEFAULT_ID
         structure = load_structure(name)
         if structure is None:
             _err(f"unknown structure: '{name}'. Use --list to see available structures.")
             return 1
+        if is_default_load:
+            dflt = by_id(DEFAULT_ID)
+            if dflt:
+                print(dflt.message, file=sys.stderr)
+
+    _selected_load_id = (
+        args.structure
+        if args.structure is not None
+        else (DEFAULT_ID if not args.material and not args.spec_file else None)
+    )
+
+    if args.physics:
+        from quarksum.physics import compute_physics
+        from quarksum.defaults import by_id as _by_id
+        dflt = _by_id(_selected_load_id) if _selected_load_id else None
+        radius_m = dflt.radius_m if dflt else None
+        result = compute_physics(structure, radius_m=radius_m)
+        _json_out(result)
+        return 0
 
     if args.inventory:
         from quarksum.checksum.particle_inventory import compute_particle_inventory

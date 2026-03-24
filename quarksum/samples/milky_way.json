@@ -1,0 +1,15 @@
+{
+  "name": "Milky Way Galaxy",
+  "description": "Baryonic mass of the Milky Way: ~6×10¹⁰ solar masses (~1.19×10⁴¹ kg). Composition: ~50% warm/hot gas (ISM, primarily H/He), ~40% stellar material (Stellar Plasma proxy), ~10% interstellar dust (carbon-silicate grains). In SSBM, the dark matter halo is additional nested baryons; this load counts only the directly baryonic component. Note: ISM density is extremely low (~1.67×10⁻²¹ kg/m³) — the mass is delivered by the stated_mass_kg anchor.",
+  "stated_mass_kg": 1.19e+41,
+  "children": [
+    {
+      "materials": [
+        {"material": "Interstellar Medium (ISM)", "ratio": 0.50},
+        {"material": "Stellar Plasma",            "ratio": 0.40},
+        {"material": "Interstellar Dust",         "ratio": 0.10}
+      ],
+      "thickness": 1.0
+    }
+  ]
+}

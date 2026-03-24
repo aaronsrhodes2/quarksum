@@ -46,6 +46,16 @@ from quarksum.checksum.stoq_checksum import (
 )
 from quarksum.models.structure import Structure
 from quarksum.resolver import resolve
+from quarksum.physics import (
+    compute_physics as physics,
+    compute_tangle as tangle,
+)
+from quarksum.defaults import (
+    LOADS as default_loads,
+    DEFAULT_ID as default_load_id,
+    default_load,
+    by_id as load_by_id,
+)
 
 __all__ = [
     "__version__",
@@ -62,4 +72,12 @@ __all__ = [
     "load_structure_spec",
     "quark_behaviors",
     "quark_chain",
+    # Physics
+    "physics",
+    "tangle",
+    # Defaults
+    "default_loads",
+    "default_load_id",
+    "default_load",
+    "load_by_id",
 ]

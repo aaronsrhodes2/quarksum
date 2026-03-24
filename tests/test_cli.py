@@ -32,14 +32,14 @@ def _run_cli(*args: str, expect_fail: bool = False) -> dict | str:
 class TestDefaultChecksum:
     """Default invocation loads Sol and runs StoQ checksum."""
 
-    def test_default_runs_sol(self):
+    def test_default_runs_earth_with_moon(self):
         data = _run_cli()
-        report("CLI Default — Sol StoQ", [
+        report("CLI Default — Earth with Moon StoQ", [
             f"Structure:   {data['structure_name']}",
             f"Stated mass: {sci(data['stated_mass_kg'])} kg",
             f"Defect:      {pct(data['mass_defect_percent'])}",
         ])
-        assert "Solar System" in data["structure_name"] or data["structure_name"] == "Sol"
+        assert "Earth" in data["structure_name"]
         assert data["stated_mass_kg"] > 0
         assert "mass_defect_percent" in data
 
@@ -80,12 +80,12 @@ class TestStructureChecksum:
 class TestListStructures:
     """--list prints a JSON array of the built-in structures."""
 
-    def test_list_returns_7(self):
+    def test_list_returns_16(self):
         data = _run_cli("--list")
         lines = [f"{s['id']:30s}  {s['name']}" for s in data]
         report("CLI --list", lines)
         assert isinstance(data, list)
-        assert len(data) == 7
+        assert len(data) == 16  # 7 originals + 9 default loads
 
     def test_list_has_expected_fields(self):
         data = _run_cli("--list")
@@ -97,16 +97,17 @@ class TestListStructures:
 class TestSpec:
     """--spec dumps a structure's raw JSON spec."""
 
-    def test_spec_default_is_sol(self):
+    def test_spec_default_is_earth_with_moon(self):
         data = _run_cli("--spec")
-        report("CLI --spec (default=Sol)", [
+        report("CLI --spec (default=Earth with Moon)", [
             f"Mass:     {sci(data.get('stated_mass_kg', 0))} kg",
             f"Children: {len(data.get('children', []))} layer specs",
             f"Name:     {data.get('name', 'N/A')}",
         ])
         assert isinstance(data, dict)
         assert "children" in data
-        assert data.get("stated_mass_kg", 0) > 1e29
+        assert "Earth" in data.get("name", "")
+        assert data.get("stated_mass_kg", 0) > 1e23  # Earth mass scale
 
     def test_spec_named_structure(self):
         data = _run_cli("gold_ring", "--spec")
