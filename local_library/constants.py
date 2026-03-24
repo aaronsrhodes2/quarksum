@@ -126,6 +126,8 @@ L_PLANCK    = HBAR / (M_PLANCK_KG * C) # Planck length √(ℏG/c³) ≈ 1.616e-
 #   Use as the natural "effectively zero" floor — not a magic number,
 #   but the universe's own minimum. Derived from ℏ, G, c above.
 M_SUN_KG = 1.989e30    # Solar mass
+L_SUN_W  = 3.828e26    # Solar luminosity (W) — IAU 2015 nominal solar luminosity
+AU_M     = 1.495978707e11  # 1 Astronomical Unit in metres (IAU 2012 exact)
 
 # Derived time constants
 YEAR_S = 365.25 * 86400.0  # Julian year in seconds (exact by IAU definition)

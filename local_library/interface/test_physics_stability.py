@@ -464,5 +464,207 @@ class TestAllPhysicsKitchenSink(unittest.TestCase):
         self.assertLess(r_final, 0.6)
 
 
+# ===========================================================================
+# Test class 5: Solar radiation pressure
+# ===========================================================================
+
+# IAU 2015 nominal solar luminosity (from local_library.constants)
+from local_library.constants import L_SUN_W as _L_SUN_W, AU_M as _AU_M_CONST
+
+# Solar constant at 1 AU: S = L / (4π r²)
+_SOLAR_CONSTANT = _L_SUN_W / (4.0 * math.pi * _AU_M_CONST**2)   # ~1361 W/m²
+
+# Radiation pressure at 1 AU: P = S / c  (perfect absorber)
+_RAD_PRESSURE_1AU_PA = _SOLAR_CONSTANT / 3.0e8                    # ~4.54e-6 Pa
+
+
+class TestSolarRadiationPressure(unittest.TestCase):
+    """Solar radiation pressure (SRP) physics tests.
+
+    SRP = L☉ A (1+CR) / (4π r² c m)   pointing away from Sun.
+
+    Key facts at 1 AU:
+      Solar constant S ≈ 1361 W/m²
+      Radiation pressure P = S/c ≈ 4.54e-6 Pa  (perfect absorber)
+      For Earth (A/m ~ 2e-11 m²/kg): a_SRP ~ 9e-17 m/s²
+      Solar gravity on Earth: a_grav ~ 5.9e-3 m/s²
+      Ratio: ~1.5e-14 -- completely negligible for planets.
+
+    For a solar sail (A/m ~ 10 m²/kg): a_SRP ~ 90 μm/s² -- significant!
+
+    Solar WIND pressure is ~1000x smaller than radiation pressure.
+    """
+
+    def test_solar_constant_at_1au(self):
+        """Solar constant S = L☉ / (4π r²) at 1 AU should be ~1361 W/m²."""
+        # IAU 2015 nominal: 1361 W/m²; we accept 1300-1400 W/m²
+        print(f"\n  Solar constant at 1 AU: {_SOLAR_CONSTANT:.1f} W/m^2")
+        self.assertGreater(_SOLAR_CONSTANT, 1300.0)
+        self.assertLess(_SOLAR_CONSTANT, 1400.0)
+
+    def test_radiation_pressure_at_1au(self):
+        """Radiation pressure P = S/c at 1 AU should be ~4.5e-6 Pa."""
+        print(f"\n  Radiation pressure at 1 AU: {_RAD_PRESSURE_1AU_PA:.3e} Pa")
+        self.assertGreater(_RAD_PRESSURE_1AU_PA, 4e-6)
+        self.assertLess(_RAD_PRESSURE_1AU_PA, 5e-6)
+
+    def test_solar_wind_pressure_vs_radiation_pressure(self):
+        """Solar wind dynamic pressure should be ~1000x smaller than SRP.
+
+        Solar wind at 1 AU: n~5 particles/cm³, v~400 km/s, m_p=1.673e-27 kg
+        P_sw = n * m_p * v² ≈ 1-3 nPa
+        P_rad ≈ 4.5 μPa
+        Ratio P_rad/P_sw ≈ 1000-5000
+
+        For orbital mechanics, solar wind is negligible vs SRP, and both
+        are negligible for any body larger than ~1 km.
+        """
+        n_sw   = 5e6       # particles/m³ (5/cm³)
+        v_sw   = 400e3     # m/s
+        m_p    = 1.673e-27 # kg (proton mass)
+        P_sw   = n_sw * m_p * v_sw**2
+        ratio  = _RAD_PRESSURE_1AU_PA / P_sw
+        print(f"\n  Solar wind dynamic pressure: {P_sw:.3e} Pa")
+        print(f"  Solar radiation pressure:    {_RAD_PRESSURE_1AU_PA:.3e} Pa")
+        print(f"  Ratio (SRP / wind):          {ratio:.1f}x")
+        # Radiation pressure should dominate solar wind by at least 100x
+        self.assertGreater(ratio, 100.0,
+                           "SRP should exceed solar wind pressure by > 100x")
+
+    def test_srp_negligible_for_earth(self):
+        """SRP acceleration on Earth should be < 1e-12 of solar gravity."""
+        R_EARTH  = 6.371e6    # m
+        M_EARTH  = 5.972e24   # kg
+        A_EARTH  = math.pi * R_EARTH**2
+        a_srp    = _RAD_PRESSURE_1AU_PA * (1.0 + 0.3) * A_EARTH / M_EARTH
+        a_grav   = _G * M_SUN / AU_M**2
+        ratio    = a_srp / a_grav
+        print(f"\n  Earth SRP acceleration:       {a_srp:.3e} m/s^2")
+        print(f"  Earth solar gravity:           {a_grav:.3e} m/s^2")
+        print(f"  SRP / gravity ratio:           {ratio:.3e}")
+        self.assertLess(ratio, 1e-11,
+                        f"SRP/gravity ratio {ratio:.2e} larger than 1e-11 for Earth")
+
+    def test_srp_significant_for_solar_sail(self):
+        """For a solar sail (area/mass ratio = 10 m²/kg), SRP ~ 45 μm/s²
+        which is non-negligible compared to solar gravity at 1 AU."""
+        A_over_m = 10.0    # m²/kg -- typical solar sail
+        CR       = 1.0     # perfect mirror
+        a_srp    = _RAD_PRESSURE_1AU_PA * (1.0 + CR) * A_over_m
+        a_grav   = _G * M_SUN / AU_M**2
+        ratio    = a_srp / a_grav
+        print(f"\n  Solar sail SRP acceleration:  {a_srp:.3e} m/s^2")
+        print(f"  Solar sail SRP / gravity:      {ratio:.3e}")
+        # For a solar sail, SRP should be > 1e-5 of solar gravity
+        self.assertGreater(ratio, 1e-5,
+                           f"Solar sail SRP/gravity {ratio:.2e} too small")
+
+    def test_srp_disabled_by_default(self):
+        """With area_m2=0 (default), SRP should not affect Earth's orbit."""
+        sun   = CelestialBody(M_SUN,   np.zeros(3), np.zeros(3), 1.0, 0.0)
+        earth = CelestialBody(M_EARTH, np.array([AU_M, 0., 0.]),
+                              np.array([0., _V_EARTH, 0.]),
+                              6.371e6, 0.299)   # area_m2 defaults to 0
+        # Enable solar luminosity but area_m2=0 → SRP off for Earth
+        system = NBodySystem([sun, earth], solar_luminosity_W=_L_SUN_W)
+        acc    = system.compute_accelerations()
+        # SRP contribution should be zero (area=0)
+        acc_no_srp_system = NBodySystem([sun, earth])
+        acc_no_srp = acc_no_srp_system.compute_accelerations()
+        diff = float(np.linalg.norm(acc[1] - acc_no_srp[1]))
+        print(f"\n  SRP diff with area_m2=0: {diff:.3e} m/s^2")
+        self.assertAlmostEqual(diff, 0.0, places=20)
+
+    def test_srp_force_direction_away_from_sun(self):
+        """SRP acceleration should point away from the Sun (body[0])."""
+        R_SAIL  = 50.0          # m (50m radius sail)
+        M_SAIL  = 100.0         # kg
+        A_SAIL  = math.pi * R_SAIL**2
+        sun     = CelestialBody(M_SUN, np.zeros(3), np.zeros(3), 1.0, 0.0)
+        sail    = CelestialBody(M_SAIL,
+                                np.array([AU_M, 0., 0.]),
+                                np.array([0., _V_EARTH, 0.]),
+                                R_SAIL, 0.0,
+                                area_m2=A_SAIL, reflectivity=1.0)
+        system  = NBodySystem([sun, sail], solar_luminosity_W=_L_SUN_W)
+        acc     = system.compute_accelerations()
+        # SRP should push sail in +x direction (away from Sun at origin)
+        a_srp_x = acc[1, 0] + _G * M_SUN / AU_M**2   # subtract gravity
+        print(f"\n  Sail SRP acceleration (x-component): {a_srp_x:.3e} m/s^2")
+        self.assertGreater(a_srp_x, 0.0,
+                           "SRP should push sail away from Sun (+x)")
+
+    def test_srp_scales_as_inverse_r_squared(self):
+        """SRP force should scale as 1/r², same as gravity.
+
+        At 2 AU, SRP should be ~1/4 of the 1 AU value.
+        """
+        R_SAIL = 50.0
+        M_SAIL = 100.0
+        A_SAIL = math.pi * R_SAIL**2
+        sun    = CelestialBody(M_SUN, np.zeros(3), np.zeros(3), 1.0, 0.0)
+
+        def srp_at_r(r_au: float) -> float:
+            sail = CelestialBody(M_SAIL,
+                                 np.array([r_au * AU_M, 0., 0.]),
+                                 np.zeros(3), R_SAIL, 0.0,
+                                 area_m2=A_SAIL, reflectivity=0.0)
+            sys_ = NBodySystem([sun, sail], solar_luminosity_W=_L_SUN_W)
+            acc_ = sys_.compute_accelerations()
+            # SRP contribution: total acc[1, 0] minus gravity
+            # Gravity is in -x direction, SRP is in +x
+            grav_x  = -_G * M_SUN / (r_au * AU_M)**2
+            return acc_[1, 0] - grav_x
+
+        srp_1au = srp_at_r(1.0)
+        srp_2au = srp_at_r(2.0)
+        ratio   = srp_1au / srp_2au
+        print(f"\n  SRP at 1 AU: {srp_1au:.3e} m/s^2")
+        print(f"  SRP at 2 AU: {srp_2au:.3e} m/s^2")
+        print(f"  Ratio (1 AU / 2 AU): {ratio:.3f}  (expected 4.000)")
+        self.assertAlmostEqual(ratio, 4.0, delta=0.01,
+                               msg="SRP should follow inverse-square law")
+
+    def test_srp_orbit_drift_earth_with_area_enabled(self):
+        """Earth with realistic area_m2 + SRP enabled: drift should be tiny.
+
+        This is the 'goofy' planetary SRP test -- enables SRP for a planet-
+        sized body and verifies the orbit doesn't blow up.
+        """
+        R_EARTH  = 6.371e6
+        M_EARTH_ = 5.972e24
+        A_EARTH  = math.pi * R_EARTH**2
+        dt       = 3600.0
+        n        = int(YEAR_S / dt)
+
+        sun   = CelestialBody(M_SUN,    np.zeros(3), np.zeros(3), 1.0, 0.0)
+        earth = CelestialBody(M_EARTH_, np.array([AU_M, 0., 0.]),
+                              np.array([0., _V_EARTH, 0.]),
+                              R_EARTH, 0.299,
+                              area_m2=A_EARTH, reflectivity=0.3)
+        earth_nosrp = CelestialBody(M_EARTH_, np.array([AU_M, 0., 0.]),
+                                    np.array([0., _V_EARTH, 0.]),
+                                    R_EARTH, 0.299)
+
+        sys_srp    = NBodySystem([sun, earth],        solar_luminosity_W=_L_SUN_W)
+        sys_nosrp  = NBodySystem([
+            CelestialBody(M_SUN, np.zeros(3), np.zeros(3), 1.0, 0.0),
+            earth_nosrp,
+        ])
+
+        for _ in range(n):
+            sys_srp.forest_ruth_step(dt)
+            sys_nosrp.forest_ruth_step(dt)
+
+        pos_srp   = sys_srp.bodies[1].position_m
+        pos_nosrp = sys_nosrp.bodies[1].position_m
+        drift_km  = float(np.linalg.norm(pos_srp - pos_nosrp)) / 1000.0
+        print(f"\n  Earth SRP drift over 1 yr (area={A_EARTH:.2e} m^2): "
+              f"{drift_km:.3f} km")
+        # Expected ~few km (SRP/gravity ~ 1.5e-14, over 1 yr)
+        self.assertLess(drift_km, 10_000.0,
+                        f"Earth drifted {drift_km:.1f} km due to SRP in 1 yr")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

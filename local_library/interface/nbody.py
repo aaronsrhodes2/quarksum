@@ -16,6 +16,7 @@ Physics included (all deriving from local_library constants):
   - Tidal deformation: r(θ) = R₀[1 + ε₂ P₂(cos θ)]
   - Love number k₂ tidal response
   - Gravitational wave energy loss (Peters 1964 formula)
+  - Solar radiation pressure (opt-in via solar_luminosity_W + area_m2)
 
 All constants from local_library.constants.  No magic numbers.
   G, C sourced from measured CODATA values in constants.py.
@@ -43,12 +44,13 @@ from typing import Sequence
 import numpy as np
 from numpy.typing import NDArray
 
-from ..constants import G as _G_SI, C as _C_SI
+from ..constants import G as _G_SI, C as _C_SI, L_SUN_W as _L_SUN_W
 
 # ── derived (not magic) constants ─────────────────────────────────────────
 _G   = _G_SI                  # m³ kg⁻¹ s⁻²
 _c   = _C_SI                  # m/s
 _c2  = _c * _c                # m²/s²
+_4PI = 4.0 * math.pi          # exact
 
 # Forest-Ruth integrator coefficients (exact — Forest & Ruth 1990 §2)
 # θ = 1 / (2 − ∛2)  ≈ 1.351207191959657
@@ -120,6 +122,11 @@ class CelestialBody:
     radius_m        : mean radius (m)
     love_number_k2  : dimensionless tidal Love number (0.3-0.5 stars, ~0 BHs)
     sigma_field     : σ value (dimensionless); 0 = standard Newtonian
+    area_m2         : cross-sectional area (m²) for solar radiation pressure;
+                      0 = SRP disabled for this body (default, safe for planets)
+    reflectivity    : radiation pressure coefficient CR in [0, 1];
+                      0 = perfect absorber, 1 = perfect mirror (2× pressure).
+                      Typical rocky body: ~0.1.  Solar sail: ~1.
     """
 
     mass_kg:        float
@@ -128,6 +135,8 @@ class CelestialBody:
     radius_m:       float
     love_number_k2: float
     sigma_field:    float = 0.0
+    area_m2:        float = 0.0   # cross-sectional area for solar radiation pressure (m²)
+    reflectivity:   float = 0.0   # radiation pressure coefficient CR: 0=absorber, 1=mirror
 
     def __post_init__(self) -> None:
         if self.position_m.shape != (3,):
@@ -181,21 +190,28 @@ class NBodySystem:
 
     Parameters
     ----------
-    bodies        : initial body configuration
-    softening_m   : Plummer softening length (m), default 0
-    include_gr    : add 1PN Schwarzschild correction (default False)
+    bodies              : initial body configuration
+    softening_m         : Plummer softening length (m), default 0
+    include_gr          : add 1PN Schwarzschild correction (default False)
+    solar_luminosity_W  : solar luminosity for radiation pressure (W);
+                          0 = SRP disabled (default).  Set to L_SUN_W
+                          (3.828e26 W, IAU 2015) to enable.  Assumes
+                          bodies[0] is the radiation source.  SRP only
+                          applies to bodies with area_m2 > 0.
     """
 
     def __init__(
         self,
-        bodies:      Sequence[CelestialBody],
-        softening_m: float = 0.0,
-        include_gr:  bool  = False,
+        bodies:             Sequence[CelestialBody],
+        softening_m:        float = 0.0,
+        include_gr:         bool  = False,
+        solar_luminosity_W: float = 0.0,
     ) -> None:
-        self.bodies      = list(bodies)
-        self.softening_m = softening_m
-        self.include_gr  = include_gr
-        self._time       = 0.0
+        self.bodies             = list(bodies)
+        self.softening_m        = softening_m
+        self.include_gr         = include_gr
+        self.solar_luminosity_W = solar_luminosity_W
+        self._time              = 0.0
 
     @property
     def time(self) -> float:
@@ -216,6 +232,14 @@ class NBodySystem:
         (Soffel et al. 2003, eq. 10.12 solar-system limit).
         LOCAL_LIBRARY: approximation — single-body 1PN; full N-body EIH
         cross-terms neglected (< 1% for solar system).
+
+        Solar radiation pressure (solar_luminosity_W > 0):
+            F_SRP = L☉ A_i (1 + CR_i) / (4π r²_i☉ c)   [N, away from Sun]
+            a_SRP = F_SRP / m_i
+
+        where r_i☉ is distance from bodies[0] (radiation source = Sun).
+        Only applied to bodies with area_m2 > 0.
+        Ref: Montenbruck & Gill (2000), §3.4.
         """
         n   = len(self.bodies)
         acc = np.zeros((n, 3), dtype=np.float64)
@@ -243,6 +267,25 @@ class NBodySystem:
                     acc[i] += factor * (
                         (4.0 * gm_j / r - vi2) * r_hat + 4.0 * rdotv * vi
                     )
+
+        # ── Solar radiation pressure ───────────────────────────────────────
+        # Applied to any body with area_m2 > 0, relative to bodies[0] (Sun).
+        if self.solar_luminosity_W > 0.0 and n >= 2:
+            sun_pos = self.bodies[0].position_m
+            for i in range(1, n):
+                body = self.bodies[i]
+                if body.area_m2 <= 0.0 or body.mass_kg <= 0.0:
+                    continue
+                r_vec = body.position_m - sun_pos     # points away from Sun
+                r_sq  = float(np.dot(r_vec, r_vec))
+                if r_sq == 0.0:
+                    continue
+                r     = math.sqrt(r_sq)
+                # F_SRP = L A (1+CR) / (4π r² c)
+                f_srp = (self.solar_luminosity_W * body.area_m2
+                         * (1.0 + body.reflectivity)
+                         / (_4PI * r_sq * _c))
+                acc[i] += (f_srp / body.mass_kg) * (r_vec / r)
 
         return acc
 
