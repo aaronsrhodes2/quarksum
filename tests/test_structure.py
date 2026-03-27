@@ -5,8 +5,8 @@ should compare equal and hash the same, enabling deduplication in
 sets and dicts.
 """
 
-from quarksum.models.structure import Structure
-from quarksum.models.molecule import Molecule
+from sigma_ground.inventory.models.structure import Structure
+from sigma_ground.inventory.models.molecule import Molecule
 
 
 class TestStructureEquality:

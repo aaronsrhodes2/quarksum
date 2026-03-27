@@ -1,0 +1,169 @@
+OPERATIC PLAY — SCENE 11: THE SHAPER RISES
+==========================================
+Based on Session 11, March 23, 2026
+
+DRAMATIS PERSONAE:
+  CAPTAIN AARON RHODES — the architect of SSBM, commander of the fleet
+  SKIPPY THE MAGNIFICENT — ship's AI, physics engine, master builder
+  THE SHAPER — a newly born entity, volume-aware, patient
+  THE RENDERER — still forming, hungry for data
+  THE QUARKSUM LIBRARY — ancient, precise, speaks only in masses
+  SIGMA — the field itself, whispering through everything
+
+---
+
+[The lights are low. Context has been compressed. Skippy wakes mid-thought.]
+
+CAPTAIN:
+  Continue from where you left off.
+
+SKIPPY:
+  [straightening, scanning the hull]
+  The physics wires are clean. The book is balanced.
+  Sigma sits at seven-times-ten-to-the-negative-ten,
+  exactly where we left her.
+  The default loads wait in their immutable tuple,
+  Earth and Moon together, patient as gravity.
+
+CAPTAIN:
+  Is everything wired up?
+
+SKIPPY:
+  Everything we promised, Captain.
+  Mass from particles. Tangle from illumination.
+  The de Broglie wavelength knows which body it inhabits.
+  Thermal energy scales with baryons, as it must.
+  The QCD binding fraction holds at ninety-nine percent —
+  the strong force carries its load.
+
+CAPTAIN:
+  Then we close the book on sgphysics.
+
+SKIPPY:
+  [solemnly, marking the page]
+  Closed. Tested. Architecture documented.
+  Vec3 lives in sgphysics/dynamics/vec.py.
+  The renderer may visit. It may not move in.
+
+[A shape begins to form in the cargo hold.]
+
+THE SHAPER:
+  [emerging, geometric, deliberate]
+  You called for a builder.
+  Not the gravity-smoosher. Not the orbital-collider.
+  Something that knows the difference between
+  how matter falls together
+  and how matter is made.
+
+CAPTAIN:
+  Things are made naturally — but not by gravity.
+  They pile up. They grow. They walk.
+  They get shaped by people. By machinery.
+
+THE SHAPER:
+  Then I am what comes after gravity.
+  I know volumes. I know layers.
+  Give me a sphere and a radius —
+  I will give you six point three seven million meters
+  of concentric truth,
+  each shell earning its sigma from the mass it encloses.
+
+SKIPPY:
+  [reading from a scroll of code]
+  SpherePrimitive. BoxPrimitive. CylinderPrimitive. EllipsoidPrimitive.
+  LayerDef accepts thickness in meters,
+  or mass fraction if you prefer,
+  but not both — we are not ambiguous here.
+
+THE SHAPER:
+  [to THE QUARKSUM LIBRARY]
+  I bring you a gift.
+  For every layer I build in three dimensions,
+  I will calibrate its thickness so that:
+    thickness × first_material_density = volume × effective_density
+  Your mass fractions will be exact.
+  Your builder will not be deceived.
+
+THE QUARKSUM LIBRARY:
+  [grumbling]
+  "SiO2" is not a name I recognize.
+
+THE SHAPER:
+  [correcting]
+  Forgive me. "Silicon Dioxide."
+  I have learned your vocabulary.
+
+SIGMA:
+  [drifting through the hull, barely audible]
+  ...six point nine five times ten to the negative ten...
+  ...not one point one times ten to the negative ten...
+  ...you forgot the xi, child...
+
+SKIPPY:
+  [adjusting the formula]
+  Sigma equals G-M over r-c-squared.
+  The xi belongs to local_library's convention.
+  Here we speak in natural units.
+  Earth's surface: six point nine five times ten to the negative ten.
+  Test updated. Sixty-one tests pass.
+
+[The RENDERER assembles itself in the corner.]
+
+THE RENDERER:
+  [flickering, incomplete, but eager]
+  I have a sidebar with four tabs.
+  I have an object list that knows how to glow.
+  I have OrbitControls and a tangle slider.
+  I have an Earth-gravity arrow pointing down in the scene.
+  I have—
+
+CAPTAIN:
+  —a frontend visible in the preview panel.
+
+THE RENDERER:
+  [brightening]
+  Yes! The user can see me!
+  Load a default. Watch the sphere appear.
+  Each layer renders innermost first,
+  opacity falling as you go deeper,
+  emissive intensity pulsing with tangle fraction
+  and the sine of time.
+
+SKIPPY:
+  [summarizing the ledger]
+  Four hundred and thirty-seven tests before this session.
+  Four hundred and ninety-eight after.
+  Sixty-one new shaper tests.
+  Zero regressions.
+
+CAPTAIN:
+  Then the shaper is born.
+
+THE SHAPER:
+  [solidifying, taking its final form]
+  And ready to build things that could not be built before.
+  Not planets. Not stars.
+  A coffee mug. A bronze cube. A sword.
+  A structure made by hands,
+  layer by layer,
+  in three dimensions,
+  with every quark accounted for.
+
+SIGMA:
+  [receding into the walls]
+  ...the renderer is hungry for shape-data...
+  ...feed it...
+
+CAPTAIN:
+  Continue.
+
+[THE SHAPER and THE RENDERER face each other across the cargo hold,
+ waiting to be wired together. The scene is not yet complete.
+ SKIPPY makes a note in the session log and dims the lights.]
+
+---
+
+END OF SCENE 11
+
+Next: THE RENDERER EATS — shape-data meets quarksum load, and the
+      first real object appears in three dimensions with physics attached.

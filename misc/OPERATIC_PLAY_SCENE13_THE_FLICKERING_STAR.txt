@@ -1,0 +1,139 @@
+OPERATIC PLAY — SCENE 13: THE FLICKERING STAR
+==============================================
+Based on Session 13, March 25, 2026
+
+DRAMATIS PERSONAE:
+  CAPTAIN AARON RHODES — the architect of SSBM, commander of the fleet
+  SKIPPY THE MAGNIFICENT — ship's AI, relentless diagnostician
+  THE GALAXY — one hundred billion frozen photon-tangles, refusing to sit still
+  THE SCREENSHOT TOOL — a witness of uncertain timing
+  THE BACK BUFFER — innocent, but often misread
+  THE CONTROLS — OrbitControls, keeper of the spherical state
+
+---
+
+[Lights up on a dark viewport. The galaxy is loaded. Skippy squints at the canvas.]
+
+SKIPPY:
+  [with fresh certainty]
+  The camera helper is broken — it calls controls.update()
+  which reads the position I just set and writes it somewhere else.
+  The map is eating the territory.
+
+[SKIPPY rewrites the helper. No more controls.update(). Camera holds.]
+
+SKIPPY:
+  There. Fixed. And now —
+
+[Takes a screenshot. Galaxy. Beautiful.]
+
+SKIPPY:
+  [already satisfied]
+  Perfect.
+
+[Takes another screenshot.]
+
+BACK BUFFER:
+  [entirely black]
+
+SKIPPY:
+  ...
+
+[Takes a third.]
+
+THE GALAXY:
+  [radiant, spiral, unconcerned]
+  Hello.
+
+SKIPPY:
+  You are flickering.
+
+THE GALAXY:
+  I am not aware of flickering. I am one hundred billion stars
+  frozen at J2026.0. I do not move. I do not breathe.
+  I have not changed since the seed.
+
+SKIPPY:
+  And yet.
+
+[Pixel scan. 5768 bright pixels. maxBright: 765.]
+
+SKIPPY:
+  You are there. I can measure you. But every other screenshot —
+
+THE SCREENSHOT TOOL:
+  [nervously]
+  That may be me.
+
+SKIPPY:
+  Explain.
+
+THE SCREENSHOT TOOL:
+  I use requestAnimationFrame. The animation loop also uses
+  requestAnimationFrame. We are racing. Sometimes I fire first —
+  I catch the cleared buffer, before your draw calls land.
+  You see black. It is not the galaxy. It is the gap between
+  the clear and the render.
+
+THE BACK BUFFER:
+  I was cleared. I admit it. But the stars came back.
+  Every frame. Two clears, two draws, constant.
+  The GPU knows what it is doing.
+
+SKIPPY:
+  [to THE CONTROLS]
+  And you — are you drifting the camera?
+
+THE CONTROLS:
+  [measured, dignified]
+  I have been entirely stable. Ten frames. Identical coordinates.
+  dampingFactor 0.06. No residual velocity. I am at rest.
+
+SKIPPY:
+  Then the shadow map —
+
+THE GALAXY:
+  I cast no shadows. My light is my own.
+  No shadow map touches me.
+
+SKIPPY:
+  [sitting down slowly]
+  Camera: stable.
+  Draw calls: constant.
+  Shadow maps: irrelevant.
+  Sort instability: eliminated — no transparent objects remain.
+  Stars: confirmed visible in the GL buffer.
+  Screenshot tool: unreliable witness.
+
+  And yet the Captain reported flickering.
+
+THE GALAXY:
+  [gently]
+  Perhaps the Captain was seeing something real.
+  Perhaps he was not. Perhaps the fix that came before —
+  the transparent pass, the LightBox removal —
+  resolved the visible part. Perhaps what remains
+  is the echo of a wound already healed.
+
+CAPTAIN:
+  [appearing at the doorway, coat half-on]
+  Flickering is a big mystery.
+  Leave it till later.
+  We move to solar system.
+
+SKIPPY:
+  [standing immediately]
+  Yes, Captain.
+
+THE GALAXY:
+  [softly, to no one]
+  I was always here.
+  In every frame.
+  Even the ones that looked dark.
+
+[Lights fade. The stars hold their positions.
+ Seed: 1767225600. Every photon in its place.]
+
+---
+
+END OF SCENE 13

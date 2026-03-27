@@ -8,8 +8,8 @@ These tests define the behavior of the new resolver module:
 
 import pytest
 
-from quarksum.models.structure import Structure
-from quarksum.resolver import resolve, ResolutionError
+from sigma_ground.inventory.models.structure import Structure
+from sigma_ground.inventory.resolver import resolve, ResolutionError
 
 
 # ---------------------------------------------------------------------------

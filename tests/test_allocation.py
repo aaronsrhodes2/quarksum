@@ -7,10 +7,10 @@ new unified Structure + resolver model.
 
 import pytest
 
-from quarksum.builder import build_quick_structure, build_structure_from_spec
-from quarksum.checksum.particle_count import count_particles_in_structure
-from quarksum.models.structure import Structure
-from quarksum.resolver import resolve
+from sigma_ground.inventory.builder import build_quick_structure, build_structure_from_spec
+from sigma_ground.inventory.checksum.particle_count import count_particles_in_structure
+from sigma_ground.inventory.models.structure import Structure
+from sigma_ground.inventory.resolver import resolve
 from report import report, sci
 
 

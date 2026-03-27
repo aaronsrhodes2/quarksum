@@ -26,11 +26,12 @@ Defaults registry tests:
 import math
 import pytest
 
-from quarksum.builder import load_structure
-from quarksum.defaults import (
+from sigma_ground.field.constants import ETA
+from sigma_ground.inventory.builder import load_structure
+from sigma_ground.inventory.defaults import (
     LOADS, DEFAULT_ID, default_load, by_id, DefaultLoad
 )
-from quarksum.physics import compute_physics, compute_tangle
+from sigma_ground.inventory.physics import compute_physics, compute_tangle
 
 
 # ── Registry tests ─────────────────────────────────────────────────────────
@@ -136,14 +137,14 @@ class TestAllDefaultsLoad:
         assert has_molecules(structure)
 
     def test_particle_inventory_runs(self, load_id):
-        from quarksum.checksum.particle_inventory import compute_particle_inventory
+        from sigma_ground.inventory.checksum.particle_inventory import compute_particle_inventory
         structure = load_structure(load_id)
         inv = compute_particle_inventory(structure)
         assert inv["protons"] > 0
         assert inv["electrons"] > 0
 
     def test_stoq_runs(self, load_id):
-        from quarksum.checksum.stoq_checksum import compute_stoq_checksum
+        from sigma_ground.inventory.checksum.stoq_checksum import compute_stoq_checksum
         structure = load_structure(load_id)
         result = compute_stoq_checksum(structure)
         assert "reconstructed_mass_kg" in result
@@ -199,16 +200,16 @@ class TestComputePhysics:
         assert s_raw < s_eff < 0
 
     def test_eta_is_ssbm_constant(self, earth_moon):
-        assert earth_moon["eta"] == 0.4153
+        assert earth_moon["eta"] == ETA
 
     def test_N_entangled_cosmic_proportional_to_eta(self, earth_moon):
         ratio = earth_moon["N_entangled_cosmic"] / earth_moon["N_particles_total"]
-        assert abs(ratio - 0.4153) < 1e-10
+        assert abs(ratio - ETA) < 1e-10
 
     def test_observer_tangle_full_illumination(self, earth_moon):
         # With illumination=1.0 (default), tangle = eta * N_total
-        assert abs(earth_moon["tangle_fraction"] - 0.4153) < 1e-10
-        expected_tangle = 0.4153 * earth_moon["N_particles_total"]
+        assert abs(earth_moon["tangle_fraction"] - ETA) < 1e-10
+        expected_tangle = ETA * earth_moon["N_particles_total"]
         assert abs(earth_moon["N_observer_tangle"] - expected_tangle) < 1
 
     def test_tangle_fraction_in_range(self, earth_moon):
@@ -250,12 +251,12 @@ class TestComputeTangle:
     def test_tangle_full_illumination(self):
         s = load_structure("bronze_cube")
         t = compute_tangle(s, illumination_fraction=1.0)
-        assert abs(t["tangle_fraction"] - 0.4153) < 1e-10
+        assert abs(t["tangle_fraction"] - ETA) < 1e-10
 
     def test_tangle_half_illumination(self):
         s = load_structure("bronze_cube")
         t = compute_tangle(s, illumination_fraction=0.5)
-        assert abs(t["tangle_fraction"] - 0.4153 * 0.5) < 1e-10
+        assert abs(t["tangle_fraction"] - ETA * 0.5) < 1e-10
 
     def test_tangle_zero_illumination(self):
         s = load_structure("bronze_cube")
@@ -266,7 +267,7 @@ class TestComputeTangle:
     def test_tangle_observer_tangle_equals_eta_times_N(self):
         s = load_structure("water_molecule")
         t = compute_tangle(s, illumination_fraction=1.0)
-        expected = 0.4153 * t["N_particles_total"]
+        expected = ETA * t["N_particles_total"]
         assert abs(t["N_observer_tangle"] - expected) < 1e-3
 
     def test_tangle_invalid_illumination_raises(self):

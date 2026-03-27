@@ -17,7 +17,7 @@ STRUCTURES = ["gold_ring", "water_bottle", "car_battery", "earths_layers", "sola
 def _run_cli(*args: str, expect_fail: bool = False) -> dict | str:
     """Run quarksum CLI and return parsed JSON (or raw stderr on failure)."""
     result = subprocess.run(
-        [sys.executable, "-m", "quarksum", *args],
+        [sys.executable, "-m", "sigma_ground.inventory", *args],
         capture_output=True,
         text=True,
         timeout=120,
@@ -261,7 +261,7 @@ class TestVersion:
 
     def test_version(self):
         result = subprocess.run(
-            [sys.executable, "-m", "quarksum", "--version"],
+            [sys.executable, "-m", "sigma_ground.inventory", "--version"],
             capture_output=True,
             text=True,
         )
@@ -275,7 +275,7 @@ class TestHelp:
 
     def test_help_shows_examples(self):
         result = subprocess.run(
-            [sys.executable, "-m", "quarksum", "--help"],
+            [sys.executable, "-m", "sigma_ground.inventory", "--help"],
             capture_output=True,
             text=True,
         )

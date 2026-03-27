@@ -18,8 +18,8 @@ KEY PROPERTIES TESTED:
 import math
 import pytest
 
-from quarksum.core.constants import CONSTANTS
-from quarksum.core.sigma import (
+from sigma_ground.inventory.core.constants import CONSTANTS
+from sigma_ground.inventory.core.sigma import (
     XI,
     LAMBDA_QCD_MEV,
     A_C_MEV,
@@ -416,11 +416,11 @@ class TestSigmaChain:
 
     def test_import(self):
         """sigma_chain module exists and is importable."""
-        from quarksum.checksum.sigma_chain import sigma_checksum_nucleus
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_checksum_nucleus
 
     def test_sigma_zero_matches_standard(self):
         """At σ=0, sigma_checksum must reproduce standard mass exactly."""
-        from quarksum.checksum.sigma_chain import sigma_checksum_nucleus
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_checksum_nucleus
 
         result = sigma_checksum_nucleus(Z=26, N=30, be_mev=492.2578, sigma=0.0)
         # stable_mass should match standard Fe-56 nucleus mass
@@ -432,7 +432,7 @@ class TestSigmaChain:
 
     def test_three_measure_closure(self):
         """Three measures close at every σ for the full checksum."""
-        from quarksum.checksum.sigma_chain import sigma_checksum_nucleus
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_checksum_nucleus
 
         for sigma in SIGMA_RANGE:
             result = sigma_checksum_nucleus(Z=26, N=30, be_mev=492.2578, sigma=sigma)
@@ -442,7 +442,7 @@ class TestSigmaChain:
 
     def test_qcd_mass_fraction(self):
         """QCD mass fraction is tracked in the checksum."""
-        from quarksum.checksum.sigma_chain import sigma_checksum_nucleus
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_checksum_nucleus
 
         result = sigma_checksum_nucleus(Z=26, N=30, be_mev=492.2578, sigma=0.0)
         assert "qcd_mass_fraction" in result
@@ -450,7 +450,7 @@ class TestSigmaChain:
 
     def test_higgs_mass_invariant(self):
         """Higgs contribution does not change with σ."""
-        from quarksum.checksum.sigma_chain import sigma_checksum_nucleus
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_checksum_nucleus
 
         r0 = sigma_checksum_nucleus(Z=26, N=30, be_mev=492.2578, sigma=0.0)
         r1 = sigma_checksum_nucleus(Z=26, N=30, be_mev=492.2578, sigma=0.1)
@@ -461,7 +461,7 @@ class TestSigmaChain:
 
     def test_qcd_mass_scales_exponentially(self):
         """QCD contribution scales as e^σ."""
-        from quarksum.checksum.sigma_chain import sigma_checksum_nucleus
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_checksum_nucleus
 
         r0 = sigma_checksum_nucleus(Z=26, N=30, be_mev=492.2578, sigma=0.0)
 
@@ -472,7 +472,7 @@ class TestSigmaChain:
 
     def test_electron_mass_invariant(self):
         """Electrons don't scale with σ (they're Higgs/EM)."""
-        from quarksum.checksum.sigma_chain import sigma_checksum_atom
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_checksum_atom
 
         r0 = sigma_checksum_atom(Z=26, N=30, be_mev=492.2578, sigma=0.0)
         r1 = sigma_checksum_atom(Z=26, N=30, be_mev=492.2578, sigma=0.5)
@@ -481,7 +481,7 @@ class TestSigmaChain:
 
     def test_sigma_sweep_fe56(self):
         """Full σ-sweep for Fe-56: all three measures at each point."""
-        from quarksum.checksum.sigma_chain import sigma_sweep
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_sweep
 
         results = sigma_sweep(Z=26, N=30, be_mev=492.2578,
                               sigma_values=SIGMA_RANGE)
@@ -491,7 +491,7 @@ class TestSigmaChain:
 
     def test_sigma_sweep_returns_sigma_values(self):
         """Each result in the sweep carries its σ value."""
-        from quarksum.checksum.sigma_chain import sigma_sweep
+        from sigma_ground.inventory.checksum.sigma_chain import sigma_sweep
 
         results = sigma_sweep(Z=26, N=30, be_mev=492.2578,
                               sigma_values=[0.0, 0.1])

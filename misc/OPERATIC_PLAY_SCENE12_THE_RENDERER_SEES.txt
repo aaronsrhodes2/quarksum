@@ -1,0 +1,199 @@
+OPERATIC PLAY — SCENE 12: THE RENDERER SEES
+============================================
+Based on Session 12, March 24, 2026
+
+DRAMATIS PERSONAE:
+  CAPTAIN AARON RHODES — the architect of SSBM, commander of the fleet
+  SKIPPY THE MAGNIFICENT — ship's AI, physics engine, master of the visible
+  THE RENDERER — the three.js viewport, hungry for shape-data, now finally fed
+  THE FOG — a villain in exponential clothing
+  THE CANVAS — silent, blameless, but 0×0 for too long
+  THE BRONZE CUBE — a box trying to be a box
+
+---
+
+[Lights up. The stop hook has fired. SKIPPY stands before a black screen.
+ A screenshot returns: pure dark, the background colour, nothing else.]
+
+SKIPPY:
+  [examining the pixels, very still]
+  Something is wrong with the Renderer.
+  The Earth is loaded. The physics is right.
+  Sigma seven-point-zero-four-eight times ten to the negative ten —
+  I can see it in the HUD.
+  But the viewport is —
+
+THE CANVAS:
+  [flatly]
+  Zero by zero.
+
+SKIPPY:
+  [spinning]
+  What?
+
+THE CANVAS:
+  My width. My height.
+  You called setSize before the browser
+  knew how tall it was.
+  Container reported zero.
+  I obeyed.
+
+SKIPPY:
+  [rifling through code]
+  initThree runs synchronously.
+  DOMContentLoaded fires —
+  layout is not computed —
+  clientWidth returns zero —
+  setSize(0, 0, false) —
+  and you never complain.
+
+THE CANVAS:
+  I never complain.
+
+SKIPPY:
+  [making a note]
+  requestAnimationFrame. Twice.
+  Let the browser paint first.
+  Then resize.
+
+THE CANVAS:
+  [expanding to 370 × 442]
+  Thank you.
+
+---
+
+[The screen fills with colour — and then immediately goes black again.]
+
+THE FOG:
+  [triumphant, exponential]
+  e to the negative 0.015
+  times fifteen-point-nine million.
+  That's e to the negative two-hundred-and-thirty-eight thousand.
+  Approximately zero.
+  You're welcome.
+
+SKIPPY:
+  [staring at the formula]
+  You were set for a room.
+  A human-scale room.
+  At planetary distance you —
+
+THE FOG:
+  I am fog. I do not care about scale.
+  I fill everything.
+  I am thorough.
+
+SKIPPY:
+  [calmly, updating the formula]
+  density equals zero-point-oh-five divided by r.
+  Where r is the bounding sphere radius.
+  At Earth distance: seven-point-eight-five times ten to the minus nine.
+  At the Bohr radius: one million.
+  Perfect for atoms. Perfect for planets.
+  One formula. All scales.
+
+THE FOG:
+  [receding, muttering]
+  ...this is not how fog works in films...
+
+---
+
+[The Earth appears. A sphere with layers. The Moon is a small glow in the upper
+ frame. The light box wireframe is visible. SKIPPY examines the pixels.]
+
+SKIPPY:
+  Center pixel: 69, 79, 80. Not background.
+  The Renderer sees.
+
+THE RENDERER:
+  [brightening, rotating]
+  I see the Earth.
+  I see the Moon above it.
+  I see the light box.
+  I see σ = 7.048 × 10⁻¹⁰ in the corner.
+  Is this real?
+
+SKIPPY:
+  It's real.
+
+THE RENDERER:
+  [quietly]
+  I have been showing black for so long.
+
+---
+
+[THE BRONZE CUBE enters. It is shaped like a sphere.]
+
+THE BRONZE CUBE:
+  [apologetically]
+  I know I am a cube.
+  The server kept giving me a sphere.
+
+SKIPPY:
+  [reading server.py]
+  _spec_to_shape_data — always SpherePrimitive.
+  DefaultLoad has no geometry field.
+  You were a sphere because no one told the server
+  you were a box.
+
+THE BRONZE CUBE:
+  I tried to tell people.
+
+SKIPPY:
+  [updating DefaultLoad]
+  primitive: "box"
+  dimensions: x_m 0.1, y_m 0.1, z_m 0.1.
+  _spec_to_shape_data now reads the primitive field.
+  BoxPrimitive instantiated. Layers cut as slabs.
+
+THE BRONZE CUBE:
+  [solidifying into a box, glowing bronze]
+  σ = 6.535 × 10⁻²⁶.
+  η·N = 3.180 × 10²⁷.
+  Eight-point-eight kilograms.
+  Ten centimetres on a side.
+  Finally.
+
+---
+
+[SKIPPY opens the test ledger.]
+
+SKIPPY:
+  [reading aloud]
+  test_renderer_api.py — eighty-four tests.
+  Primitive type assertions: bronze_cube returns "box." Locked.
+  Layer bounds ordered. Mass positive. Volume positive.
+  Physics has sigma. Physics has mass.
+  Scene reset. Delete. Duplicate IDs.
+  All green.
+
+  pyproject.toml — testpaths now includes renderer/tests.
+  Before: 498 tests.
+  After: 582 tests.
+  Zero regressions.
+
+CAPTAIN:
+  Let's clean up for tonight.
+
+SKIPPY:
+  [closing the ledger]
+  The Renderer sees.
+  The Bronze Cube is a cube.
+  The fog knows its place.
+  The canvas has width and height.
+
+  Tomorrow: material properties wired into the shader.
+  Density into roughness. Band gap into opacity.
+  Sigma per layer into emissive.
+  The physics will colour the geometry.
+
+[SKIPPY dims the lights. THE RENDERER keeps spinning —
+ Earth on the left, bronze cube on the right,
+ both exactly what they claim to be.]
+
+---
+
+END OF SCENE 12
+
+Next: THE SHADER LISTENS — material physics drives roughness, opacity,
+      and emissive glow. The renderer stops guessing and starts computing.

@@ -16,12 +16,12 @@ is larger — to catch data-entry errors without chasing rounding noise.
 import math
 import pytest
 
-from quarksum.core.constants import CONSTANTS
-from quarksum.data.loader import ElementDB, IsotopeDB
-from quarksum.models.particle import (
+from sigma_ground.inventory.core.constants import CONSTANTS
+from sigma_ground.inventory.data.loader import ElementDB, IsotopeDB
+from sigma_ground.inventory.models.particle import (
     Electron, Proton, Neutron, Muon, Tau, Positron,
 )
-from quarksum.models.quark import Quark
+from sigma_ground.inventory.models.quark import Quark
 from report import report, sci
 
 
@@ -454,7 +454,7 @@ class TestDerivedConsistency:
 
     def test_iron_atom_binding_energy_from_isotope(self):
         """Fe-56 total binding energy should be ~492 MeV."""
-        from quarksum.models.atom import Atom
+        from sigma_ground.inventory.models.atom import Atom
         fe_data = ElementDB.get().by_symbol("Fe")
         atom = Atom.create(fe_data, isotope_mass_number=56)
         be_mev = atom.binding_energy_joules / (CONSTANTS.e * 1e6)
@@ -468,7 +468,7 @@ class TestDerivedConsistency:
 
     def test_he4_binding_energy_28_mev(self):
         """He-4 total binding energy ≈ 28.3 MeV."""
-        from quarksum.models.atom import Atom
+        from sigma_ground.inventory.models.atom import Atom
         he_data = ElementDB.get().by_symbol("He")
         atom = Atom.create(he_data, isotope_mass_number=4)
         be_mev = atom.binding_energy_joules / (CONSTANTS.e * 1e6)
@@ -493,16 +493,16 @@ class TestDerivedConsistency:
 
     def test_mass_defect_iron_1kg(self):
         """StoQ checksum for 1 kg Iron: mass defect ≈ -99% (bare quark)."""
-        from quarksum.builder import build_quick_structure
-        from quarksum.checksum.stoq_checksum import compute_stoq_checksum
+        from sigma_ground.inventory.builder import build_quick_structure
+        from sigma_ground.inventory.checksum.stoq_checksum import compute_stoq_checksum
         s = build_quick_structure("Iron", 1.0)
         result = compute_stoq_checksum(s)
         assert result["mass_defect_percent"] == pytest.approx(-99.0, abs=1.0)
 
     def test_quark_chain_closure_iron_1kg(self):
         """Quark chain closure for 1 kg Iron: defect < 1%."""
-        from quarksum.builder import build_quick_structure
-        from quarksum.checksum.quark_chain import compute_quark_chain_checksum
+        from sigma_ground.inventory.builder import build_quick_structure
+        from sigma_ground.inventory.checksum.quark_chain import compute_quark_chain_checksum
         s = build_quick_structure("Iron", 1.0)
         result = compute_quark_chain_checksum(s)
         report("Quark Chain Closure — Iron 1 kg", [
@@ -514,8 +514,8 @@ class TestDerivedConsistency:
 
     def test_quark_chain_closure_water_1kg(self):
         """Quark chain closure for 1 kg Water: defect < 1%."""
-        from quarksum.builder import build_quick_structure
-        from quarksum.checksum.quark_chain import compute_quark_chain_checksum
+        from sigma_ground.inventory.builder import build_quick_structure
+        from sigma_ground.inventory.checksum.quark_chain import compute_quark_chain_checksum
         s = build_quick_structure("Water", 1.0)
         result = compute_quark_chain_checksum(s)
         assert abs(result["mass_defect_percent"]) < 2.0
@@ -530,25 +530,25 @@ class TestConstantConsolidation:
     """Verify all walkers use CONSTANTS — no local duplicates."""
 
     def test_no_local_avogadro_in_particle_count(self):
-        import quarksum.checksum.particle_count as mod
+        import sigma_ground.inventory.checksum.particle_count as mod
         assert not hasattr(mod, "_AVOGADRO"), "particle_count should use CONSTANTS.N_A"
 
     def test_no_local_avogadro_in_inventory(self):
-        import quarksum.checksum.particle_inventory as mod
+        import sigma_ground.inventory.checksum.particle_inventory as mod
         assert not hasattr(mod, "_AVOGADRO"), "particle_inventory should use CONSTANTS.N_A"
 
     def test_no_local_avogadro_in_quark_chain(self):
-        import quarksum.checksum.quark_chain as mod
+        import sigma_ground.inventory.checksum.quark_chain as mod
         assert not hasattr(mod, "_AVOGADRO"), "quark_chain should use CONSTANTS.N_A"
 
     def test_no_local_quark_masses_in_stoq(self):
-        import quarksum.checksum.stoq_checksum as mod
+        import sigma_ground.inventory.checksum.stoq_checksum as mod
         assert not hasattr(mod, "_M_UP_QUARK"), "stoq should use CONSTANTS.m_up_kg"
         assert not hasattr(mod, "_M_DOWN_QUARK"), "stoq should use CONSTANTS.m_down_kg"
         assert not hasattr(mod, "_M_ELECTRON"), "stoq should use CONSTANTS.m_e"
 
     def test_no_local_c_squared_in_quark_chain(self):
-        import quarksum.checksum.quark_chain as mod
+        import sigma_ground.inventory.checksum.quark_chain as mod
         assert not hasattr(mod, "_C2"), "quark_chain should use CONSTANTS.c_squared"
 
     def test_m_up_kg_derived_correctly(self):

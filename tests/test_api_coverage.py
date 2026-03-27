@@ -21,20 +21,20 @@ Identified gaps (15 items):
 
 import unittest
 
-from quarksum.behaviors import behaviors, apply_env, extract_fields
-from quarksum.builder import load_structure_spec, list_structures
-from quarksum.core.types import PhysicsObject, constant, variable
-from quarksum.models.structure import Structure, MaterialClass
-from quarksum.models.quark import Quark, QuarkFlavor
-from quarksum.models.gluon import Gluon
-from quarksum.models.particle import (
+from sigma_ground.inventory.behaviors import behaviors, apply_env, extract_fields
+from sigma_ground.inventory.builder import load_structure_spec, list_structures
+from sigma_ground.inventory.core.types import PhysicsObject, constant, variable
+from sigma_ground.inventory.models.structure import Structure, MaterialClass
+from sigma_ground.inventory.models.quark import Quark, QuarkFlavor
+from sigma_ground.inventory.models.gluon import Gluon
+from sigma_ground.inventory.models.particle import (
     Particle, ParticleType,
     Proton, Neutron, Electron,
     ElectronNeutrino, MuonNeutrino, TauNeutrino,
 )
-from quarksum.models.atom import Atom
-from quarksum.models.molecule import Molecule
-from quarksum.models.bond import Bond, BondType
+from sigma_ground.inventory.models.atom import Atom
+from sigma_ground.inventory.models.molecule import Molecule
+from sigma_ground.inventory.models.bond import Bond, BondType
 
 
 class TestBehaviorsUniversalGetter(unittest.TestCase):

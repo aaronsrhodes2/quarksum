@@ -2,21 +2,21 @@
 
 import pytest
 
-from quarksum.builder import (
+from sigma_ground.inventory.builder import (
     build_quick_structure,
     build_structure_from_spec,
     list_structures,
     load_structure,
 )
-from quarksum.checksum.particle_count import count_particles_in_structure
-from quarksum.checksum.stoq_checksum import compute_stoq_checksum
-from quarksum.checksum.quark_chain import (
+from sigma_ground.inventory.checksum.particle_count import count_particles_in_structure
+from sigma_ground.inventory.checksum.stoq_checksum import compute_stoq_checksum
+from sigma_ground.inventory.checksum.quark_chain import (
     compute_quark_chain_checksum,
     predict_from_quark_chain,
     walk_quark_chain,
 )
-from quarksum.core.constants import CONSTANTS
-from quarksum.models.particle import Proton, Neutron, Particle
+from sigma_ground.inventory.core.constants import CONSTANTS
+from sigma_ground.inventory.models.particle import Proton, Neutron, Particle
 from report import sci, pct, report
 
 
@@ -246,58 +246,58 @@ class TestRestoredModels:
     """Verify restored Standard Model particle factories."""
 
     def test_charm_quark_has_correct_mass(self):
-        from quarksum.models.quark import Quark
+        from sigma_ground.inventory.models.quark import Quark
         c = Quark.charm()
         assert c.bare_mass_mev == pytest.approx(1270.0, rel=1e-3)
         assert c.flavor == "charm"
         assert c.generation == 2
 
     def test_bottom_quark_has_correct_mass(self):
-        from quarksum.models.quark import Quark
+        from sigma_ground.inventory.models.quark import Quark
         b = Quark.bottom()
         assert b.bare_mass_mev == pytest.approx(4180.0, rel=1e-3)
         assert b.generation == 3
 
     def test_top_quark_has_correct_mass(self):
-        from quarksum.models.quark import Quark
+        from sigma_ground.inventory.models.quark import Quark
         t = Quark.top()
         assert t.bare_mass_mev == pytest.approx(172500.0, rel=1e-3)
         assert t.generation == 3
 
     def test_anti_charm_is_antimatter(self):
-        from quarksum.models.quark import Quark
+        from sigma_ground.inventory.models.quark import Quark
         ac = Quark.anti_charm()
         assert ac.is_antimatter is True
         assert ac.charge == pytest.approx(-2 / 3)
 
     def test_muon_has_correct_mass_and_lepton_number(self):
-        from quarksum.models.particle import Muon
+        from sigma_ground.inventory.models.particle import Muon
         m = Muon.create()
         assert m.rest_mass_kg == pytest.approx(1.883531627e-28, rel=1e-6)
         assert m.lepton_number == 1
         assert m.symbol == "μ⁻"
 
     def test_tau_has_correct_mass(self):
-        from quarksum.models.particle import Tau
+        from sigma_ground.inventory.models.particle import Tau
         t = Tau.create()
         assert t.rest_mass_kg == pytest.approx(3.16754e-27, rel=1e-3)
 
     def test_neutrinos_are_massless(self):
-        from quarksum.models.particle import ElectronNeutrino, MuonNeutrino, TauNeutrino
+        from sigma_ground.inventory.models.particle import ElectronNeutrino, MuonNeutrino, TauNeutrino
         for cls in (ElectronNeutrino, MuonNeutrino, TauNeutrino):
             nu = cls.create()
             assert nu.rest_mass_kg == 0.0
             assert nu.lepton_number == 1
 
     def test_positron_is_antimatter_electron(self):
-        from quarksum.models.particle import Positron
+        from sigma_ground.inventory.models.particle import Positron
         p = Positron.create()
         assert p.is_antimatter is True
         assert p.charge_e == 1.0
         assert p.antiparticle == "electron"
 
     def test_antiproton_has_antiquarks(self):
-        from quarksum.models.particle import Antiproton
+        from sigma_ground.inventory.models.particle import Antiproton
         ap = Antiproton.create()
         assert ap.is_antimatter is True
         assert ap.baryon_number == -1.0
@@ -305,7 +305,7 @@ class TestRestoredModels:
         assert all(q.is_antimatter for q in ap.quarks)
 
     def test_antineutron_has_antiquarks(self):
-        from quarksum.models.particle import Antineutron
+        from sigma_ground.inventory.models.particle import Antineutron
         an = Antineutron.create()
         assert an.is_antimatter is True
         assert len(an.quarks) == 3
@@ -315,7 +315,7 @@ class TestParticleInventory:
     """Full Standard Model particle inventory."""
 
     def _inv(self, material="Iron", mass=1.0):
-        from quarksum.checksum.particle_inventory import compute_particle_inventory
+        from sigma_ground.inventory.checksum.particle_inventory import compute_particle_inventory
         s = build_quick_structure(material, mass)
         return compute_particle_inventory(s)
 
@@ -386,7 +386,7 @@ class TestInventoryCLI:
 
     def test_inventory_cli_returns_json_with_expected_keys(self):
         import json
-        from quarksum.__main__ import main
+        from sigma_ground.inventory.__main__ import main
         from io import StringIO
         import sys
 
@@ -404,7 +404,7 @@ class TestInventoryCLI:
         assert "standard_model_note" in data
 
     def test_inventory_via_library_api(self):
-        import quarksum
+        import sigma_ground.inventory as quarksum
         s = quarksum.load_structure("gold_ring")
         result = quarksum.inventory(s)
         assert result["protons"] > 0
@@ -415,8 +415,8 @@ class TestQuarkBehaviors:
     """QCD behavioral computations for individual quarks."""
 
     def _beh(self, flavor="up", color="red"):
-        from quarksum.behaviors.quark_behaviors import compute_quark_behaviors
-        from quarksum.models.quark import Quark
+        from sigma_ground.inventory.behaviors.quark_behaviors import compute_quark_behaviors
+        from sigma_ground.inventory.models.quark import Quark
         factory = getattr(Quark, flavor)
         q = factory(color=color)
         return compute_quark_behaviors(q)
@@ -504,8 +504,8 @@ class TestParticleBehaviors:
     """Behavior getter for subatomic particles."""
 
     def test_electron_has_intrinsic_and_operable(self):
-        from quarksum.behaviors.particle_behaviors import compute_particle_behaviors
-        from quarksum.models.particle import Electron
+        from sigma_ground.inventory.behaviors.particle_behaviors import compute_particle_behaviors
+        from sigma_ground.inventory.models.particle import Electron
         e = Electron.create()
         result = compute_particle_behaviors(e)
         assert "intrinsic" in result
@@ -514,16 +514,16 @@ class TestParticleBehaviors:
         assert result["particle_type"] == "electron"
 
     def test_electron_operable_has_orbital_quantum_numbers(self):
-        from quarksum.behaviors.particle_behaviors import compute_particle_behaviors
-        from quarksum.models.particle import Electron
+        from sigma_ground.inventory.behaviors.particle_behaviors import compute_particle_behaviors
+        from sigma_ground.inventory.models.particle import Electron
         e = Electron.create(n=2, l=1, ml=0)
         result = compute_particle_behaviors(e)
         assert result["operable"]["principal_n"]["value"] == 2
         assert result["operable"]["angular_l"]["value"] == 1
 
     def test_proton_intrinsic_has_qcd_binding(self):
-        from quarksum.behaviors.particle_behaviors import compute_particle_behaviors
-        from quarksum.models.particle import Proton
+        from sigma_ground.inventory.behaviors.particle_behaviors import compute_particle_behaviors
+        from sigma_ground.inventory.models.particle import Proton
         p = Proton.create()
         result = compute_particle_behaviors(p)
         assert result["intrinsic"]["qcd_binding_energy_mev"]["value"] == pytest.approx(
@@ -531,16 +531,16 @@ class TestParticleBehaviors:
         )
 
     def test_proton_has_quark_children_summary(self):
-        from quarksum.behaviors.particle_behaviors import compute_particle_behaviors
-        from quarksum.models.particle import Proton
+        from sigma_ground.inventory.behaviors.particle_behaviors import compute_particle_behaviors
+        from sigma_ground.inventory.models.particle import Proton
         p = Proton.create()
         result = compute_particle_behaviors(p)
         assert result["children"]["quarks"] == 3
         assert result["children"]["gluons"] == 8
 
     def test_muon_has_lepton_number(self):
-        from quarksum.behaviors.particle_behaviors import compute_particle_behaviors
-        from quarksum.models.particle import Muon
+        from sigma_ground.inventory.behaviors.particle_behaviors import compute_particle_behaviors
+        from sigma_ground.inventory.models.particle import Muon
         m = Muon.create()
         result = compute_particle_behaviors(m)
         assert result["intrinsic"]["lepton_number"]["value"] == 1
@@ -554,7 +554,7 @@ class TestAtomBehaviors:
         return s.children[0].molecules[0].atoms[0]
 
     def test_atom_has_intrinsic_and_operable(self):
-        from quarksum.behaviors.atom_behaviors import compute_atom_behaviors
+        from sigma_ground.inventory.behaviors.atom_behaviors import compute_atom_behaviors
         a = self._atom()
         result = compute_atom_behaviors(a)
         assert "intrinsic" in result
@@ -562,14 +562,14 @@ class TestAtomBehaviors:
         assert result["entity_type"] == "atom"
 
     def test_atom_intrinsic_has_nuclear_properties(self):
-        from quarksum.behaviors.atom_behaviors import compute_atom_behaviors
+        from sigma_ground.inventory.behaviors.atom_behaviors import compute_atom_behaviors
         a = self._atom()
         result = compute_atom_behaviors(a)
         assert "nuclear_binding_energy_mev" in result["intrinsic"]
         assert result["intrinsic"]["atomic_number"]["value"] == 26
 
     def test_atom_intrinsic_has_ionization_energies(self):
-        from quarksum.behaviors.atom_behaviors import compute_atom_behaviors
+        from sigma_ground.inventory.behaviors.atom_behaviors import compute_atom_behaviors
         a = self._atom()
         result = compute_atom_behaviors(a)
         assert result["intrinsic"]["ionization_energy_1"]["value"] == pytest.approx(
@@ -577,14 +577,14 @@ class TestAtomBehaviors:
         )
 
     def test_atom_operable_has_charge_state(self):
-        from quarksum.behaviors.atom_behaviors import compute_atom_behaviors
+        from sigma_ground.inventory.behaviors.atom_behaviors import compute_atom_behaviors
         a = self._atom()
         result = compute_atom_behaviors(a)
         assert "charge_state" in result["operable"]
         assert result["operable"]["charge_state"]["value"] == 0
 
     def test_atom_children_summary(self):
-        from quarksum.behaviors.atom_behaviors import compute_atom_behaviors
+        from sigma_ground.inventory.behaviors.atom_behaviors import compute_atom_behaviors
         a = self._atom()
         result = compute_atom_behaviors(a)
         assert result["children"]["protons"] == 26
@@ -600,7 +600,7 @@ class TestMoleculeBehaviors:
         return s.children[0].molecules[0]
 
     def test_molecule_has_intrinsic_and_operable(self):
-        from quarksum.behaviors.molecule_behaviors import compute_molecule_behaviors
+        from sigma_ground.inventory.behaviors.molecule_behaviors import compute_molecule_behaviors
         m = self._mol()
         result = compute_molecule_behaviors(m)
         assert "intrinsic" in result
@@ -608,20 +608,20 @@ class TestMoleculeBehaviors:
         assert result["entity_type"] == "molecule"
 
     def test_molecule_has_bond_inventory(self):
-        from quarksum.behaviors.molecule_behaviors import compute_molecule_behaviors
+        from sigma_ground.inventory.behaviors.molecule_behaviors import compute_molecule_behaviors
         m = self._mol()
         result = compute_molecule_behaviors(m)
         assert result["children"]["bonds"] == 2
         assert result["children"]["atoms"] == 3
 
     def test_molecule_has_dissociation_energies(self):
-        from quarksum.behaviors.molecule_behaviors import compute_molecule_behaviors
+        from sigma_ground.inventory.behaviors.molecule_behaviors import compute_molecule_behaviors
         m = self._mol()
         result = compute_molecule_behaviors(m)
         assert result["bond_summary"]["weakest_bond_ev"] == pytest.approx(4.77, rel=1e-2)
 
     def test_molecule_has_formula_and_weight(self):
-        from quarksum.behaviors.molecule_behaviors import compute_molecule_behaviors
+        from sigma_ground.inventory.behaviors.molecule_behaviors import compute_molecule_behaviors
         m = self._mol()
         result = compute_molecule_behaviors(m)
         assert result["formula"] == "H2O"
@@ -636,7 +636,7 @@ class TestMoleculeApply:
         return s.children[0].molecules[0]
 
     def test_energy_ev_delta_breaks_weakest_bond(self):
-        from quarksum.behaviors.molecule_behaviors import resolve_molecule_env
+        from sigma_ground.inventory.behaviors.molecule_behaviors import resolve_molecule_env
         m = self._mol()
         n_bonds = len(m.bonds)
         weakest = min(b.dissociation_energy for b in m.bonds if b.dissociation_energy)
@@ -644,7 +644,7 @@ class TestMoleculeApply:
         assert len(m.bonds) == n_bonds - 1
 
     def test_temperature_k_delta_stretches_bonds(self):
-        from quarksum.behaviors.molecule_behaviors import resolve_molecule_env
+        from sigma_ground.inventory.behaviors.molecule_behaviors import resolve_molecule_env
         m = self._mol()
         orig_lengths = [b.length for b in m.bonds]
         resolve_molecule_env(m, {"temperature_k": 1000.0}, mode="delta")
@@ -652,7 +652,7 @@ class TestMoleculeApply:
             assert b.length >= orig
 
     def test_pressure_pa_update_compresses_bonds(self):
-        from quarksum.behaviors.molecule_behaviors import resolve_molecule_env
+        from sigma_ground.inventory.behaviors.molecule_behaviors import resolve_molecule_env
         m = self._mol()
         orig_lengths = [b.length for b in m.bonds]
         resolve_molecule_env(m, {"pressure_pa": 1e9}, mode="update")
@@ -660,7 +660,7 @@ class TestMoleculeApply:
             assert b.length <= orig
 
     def test_electric_field_vm_delta_polarizes(self):
-        from quarksum.behaviors.molecule_behaviors import resolve_molecule_env
+        from sigma_ground.inventory.behaviors.molecule_behaviors import resolve_molecule_env
         m = self._mol()
         result = resolve_molecule_env(m, {"electric_field_vm": 1e6}, mode="delta")
         assert any(ap["key"] == "electric_field_vm" for ap in result["applied"])
@@ -671,37 +671,37 @@ class TestUniversalDispatcher:
     """Universal behaviors() getter and apply_env() setter."""
 
     def test_behaviors_routes_quark(self):
-        from quarksum.behaviors import behaviors
-        from quarksum.models.quark import Quark
+        from sigma_ground.inventory.behaviors import behaviors
+        from sigma_ground.inventory.models.quark import Quark
         q = Quark.up()
         result = behaviors(q)
         assert result["entity_type"] == "quark"
         assert "intrinsic" in result
 
     def test_behaviors_routes_atom(self):
-        from quarksum.behaviors import behaviors
+        from sigma_ground.inventory.behaviors import behaviors
         s = build_quick_structure("Iron", 1.0)
         atom = s.children[0].molecules[0].atoms[0]
         result = behaviors(atom)
         assert result["entity_type"] == "atom"
 
     def test_behaviors_routes_molecule(self):
-        from quarksum.behaviors import behaviors
+        from sigma_ground.inventory.behaviors import behaviors
         s = build_quick_structure("Water", 1.0)
         mol = s.children[0].molecules[0]
         result = behaviors(mol)
         assert result["entity_type"] == "molecule"
 
     def test_apply_delta_adds_to_current(self):
-        from quarksum.behaviors import apply_env
-        from quarksum.models.particle import Electron
+        from sigma_ground.inventory.behaviors import apply_env
+        from sigma_ground.inventory.models.particle import Electron
         e = Electron.create()
         old_energy = e.energy_level
         apply_env(e, {"momentum_gev": 0.001}, mode="delta")
         assert e.energy_level > old_energy
 
     def test_apply_update_replaces_value(self):
-        from quarksum.behaviors import apply_env
+        from sigma_ground.inventory.behaviors import apply_env
         s = build_quick_structure("Water", 1.0)
         mol = s.children[0].molecules[0]
         bond = mol.bonds[0]
@@ -709,7 +709,7 @@ class TestUniversalDispatcher:
         assert bond.length < bond.reference_length
 
     def test_unknown_type_raises_type_error(self):
-        from quarksum.behaviors import behaviors
+        from sigma_ground.inventory.behaviors import behaviors
         with pytest.raises(TypeError):
             behaviors("not an entity")
 
@@ -718,7 +718,7 @@ class TestCascade:
     """Environment changes cascade through the hierarchy."""
 
     def test_molecule_temperature_cascades_to_atom_electrons(self):
-        from quarksum.behaviors import apply_env
+        from sigma_ground.inventory.behaviors import apply_env
         s = build_quick_structure("Water", 1.0)
         mol = s.children[0].molecules[0]
         electron = mol.atoms[0].electrons[0]
@@ -727,7 +727,7 @@ class TestCascade:
         assert electron.spin_projection != old_spin
 
     def test_atom_magnetic_field_cascades_to_electrons(self):
-        from quarksum.behaviors import apply_env
+        from sigma_ground.inventory.behaviors import apply_env
         s = build_quick_structure("Iron", 1.0)
         atom = s.children[0].molecules[0].atoms[0]
         electron = atom.electrons[0]
@@ -736,7 +736,7 @@ class TestCascade:
         assert electron.spin_projection != old_spin
 
     def test_structure_temperature_cascades_to_bonds(self):
-        from quarksum.behaviors import apply_env
+        from sigma_ground.inventory.behaviors import apply_env
         s = build_quick_structure("Water", 1.0)
         bond = s.children[0].molecules[0].bonds[0]
         orig_length = bond.length
@@ -752,7 +752,7 @@ class TestAtomApply:
         return s.children[0].molecules[0].atoms[0]
 
     def test_energy_ev_delta_ionizes_atom(self):
-        from quarksum.behaviors.atom_behaviors import resolve_atom_env
+        from sigma_ground.inventory.behaviors.atom_behaviors import resolve_atom_env
         a = self._atom()
         ie1 = a.ionization_energy_1
         assert a.charge_state == 0
@@ -761,20 +761,20 @@ class TestAtomApply:
         assert len(a.electrons) == 25
 
     def test_energy_ev_delta_below_threshold_excites(self):
-        from quarksum.behaviors.atom_behaviors import resolve_atom_env
+        from sigma_ground.inventory.behaviors.atom_behaviors import resolve_atom_env
         a = self._atom()
         ie1 = a.ionization_energy_1
         resolve_atom_env(a, {"energy_ev": ie1 * 0.5}, mode="delta")
         assert a.charge_state == 0
 
     def test_temperature_k_update_sets_thermal_state(self):
-        from quarksum.behaviors.atom_behaviors import resolve_atom_env
+        from sigma_ground.inventory.behaviors.atom_behaviors import resolve_atom_env
         a = self._atom()
         result = resolve_atom_env(a, {"temperature_k": 5000.0}, mode="update")
         assert any(ap["key"] == "temperature_k" for ap in result["applied"])
 
     def test_magnetic_field_delta_zeeman(self):
-        from quarksum.behaviors.atom_behaviors import resolve_atom_env
+        from sigma_ground.inventory.behaviors.atom_behaviors import resolve_atom_env
         a = self._atom()
         result = resolve_atom_env(a, {"magnetic_field_t": 2.0}, mode="delta")
         assert any(ap["key"] == "magnetic_field_t" for ap in result["applied"])
@@ -785,24 +785,24 @@ class TestParticleApply:
     """Environment delta/update resolution for particles."""
 
     def test_energy_ev_delta_excites_electron(self):
-        from quarksum.behaviors.particle_behaviors import resolve_particle_env
-        from quarksum.models.particle import Electron
+        from sigma_ground.inventory.behaviors.particle_behaviors import resolve_particle_env
+        from sigma_ground.inventory.models.particle import Electron
         e = Electron.create(n=1, l=0, ml=0)
         result = resolve_particle_env(e, {"energy_ev": 10.2}, mode="delta")
         assert e.principal_n == 2
         assert any(a["key"] == "energy_ev" for a in result["applied"])
 
     def test_magnetic_field_delta_flips_spin(self):
-        from quarksum.behaviors.particle_behaviors import resolve_particle_env
-        from quarksum.models.particle import Electron
+        from sigma_ground.inventory.behaviors.particle_behaviors import resolve_particle_env
+        from sigma_ground.inventory.models.particle import Electron
         e = Electron.create()
         assert e.spin_projection == 0.5
         result = resolve_particle_env(e, {"magnetic_field_t": 1.0}, mode="delta")
         assert e.spin_projection == -0.5
 
     def test_momentum_gev_delta_deposits_energy(self):
-        from quarksum.behaviors.particle_behaviors import resolve_particle_env
-        from quarksum.models.particle import Electron
+        from sigma_ground.inventory.behaviors.particle_behaviors import resolve_particle_env
+        from sigma_ground.inventory.models.particle import Electron
         e = Electron.create()
         old_e = e.energy_level
         resolve_particle_env(e, {"momentum_gev": 0.001}, mode="delta")
@@ -813,11 +813,11 @@ class TestQuarkApply:
     """Environment delta/update resolution for quarks."""
 
     def _quark(self, flavor="up", color="red"):
-        from quarksum.models.quark import Quark
+        from sigma_ground.inventory.models.quark import Quark
         return getattr(Quark, flavor)(color=color)
 
     def test_energy_gev_delta_recomputes_alpha_s(self):
-        from quarksum.behaviors.quark_behaviors import resolve_quark_env
+        from sigma_ground.inventory.behaviors.quark_behaviors import resolve_quark_env
         q = self._quark()
         result = resolve_quark_env(q, {"energy_gev": 91.2}, mode="delta")
         alpha_s_entries = result["intrinsic"]["asymptotic_freedom"]["alpha_s"]
@@ -826,7 +826,7 @@ class TestQuarkApply:
         assert any(a["key"] == "energy_gev" for a in result["applied"])
 
     def test_magnetic_field_delta_flips_spin(self):
-        from quarksum.behaviors.quark_behaviors import resolve_quark_env
+        from sigma_ground.inventory.behaviors.quark_behaviors import resolve_quark_env
         q = self._quark()
         assert q.spin_projection == 0.5
         result = resolve_quark_env(q, {"magnetic_field_t": 1.0}, mode="delta")
@@ -834,7 +834,7 @@ class TestQuarkApply:
         assert result["operable"]["spin_projection"]["value"] == -0.5
 
     def test_color_field_update_changes_color(self):
-        from quarksum.behaviors.quark_behaviors import resolve_quark_env
+        from sigma_ground.inventory.behaviors.quark_behaviors import resolve_quark_env
         q = self._quark("up", "red")
         result = resolve_quark_env(q, {"color_field": "rg\u0304"}, mode="update")
         assert q.color_charge == "green"
@@ -847,7 +847,7 @@ class TestBehaviorsCLI:
 
     def test_behaviors_cli_returns_json_with_sections(self):
         import json
-        from quarksum.__main__ import main
+        from sigma_ground.inventory.__main__ import main
         from io import StringIO
         import sys
 
@@ -867,15 +867,15 @@ class TestBehaviorsCLI:
         assert "ckm_couplings" in data["intrinsic"]
 
     def test_behaviors_via_library_api(self):
-        import quarksum
-        from quarksum.models.quark import Quark
+        import sigma_ground.inventory as quarksum
+        from sigma_ground.inventory.models.quark import Quark
         result = quarksum.quark_behaviors(Quark.charm(color="blue"))
         assert result["flavor"] == "charm"
         assert result["color"] == "blue"
         assert result["generation"] == 2
 
     def test_behaviors_cli_bad_flavor_returns_error(self):
-        from quarksum.__main__ import main
+        from sigma_ground.inventory.__main__ import main
         from io import StringIO
         import sys
 
@@ -911,7 +911,7 @@ class TestApplyCLI:
 
     def test_apply_cli_delta_mode(self):
         import json
-        from quarksum.__main__ import main
+        from sigma_ground.inventory.__main__ import main
         from io import StringIO
         import sys
 
@@ -931,7 +931,7 @@ class TestApplyCLI:
 
     def test_apply_cli_update_mode(self):
         import json
-        from quarksum.__main__ import main
+        from sigma_ground.inventory.__main__ import main
         from io import StringIO
         import sys
 
