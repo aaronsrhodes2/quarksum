@@ -43,9 +43,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/aaronrhodes/sigma-ground"
-Repository = "https://github.com/aaronrhodes/sigma-ground"
-Issues = "https://github.com/aaronrhodes/sigma-ground/issues"
+Homepage = "https://github.com/aaronsrhodes2/sigma-ground"
+Repository = "https://github.com/aaronsrhodes2/sigma-ground"
+Issues = "https://github.com/aaronsrhodes2/sigma-ground/issues"
 
 [project.scripts]
 sigma-ground = "sigma_ground.inventory.__main__:main"

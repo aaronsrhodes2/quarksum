@@ -174,7 +174,7 @@ sigma_ground/
 ## What's not here yet
 
 - **Organic science** — biochemistry, amino acids, organic molecules. Planned as a separate library (`sigma-ground-organic`).
-- **Rendering** — 3D visualization lives in [matter-shaper](https://github.com/aaronrhodes/matter-shaper) (separate project).
+- **Rendering** — 3D visualization lives in [matter-shaper](https://github.com/aaronsrhodes2/matter-shaper) (separate project).
 
 ---
 
